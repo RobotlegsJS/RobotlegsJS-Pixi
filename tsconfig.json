@@ -1,0 +1,29 @@
+{
+  "baseUrl": "src",
+  "compilerOptions": {
+    "outDir": "lib",
+    "target": "es5",
+    "module": "commonjs",
+    "declaration": false,
+    "noImplicitAny": false,
+    "sourceMap": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true
+  },
+  "exclude": [
+    "node_modules",
+    "bower_components",
+    "test",
+    "definitions"
+  ],
+  "rootDirs": [
+    "src/"
+  ],
+  "filesGlob": [
+    "src/*.ts",
+    "src/**/*.ts",
+    "test/*.ts",
+    "test/**/*.ts",
+    "!node_modules/**"
+  ]
+}

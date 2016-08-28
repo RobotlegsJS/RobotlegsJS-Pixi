@@ -1,0 +1,44 @@
+{
+  "name": "robotlegs-pixi",
+  "version": "0.1.0",
+  "description": "PIXI v4 integration with for RobotlegsJS",
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
+  "scripts": {
+    "test": "mocha test/**/*.test.ts --require ts-node/register",
+    "build": "cp node_modules/inversify-dts/inversify/inversify.d.ts . && tsc -d",
+    "prepublish": "publish-please guard && rimraf ./lib && npm run build",
+    "publish-please": "publish-please"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@source.services.ggs-net.com:game-core/typescript-robotlegs-framework.git"
+  },
+  "keywords": [
+    "TypeScript",
+    "Robotlegs",
+    "IoC"
+  ],
+  "author": "Goodgame Studios",
+  "license": "MIT",
+  "dependencies": {
+    "robotlegs": "file:../robotlegsjs"
+  },
+  "devDependencies": {
+    "awesome-typescript-loader": "^1.1.1",
+    "browserify-versionify": "^1.0.6",
+    "glslify": "^5.1.0",
+    "inversify-dts": "^2.2.0",
+    "pixi.js": "^4.0.0",
+    "publish-please": "^2.1.4",
+    "reflect-metadata": "^0.1.8",
+    "rimraf": "^2.5.2",
+    "typescript": "^2.1.0-dev.20160811",
+    "webpack": "^2.1.0-beta.20",
+    "webpack-dev-server": "^2.1.0-beta.0"
+  },
+  "peerDependencies": {
+    "pixi.js": "*",
+    "eventemitter3": "*"
+  }
+}

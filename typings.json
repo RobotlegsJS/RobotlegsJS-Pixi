@@ -1,0 +1,8 @@
+{
+  "globalDependencies": {
+    "pixi.js": "github:pixijs/pixi-typescript/pixi.js.d.ts#7a04f3b3e449c2422f70597b0d836bb958b5fe17"
+  },
+  "globalDevDependencies": {
+    "eventemitter3": "registry:dt/eventemitter3#1.1.1+20151208234524"
+  }
+}
