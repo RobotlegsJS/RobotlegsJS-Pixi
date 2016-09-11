@@ -6,3 +6,4 @@
 // ------------------------------------------------------------------------------
 
 export { ContextView } from "./ContextView";
+export { PixiExtension } from "./PixiExtension";

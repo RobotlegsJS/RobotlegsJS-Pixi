@@ -5,7 +5,14 @@
 //  in accordance with the terms of the license agreement accompanying it.
 // ------------------------------------------------------------------------------
 
-import { instanceOfType, IContext, IExtension, IInjector, ILogger } from "robotlegs";
+import {
+    instanceOfType,
+    IContext,
+    IExtension,
+    IInjector,
+    ILogger,
+    IContextView
+} from "robotlegs";
 
 import { ContextView } from "./ContextView";
 import { applyPixiPatch } from "./pixiPatch";
@@ -53,8 +60,10 @@ export class ContextViewExtension implements IExtension {
 
             applyPixiPatch(contextView.view);
 
+            console.log("Register ContextView to", contextView);
+
             // this._injector.map(ContextView).toValue(contextView);
-            this._injector.bind(ContextView).toConstantValue(contextView);
+            this._injector.bind(IContextView).toConstantValue(contextView);
         }
     }
 

@@ -2,7 +2,7 @@ robotlegs-pixi
 ===
 
 Integrate [RobotlegsJS](https://github.com/goodgamestudios/RobotlegsJs)
-framework with [PixiJS v4](https://github.com/pixijs/pixi.js).
+framework with [PixiJS](https://github.com/pixijs/pixi.js).
 
 Usage
 ---
@@ -11,11 +11,11 @@ Usage
 /// <reference path="node_modules/robotlegs-pixi/definitions/pixi.d.ts" />
 
 import { Context, MVCSBundle } from "robotlegs";
-import { ContextView } from "robotlegs-pixi";
+import { PixiExtension ,ContextView } from "robotlegs-pixi";
 
 let context = new Context();
 context.
-  install( MVCSBundle ).
+  install( MVCSBundle, PixiExtension ).
   configure( new ContextView((<any>this.renderer).plugins.interaction) );
 ```
 
