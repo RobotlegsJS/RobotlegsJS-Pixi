@@ -1,10 +1,3 @@
-// ------------------------------------------------------------------------------
-//  Copyright (c) 2016 Goodgame Studios. All Rights Reserved.
-//
-//  NOTICE: You are permitted to use, modify, and distribute this file
-//  in accordance with the terms of the license agreement accompanying it.
-// ------------------------------------------------------------------------------
-
 /**
  * Patch PIXI event handling.
  *
@@ -12,10 +5,9 @@
  * - Implements event bubbling on `dispatchEvent` when `bubbles` is true.
  */
 
-import { IEvent } from "robotlegs";
 import EventEmitter = require("eventemitter3");
-
 import { DisplayObject } from "pixi.js";
+import { IEvent } from "robotlegs";
 
 const EventDispatcherMixin = {
 

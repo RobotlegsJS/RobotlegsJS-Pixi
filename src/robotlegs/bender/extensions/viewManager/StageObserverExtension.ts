@@ -6,25 +6,28 @@
 // ------------------------------------------------------------------------------
 
 import {
-    instanceOfType,
     IContext,
     IExtension,
     IInjector,
     ILogger
 } from "robotlegs";
 
-import { IContextView } from "./api/IContextView";
-import { ContextView } from "./impl/ContextView";
+import { ContainerRegistry } from "./impl/ContainerRegistry";
+import { StageObserver } from "./impl/StageObserver";
 
-import { applyPixiPatch } from "./pixiPatch";
+let installCount: number = 0;
 
 /**
- * <p>This Extension waits for a ContextView to be added as a configuration
- * and maps it into the context's injector.</p>
- *
- * <p>It should be installed before context initialization.</p>
+ * This extension install an automatic Stage Observer
  */
-export class ContextViewExtension implements IExtension {
+export class StageObserverExtension implements IExtension {
+
+    /*============================================================================*/
+    /* Private Static Properties                                                  */
+    /*============================================================================*/
+
+    // Really? Yes, there can be only one.
+    private static _stageObserver: StageObserver = null;
 
     /*============================================================================*/
     /* Private Properties                                                         */
@@ -42,31 +45,32 @@ export class ContextViewExtension implements IExtension {
      * @inheritDoc
      */
     public extend(context: IContext): void {
+        context.whenInitializing(this.whenInitializing.bind(this));
+        context.whenDestroying(this.whenDestroying.bind(this));
+        installCount++;
         this._injector = context.injector;
         this._logger = context.getLogger(this);
-        context.beforeInitializing(this.beforeInitializing.bind(this));
-        context.addConfigHandler(instanceOfType(ContextView), this.handleContextView.bind(this));
     }
 
     /*============================================================================*/
     /* Private Functions                                                          */
     /*============================================================================*/
 
-    private handleContextView(contextView: IContextView): void {
-        if (this._injector.isBound(IContextView)) {
-            this._logger.warn("A contextView has already been installed, ignoring {0}", [contextView.view]);
-        } else {
-            this._logger.debug("Mapping {0} as contextView", [contextView.view]);
-
-            applyPixiPatch(contextView.view);
-
-            this._injector.bind(IContextView).toConstantValue(contextView);
+    private whenInitializing(): void {
+        // Hark, an actual Singleton!
+        if (!StageObserverExtension._stageObserver) {
+            var containerRegistry: ContainerRegistry = this._injector.get<ContainerRegistry>(ContainerRegistry);
+            this._logger.debug("Creating genuine StageObserver Singleton");
+            StageObserverExtension._stageObserver = new StageObserver(containerRegistry);
         }
     }
 
-    private beforeInitializing(): void {
-        if (!this._injector.isBound(IContextView)) {
-            this._logger.error("A ContextView must be installed if you install the ContextViewExtension.");
+    private whenDestroying(): void {
+        installCount--;
+        if (installCount == 0) {
+            this._logger.debug("Destroying genuine StageObserver Singleton");
+            StageObserverExtension._stageObserver.destroy();
+            StageObserverExtension._stageObserver = null;
         }
     }
 }

@@ -1,9 +1,9 @@
 //
-// Patch PIXI to emit "added" / "removed" events on global event dispatcher
+// Patch PIXI to emit "added"/"removed" events on global event dispatcher
 //
 
-import PIXI = require('pixi.js');
 import "./eventemitter3-patch";
+import PIXI = require('pixi.js');
 
 export function applyPixiPatch(interaction: any) {
 

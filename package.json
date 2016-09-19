@@ -33,7 +33,7 @@
   "dependencies": {
     "eventemitter3": "^2.0.0",
     "pixi.js": "^4.0.1",
-    "robotlegs": "^1.0.0-alpha.4"
+    "robotlegs": "1.0.0-alpha.5"
   },
   "devDependencies": {
     "awesome-typescript-loader": "^2.2.4",

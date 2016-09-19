@@ -5,35 +5,36 @@
 //  in accordance with the terms of the license agreement accompanying it.
 // ------------------------------------------------------------------------------
 
-import { IContextView } from "../api/IContextView";
-
 /**
- * The Context View represents the root any for a Context
+ * @private
  */
-export class ContextView implements IContextView {
+export class ContainerBindingEvent extends Event {
 
     /*============================================================================*/
-    /* Public Properties                                                          */
+    /* Public Static Properties                                                   */
     /*============================================================================*/
 
-    private _view: any;
-
-    /**
-     * The root DisplayObjectContainer for this Context
-     */
-    public get view(): any {
-        return this._view;
-    }
+    public static BINDING_EMPTY: string = "bindingEmpty";
 
     /*============================================================================*/
     /* Constructor                                                                */
     /*============================================================================*/
 
     /**
-     * The Context View represents the root any for a Context
-     * @param view The root any for this Context
+     * @private
      */
-    constructor(view: any) {
-        this._view = view;
+    constructor(type: string) {
+        super(type);
+    }
+
+    /*============================================================================*/
+    /* Public Functions                                                           */
+    /*============================================================================*/
+
+    /**
+     * @inheritDoc
+     */
+    public clone(): Event {
+        return new ContainerBindingEvent(this.type);
     }
 }
