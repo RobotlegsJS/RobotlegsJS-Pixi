@@ -1,6 +1,6 @@
 {
   "name": "robotlegs-pixi",
-  "version": "0.1.0",
+  "version": "1.0.0-alpha.1",
   "description": "PIXI View Integration with RobotlegsJS",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
@@ -23,7 +23,7 @@
   "author": "Goodgame Studios",
   "license": "MIT",
   "dependencies": {
-    "robotlegs": "file:../RobotlegsJS"
+    "robotlegs": "1.0.0-alpha.3"
   },
   "devDependencies": {
     "awesome-typescript-loader": "^2.2.4",

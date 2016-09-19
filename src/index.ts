@@ -5,5 +5,5 @@
 //  in accordance with the terms of the license agreement accompanying it.
 // ------------------------------------------------------------------------------
 
-export { ContextView } from "./ContextView";
-export { PixiExtension } from "./PixiExtension";
+export { ContextView } from "./robotlegs/bender/extensions/contextView/ContextView";
+export { PixiExtension } from "./robotlegs/bender/extensions/contextView/PixiExtension";
