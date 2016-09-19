@@ -1,37 +1,48 @@
 const webpack = require('webpack')
 const path = require('path')
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = (function(options) {
+
   return {
     entry: {
-      main: (process.env.EXAMPLE)
-        ? path.resolve("example/index.ts")
-        : path.resolve("src/index.ts")
+      main: path.join(__dirname, "src/index.ts")
     },
 
     output: {
-      path: __dirname + "/dist",
+      path: path.join(__dirname, "dist"),
       filename: "bundle.js"
     },
 
-    devtool: 'source-map',
+    devtool: 'inline-source-map',
 
     module: {
       loaders: [
-        { test: /\.ts$/, loader: "awesome-typescript-loader" },
-        { test: /node_modules\/pixi\.js/, loader: 'ify' },
-      ]
+        { test: /\.ts$/, loader: "awesome-typescript-loader" }
+      ],
+      postLoaders: [
+        {
+          test: /^(.(?!\.test))*\.ts$/,
+          loader: "istanbul-instrumenter-loader",
+          query: {
+            embedSource: true,
+          },
+        }
+      ],
     },
 
-    plugins: (process.env.EXAMPLE)
-      ? [ new HtmlWebpackPlugin() ]
-      : [],
+    plugins: [
+      // new webpack.optimize.UglifyJsPlugin()
+      new webpack.SourceMapDevToolPlugin({ test: /\.ts$/i })
+    ],
 
     resolve: {
-      extensions: ['.ts', '.js', '.json'],
-      root: [ path.join(__dirname, "./node_modules"), path.join(__dirname, "./src") ]
+      extensions: ['', '.ts', '.js', '.json'],
+      root: [ path.join(__dirname, "./src") ],
+      alias: {
+         // sinon: 'sinon/pkg/sinon'
+      }
     }
+
 
   }
 })()
