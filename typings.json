@@ -1,9 +1,11 @@
 {
   "globalDependencies": {
-    "node": "registry:dt/node#6.0.0+20160909174046",
-    "pixi.js": "registry:dt/pixi.js#3.0.9+20160825215559"
+    "bluebird": "registry:dt/bluebird#2.0.0+20160701023356"
   },
   "globalDevDependencies": {
-    "eventemitter3": "registry:dt/eventemitter3#1.1.1+20151208234524"
+    "chai": "registry:dt/chai#3.4.0+20160317120654",
+    "eventemitter3": "registry:dt/eventemitter3#1.1.1+20151208234524",
+    "mocha": "registry:dt/mocha#2.2.5+20160317120654",
+    "sinon": "registry:dt/sinon#1.16.0+20160517064723"
   }
 }
