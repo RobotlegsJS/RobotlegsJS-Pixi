@@ -1,6 +1,7 @@
 {
   "globalDependencies": {
-    "bluebird": "registry:dt/bluebird#2.0.0+20160701023356"
+    "bluebird": "registry:dt/bluebird#2.0.0+20160701023356",
+    "pixi.js": "github:pixijs/pixi-typescript/pixi.js.d.ts#7a04f3b3e449c2422f70597b0d836bb958b5fe17"
   },
   "globalDevDependencies": {
     "chai": "registry:dt/chai#3.4.0+20160317120654",

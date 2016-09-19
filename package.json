@@ -31,7 +31,9 @@
   },
   "homepage": "https://github.com/GoodgameStudios/RobotlegsJS-Pixi#readme",
   "dependencies": {
-    "robotlegs": "^1.0.0-alpha.3"
+    "eventemitter3": "^2.0.0",
+    "pixi.js": "^4.0.1",
+    "robotlegs": "^1.0.0-alpha.4"
   },
   "devDependencies": {
     "awesome-typescript-loader": "^2.2.4",
@@ -62,7 +64,6 @@
     "karma-typescript-preprocessor2": "^1.2.1",
     "karma-webpack": "^1.8.0",
     "mocha": "^3.0.2",
-    "pixi.js": "pixijs/pixi.js#dev",
     "publish-please": "^2.2.0",
     "reflect-metadata": "^0.1.8",
     "remap-istanbul": "^0.6.4",
