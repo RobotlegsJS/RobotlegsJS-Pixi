@@ -14,7 +14,7 @@ import {
     IContextView
 } from "robotlegs";
 
-import { ContextView } from "./ContextView";
+import { ContextView } from "./impl/ContextView";
 import { applyPixiPatch } from "./pixiPatch";
 
 /**
