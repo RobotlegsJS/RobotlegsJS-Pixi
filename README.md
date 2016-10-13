@@ -20,11 +20,11 @@ Usage
 /// <reference path="node_modules/robotlegs-pixi/definitions/pixi.d.ts" />
 
 import { Context, MVCSBundle } from "robotlegs";
-import { PixiExtension ,ContextView } from "robotlegs-pixi";
+import { PixiBundle ,ContextView } from "robotlegs-pixi";
 
 let context = new Context();
 context.
-  install( MVCSBundle, PixiExtension ).
+  install( MVCSBundle, PixiBundle ).
   configure( new ContextView((<any>this.renderer).plugins.interaction) );
 ```
 

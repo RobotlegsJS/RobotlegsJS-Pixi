@@ -2,12 +2,12 @@ import {
     inject,
     injectable,
     IConfig,
-    IInjector,
-    IMediatorMap,
+    IInjector
 } from "robotlegs";
 
 import { CircleMediator } from "../view/CircleMediator";
 import { CircleView } from "../view/CircleView";
+import { IMediatorMap } from "../../src/index";
 
 @injectable()
 export class MyConfig implements IConfig {

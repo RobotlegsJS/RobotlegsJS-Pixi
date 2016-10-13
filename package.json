@@ -5,6 +5,7 @@
   "main": "lib/src/index.js",
   "typings": "lib/src/index.d.ts",
   "scripts": {
+    "start": "webpack-dev-server --config ./webpack.example.config.js",
     "test": "karma start --single-run",
     "mocha": "mocha test/**/*.test.ts --require ts-node/register",
     "autoformat": "tsfmt -r",
@@ -18,7 +19,8 @@
   "keywords": [
     "TypeScript",
     "Robotlegs",
-    "IoC"
+    "IoC",
+    "PIXI"
   ],
   "author": "Goodgame Studios",
   "contributors": [
@@ -76,10 +78,14 @@
     "typedoc": "^0.4.5",
     "typescript": "^2.0.2",
     "typescript-formatter": "^2.3.0",
-    "webpack": "^1.13.2",
-    "webpack-dev-server": "^1.15.1"
+    "webpack": "^2.1.0-beta.20",
+    "webpack-dev-server": "^2.1.0-beta.0",
+    "html-webpack-plugin": "^2.22.0",
+    "ify-loader": "^1.0.3",
+    "pixi.js": "^4.0.0"
   },
   "peerDependencies": {
+    "pixi.js": "*",
     "reflect-metadata": "^0.1.3"
   }
 }

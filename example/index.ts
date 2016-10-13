@@ -3,7 +3,7 @@ import "reflect-metadata";
 import PIXI = require('pixi.js');
 
 import { Context, MVCSBundle } from "robotlegs";
-import { ContextView, PixiExtension } from "../src";
+import { ContextView, PixiBundle } from "../src";
 
 import { MyConfig } from "./config/MyConfig";
 import { CircleView } from "./view/CircleView";
@@ -19,9 +19,8 @@ class Main {
         this.stage = new PIXI.Container();
 
         this.context = new Context();
-        this.context.install(MVCSBundle, PixiExtension).
+        this.context.install(MVCSBundle, PixiBundle).
             configure(new ContextView((<any>this.renderer).plugins.interaction)).
-            // install().
             configure(MyConfig).
             initialize();
 

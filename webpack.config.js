@@ -16,11 +16,10 @@ module.exports = (function(options) {
     devtool: 'inline-source-map',
 
     module: {
-      loaders: [
-        { test: /\.ts$/, loader: "awesome-typescript-loader" }
-      ],
-      postLoaders: [
+      rules: [
+        { test: /\.ts$/, loader: "awesome-typescript-loader" },
         {
+          enforce: 'post',
           test: /^(.(?!\.test))*\.ts$/,
           loader: "istanbul-instrumenter-loader",
           query: {
@@ -36,11 +35,7 @@ module.exports = (function(options) {
     ],
 
     resolve: {
-      extensions: ['', '.ts', '.js', '.json'],
-      root: [ path.join(__dirname, "./src") ],
-      alias: {
-         // sinon: 'sinon/pkg/sinon'
-      }
+      extensions: ['.ts', '.js', '.json']
     }
 
 
