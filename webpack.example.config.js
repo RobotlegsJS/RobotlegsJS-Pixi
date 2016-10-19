@@ -17,8 +17,7 @@ module.exports = (function(options) {
 
     module: {
       rules: [
-        { test: /\.ts$/, loader: "awesome-typescript-loader" },
-        { test: /node_modules\/pixi\.js/, loader: 'ify' },
+        { test: /\.ts$/, loader: "awesome-typescript-loader" }
       ]
     },
 
