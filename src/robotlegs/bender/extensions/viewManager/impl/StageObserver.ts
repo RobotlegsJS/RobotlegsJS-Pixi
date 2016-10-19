@@ -69,7 +69,7 @@ export class StageObserver {
     }
 
     private addRootListener(container: any): void {
-        container.addEventListener("added", this.onViewAddedToStage, this);
+        container.addListener("added", this.onViewAddedToStage, this);
 
         // Watch the root container itself - nobody else is going to pick it up!
         // container.on("added", this.onContainerRootAddedToStage, this);
@@ -80,7 +80,7 @@ export class StageObserver {
         // container.removeEventListener(Event.ADDED_TO_STAGE, this.onViewAddedToStage, true);
         // container.removeEventListener(Event.ADDED_TO_STAGE, this.onContainerRootAddedToStage);
 
-        container.removeEventListener("added", this.onViewAddedToStage, this);
+        container.removeListener("added", this.onViewAddedToStage, this);
         // container.on("removed", this.onContainerRootAddedToStage);
     }
 

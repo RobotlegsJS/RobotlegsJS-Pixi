@@ -23,7 +23,7 @@ const EventDispatcherMixin = {
         this.off(type, listener, thisObject);
     },
 
-    willTrigger: function(type: string): void {
+    willTrigger: function(type: string): boolean {
         return this.hasEventListener(type);
     },
 
