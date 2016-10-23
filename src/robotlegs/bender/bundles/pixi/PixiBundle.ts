@@ -35,8 +35,6 @@ export class PixiBundle implements IBundle {
      * @inheritDoc
      */
     public extend(context: IContext): void {
-        context.logLevel = LogLevel.DEBUG;
-
         context.install(
             ContextViewExtension,
             ViewManagerExtension,
