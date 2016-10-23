@@ -38,6 +38,9 @@
     "robotlegs": "^1.0.0-alpha.7"
   },
   "devDependencies": {
+    "@types/chai": "^3.4.34",
+    "@types/mocha": "^2.2.32",
+    "@types/pixi.js": "github:pixijs/pixi-typescript",
     "awesome-typescript-loader": "^2.2.4",
     "bluebird": "^3.4.6",
     "browserify-versionify": "^1.0.6",

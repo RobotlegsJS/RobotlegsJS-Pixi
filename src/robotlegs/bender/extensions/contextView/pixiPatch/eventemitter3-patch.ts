@@ -41,4 +41,4 @@ const EventDispatcherMixin = {
 };
 
 Object.assign(DisplayObject.prototype, EventDispatcherMixin);
-Object.assign(EventEmitter.prototype, EventDispatcherMixin);
+Object.assign((<any>EventEmitter).prototype, EventDispatcherMixin);

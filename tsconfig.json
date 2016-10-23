@@ -3,7 +3,6 @@
     "outDir": "lib",
     "target": "es5",
     "lib": ["es6", "dom"],
-    "types": ["reflect-metadata"],
     "module": "commonjs",
     "moduleResolution": "node",
     "declaration": false,
