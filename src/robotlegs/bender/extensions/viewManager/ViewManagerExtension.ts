@@ -62,7 +62,6 @@ export class ViewManagerExtension implements IExtension {
     /*============================================================================*/
 
     private whenInitializing(): void {
-        console.log("initializing ViewManagerExtension");
         this._viewManager = this._injector.get<IViewManager>(IViewManager);
     }
 

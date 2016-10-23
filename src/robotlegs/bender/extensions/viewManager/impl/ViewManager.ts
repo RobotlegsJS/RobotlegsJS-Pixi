@@ -72,8 +72,6 @@ export class ViewManager extends EventDispatcher implements IViewManager {
         if (!this.validContainer(container))
             return;
 
-        console.log("addContainer: ", container);
-
         this._containers.push(container);
 
         for (let i in this._handlers) {
