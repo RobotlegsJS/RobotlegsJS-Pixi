@@ -2,10 +2,7 @@ import { inject } from "robotlegs";
 import { CircleView } from "./CircleView"
 import { Mediator } from "../../src/index";
 
-export class CircleMediator extends Mediator {
-
-    @inject(CircleView)
-    view: CircleView;
+export class CircleMediator extends Mediator<CircleView> {
 
     initialize()
     {

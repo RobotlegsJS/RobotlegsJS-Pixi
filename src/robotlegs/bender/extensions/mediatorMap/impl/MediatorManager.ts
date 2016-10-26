@@ -81,8 +81,8 @@ export class MediatorManager {
         if ('preInitialize' in mediator)
             mediator.preInitialize();
 
-        if ('viewComponent' in mediator)
-            mediator.viewComponent = mediatedItem;
+        if ('view' in mediator)
+            mediator.view = mediatedItem;
 
         if ('initialize' in mediator)
             mediator.initialize();
@@ -98,8 +98,8 @@ export class MediatorManager {
         if ('destroy' in mediator)
             mediator.destroy();
 
-        if ('viewComponent' in mediator)
-            mediator.viewComponent = null;
+        if ('view' in mediator)
+            mediator.view = null;
 
         if ('postDestroy' in mediator)
             mediator.postDestroy();

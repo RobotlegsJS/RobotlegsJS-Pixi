@@ -21,7 +21,7 @@ import { IMediator } from "../api/IMediator";
  * <p>Override initialize and destroy to hook into the mediator lifecycle.</p>
  */
 @injectable()
-export abstract class Mediator implements IMediator {
+export abstract class Mediator<T extends IEventDispatcher> implements IMediator {
 
     /*============================================================================*/
     /* Protected Properties                                                       */
@@ -33,17 +33,18 @@ export abstract class Mediator implements IMediator {
     @inject(IEventDispatcher)
     protected eventDispatcher: IEventDispatcher;
 
-    protected _viewComponent: IEventDispatcher;
+    protected _viewComponent: T;
 
     /*============================================================================*/
     /* Public Properties                                                          */
     /*============================================================================*/
 
-    /**
-     * @private
-     */
-    public set viewComponent(view: IEventDispatcher) {
+    public set view(view: T) {
         this._viewComponent = view;
+    }
+
+    public get view(): T {
+        return this._viewComponent;
     }
 
     /*============================================================================*/

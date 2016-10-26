@@ -16,6 +16,7 @@
     "./test/**/*.ts"
   ],
   "files": [
-    "./typings/index.d.ts"
+    "./typings/index.d.ts",
+    "./definitions/pixi.d.ts"
   ]
 }
