@@ -35,11 +35,12 @@
     "dependencies": {
         "eventemitter3": "^2.0.2",
         "pixi.js": "^4.1.0",
-        "robotlegs": "^1.0.0-alpha.7"
+        "robotlegs": "^1.0.0-alpha.9"
     },
     "devDependencies": {
         "@types/chai": "^3.4.34",
         "@types/mocha": "^2.2.32",
+        "@types/sinon": "^1.16.31",
         "@types/pixi.js": "github:pixijs/pixi-typescript",
         "awesome-typescript-loader": "^2.2.4",
         "bluebird": "^3.4.6",
@@ -78,7 +79,7 @@
         "tslint": "^3.15.1",
         "typedoc": "^0.5.0",
         "typescript": "^2.0.3",
-        "typescript-formatter": "^3.1.0",
+        "typescript-formatter": "^4.0.0",
         "webpack": "^2.1.0-beta.25",
         "webpack-dev-server": "^2.1.0-beta.9"
     },
