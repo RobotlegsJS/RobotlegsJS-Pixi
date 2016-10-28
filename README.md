@@ -30,6 +30,17 @@ context.
   configure( new ContextView((<any>this.renderer).plugins.interaction) );
 ```
 
+Running the example
+---
+
+Run the following commands to run the example:
+
+```
+npm install -g typings
+typings install
+npm install
+npm start
+```
 
 License
 ---
