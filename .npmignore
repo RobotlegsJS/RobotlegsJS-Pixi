@@ -17,6 +17,7 @@ tsfmt.json
 tslint.json
 typings.json
 webpack.config.js
+webpack.example.config.js
 .codeclimate.yml
 .editorconfig
 .eslintignore
