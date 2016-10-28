@@ -2,6 +2,7 @@
 /.vscode
 /coverage
 /docs
+/example
 /lib/test
 /not-ported-extensions
 /src
