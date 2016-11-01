@@ -9,8 +9,7 @@ import { assert } from "chai";
 
 import {
     IContext,
-    Context,
-    LifecycleError
+    Context
 } from "robotlegs";
 
 import { ContextViewExtension } from "../../../../../src/robotlegs/bender/extensions/contextView/ContextViewExtension";
@@ -32,6 +31,6 @@ describe("ContextViewExtension", () => {
             context.initialize();
             context.install(ContextViewExtension);
         }
-        assert.throws(installExtensionAfterInitialization, LifecycleError);
+        assert.throws(installExtensionAfterInitialization, Error);
     });
 });
