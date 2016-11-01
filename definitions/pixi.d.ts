@@ -15,15 +15,15 @@ declare module "pixi.js" {
         dispatchEvent(event: IEvent): boolean;
     }
 
-    export interface DisplayObject extends IEventDispatcher {}
-    export interface SystemRenderer extends IEventDispatcher {}
+    export interface DisplayObject extends IEventDispatcher { }
+    export interface SystemRenderer extends IEventDispatcher { }
 
-    export interface BaseTexture extends IEventDispatcher {}
-    export interface Texture extends IEventDispatcher {}
+    export interface BaseTexture extends IEventDispatcher { }
+    export interface Texture extends IEventDispatcher { }
 
     export namespace loaders {
-        export interface Loader extends IEventDispatcher {}
-        export interface Resource extends IEventDispatcher {}
+        export interface Loader extends IEventDispatcher { }
+        export interface Resource extends IEventDispatcher { }
     }
 
 }
