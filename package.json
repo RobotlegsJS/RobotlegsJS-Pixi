@@ -17,6 +17,9 @@
     "type": "git",
     "url": "https://github.com/GoodgameStudios/RobotlegsJS-Pixi.git"
   },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
+  },
   "keywords": [
     "TypeScript",
     "Robotlegs",
