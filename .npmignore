@@ -13,6 +13,7 @@ CONTRIBUTING.md
 bower.json
 karma.conf.js
 tsconfig.json
+tsconfig.test.json
 tsfmt.json
 tslint.json
 typings.json

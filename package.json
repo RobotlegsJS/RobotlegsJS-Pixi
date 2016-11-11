@@ -2,8 +2,8 @@
   "name": "robotlegs-pixi",
   "version": "1.0.0-alpha.9",
   "description": "PIXI View Integration with RobotlegsJS",
-  "main": "lib/src/index.js",
-  "typings": "lib/src/index.d.ts",
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
   "scripts": {
     "start": "webpack-dev-server --config ./webpack.example.config.js",
     "test": "karma start --single-run",
