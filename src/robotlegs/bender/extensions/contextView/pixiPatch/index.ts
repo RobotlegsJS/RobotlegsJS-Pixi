@@ -21,7 +21,7 @@ export function applyPixiPatch(interaction: any) {
     }
 
     PIXI.Container.prototype.addChildAt = function(child, index): PIXI.DisplayObject {
-        addChildAt.call(this, child);
+        addChildAt.call(this, child, index);
         interaction.emit("added", { target: child })
         return this;
     }
