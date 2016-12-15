@@ -29,14 +29,14 @@ export function applyPixiPatch(interaction: any) {
     PIXI.Container.prototype.removeChild = function(...child): PIXI.DisplayObject {
         for (var i = 0, len = child.length; i < len; i++) {
             removeChild.call(this, child[i]);
-            interaction.emit("removed", { target: child })
+            interaction.emit("removed", { target: child[i] })
         }
         return this;
     }
 
     PIXI.Container.prototype.removeChildAt = function(index): PIXI.DisplayObject {
-        removeChildAt.call(this, index);
-        interaction.emit("removed", { target: this.getChildAt(index) });
+        var child = removeChildAt.call(this, index);
+        interaction.emit("removed", { target: child });
         return this;
     }
 
