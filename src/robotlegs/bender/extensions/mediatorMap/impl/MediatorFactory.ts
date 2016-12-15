@@ -84,9 +84,7 @@ export class MediatorFactory {
         if (!mediators)
             return;
 
-        for (var mapping in mediators) {
-            this._manager.removeMediator(mediators[mapping], item, <any>mapping);
-        }
+        mediators.forEach((value, key) => this._manager.removeMediator(value, item, key));
 
         this._mediators.delete(item);
     }
