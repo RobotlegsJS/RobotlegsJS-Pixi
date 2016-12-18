@@ -50,9 +50,10 @@ export class MediatorManager {
         var displayObject: DisplayObject = <DisplayObject>item;
 
         // Watch Display Object for removal
-        if (displayObject && mapping.autoRemoveEnabled)
-            displayObject.on('removed', this.onRemovedFromStage, this);
-        // displayObject.addEventListener(Event.REMOVED_FROM_STAGE, this.onRemovedFromStage);
+        if (displayObject && mapping.autoRemoveEnabled) {
+            item._onRemovedFromStage = this.onRemovedFromStage.bind(this, item);
+            displayObject.on('removed', item._onRemovedFromStage, this);
+        }
 
         // Synchronize with item life-cycle
         this.initializeMediator(mediator, item);
@@ -63,8 +64,7 @@ export class MediatorManager {
      */
     public removeMediator(mediator: any, item: any, mapping: IMediatorMapping): void {
         if (item instanceof DisplayObject)
-            (<DisplayObject>item).off('removed', this.onRemovedFromStage);
-        // displayObject.removeEventListener(Event.REMOVED_FROM_STAGE, this.onRemovedFromStage);
+            (<DisplayObject>item).off('removed', (<any>item)._onRemovedFromStage);
 
         this.destroyMediator(mediator);
     }
@@ -73,8 +73,8 @@ export class MediatorManager {
     /* Private Functions                                                          */
     /*============================================================================*/
 
-    private onRemovedFromStage(event: any): void {
-        this._factory.removeMediators(event);
+    private onRemovedFromStage(displayObject: any, fromContainer: any): void {
+        this._factory.removeMediators(displayObject);
     }
 
     private initializeMediator(mediator: any, mediatedItem: any): void {
