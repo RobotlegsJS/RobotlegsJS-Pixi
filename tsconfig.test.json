@@ -12,11 +12,9 @@
     "emitDecoratorMetadata": true
   },
   "include": [
-    "./src/**/*.ts",
-    "./test/**/*.ts"
+    "./src/**/*.ts"
   ],
   "files": [
-    "./typings/index.d.ts",
     "./definitions/pixi.d.ts"
   ]
 }

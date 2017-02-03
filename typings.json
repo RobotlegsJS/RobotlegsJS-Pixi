@@ -1,5 +1,0 @@
-{
-  "globalDependencies": {
-    "pixi.js": "github:pixijs/pixi-typescript/pixi.js.d.ts#v4.x"
-  }
-}

@@ -6,8 +6,7 @@ RobotlegsJS PixiJS Extension
 [![Code Climate](https://codeclimate.com/github/GoodgameStudios/RobotlegsJS-Pixi/badges/gpa.svg)](https://codeclimate.com/github/GoodgameStudios/RobotlegsJS-Pixi)
 [![Test Coverage](https://codeclimate.com/github/GoodgameStudios/RobotlegsJS-Pixi/badges/coverage.svg)](https://codeclimate.com/github/GoodgameStudios/RobotlegsJS-Pixi/coverage)
 [![npm version](https://badge.fury.io/js/robotlegs-pixi.svg)](https://badge.fury.io/js/robotlegs-pixi)
-[![Dependency Status](https://img.shields.io/david/GoodgameStudios/RobotlegsJS-Pixi.svg?style=flat)](https://david-dm.org/GoodgameStudios/RobotlegsJS-Pixi)
-[![DevDependency Status](https://img.shields.io/david/dev/GoodgameStudios/RobotlegsJS-Pixi.svg?style=flat)](https://david-dm.org/GoodgameStudios/RobotlegsJS-Pixi?type=dev)
+[![Greenkeeper badge](https://badges.greenkeeper.io/GoodgameStudios/RobotlegsJS-Pixi.svg)](https://greenkeeper.io/)
 
 [![NPM](https://nodei.co/npm/robotlegs-pixi.png?downloads=true&downloadRank=true)](https://nodei.co/npm/robotlegs-pixi/)
 [![NPM](https://nodei.co/npm-dl/robotlegs-pixi.png?months=9&height=3)](https://nodei.co/npm/robotlegs-pixi/)
