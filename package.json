@@ -44,7 +44,7 @@
   "devDependencies": {
     "@types/bluebird": "^3.0.37",
     "@types/chai": "^3.4.34",
-    "@types/mocha": "^2.2.38",
+    "@types/mocha": "^2.2.39",
     "@types/pixi.js": "^4.1.1",
     "@types/sinon": "^1.16.34",
     "bluebird": "^3.4.7",
@@ -84,7 +84,7 @@
     "tslint": "^4.4.2",
     "typedoc": "^0.5.5",
     "typescript": "^2.1.5",
-    "typescript-formatter": "^4.0.1",
+    "typescript-formatter": "^4.1.0",
     "webpack": "^2.2.1",
     "webpack-dev-server": "^2.3.0"
   },
