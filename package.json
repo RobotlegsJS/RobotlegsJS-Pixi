@@ -86,7 +86,7 @@
     "typescript": "^2.1.5",
     "typescript-formatter": "^4.0.1",
     "webpack": "^2.2.1",
-    "webpack-dev-server": "^1.16.3"
+    "webpack-dev-server": "^2.3.0"
   },
   "peerDependencies": {
     "pixi.js": "*",
