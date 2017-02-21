@@ -5,7 +5,7 @@
 //  in accordance with the terms of the license agreement accompanying it.
 // ------------------------------------------------------------------------------
 
-import "../../../../entry.test";
+import "../../../../entry";
 
 import { assert } from "chai";
 
