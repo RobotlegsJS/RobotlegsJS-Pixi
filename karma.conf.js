@@ -18,7 +18,6 @@ module.exports = function(config) {
       "es6-shim"
     ],
     files: [
-      "./test/entry.test.ts",
       "./test/**/**/**.test.ts",
       {
         pattern: '**/*.map',
@@ -45,19 +44,21 @@ module.exports = function(config) {
       "karma-chai",
       "karma-sinon",
       "karma-es6-shim",
-      "karma-coverage"
+      "karma-coverage-istanbul-reporter"
     ],
-    reporters: (config.singleRun
-      ? ["dots", "mocha", "coverage"]
-      : ["dots", "mocha"]),
-    coverageReporter: {
+    reporters: (
+      config.singleRun ?
+        ["dots", "mocha", "coverage-istanbul"] :
+        ["dots", "mocha"]
+    ),
+    coverageIstanbulReporter: {
+      reports: ["html", "lcov", "lcovonly", "text-summary"],
       dir: "coverage",
-      reporters: [
-        { type: 'html', subdir: 'report-html' },
-        { type: 'lcov', subdir: 'report-lcov' }
-      ],
-      instrumenterOptions: {
-        istanbul: { noCompact: true }
+      fixWebpackSourcePaths: true,
+      "report-config": {
+        html: {
+          subdir: "html-report"
+        }
       }
     },
     port: 9876,
