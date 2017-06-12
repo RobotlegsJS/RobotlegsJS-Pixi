@@ -46,7 +46,7 @@ export class StageCrawler {
 
     private scanContainer(container: any): void {
         this.processView(container);
-        var numChildren: number = container.numChildren;
+        var numChildren: number = container.children.length;
         for (var i: number = 0; i < numChildren; i++) {
             // TODO: abstract view layer (pixi.js/three.js)
             var child: any = container.getChildAt(i);
