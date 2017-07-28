@@ -9,6 +9,7 @@ import {
     IInjector,
     applyHooks,
     guardsApprove,
+    instantiateUnmapped,
     ITypeFilter
 } from "robotlegs";
 
@@ -108,7 +109,7 @@ export class MediatorFactory {
 
         if (mapping.guards.length == 0 || guardsApprove(mapping.guards, this._injector)) {
             var mediatorClass: FunctionConstructor = mapping.mediatorClass;
-            mediator = this._injector.instantiateUnmapped(mediatorClass);
+            mediator = instantiateUnmapped(this._injector, mediatorClass);
             if (mapping.hooks.length > 0) {
                 this._injector.bind(mediatorClass).toConstantValue(mediator);
                 applyHooks(mapping.hooks, this._injector);
