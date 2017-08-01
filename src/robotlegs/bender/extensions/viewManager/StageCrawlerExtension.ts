@@ -4,6 +4,7 @@
 //  NOTICE: You are permitted to use, modify, and distribute this file
 //  in accordance with the terms of the license agreement accompanying it.
 // ------------------------------------------------------------------------------
+import * as PIXI from "pixi.js";
 
 import {
     IContext,
@@ -67,7 +68,9 @@ export class StageCrawlerExtension implements IExtension {
         var viewManager: IViewManager = this._injector.get<IViewManager>(IViewManager);
         for (let i in viewManager.containers) {
             let container: any = viewManager.containers[i];
-            container && this.scanContainer(container);
+            if (container instanceof PIXI.Container) {
+                this.scanContainer(container);
+            }
         }
     }
 
