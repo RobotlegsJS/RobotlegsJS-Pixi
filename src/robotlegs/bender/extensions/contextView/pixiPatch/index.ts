@@ -12,7 +12,7 @@ export function applyPixiPatch(interaction: any) {
     let removeChild = PIXI.Container.prototype.removeChild;
     let removeChildAt = PIXI.Container.prototype.removeChildAt;
 
-    PIXI.Container.prototype.addChild = function(...child): PIXI.DisplayObject {
+    PIXI.Container.prototype.addChild = function patchedAddChild<T extends PIXI.DisplayObject>(...child: T[]) {
         for (var i = 0, len = child.length; i < len; i++) {
             addChild.call(this, child[i]);
             interaction.emit("added", { target: child[i] })
@@ -20,7 +20,7 @@ export function applyPixiPatch(interaction: any) {
         return this;
     }
 
-    PIXI.Container.prototype.addChildAt = function(child, index): PIXI.DisplayObject {
+    PIXI.Container.prototype.addChildAt = function patchedAddChildAt<T extends PIXI.DisplayObject>(child: T, index: number): T {
         addChildAt.call(this, child, index);
         interaction.emit("added", { target: child })
         return this;
