@@ -1,6 +1,6 @@
 The MIT License (MIT)
 
-Copyright (c) 2016 Goodgame Studios https://www.goodgamestudios.com
+Copyright (c) 2017 RobotlegsJS https://www.goodgamestudios.com
 Copyright (c) 2009 - 2013 the original author or authors
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
