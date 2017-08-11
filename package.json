@@ -1,6 +1,6 @@
 {
-  "name": "robotlegs-pixi",
-  "version": "1.0.0",
+  "name": "@robotlegsjs/pixi",
+  "version": "0.0.1",
   "description": "PIXI View Integration with RobotlegsJS",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
@@ -15,7 +15,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/GoodgameStudios/RobotlegsJS-Pixi.git"
+    "url": "git@github.com:RobotlegsJS/RobotlegsJS-Pixi.git"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org"
@@ -26,16 +26,16 @@
     "IoC",
     "PIXI"
   ],
-  "author": "Goodgame Studios",
+  "author": "RobotlegsJS",
   "contributors": [
     "Endel Dreyer <endel.dreyer@gmail.com>",
-    "Tiago Schenkel <tiago.tche@gmail.com>"
+    "Tiago Schenkel <tiago.schenkel@gmail.com>"
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/GoodgameStudios/RobotlegsJS-Pixi/issues"
+    "url": "https://github.com/RobotlegsJS/RobotlegsJS-Pixi/issues"
   },
-  "homepage": "https://github.com/GoodgameStudios/RobotlegsJS-Pixi#readme",
+  "homepage": "https://github.com/RobotlegsJS/RobotlegsJS-Pixi#readme",
   "dependencies": {
     "eventemitter3": "^2.0.3",
     "pixi.js": "^4.5.4",

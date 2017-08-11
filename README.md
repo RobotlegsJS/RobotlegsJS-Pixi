@@ -1,27 +1,24 @@
 RobotlegsJS PixiJS Extension
 ===
 
-[![Join the chat at https://gitter.im/GoodgameStudios/RobotlegsJS](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/GoodgameStudios/RobotlegsJS)
-[![Build Status](https://secure.travis-ci.org/GoodgameStudios/RobotlegsJS-Pixi.svg?branch=master)](https://travis-ci.org/GoodgameStudios/RobotlegsJS-Pixi)
-[![Code Climate](https://codeclimate.com/github/GoodgameStudios/RobotlegsJS-Pixi/badges/gpa.svg)](https://codeclimate.com/github/GoodgameStudios/RobotlegsJS-Pixi)
-[![Test Coverage](https://codeclimate.com/github/GoodgameStudios/RobotlegsJS-Pixi/badges/coverage.svg)](https://codeclimate.com/github/GoodgameStudios/RobotlegsJS-Pixi/coverage)
-[![npm version](https://badge.fury.io/js/robotlegs-pixi.svg)](https://badge.fury.io/js/robotlegs-pixi)
-[![Greenkeeper badge](https://badges.greenkeeper.io/GoodgameStudios/RobotlegsJS-Pixi.svg)](https://greenkeeper.io/)
+[![Gitter chat](https://badges.gitter.im/RobotlegsJS/RobotlegsJS.svg)](https://gitter.im/RobotlegsJS/RobotlegsJS)
+[![Build Status](https://secure.travis-ci.org/RobotlegsJS/RobotlegsJS-Pixi.svg?branch=master)](https://travis-ci.org/RobotlegsJS/RobotlegsJS-Pixi)
+[![Code Climate](https://codeclimate.com/github/RobotlegsJS/RobotlegsJS-Pixi/badges/gpa.svg)](https://codeclimate.com/github/RobotlegsJS/RobotlegsJS-Pixi)
+[![Test Coverage](https://codeclimate.com/github/RobotlegsJS/RobotlegsJS-Pixi/badges/coverage.svg)](https://codeclimate.com/github/RobotlegsJS/RobotlegsJS-Pixi/coverage)
+[![npm version](https://badge.fury.io/js/%40robotlegsjs%2Fpixi.svg)](https://badge.fury.io/js/%40robotlegsjs%2Fpixi)
+[![Greenkeeper badge](https://badges.greenkeeper.io/RobotlegsJS/RobotlegsJS-Pixi.svg)](https://greenkeeper.io/)
 
-[![NPM](https://nodei.co/npm/robotlegs-pixi.png?downloads=true&downloadRank=true)](https://nodei.co/npm/robotlegs-pixi/)
-[![NPM](https://nodei.co/npm-dl/robotlegs-pixi.png?months=9&height=3)](https://nodei.co/npm/robotlegs-pixi/)
-
-Integrate [RobotlegsJS](https://github.com/goodgamestudios/RobotlegsJs)
+Integrate [RobotlegsJS](https://github.com/RobotlegsJS/RobotlegsJS)
 framework with [PixiJS](https://github.com/pixijs/pixi.js).
 
 Usage
 ---
 
 ```ts
-/// <reference path="node_modules/robotlegs-pixi/definitions/pixi.d.ts" />
+/// <reference path="node_modules/@robotlegsjs/pixi/definitions/pixi.d.ts" />
 
 import { Context, MVCSBundle } from "robotlegs";
-import { PixiBundle ,ContextView } from "robotlegs-pixi";
+import { PixiBundle ,ContextView } from "@robotlegsjs/pixi";
 
 let context = new Context();
 context.
@@ -35,8 +32,6 @@ Running the example
 Run the following commands to run the example:
 
 ```
-npm install -g typings
-typings install
 npm install
 npm start
 ```
