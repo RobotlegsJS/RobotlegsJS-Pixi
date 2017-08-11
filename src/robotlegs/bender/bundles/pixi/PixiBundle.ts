@@ -9,7 +9,7 @@ import {
     IBundle,
     IContext,
     LogLevel
-} from "robotlegs";
+} from "@robotlegsjs/core";
 
 import { ContextViewExtension } from "../../extensions/contextView/ContextViewExtension";
 import { ContextViewListenerConfig } from "../../extensions/contextView/impl/ContextViewListenerConfig";

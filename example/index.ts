@@ -2,7 +2,7 @@ import "reflect-metadata";
 
 import PIXI = require('pixi.js');
 
-import { Context, MVCSBundle } from "robotlegs";
+import { Context, MVCSBundle } from "@robotlegsjs/core";
 import { ContextView, PixiBundle } from "../src";
 
 import { MyConfig } from "./config/MyConfig";

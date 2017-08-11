@@ -10,7 +10,7 @@ import {
     IContext,
     IExtension,
     ILogger
-} from "robotlegs";
+} from "@robotlegsjs/core";
 
 import { ContextView } from "./impl/ContextView";
 

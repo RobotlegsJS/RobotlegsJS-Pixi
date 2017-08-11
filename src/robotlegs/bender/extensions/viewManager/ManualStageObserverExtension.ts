@@ -10,7 +10,7 @@ import {
     IExtension,
     IInjector,
     ILogger
-} from "robotlegs";
+} from "@robotlegsjs/core";
 
 import { ContainerRegistry } from "./impl/ContainerRegistry";
 import { ManualStageObserver } from "./impl/ManualStageObserver";

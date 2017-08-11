@@ -9,7 +9,7 @@ import {
     IContext,
     IExtension,
     IInjector
-} from "robotlegs";
+} from "@robotlegsjs/core";
 
 import { IViewManager } from "../viewManager/api/IViewManager";
 import { ViewManager } from "../viewManager/impl/ViewManager";

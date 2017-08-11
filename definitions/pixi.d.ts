@@ -1,6 +1,6 @@
-/// <reference types="robotlegs" />
+/// <reference types="@robotlegsjs/core" />
 
-import { IEvent } from "robotlegs";
+import { IEvent } from "@robotlegsjs/core";
 
 /**
  * Augment PIXI module to recognize IEventDispatcher patch.

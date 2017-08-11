@@ -10,7 +10,7 @@ import {
     ILogger,
     ITypeMatcher,
     TypeMatcher
-} from "robotlegs";
+} from "@robotlegsjs/core";
 
 import { IMediatorMap } from "../api/IMediatorMap";
 import { IMediatorMapper } from "../dsl/IMediatorMapper";

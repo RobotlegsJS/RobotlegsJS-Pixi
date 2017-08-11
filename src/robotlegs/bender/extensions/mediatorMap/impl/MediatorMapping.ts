@@ -9,7 +9,7 @@ import {
     IGuard,
     IHook,
     ITypeFilter
-} from "robotlegs";
+} from "@robotlegsjs/core";
 
 import { IMediatorMapping } from "../api/IMediatorMapping";
 import { IMediatorConfigurator } from "../dsl/IMediatorConfigurator";

@@ -3,7 +3,7 @@ import {
     injectable,
     IConfig,
     IInjector
-} from "robotlegs";
+} from "@robotlegsjs/core";
 
 import { CircleMediator } from "../view/CircleMediator";
 import { CircleView } from "../view/CircleView";

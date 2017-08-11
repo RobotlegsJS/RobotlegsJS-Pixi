@@ -11,7 +11,7 @@ import {
     IEventMap,
     IEventDispatcher,
     Event
-} from "robotlegs";
+} from "@robotlegsjs/core";
 
 import { IMediator } from "../api/IMediator";
 

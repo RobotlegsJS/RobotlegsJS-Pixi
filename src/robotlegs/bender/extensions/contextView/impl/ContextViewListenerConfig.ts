@@ -7,7 +7,7 @@
 
 import { injectable, inject } from "inversify";
 
-import { IConfig } from "robotlegs";
+import { IConfig } from "@robotlegsjs/core";
 
 import { IContextView } from "../api/IContextView";
 import { IViewManager } from "../../viewManager/api/IViewManager";

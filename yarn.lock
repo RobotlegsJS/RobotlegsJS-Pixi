@@ -2,6 +2,12 @@
 # yarn lockfile v1
 
 
+"@robotlegsjs/core@^0.0.1":
+  version "0.0.1"
+  resolved "https://registry.npmjs.org/@robotlegsjs/core/-/core-0.0.1.tgz#ff42805681cd45d92bc04be670f3f0fcc723ee20"
+  dependencies:
+    inversify "^4.3.0"
+
 "@types/bluebird@^3.5.8":
   version "3.5.8"
   resolved "https://registry.npmjs.org/@types/bluebird/-/bluebird-3.5.8.tgz#242a83379f06c90f96acf6d1aeab3af6faebdb98"
@@ -4620,12 +4626,6 @@ ripemd160@^2.0.0, ripemd160@^2.0.1:
   dependencies:
     hash-base "^2.0.0"
     inherits "^2.0.1"
-
-robotlegs@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.npmjs.org/robotlegs/-/robotlegs-1.0.1.tgz#a451383d4d03596db97bef01798cb045c4878f58"
-  dependencies:
-    inversify "^4.3.0"
 
 run-async@^0.1.0:
   version "0.1.0"

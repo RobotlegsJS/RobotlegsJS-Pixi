@@ -7,7 +7,7 @@
 
 import EventEmitter = require("eventemitter3");
 import { DisplayObject } from "pixi.js";
-import { IEvent } from "robotlegs";
+import { IEvent } from "@robotlegsjs/core";
 
 const EventDispatcherMixin = {
 

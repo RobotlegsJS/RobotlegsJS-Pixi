@@ -12,7 +12,7 @@ import { assert } from "chai";
 import {
     IContext,
     Context
-} from "robotlegs";
+} from "@robotlegsjs/core";
 
 import { ContextViewExtension } from "../../../../../src/robotlegs/bender/extensions/contextView/ContextViewExtension";
 

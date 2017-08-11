@@ -7,7 +7,7 @@
 
 // import PIXI = require("pixi.js");
 
-import { IEventDispatcher } from "robotlegs";
+import { IEventDispatcher } from "@robotlegsjs/core";
 import { IViewHandler } from "./IViewHandler";
 
 /*[Event(name="containerAdd", type="robotlegs.bender.extensions.viewManager.impl.ViewManagerEvent")]*/

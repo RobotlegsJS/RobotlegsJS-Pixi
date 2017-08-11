@@ -17,7 +17,7 @@ Usage
 ```ts
 /// <reference path="node_modules/@robotlegsjs/pixi/definitions/pixi.d.ts" />
 
-import { Context, MVCSBundle } from "robotlegs";
+import { Context, MVCSBundle } from "@robotlegsjs/core";
 import { PixiBundle ,ContextView } from "@robotlegsjs/pixi";
 
 let context = new Context();

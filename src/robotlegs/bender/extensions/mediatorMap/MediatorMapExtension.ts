@@ -9,7 +9,7 @@ import {
     IContext,
     IExtension,
     IInjector
-} from "robotlegs";
+} from "@robotlegsjs/core";
 
 import { IMediatorMap } from "./api/IMediatorMap";
 import { MediatorMap } from "./impl/MediatorMap";

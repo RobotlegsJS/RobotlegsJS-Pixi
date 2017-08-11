@@ -5,7 +5,7 @@
 //  in accordance with the terms of the license agreement accompanying it.
 // ------------------------------------------------------------------------------
 
-import { EventDispatcher } from "robotlegs";
+import { EventDispatcher } from "@robotlegsjs/core";
 
 import { ContainerBinding } from "./ContainerBinding";
 import { ContainerBindingEvent } from "./ContainerBindingEvent";

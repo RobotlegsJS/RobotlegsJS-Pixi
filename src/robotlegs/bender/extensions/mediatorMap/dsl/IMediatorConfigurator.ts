@@ -8,7 +8,7 @@
 import {
     IGuard,
     IHook
-} from "robotlegs";
+} from "@robotlegsjs/core";
 
 /**
  * Configures a mediator mapping

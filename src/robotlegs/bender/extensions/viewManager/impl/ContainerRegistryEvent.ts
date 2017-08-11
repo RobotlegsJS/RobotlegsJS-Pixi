@@ -9,7 +9,7 @@
  * Container existence event
  * @private
  */
-import { Event } from "robotlegs";
+import { Event } from "@robotlegsjs/core";
 
 export class ContainerRegistryEvent extends Event {
 

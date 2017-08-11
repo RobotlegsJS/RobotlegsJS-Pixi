@@ -5,7 +5,7 @@
 //  in accordance with the terms of the license agreement accompanying it.
 // ------------------------------------------------------------------------------
 
-import { EventDispatcher } from "robotlegs";
+import { EventDispatcher } from "@robotlegsjs/core";
 
 import { IViewHandler } from "../api/IViewHandler";
 

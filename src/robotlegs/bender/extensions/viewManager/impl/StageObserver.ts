@@ -5,7 +5,7 @@
 //  in accordance with the terms of the license agreement accompanying it.
 // ------------------------------------------------------------------------------
 
-import { IEvent } from "robotlegs";
+import { IEvent } from "@robotlegsjs/core";
 
 import { ContainerBinding } from "./ContainerBinding";
 import { ContainerRegistry } from "./ContainerRegistry";

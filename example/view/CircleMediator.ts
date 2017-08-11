@@ -1,4 +1,4 @@
-import { inject } from "robotlegs";
+import { inject } from "@robotlegsjs/core";
 import { CircleView } from "./CircleView"
 import { Mediator } from "../../src/index";
 import { ChildView } from "./ChildView";
