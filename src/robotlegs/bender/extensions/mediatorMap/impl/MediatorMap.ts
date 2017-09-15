@@ -30,12 +30,14 @@ import { injectable, inject } from "inversify";
  */
 @injectable()
 export class MediatorMap implements IMediatorMap, IViewHandler {
-
     /*============================================================================*/
     /* Private Properties                                                         */
     /*============================================================================*/
 
-    private _mappers: Map<string, IMediatorMapper> = new Map<string, IMediatorMapper>();
+    private _mappers: Map<string, IMediatorMapper> = new Map<
+        string,
+        IMediatorMapper
+    >();
 
     private _logger: ILogger;
 
@@ -52,9 +54,7 @@ export class MediatorMap implements IMediatorMap, IViewHandler {
     /**
      * @private
      */
-    constructor(
-        @inject(IContext) context: IContext
-    ) {
+    constructor(@inject(IContext) context: IContext) {
         this._logger = context.getLogger(this);
         this._factory = new MediatorFactory(context.injector);
         this._viewHandler = new MediatorViewHandler(this._factory);
@@ -69,7 +69,8 @@ export class MediatorMap implements IMediatorMap, IViewHandler {
      */
     public mapMatcher(matcher: ITypeMatcher): IMediatorMapper {
         this._mappers[matcher.createTypeFilter().descriptor] =
-            this._mappers[matcher.createTypeFilter().descriptor] || this.createMapper(matcher);
+            this._mappers[matcher.createTypeFilter().descriptor] ||
+            this.createMapper(matcher);
         return this._mappers[matcher.createTypeFilter().descriptor];
     }
 
@@ -84,14 +85,17 @@ export class MediatorMap implements IMediatorMap, IViewHandler {
      * @inheritDoc
      */
     public unmapMatcher(matcher: ITypeMatcher): IMediatorUnmapper {
-        return this._mappers[matcher.createTypeFilter().descriptor] || this.NULL_UNMAPPER;
+        return (
+            this._mappers[matcher.createTypeFilter().descriptor] ||
+            this.NULL_UNMAPPER
+        );
     }
 
     /**
      * @inheritDoc
      */
     public unmap(type: any): IMediatorUnmapper {
-        return this.unmapMatcher((new TypeMatcher().allOf(type)));
+        return this.unmapMatcher(new TypeMatcher().allOf(type));
     }
 
     /**
@@ -105,7 +109,7 @@ export class MediatorMap implements IMediatorMap, IViewHandler {
      * @inheritDoc
      */
     public mediate(item: any): void {
-        this._viewHandler.handleItem(item, <any>item['constructor']);
+        this._viewHandler.handleItem(item, <any>item["constructor"]);
     }
 
     /**
@@ -127,6 +131,10 @@ export class MediatorMap implements IMediatorMap, IViewHandler {
     /*============================================================================*/
 
     private createMapper(matcher: ITypeMatcher): IMediatorMapper {
-        return new MediatorMapper(matcher.createTypeFilter(), this._viewHandler, this._logger);
+        return new MediatorMapper(
+            matcher.createTypeFilter(),
+            this._viewHandler,
+            this._logger
+        );
     }
 }

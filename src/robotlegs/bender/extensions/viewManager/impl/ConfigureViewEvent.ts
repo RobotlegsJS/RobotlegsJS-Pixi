@@ -5,13 +5,11 @@
 //  in accordance with the terms of the license agreement accompanying it.
 // ------------------------------------------------------------------------------
 
-
 /**
  * View Configuration Event
  * @private
  */
 export class ConfigureViewEvent extends Event {
-
     /*============================================================================*/
     /* Public Static Properties                                                   */
     /*============================================================================*/

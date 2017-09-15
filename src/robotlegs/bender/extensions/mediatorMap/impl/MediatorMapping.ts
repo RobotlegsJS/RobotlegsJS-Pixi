@@ -5,11 +5,7 @@
 //  in accordance with the terms of the license agreement accompanying it.
 // ------------------------------------------------------------------------------
 
-import {
-    IGuard,
-    IHook,
-    ITypeFilter
-} from "@robotlegsjs/core";
+import { IGuard, IHook, ITypeFilter } from "@robotlegsjs/core";
 
 import { IMediatorMapping } from "../api/IMediatorMapping";
 import { IMediatorConfigurator } from "../dsl/IMediatorConfigurator";
@@ -17,8 +13,8 @@ import { IMediatorConfigurator } from "../dsl/IMediatorConfigurator";
 /**
  * @private
  */
-export class MediatorMapping implements IMediatorMapping, IMediatorConfigurator {
-
+export class MediatorMapping
+    implements IMediatorMapping, IMediatorConfigurator {
     /*============================================================================*/
     /* Public Properties                                                          */
     /*============================================================================*/

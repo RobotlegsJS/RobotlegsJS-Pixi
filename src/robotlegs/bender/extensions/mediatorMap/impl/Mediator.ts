@@ -7,11 +7,7 @@
 
 import { injectable, inject } from "inversify";
 
-import {
-    IEventMap,
-    IEventDispatcher,
-    Event
-} from "@robotlegsjs/core";
+import { IEventMap, IEventDispatcher, Event } from "@robotlegsjs/core";
 
 import { IMediator } from "../api/IMediator";
 
@@ -21,17 +17,15 @@ import { IMediator } from "../api/IMediator";
  * <p>Override initialize and destroy to hook into the mediator lifecycle.</p>
  */
 @injectable()
-export abstract class Mediator<T extends IEventDispatcher> implements IMediator {
-
+export abstract class Mediator<T extends IEventDispatcher>
+    implements IMediator {
     /*============================================================================*/
     /* Protected Properties                                                       */
     /*============================================================================*/
 
-    @inject(IEventMap)
-    protected eventMap: IEventMap;
+    @inject(IEventMap) protected eventMap: IEventMap;
 
-    @inject(IEventDispatcher)
-    protected eventDispatcher: IEventDispatcher;
+    @inject(IEventDispatcher) protected eventDispatcher: IEventDispatcher;
 
     protected _viewComponent: T;
 
@@ -73,20 +67,56 @@ export abstract class Mediator<T extends IEventDispatcher> implements IMediator 
     /* Protected Functions                                                        */
     /*============================================================================*/
 
-    protected addViewListener(eventString: string, listener: Function, eventClass?: Object): void {
-        this.eventMap.mapListener(this._viewComponent, eventString, listener, eventClass);
+    protected addViewListener(
+        eventString: string,
+        listener: Function,
+        eventClass?: Object
+    ): void {
+        this.eventMap.mapListener(
+            this._viewComponent,
+            eventString,
+            listener,
+            eventClass
+        );
     }
 
-    protected addContextListener(eventString: string, listener: Function, eventClass?: Object): void {
-        this.eventMap.mapListener(this.eventDispatcher, eventString, listener, eventClass);
+    protected addContextListener(
+        eventString: string,
+        listener: Function,
+        eventClass?: Object
+    ): void {
+        this.eventMap.mapListener(
+            this.eventDispatcher,
+            eventString,
+            listener,
+            eventClass
+        );
     }
 
-    protected removeViewListener(eventString: string, listener: Function, eventClass?: Object): void {
-        this.eventMap.unmapListener(this._viewComponent, eventString, listener, eventClass);
+    protected removeViewListener(
+        eventString: string,
+        listener: Function,
+        eventClass?: Object
+    ): void {
+        this.eventMap.unmapListener(
+            this._viewComponent,
+            eventString,
+            listener,
+            eventClass
+        );
     }
 
-    protected removeContextListener(eventString: string, listener: Function, eventClass?: Object): void {
-        this.eventMap.unmapListener(this.eventDispatcher, eventString, listener, eventClass);
+    protected removeContextListener(
+        eventString: string,
+        listener: Function,
+        eventClass?: Object
+    ): void {
+        this.eventMap.unmapListener(
+            this.eventDispatcher,
+            eventString,
+            listener,
+            eventClass
+        );
     }
 
     protected dispatch(event: Event): void {

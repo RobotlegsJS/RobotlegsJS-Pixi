@@ -20,7 +20,6 @@ import { IViewManager } from "../../viewManager/api/IViewManager";
  */
 @injectable()
 export class ContextViewListenerConfig implements IConfig {
-
     /*============================================================================*/
     /* Public Properties                                                          */
     /*============================================================================*/

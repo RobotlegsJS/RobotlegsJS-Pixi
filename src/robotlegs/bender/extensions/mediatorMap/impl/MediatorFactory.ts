@@ -21,7 +21,6 @@ import { MediatorManager } from "./MediatorManager";
  * @private
  */
 export class MediatorFactory {
-
     /*============================================================================*/
     /* Private Properties                                                         */
     /*============================================================================*/
@@ -52,15 +51,21 @@ export class MediatorFactory {
      * @private
      */
     public getMediator(item: any, mapping: IMediatorMapping): any {
-        return this._mediators.get(item) ? this._mediators.get(item).get(<any>mapping) : null;
+        return this._mediators.get(item)
+            ? this._mediators.get(item).get(<any>mapping)
+            : null;
     }
 
     /**
      * @private
      */
-    public createMediators(item: any, type: FunctionConstructor, mappings: any[]): any[] {
-        var createdMediators: any[] = [];
-        var mediator: any;
+    public createMediators(
+        item: any,
+        type: FunctionConstructor,
+        mappings: any[]
+    ): any[] {
+        let createdMediators: any[] = [];
+        let mediator: any;
         for (let i in mappings) {
             let mapping: IMediatorMapping = mappings[i];
             mediator = this.getMediator(item, mapping);
@@ -68,11 +73,12 @@ export class MediatorFactory {
             if (!mediator) {
                 this.mapTypeForFilterBinding(mapping.matcher, type, item);
                 mediator = this.createMediator(item, mapping);
-                this.unmapTypeForFilterBinding(mapping.matcher, type, item)
+                this.unmapTypeForFilterBinding(mapping.matcher, type, item);
             }
 
-            if (mediator)
+            if (mediator) {
                 createdMediators.push(mediator);
+            }
         }
         return createdMediators;
     }
@@ -81,11 +87,14 @@ export class MediatorFactory {
      * @private
      */
     public removeMediators(item: any): void {
-        var mediators: Map<any, IMediatorMapping> = this._mediators.get(item);
-        if (!mediators)
+        let mediators: Map<any, IMediatorMapping> = this._mediators.get(item);
+        if (!mediators) {
             return;
+        }
 
-        mediators.forEach((value, key) => this._manager.removeMediator(value, item, key));
+        mediators.forEach((value, key) =>
+            this._manager.removeMediator(value, item, key)
+        );
 
         this._mediators.delete(item);
     }
@@ -102,13 +111,17 @@ export class MediatorFactory {
     /*============================================================================*/
 
     private createMediator(item: any, mapping: IMediatorMapping): any {
-        var mediator: any = this.getMediator(item, mapping);
+        let mediator: any = this.getMediator(item, mapping);
 
-        if (mediator)
+        if (mediator) {
             return mediator;
+        }
 
-        if (mapping.guards.length == 0 || guardsApprove(mapping.guards, this._injector)) {
-            var mediatorClass: FunctionConstructor = mapping.mediatorClass;
+        if (
+            mapping.guards.length === 0 ||
+            guardsApprove(mapping.guards, this._injector)
+        ) {
+            let mediatorClass: FunctionConstructor = mapping.mediatorClass;
             mediator = instantiateUnmapped(this._injector, mediatorClass);
             if (mapping.hooks.length > 0) {
                 this._injector.bind(mediatorClass).toConstantValue(mediator);
@@ -120,14 +133,23 @@ export class MediatorFactory {
         return mediator;
     }
 
-    private addMediator(mediator: any, item: any, mapping: IMediatorMapping): void {
-        let mediatorMap = this._mediators.get(item) || new Map<any, IMediatorMapping>();
+    private addMediator(
+        mediator: any,
+        item: any,
+        mapping: IMediatorMapping
+    ): void {
+        let mediatorMap =
+            this._mediators.get(item) || new Map<any, IMediatorMapping>();
         this._mediators.set(item, mediatorMap);
         mediatorMap.set(<any>mapping, mediator);
         this._manager.addMediator(mediator, item, mapping);
     }
 
-    private mapTypeForFilterBinding(filter: ITypeFilter, type: FunctionConstructor, item: any): void {
+    private mapTypeForFilterBinding(
+        filter: ITypeFilter,
+        type: FunctionConstructor,
+        item: any
+    ): void {
         let requiredTypes = this.requiredTypesFor(filter, type);
         for (let i in requiredTypes) {
             let requiredType: FunctionConstructor = requiredTypes[i];
@@ -135,7 +157,11 @@ export class MediatorFactory {
         }
     }
 
-    private unmapTypeForFilterBinding(filter: ITypeFilter, type: FunctionConstructor, item: any): void {
+    private unmapTypeForFilterBinding(
+        filter: ITypeFilter,
+        type: FunctionConstructor,
+        item: any
+    ): void {
         let requiredTypes = this.requiredTypesFor(filter, type);
         for (let i in requiredTypes) {
             let requiredType: FunctionConstructor = requiredTypes[i];
@@ -144,11 +170,17 @@ export class MediatorFactory {
         }
     }
 
-    private requiredTypesFor(filter: ITypeFilter, type: FunctionConstructor): FunctionConstructor[] {
-        var requiredTypes: FunctionConstructor[] = filter.allOfTypes.concat(filter.anyOfTypes);
+    private requiredTypesFor(
+        filter: ITypeFilter,
+        type: FunctionConstructor
+    ): FunctionConstructor[] {
+        let requiredTypes: FunctionConstructor[] = filter.allOfTypes.concat(
+            filter.anyOfTypes
+        );
 
-        if (requiredTypes.indexOf(type) == -1)
+        if (requiredTypes.indexOf(type) === -1) {
             requiredTypes.push(type);
+        }
 
         return requiredTypes;
     }

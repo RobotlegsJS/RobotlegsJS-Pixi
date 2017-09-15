@@ -5,11 +5,7 @@
 //  in accordance with the terms of the license agreement accompanying it.
 // ------------------------------------------------------------------------------
 
-import {
-    IContext,
-    IExtension,
-    IInjector
-} from "@robotlegsjs/core";
+import { IContext, IExtension, IInjector } from "@robotlegsjs/core";
 
 import { IViewManager } from "../viewManager/api/IViewManager";
 import { ViewManager } from "../viewManager/impl/ViewManager";
@@ -20,7 +16,6 @@ import { ContainerRegistry } from "./impl/ContainerRegistry";
  * This extension install a View Manager into the context
  */
 export class ViewManagerExtension implements IExtension {
-
     /*============================================================================*/
     /* Private Static Properties                                                  */
     /*============================================================================*/
@@ -50,11 +45,17 @@ export class ViewManagerExtension implements IExtension {
         this._injector = context.injector;
 
         // Just one Container Registry
-        ViewManagerExtension._containerRegistry = ViewManagerExtension._containerRegistry || new ContainerRegistry();
-        this._injector.bind(ContainerRegistry).toConstantValue(ViewManagerExtension._containerRegistry);
+        ViewManagerExtension._containerRegistry =
+            ViewManagerExtension._containerRegistry || new ContainerRegistry();
+        this._injector
+            .bind(ContainerRegistry)
+            .toConstantValue(ViewManagerExtension._containerRegistry);
 
         // But you get your own View Manager
-        this._injector.bind(IViewManager).to(ViewManager).inSingletonScope();
+        this._injector
+            .bind(IViewManager)
+            .to(ViewManager)
+            .inSingletonScope();
     }
 
     /*============================================================================*/

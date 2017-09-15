@@ -11,7 +11,6 @@ import { ContainerBinding } from "./ContainerBinding";
  * @private
  */
 export class StageCrawler {
-
     /*============================================================================*/
     /* Private Properties                                                         */
     /*============================================================================*/
@@ -46,17 +45,17 @@ export class StageCrawler {
 
     private scanContainer(container: any): void {
         this.processView(container);
-        var numChildren: number = container.children.length;
-        for (var i: number = 0; i < numChildren; i++) {
+        let numChildren: number = container.children.length;
+        for (let i: number = 0; i < numChildren; i++) {
             // TODO: abstract view layer (pixi.js/three.js)
-            var child: any = container.getChildAt(i);
-            child['addChild'] // is a container?
+            let child: any = container.getChildAt(i);
+            child["addChild"] // is a container?
                 ? this.scanContainer(<any>child)
                 : this.processView(child);
         }
     }
 
     private processView(view: any): void {
-        this._binding.handleView(view, view['constructor']);
+        this._binding.handleView(view, view["constructor"]);
     }
 }

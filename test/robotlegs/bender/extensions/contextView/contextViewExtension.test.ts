@@ -9,15 +9,11 @@ import "../../../../entry";
 
 import { assert } from "chai";
 
-import {
-    IContext,
-    Context
-} from "@robotlegsjs/core";
+import { IContext, Context } from "@robotlegsjs/core";
 
 import { ContextViewExtension } from "../../../../../src/robotlegs/bender/extensions/contextView/ContextViewExtension";
 
 describe("ContextViewExtension", () => {
-
     let context: IContext;
 
     beforeEach(() => {

@@ -11,7 +11,6 @@ import { IContextView } from "../api/IContextView";
  * The Context View represents the root any for a Context
  */
 export class ContextView implements IContextView {
-
     /*============================================================================*/
     /* Public Properties                                                          */
     /*============================================================================*/

@@ -14,14 +14,16 @@ import { MediatorFactory } from "./MediatorFactory";
  * @private
  */
 export class MediatorViewHandler implements IViewHandler {
-
     /*============================================================================*/
     /* Private Properties                                                         */
     /*============================================================================*/
 
     private _mappings: IMediatorMapping[] = [];
 
-    private _knownMappings: Map<FunctionConstructor, IMediatorMapping[]> = new Map<FunctionConstructor, IMediatorMapping[]>();
+    private _knownMappings: Map<
+        FunctionConstructor,
+        IMediatorMapping[]
+    > = new Map<FunctionConstructor, IMediatorMapping[]>();
 
     private _factory: MediatorFactory;
 
@@ -44,9 +46,10 @@ export class MediatorViewHandler implements IViewHandler {
      * @private
      */
     public addMapping(mapping: IMediatorMapping): void {
-        var index: number = this._mappings.indexOf(mapping);
-        if (index > -1)
+        let index: number = this._mappings.indexOf(mapping);
+        if (index > -1) {
             return;
+        }
         this._mappings.push(mapping);
         this.flushCache();
     }
@@ -55,9 +58,10 @@ export class MediatorViewHandler implements IViewHandler {
      * @private
      */
     public removeMapping(mapping: IMediatorMapping): void {
-        var index: number = this._mappings.indexOf(mapping);
-        if (index == -1)
+        let index: number = this._mappings.indexOf(mapping);
+        if (index === -1) {
             return;
+        }
         this._mappings.splice(index, 1);
         this.flushCache();
     }
@@ -66,18 +70,20 @@ export class MediatorViewHandler implements IViewHandler {
      * @private
      */
     public handleView(view: any, type: FunctionConstructor): void {
-        var interestedMappings = this.getInterestedMappingsFor(view, type);
-        if (interestedMappings)
+        let interestedMappings = this.getInterestedMappingsFor(view, type);
+        if (interestedMappings) {
             this._factory.createMediators(view, type, interestedMappings);
+        }
     }
 
     /**
      * @private
      */
     public handleItem(item: Object, type: FunctionConstructor): void {
-        var interestedMappings = this.getInterestedMappingsFor(item, type);
-        if (interestedMappings)
+        let interestedMappings = this.getInterestedMappingsFor(item, type);
+        if (interestedMappings) {
             this._factory.createMediators(item, type, interestedMappings);
+        }
     }
 
     /*============================================================================*/
@@ -85,30 +91,39 @@ export class MediatorViewHandler implements IViewHandler {
     /*============================================================================*/
 
     private flushCache(): void {
-        this._knownMappings = new Map<FunctionConstructor, IMediatorMapping[]>();
+        this._knownMappings = new Map<
+            FunctionConstructor,
+            IMediatorMapping[]
+        >();
     }
 
-    private getInterestedMappingsFor(item: Object, type: any): IMediatorMapping[] {
-        var mapping: IMediatorMapping;
+    private getInterestedMappingsFor(
+        item: Object,
+        type: any
+    ): IMediatorMapping[] {
+        let mapping: IMediatorMapping;
 
         // we've seen this type before and nobody was interested
-        if (this._knownMappings[type] === false)
+        if (this._knownMappings[type] === false) {
             return null;
+        }
 
         // we haven't seen this type before
-        if (this._knownMappings[type] == undefined) {
+        if (this._knownMappings[type] === undefined) {
             this._knownMappings[type] = false;
             for (let i in this._mappings) {
                 let mapping: IMediatorMapping = this._mappings[i];
                 if (mapping.matcher.matches(item)) {
-                    if (!this._knownMappings[type])
+                    if (!this._knownMappings[type]) {
                         this._knownMappings[type] = [];
+                    }
                     this._knownMappings[type].push(mapping);
                 }
             }
             // nobody cares, let's get out of here
-            if (this._knownMappings[type] === false)
+            if (this._knownMappings[type] === false) {
                 return null;
+            }
         }
 
         // these mappings really do care

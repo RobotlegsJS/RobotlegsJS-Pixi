@@ -5,11 +5,7 @@
 //  in accordance with the terms of the license agreement accompanying it.
 // ------------------------------------------------------------------------------
 
-import {
-    IBundle,
-    IContext,
-    LogLevel
-} from "@robotlegsjs/core";
+import { IBundle, IContext, LogLevel } from "@robotlegsjs/core";
 
 import { ContextViewExtension } from "../../extensions/contextView/ContextViewExtension";
 import { ContextViewListenerConfig } from "../../extensions/contextView/impl/ContextViewListenerConfig";
@@ -26,7 +22,6 @@ import { ViewManagerExtension } from "../../extensions/viewManager/ViewManagerEx
  * in typical Robotlegs applications and modules.</p>
  */
 export class PixiBundle implements IBundle {
-
     /*============================================================================*/
     /* Public Functions                                                           */
     /*============================================================================*/

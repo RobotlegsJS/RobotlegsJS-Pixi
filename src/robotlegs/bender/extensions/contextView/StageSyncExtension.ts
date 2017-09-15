@@ -21,7 +21,6 @@ import { ContextView } from "./impl/ContextView";
  * <p>It should be installed before context initialization.</p>
  */
 export class StageSyncExtension implements IExtension {
-
     /*============================================================================*/
     /* Private Properties                                                         */
     /*============================================================================*/
@@ -42,7 +41,10 @@ export class StageSyncExtension implements IExtension {
     public extend(context: IContext): void {
         this._context = context;
         this._logger = context.getLogger(this);
-        this._context.addConfigHandler(instanceOfType(ContextView), this.handleContextView.bind(this));
+        this._context.addConfigHandler(
+            instanceOfType(ContextView),
+            this.handleContextView.bind(this)
+        );
     }
 
     /*============================================================================*/
@@ -51,7 +53,10 @@ export class StageSyncExtension implements IExtension {
 
     private handleContextView(contextView: ContextView): void {
         if (this._contextView) {
-            this._logger.warn("A contextView has already been installed, ignoring {0}", [contextView.view]);
+            this._logger.warn(
+                "A contextView has already been installed, ignoring {0}",
+                [contextView.view]
+            );
             return;
         }
         this._contextView = contextView.view;
@@ -69,13 +74,17 @@ export class StageSyncExtension implements IExtension {
     }
 
     private initializeContext(): void {
-        this._logger.debug("Context view is now on stage. Initializing context...");
+        this._logger.debug(
+            "Context view is now on stage. Initializing context..."
+        );
         this._context.initialize();
         // this._contextView.addEventListener(Event.REMOVED_FROM_STAGE, this.onRemovedFromStage);
     }
 
     private onRemovedFromStage(event: Event): void {
-        this._logger.debug("Context view has left the stage. Destroying context...");
+        this._logger.debug(
+            "Context view has left the stage. Destroying context..."
+        );
         // this._contextView.removeEventListener(Event.REMOVED_FROM_STAGE, this.onRemovedFromStage);
         this._context.destroy();
     }

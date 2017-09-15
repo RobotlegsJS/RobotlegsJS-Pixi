@@ -25,7 +25,6 @@ import { applyPixiPatch } from "./pixiPatch";
  * <p>It should be installed before context initialization.</p>
  */
 export class ContextViewExtension implements IExtension {
-
     /*============================================================================*/
     /* Private Properties                                                         */
     /*============================================================================*/
@@ -45,7 +44,10 @@ export class ContextViewExtension implements IExtension {
         this._injector = context.injector;
         this._logger = context.getLogger(this);
         context.beforeInitializing(this.beforeInitializing.bind(this));
-        context.addConfigHandler(instanceOfType(ContextView), this.handleContextView.bind(this));
+        context.addConfigHandler(
+            instanceOfType(ContextView),
+            this.handleContextView.bind(this)
+        );
     }
 
     /*============================================================================*/
@@ -54,9 +56,14 @@ export class ContextViewExtension implements IExtension {
 
     private handleContextView(contextView: IContextView): void {
         if (this._injector.isBound(IContextView)) {
-            this._logger.warn("A contextView has already been installed, ignoring {0}", [contextView.view]);
+            this._logger.warn(
+                "A contextView has already been installed, ignoring {0}",
+                [contextView.view]
+            );
         } else {
-            this._logger.debug("Mapping {0} as contextView", [contextView.view]);
+            this._logger.debug("Mapping {0} as contextView", [
+                contextView.view
+            ]);
 
             applyPixiPatch(contextView.view);
 
@@ -66,7 +73,9 @@ export class ContextViewExtension implements IExtension {
 
     private beforeInitializing(): void {
         if (!this._injector.isBound(IContextView)) {
-            this._logger.error("A ContextView must be installed if you install the ContextViewExtension.");
+            this._logger.error(
+                "A ContextView must be installed if you install the ContextViewExtension."
+            );
         }
     }
 }

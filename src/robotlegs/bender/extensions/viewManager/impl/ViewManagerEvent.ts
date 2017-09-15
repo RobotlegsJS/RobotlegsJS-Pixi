@@ -14,18 +14,17 @@ import { IViewHandler } from "../api/IViewHandler";
  * @private
  */
 export class ViewManagerEvent extends Event {
-
     /*============================================================================*/
     /* Public Static Properties                                                   */
     /*============================================================================*/
 
-    public static CONTAINER_ADD: string = 'containerAdd';
+    public static CONTAINER_ADD: string = "containerAdd";
 
-    public static CONTAINER_REMOVE: string = 'containerRemove';
+    public static CONTAINER_REMOVE: string = "containerRemove";
 
-    public static HANDLER_ADD: string = 'handlerAdd';
+    public static HANDLER_ADD: string = "handlerAdd";
 
-    public static HANDLER_REMOVE: string = 'handlerRemove';
+    public static HANDLER_REMOVE: string = "handlerRemove";
 
     /*============================================================================*/
     /* Public Properties                                                          */

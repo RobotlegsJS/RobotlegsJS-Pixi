@@ -15,7 +15,6 @@ import { ContainerRegistryEvent } from "./ContainerRegistryEvent";
  * @private
  */
 export class StageObserver {
-
     private _registry: ContainerRegistry;
 
     /*============================================================================*/
@@ -29,8 +28,16 @@ export class StageObserver {
         this._registry = containerRegistry;
 
         // We only care about roots
-        this._registry.addEventListener(ContainerRegistryEvent.ROOT_CONTAINER_ADD, this.onRootContainerAdd, this);
-        this._registry.addEventListener(ContainerRegistryEvent.ROOT_CONTAINER_REMOVE, this.onRootContainerRemove, this);
+        this._registry.addEventListener(
+            ContainerRegistryEvent.ROOT_CONTAINER_ADD,
+            this.onRootContainerAdd,
+            this
+        );
+        this._registry.addEventListener(
+            ContainerRegistryEvent.ROOT_CONTAINER_REMOVE,
+            this.onRootContainerRemove,
+            this
+        );
 
         // We might have arrived late on the scene
         for (let i in this._registry.rootBindings) {
@@ -47,8 +54,16 @@ export class StageObserver {
      * @private
      */
     public destroy(): void {
-        this._registry.removeEventListener(ContainerRegistryEvent.ROOT_CONTAINER_ADD, this.onRootContainerAdd, this);
-        this._registry.removeEventListener(ContainerRegistryEvent.ROOT_CONTAINER_REMOVE, this.onRootContainerRemove, this);
+        this._registry.removeEventListener(
+            ContainerRegistryEvent.ROOT_CONTAINER_ADD,
+            this.onRootContainerAdd,
+            this
+        );
+        this._registry.removeEventListener(
+            ContainerRegistryEvent.ROOT_CONTAINER_REMOVE,
+            this.onRootContainerRemove,
+            this
+        );
 
         for (let i in this._registry.rootBindings) {
             let binding: ContainerBinding = this._registry.rootBindings[i];
@@ -73,7 +88,6 @@ export class StageObserver {
 
         // Watch the root container itself - nobody else is going to pick it up!
         // container.on("added", this.onContainerRootAddedToStage, this);
-
     }
 
     private removeRootListener(container: any): void {
@@ -85,11 +99,11 @@ export class StageObserver {
     }
 
     private onViewAddedToStage(event: IEvent): void {
-        var view: any = event.target;
-        var type: FunctionConstructor = view['constructor'];
+        let view: any = event.target;
+        let type: FunctionConstructor = view["constructor"];
 
         // Walk upwards from the nearest binding
-        var binding: ContainerBinding = this._registry.findParentBinding(view);
+        let binding: ContainerBinding = this._registry.findParentBinding(view);
         while (binding) {
             binding.handleView(view, type);
             binding = binding.parent;

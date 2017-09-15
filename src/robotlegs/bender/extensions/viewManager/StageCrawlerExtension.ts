@@ -6,12 +6,7 @@
 // ------------------------------------------------------------------------------
 import * as PIXI from "pixi.js";
 
-import {
-    IContext,
-    IExtension,
-    IInjector,
-    ILogger
-} from "@robotlegsjs/core";
+import { IContext, IExtension, IInjector, ILogger } from "@robotlegsjs/core";
 
 import { IContextView } from "../contextView/api/IContextView";
 
@@ -27,7 +22,6 @@ import { StageCrawler } from "./impl/StageCrawler";
  * after context initialization and ensures that those views are handled.
  */
 export class StageCrawlerExtension implements IExtension {
-
     /*============================================================================*/
     /* Private Properties                                                         */
     /*============================================================================*/
@@ -57,15 +51,21 @@ export class StageCrawlerExtension implements IExtension {
 
     private afterInitializing(): void {
         // this._containerRegistry = this._injector.getInstance(ContainerRegistry);
-        this._containerRegistry = this._injector.get<ContainerRegistry>(ContainerRegistry);
+        this._containerRegistry = this._injector.get<ContainerRegistry>(
+            ContainerRegistry
+        );
         this._injector.isBound(IViewManager)
             ? this.scanViewManagedContainers()
             : this.scanContextView();
     }
 
     private scanViewManagedContainers(): void {
-        this._logger.debug("ViewManager is installed. Checking for managed containers...");
-        var viewManager: IViewManager = this._injector.get<IViewManager>(IViewManager);
+        this._logger.debug(
+            "ViewManager is installed. Checking for managed containers..."
+        );
+        let viewManager: IViewManager = this._injector.get<IViewManager>(
+            IViewManager
+        );
         for (let i in viewManager.containers) {
             let container: any = viewManager.containers[i];
             if (container instanceof PIXI.Container) {
@@ -75,14 +75,24 @@ export class StageCrawlerExtension implements IExtension {
     }
 
     private scanContextView(): void {
-        this._logger.debug("ViewManager is not installed. Checking the ContextView...");
-        var contextView: IContextView = this._injector.get<IContextView>(IContextView);
-        contextView.view && this.scanContainer(contextView.view);
+        this._logger.debug(
+            "ViewManager is not installed. Checking the ContextView..."
+        );
+        let contextView: IContextView = this._injector.get<IContextView>(
+            IContextView
+        );
+        if (contextView.view) {
+            this.scanContainer(contextView.view);
+        }
     }
 
     private scanContainer(container: any): void {
-        var binding: ContainerBinding = this._containerRegistry.getBinding(container);
-        this._logger.debug("StageCrawler scanning container {0} ...", [container]);
+        let binding: ContainerBinding = this._containerRegistry.getBinding(
+            container
+        );
+        this._logger.debug("StageCrawler scanning container {0} ...", [
+            container
+        ]);
         new StageCrawler(binding).scan(container);
         this._logger.debug("StageCrawler finished scanning {0}", [container]);
     }
