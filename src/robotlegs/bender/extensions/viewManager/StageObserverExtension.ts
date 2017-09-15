@@ -59,7 +59,7 @@ export class StageObserverExtension implements IExtension {
     private whenInitializing(): void {
         // Hark, an actual Singleton!
         if (!StageObserverExtension._stageObserver) {
-            var containerRegistry: ContainerRegistry = this._injector.get<ContainerRegistry>(ContainerRegistry);
+            let containerRegistry: ContainerRegistry = this._injector.get<ContainerRegistry>(ContainerRegistry);
             this._logger.debug("Creating genuine StageObserver Singleton");
             StageObserverExtension._stageObserver = new StageObserver(containerRegistry);
         }
@@ -67,7 +67,7 @@ export class StageObserverExtension implements IExtension {
 
     private whenDestroying(): void {
         installCount--;
-        if (installCount == 0) {
+        if (installCount === 0) {
             this._logger.debug("Destroying genuine StageObserver Singleton");
             StageObserverExtension._stageObserver.destroy();
             StageObserverExtension._stageObserver = null;

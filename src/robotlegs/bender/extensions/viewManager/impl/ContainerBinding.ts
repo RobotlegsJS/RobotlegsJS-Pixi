@@ -72,8 +72,9 @@ export class ContainerBinding extends EventDispatcher {
      * @private
      */
     public addHandler(handler: IViewHandler): void {
-        if (this._handlers.indexOf(handler) > -1)
+        if (this._handlers.indexOf(handler) > -1) {
             return;
+        }
         this._handlers.push(handler);
     }
 
@@ -81,10 +82,10 @@ export class ContainerBinding extends EventDispatcher {
      * @private
      */
     public removeHandler(handler: IViewHandler): void {
-        var index: number = this._handlers.indexOf(handler);
+        let index: number = this._handlers.indexOf(handler);
         if (index > -1) {
             this._handlers.splice(index, 1);
-            if (this._handlers.length == 0) {
+            if (this._handlers.length === 0) {
                 this.dispatchEvent(new ContainerBindingEvent(ContainerBindingEvent.BINDING_EMPTY));
             }
         }
@@ -94,9 +95,9 @@ export class ContainerBinding extends EventDispatcher {
      * @private
      */
     public handleView(view: any, type: FunctionConstructor): void {
-        var length: number = this._handlers.length;
-        for (var i: number = 0; i < length; i++) {
-            var handler: IViewHandler = <IViewHandler>this._handlers[i];
+        let length: number = this._handlers.length;
+        for (let i: number = 0; i < length; i++) {
+            let handler: IViewHandler = <IViewHandler>this._handlers[i];
             handler.handleView(view, type);
         }
     }

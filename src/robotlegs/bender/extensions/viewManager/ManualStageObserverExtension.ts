@@ -60,7 +60,7 @@ export class ManualStageObserverExtension implements IExtension {
         // Hark, an actual Singleton!
         if (!ManualStageObserverExtension._manualStageObserver) {
             // var containerRegistry: ContainerRegistry = this._injector.getInstance(ContainerRegistry);
-            var containerRegistry: ContainerRegistry = this._injector.get<ContainerRegistry>(ContainerRegistry);
+            let containerRegistry: ContainerRegistry = this._injector.get<ContainerRegistry>(ContainerRegistry);
             this._logger.debug("Creating genuine ManualStageObserver Singleton");
             ManualStageObserverExtension._manualStageObserver = new ManualStageObserver(containerRegistry);
         }
@@ -68,7 +68,7 @@ export class ManualStageObserverExtension implements IExtension {
 
     private whenDestroying(): void {
         installCount--;
-        if (installCount == 0) {
+        if (installCount === 0) {
             this._logger.debug("Destroying genuine ManualStageObserver Singleton");
             ManualStageObserverExtension._manualStageObserver.destroy();
             ManualStageObserverExtension._manualStageObserver = null;

@@ -85,11 +85,11 @@ export class StageObserver {
     }
 
     private onViewAddedToStage(event: IEvent): void {
-        var view: any = event.target;
-        var type: FunctionConstructor = view['constructor'];
+        let view: any = event.target;
+        let type: FunctionConstructor = view["constructor"];
 
         // Walk upwards from the nearest binding
-        var binding: ContainerBinding = this._registry.findParentBinding(view);
+        let binding: ContainerBinding = this._registry.findParentBinding(view);
         while (binding) {
             binding.handleView(view, type);
             binding = binding.parent;

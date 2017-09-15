@@ -47,12 +47,12 @@ export class MediatorManager {
      * @private
      */
     public addMediator(mediator: any, item: any, mapping: IMediatorMapping): void {
-        var displayObject: DisplayObject = <DisplayObject>item;
+        let displayObject: DisplayObject = <DisplayObject>item;
 
         // Watch Display Object for removal
         if (displayObject && mapping.autoRemoveEnabled) {
             item._onRemovedFromStage = this.onRemovedFromStage.bind(this, item);
-            displayObject.on('removed', item._onRemovedFromStage, this);
+            displayObject.on("removed", item._onRemovedFromStage, this);
         }
 
         // Synchronize with item life-cycle
@@ -63,8 +63,9 @@ export class MediatorManager {
      * @private
      */
     public removeMediator(mediator: any, item: any, mapping: IMediatorMapping): void {
-        if (item instanceof DisplayObject)
-            (<DisplayObject>item).off('removed', (<any>item)._onRemovedFromStage);
+        if (item instanceof DisplayObject) {
+            (<DisplayObject>item).off("removed", (<any>item)._onRemovedFromStage);
+        }
 
         this.destroyMediator(mediator);
     }
@@ -78,30 +79,38 @@ export class MediatorManager {
     }
 
     private initializeMediator(mediator: any, mediatedItem: any): void {
-        if ('preInitialize' in mediator)
+        if ("preInitialize" in mediator) {
             mediator.preInitialize();
+        }
 
-        if ('view' in mediator)
+        if ("view" in mediator) {
             mediator.view = mediatedItem;
+        }
 
-        if ('initialize' in mediator)
+        if ("initialize" in mediator) {
             mediator.initialize();
+        }
 
-        if ('postInitialize' in mediator)
+        if ("postInitialize" in mediator) {
             mediator.postInitialize();
+        }
     }
 
     private destroyMediator(mediator: any): void {
-        if ('preDestroy' in mediator)
+        if ("preDestroy" in mediator) {
             mediator.preDestroy();
+        }
 
-        if ('destroy' in mediator)
+        if ("destroy" in mediator) {
             mediator.destroy();
+        }
 
-        if ('view' in mediator)
+        if ("view" in mediator) {
             mediator.view = null;
+        }
 
-        if ('postDestroy' in mediator)
+        if ("postDestroy" in mediator) {
             mediator.postDestroy();
+        }
     }
 }

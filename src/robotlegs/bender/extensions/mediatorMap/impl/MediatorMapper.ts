@@ -56,7 +56,7 @@ export class MediatorMapper implements IMediatorMapper, IMediatorUnmapper {
      * @inheritDoc
      */
     public toMediator(mediatorClass: any): IMediatorConfigurator {
-        var mapping: IMediatorMapping = this._mappings[<any>mediatorClass];
+        let mapping: IMediatorMapping = this._mappings[<any>mediatorClass];
         return mapping
             ? this.overwriteMapping(mapping)
             : this.createMapping(mediatorClass);
@@ -66,8 +66,11 @@ export class MediatorMapper implements IMediatorMapper, IMediatorUnmapper {
      * @inheritDoc
      */
     public fromMediator(mediatorClass: any): void {
-        var mapping: IMediatorMapping = this._mappings[<any>mediatorClass];
-        mapping && this.deleteMapping(mapping);
+        let mapping: IMediatorMapping = this._mappings[<any>mediatorClass];
+
+        if (mapping) {
+            this.deleteMapping(mapping);
+        }
     }
 
     /**
@@ -85,24 +88,33 @@ export class MediatorMapper implements IMediatorMapper, IMediatorUnmapper {
     /*============================================================================*/
 
     private createMapping(mediatorClass: any): MediatorMapping {
-        var mapping: MediatorMapping = new MediatorMapping(this._typeFilter, mediatorClass);
+        let mapping: MediatorMapping = new MediatorMapping(this._typeFilter, mediatorClass);
         this._handler.addMapping(mapping);
         this._mappings[<any>mediatorClass] = mapping;
-        this._logger && this._logger.debug('{0} mapped to {1}', [this._typeFilter, mapping]);
+
+        if (this._logger) {
+            this._logger.debug("{0} mapped to {1}", [this._typeFilter, mapping]);
+        }
+
         return mapping;
     }
 
     private deleteMapping(mapping: IMediatorMapping): void {
         this._handler.removeMapping(mapping);
         delete this._mappings[<any>mapping.mediatorClass];
-        this._logger && this._logger.debug('{0} unmapped from {1}', [this._typeFilter, mapping]);
+
+        if (this._logger) {
+            this._logger.debug("{0} unmapped from {1}", [this._typeFilter, mapping]);
+        }
     }
 
     private overwriteMapping(mapping: IMediatorMapping): IMediatorConfigurator {
-        this._logger && this._logger.warn('{0} already mapped to {1}\n' +
-            'If you have overridden this mapping intentionally you can use "unmap()" ' +
-            'prior to your replacement mapping in order to avoid seeing this message.\n',
-            [this._typeFilter, mapping]);
+        if (this._logger) {
+            this._logger.warn("{0} already mapped to {1}\n" +
+                "If you have overridden this mapping intentionally you can use \"unmap()\" " +
+                "prior to your replacement mapping in order to avoid seeing this message.\n",
+                [this._typeFilter, mapping]);
+        }
         this.deleteMapping(mapping);
         return this.createMapping(mapping.mediatorClass);
     }

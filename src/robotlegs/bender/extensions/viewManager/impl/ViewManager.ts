@@ -69,8 +69,9 @@ export class ViewManager extends EventDispatcher implements IViewManager {
      * @inheritDoc
      */
     public addContainer(container: any): void {
-        if (!this.validContainer(container))
+        if (!this.validContainer(container)) {
             return;
+        }
 
         this._containers.push(container);
 
@@ -85,13 +86,14 @@ export class ViewManager extends EventDispatcher implements IViewManager {
      * @inheritDoc
      */
     public removeContainer(container: any): void {
-        var index: number = this._containers.indexOf(container);
-        if (index == -1)
+        let index: number = this._containers.indexOf(container);
+        if (index === -1) {
             return;
+        }
 
         this._containers.splice(index, 1);
 
-        var binding: ContainerBinding = this._registry.getBinding(container);
+        let binding: ContainerBinding = this._registry.getBinding(container);
         for (let i in this._handlers) {
             let handler: IViewHandler = this._handlers[i];
             binding.removeHandler(handler);
@@ -103,8 +105,9 @@ export class ViewManager extends EventDispatcher implements IViewManager {
      * @inheritDoc
      */
     public addViewHandler(handler: IViewHandler): void {
-        if (this._handlers.indexOf(handler) != -1)
+        if (this._handlers.indexOf(handler) !== -1) {
             return;
+        }
 
         this._handlers.push(handler);
 
@@ -112,6 +115,7 @@ export class ViewManager extends EventDispatcher implements IViewManager {
             let container: any = this._containers[i];
             this._registry.addContainer(container).addHandler(handler);
         }
+
         this.dispatchEvent(new ViewManagerEvent(ViewManagerEvent.HANDLER_ADD, null, handler));
     }
 
@@ -119,9 +123,11 @@ export class ViewManager extends EventDispatcher implements IViewManager {
      * @inheritDoc
      */
     public removeViewHandler(handler: IViewHandler): void {
-        var index: number = this._handlers.indexOf(handler);
-        if (index == -1)
+        let index: number = this._handlers.indexOf(handler);
+
+        if (index === -1) {
             return;
+        }
 
         this._handlers.splice(index, 1);
 
@@ -129,6 +135,7 @@ export class ViewManager extends EventDispatcher implements IViewManager {
             let container: any = this._containers[i];
             this._registry.getBinding(container).removeHandler(handler);
         }
+
         this.dispatchEvent(new ViewManagerEvent(ViewManagerEvent.HANDLER_REMOVE, null, handler));
     }
 
@@ -153,11 +160,13 @@ export class ViewManager extends EventDispatcher implements IViewManager {
     private validContainer(container: any): boolean {
         for (let i in this._containers) {
             let registeredContainer: any = this._containers[i];
-            if (container == registeredContainer)
+            if (container === registeredContainer) {
                 return false;
+            }
 
-            if (registeredContainer.contains(container) || container.contains(registeredContainer))
+            if (registeredContainer.contains(container) || container.contains(registeredContainer)) {
                 throw new Error("Containers can not be nested");
+            }
         }
         return true;
     }

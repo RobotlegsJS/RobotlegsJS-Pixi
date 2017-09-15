@@ -64,8 +64,12 @@ export class ContainerRegistry extends EventDispatcher {
      * @private
      */
     public removeContainer(container: any): ContainerBinding {
-        var binding: ContainerBinding = this._bindingByContainer[container];
-        binding && this.removeBinding(binding);
+        let binding: ContainerBinding = this._bindingByContainer[container];
+
+        if (binding) {
+            this.removeBinding(binding);
+        }
+
         return binding;
     }
 
@@ -75,9 +79,9 @@ export class ContainerRegistry extends EventDispatcher {
      * @private
      */
     public findParentBinding(target: any): ContainerBinding {
-        var parent: any = target.parent;
+        let parent: any = target.parent;
         while (parent) {
-            var binding: ContainerBinding = this._bindingByContainer[parent];
+            let binding: ContainerBinding = this._bindingByContainer[parent];
             if (binding) {
                 return binding;
             }
@@ -98,7 +102,7 @@ export class ContainerRegistry extends EventDispatcher {
     /*============================================================================*/
 
     private createBinding(container: any): ContainerBinding {
-        var binding: ContainerBinding = new ContainerBinding(container);
+        let binding: ContainerBinding = new ContainerBinding(container);
         this._bindings.push(binding);
 
         // Add a listener so that we can remove this binding when it has no handlers
@@ -133,7 +137,7 @@ export class ContainerRegistry extends EventDispatcher {
     private removeBinding(binding: ContainerBinding): void {
         // Remove the binding itself
         delete this._bindingByContainer[binding.container];
-        var index: number = this._bindings.indexOf(binding);
+        let index: number = this._bindings.indexOf(binding);
         this._bindings.splice(index, 1);
 
         // Drop the empty binding listener
@@ -147,7 +151,7 @@ export class ContainerRegistry extends EventDispatcher {
         // Re-parent the bindings
         for (let i in this._bindingByContainer) {
             let childBinding: ContainerBinding = this._bindingByContainer[i];
-            if (childBinding.parent == binding) {
+            if (childBinding.parent === binding) {
                 childBinding.parent = binding.parent;
                 if (!childBinding.parent) {
                     // This binding used to have a parent,
@@ -166,7 +170,7 @@ export class ContainerRegistry extends EventDispatcher {
     }
 
     private removeRootBinding(binding: ContainerBinding): void {
-        var index: number = this._rootBindings.indexOf(binding);
+        let index: number = this._rootBindings.indexOf(binding);
         this._rootBindings.splice(index, 1);
         this.dispatchEvent(new ContainerRegistryEvent(ContainerRegistryEvent.ROOT_CONTAINER_REMOVE, binding.container));
     }
