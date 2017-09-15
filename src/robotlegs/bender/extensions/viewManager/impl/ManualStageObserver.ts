@@ -16,7 +16,6 @@ import { ConfigureViewEvent } from "./ConfigureViewEvent";
  * @private
  */
 export class ManualStageObserver {
-
     /*============================================================================*/
     /* Private Properties                                                         */
     /*============================================================================*/
@@ -33,8 +32,14 @@ export class ManualStageObserver {
     constructor(containerRegistry: ContainerRegistry) {
         this._registry = containerRegistry;
         // We care about all containers (not just roots)
-        this._registry.addEventListener(ContainerRegistryEvent.CONTAINER_ADD, this.onContainerAdd);
-        this._registry.addEventListener(ContainerRegistryEvent.CONTAINER_REMOVE, this.onContainerRemove);
+        this._registry.addEventListener(
+            ContainerRegistryEvent.CONTAINER_ADD,
+            this.onContainerAdd
+        );
+        this._registry.addEventListener(
+            ContainerRegistryEvent.CONTAINER_REMOVE,
+            this.onContainerRemove
+        );
         // We might have arrived late on the scene
         for (let i in this._registry.bindings) {
             let binding: ContainerBinding = this._registry.bindings[i];
@@ -50,8 +55,14 @@ export class ManualStageObserver {
      * @private
      */
     public destroy(): void {
-        this._registry.removeEventListener(ContainerRegistryEvent.CONTAINER_ADD, this.onContainerAdd);
-        this._registry.removeEventListener(ContainerRegistryEvent.CONTAINER_REMOVE, this.onContainerRemove);
+        this._registry.removeEventListener(
+            ContainerRegistryEvent.CONTAINER_ADD,
+            this.onContainerAdd
+        );
+        this._registry.removeEventListener(
+            ContainerRegistryEvent.CONTAINER_REMOVE,
+            this.onContainerRemove
+        );
         for (let i in this._registry.bindings) {
             let binding: ContainerBinding = this._registry.bindings[i];
             this.removeContainerListener(binding.container);
@@ -73,11 +84,17 @@ export class ManualStageObserver {
     private addContainerListener(container: any): void {
         // We're interested in ALL container bindings
         // but just for normal, bubbling events
-        container.addEventListener(ConfigureViewEvent.CONFIGURE_VIEW, this.onConfigureView);
+        container.addEventListener(
+            ConfigureViewEvent.CONFIGURE_VIEW,
+            this.onConfigureView
+        );
     }
 
     private removeContainerListener(container: any): void {
-        container.removeEventListener(ConfigureViewEvent.CONFIGURE_VIEW, this.onConfigureView);
+        container.removeEventListener(
+            ConfigureViewEvent.CONFIGURE_VIEW,
+            this.onConfigureView
+        );
     }
 
     private onConfigureView(event: ConfigureViewEvent): void {

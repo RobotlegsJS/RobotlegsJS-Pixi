@@ -12,7 +12,6 @@
 import { Event } from "@robotlegsjs/core";
 
 export class ContainerRegistryEvent extends Event {
-
     /*============================================================================*/
     /* Public Static Properties                                                   */
     /*============================================================================*/

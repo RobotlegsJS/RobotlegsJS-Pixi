@@ -14,7 +14,6 @@ import { IViewHandler } from "../api/IViewHandler";
  * @private
  */
 export class ViewManagerEvent extends Event {
-
     /*============================================================================*/
     /* Public Static Properties                                                   */
     /*============================================================================*/

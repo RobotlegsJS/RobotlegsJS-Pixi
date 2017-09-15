@@ -5,12 +5,7 @@
 //  in accordance with the terms of the license agreement accompanying it.
 // ------------------------------------------------------------------------------
 
-import {
-    IContext,
-    IExtension,
-    IInjector,
-    ILogger
-} from "@robotlegsjs/core";
+import { IContext, IExtension, IInjector, ILogger } from "@robotlegsjs/core";
 
 import { ContainerRegistry } from "./impl/ContainerRegistry";
 import { ManualStageObserver } from "./impl/ManualStageObserver";
@@ -21,7 +16,6 @@ let installCount: number = 0;
  * This extension install a manual Stage Observer
  */
 export class ManualStageObserverExtension implements IExtension {
-
     /*============================================================================*/
     /* Private Static Properties                                                  */
     /*============================================================================*/
@@ -60,16 +54,24 @@ export class ManualStageObserverExtension implements IExtension {
         // Hark, an actual Singleton!
         if (!ManualStageObserverExtension._manualStageObserver) {
             // var containerRegistry: ContainerRegistry = this._injector.getInstance(ContainerRegistry);
-            let containerRegistry: ContainerRegistry = this._injector.get<ContainerRegistry>(ContainerRegistry);
-            this._logger.debug("Creating genuine ManualStageObserver Singleton");
-            ManualStageObserverExtension._manualStageObserver = new ManualStageObserver(containerRegistry);
+            let containerRegistry: ContainerRegistry = this._injector.get<
+                ContainerRegistry
+            >(ContainerRegistry);
+            this._logger.debug(
+                "Creating genuine ManualStageObserver Singleton"
+            );
+            ManualStageObserverExtension._manualStageObserver = new ManualStageObserver(
+                containerRegistry
+            );
         }
     }
 
     private whenDestroying(): void {
         installCount--;
         if (installCount === 0) {
-            this._logger.debug("Destroying genuine ManualStageObserver Singleton");
+            this._logger.debug(
+                "Destroying genuine ManualStageObserver Singleton"
+            );
             ManualStageObserverExtension._manualStageObserver.destroy();
             ManualStageObserverExtension._manualStageObserver = null;
         }

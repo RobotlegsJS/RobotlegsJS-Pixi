@@ -14,7 +14,6 @@ import { MediatorFactory } from "./MediatorFactory";
  * @private
  */
 export class MediatorManager {
-
     /*============================================================================*/
     /* Private Static Properties                                                  */
     /*============================================================================*/
@@ -38,7 +37,6 @@ export class MediatorManager {
         this._factory = factory;
     }
 
-
     /*============================================================================*/
     /* Public Functions                                                           */
     /*============================================================================*/
@@ -46,7 +44,11 @@ export class MediatorManager {
     /**
      * @private
      */
-    public addMediator(mediator: any, item: any, mapping: IMediatorMapping): void {
+    public addMediator(
+        mediator: any,
+        item: any,
+        mapping: IMediatorMapping
+    ): void {
         let displayObject: DisplayObject = <DisplayObject>item;
 
         // Watch Display Object for removal
@@ -62,9 +64,16 @@ export class MediatorManager {
     /**
      * @private
      */
-    public removeMediator(mediator: any, item: any, mapping: IMediatorMapping): void {
+    public removeMediator(
+        mediator: any,
+        item: any,
+        mapping: IMediatorMapping
+    ): void {
         if (item instanceof DisplayObject) {
-            (<DisplayObject>item).off("removed", (<any>item)._onRemovedFromStage);
+            (<DisplayObject>item).off(
+                "removed",
+                (<any>item)._onRemovedFromStage
+            );
         }
 
         this.destroyMediator(mediator);

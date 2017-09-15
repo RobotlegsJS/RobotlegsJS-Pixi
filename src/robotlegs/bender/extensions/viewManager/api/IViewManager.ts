@@ -20,7 +20,6 @@ import { IViewHandler } from "./IViewHandler";
  */
 export let IViewManager = Symbol("IViewManager");
 export interface IViewManager extends IEventDispatcher {
-
     /**
      * A list of currently registered container
      */

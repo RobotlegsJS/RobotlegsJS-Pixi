@@ -14,14 +14,16 @@ import { MediatorFactory } from "./MediatorFactory";
  * @private
  */
 export class MediatorViewHandler implements IViewHandler {
-
     /*============================================================================*/
     /* Private Properties                                                         */
     /*============================================================================*/
 
     private _mappings: IMediatorMapping[] = [];
 
-    private _knownMappings: Map<FunctionConstructor, IMediatorMapping[]> = new Map<FunctionConstructor, IMediatorMapping[]>();
+    private _knownMappings: Map<
+        FunctionConstructor,
+        IMediatorMapping[]
+    > = new Map<FunctionConstructor, IMediatorMapping[]>();
 
     private _factory: MediatorFactory;
 
@@ -89,10 +91,16 @@ export class MediatorViewHandler implements IViewHandler {
     /*============================================================================*/
 
     private flushCache(): void {
-        this._knownMappings = new Map<FunctionConstructor, IMediatorMapping[]>();
+        this._knownMappings = new Map<
+            FunctionConstructor,
+            IMediatorMapping[]
+        >();
     }
 
-    private getInterestedMappingsFor(item: Object, type: any): IMediatorMapping[] {
+    private getInterestedMappingsFor(
+        item: Object,
+        type: any
+    ): IMediatorMapping[] {
         let mapping: IMediatorMapping;
 
         // we've seen this type before and nobody was interested

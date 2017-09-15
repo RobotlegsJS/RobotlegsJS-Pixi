@@ -21,7 +21,6 @@ import { MediatorManager } from "./MediatorManager";
  * @private
  */
 export class MediatorFactory {
-
     /*============================================================================*/
     /* Private Properties                                                         */
     /*============================================================================*/
@@ -52,13 +51,19 @@ export class MediatorFactory {
      * @private
      */
     public getMediator(item: any, mapping: IMediatorMapping): any {
-        return this._mediators.get(item) ? this._mediators.get(item).get(<any>mapping) : null;
+        return this._mediators.get(item)
+            ? this._mediators.get(item).get(<any>mapping)
+            : null;
     }
 
     /**
      * @private
      */
-    public createMediators(item: any, type: FunctionConstructor, mappings: any[]): any[] {
+    public createMediators(
+        item: any,
+        type: FunctionConstructor,
+        mappings: any[]
+    ): any[] {
         let createdMediators: any[] = [];
         let mediator: any;
         for (let i in mappings) {
@@ -68,7 +73,7 @@ export class MediatorFactory {
             if (!mediator) {
                 this.mapTypeForFilterBinding(mapping.matcher, type, item);
                 mediator = this.createMediator(item, mapping);
-                this.unmapTypeForFilterBinding(mapping.matcher, type, item)
+                this.unmapTypeForFilterBinding(mapping.matcher, type, item);
             }
 
             if (mediator) {
@@ -87,7 +92,9 @@ export class MediatorFactory {
             return;
         }
 
-        mediators.forEach((value, key) => this._manager.removeMediator(value, item, key));
+        mediators.forEach((value, key) =>
+            this._manager.removeMediator(value, item, key)
+        );
 
         this._mediators.delete(item);
     }
@@ -110,7 +117,10 @@ export class MediatorFactory {
             return mediator;
         }
 
-        if (mapping.guards.length === 0 || guardsApprove(mapping.guards, this._injector)) {
+        if (
+            mapping.guards.length === 0 ||
+            guardsApprove(mapping.guards, this._injector)
+        ) {
             let mediatorClass: FunctionConstructor = mapping.mediatorClass;
             mediator = instantiateUnmapped(this._injector, mediatorClass);
             if (mapping.hooks.length > 0) {
@@ -123,14 +133,23 @@ export class MediatorFactory {
         return mediator;
     }
 
-    private addMediator(mediator: any, item: any, mapping: IMediatorMapping): void {
-        let mediatorMap = this._mediators.get(item) || new Map<any, IMediatorMapping>();
+    private addMediator(
+        mediator: any,
+        item: any,
+        mapping: IMediatorMapping
+    ): void {
+        let mediatorMap =
+            this._mediators.get(item) || new Map<any, IMediatorMapping>();
         this._mediators.set(item, mediatorMap);
         mediatorMap.set(<any>mapping, mediator);
         this._manager.addMediator(mediator, item, mapping);
     }
 
-    private mapTypeForFilterBinding(filter: ITypeFilter, type: FunctionConstructor, item: any): void {
+    private mapTypeForFilterBinding(
+        filter: ITypeFilter,
+        type: FunctionConstructor,
+        item: any
+    ): void {
         let requiredTypes = this.requiredTypesFor(filter, type);
         for (let i in requiredTypes) {
             let requiredType: FunctionConstructor = requiredTypes[i];
@@ -138,7 +157,11 @@ export class MediatorFactory {
         }
     }
 
-    private unmapTypeForFilterBinding(filter: ITypeFilter, type: FunctionConstructor, item: any): void {
+    private unmapTypeForFilterBinding(
+        filter: ITypeFilter,
+        type: FunctionConstructor,
+        item: any
+    ): void {
         let requiredTypes = this.requiredTypesFor(filter, type);
         for (let i in requiredTypes) {
             let requiredType: FunctionConstructor = requiredTypes[i];
@@ -147,8 +170,13 @@ export class MediatorFactory {
         }
     }
 
-    private requiredTypesFor(filter: ITypeFilter, type: FunctionConstructor): FunctionConstructor[] {
-        let requiredTypes: FunctionConstructor[] = filter.allOfTypes.concat(filter.anyOfTypes);
+    private requiredTypesFor(
+        filter: ITypeFilter,
+        type: FunctionConstructor
+    ): FunctionConstructor[] {
+        let requiredTypes: FunctionConstructor[] = filter.allOfTypes.concat(
+            filter.anyOfTypes
+        );
 
         if (requiredTypes.indexOf(type) === -1) {
             requiredTypes.push(type);

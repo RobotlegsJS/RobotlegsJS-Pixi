@@ -5,11 +5,7 @@
 //  in accordance with the terms of the license agreement accompanying it.
 // ------------------------------------------------------------------------------
 
-import {
-    IContext,
-    IExtension,
-    IInjector
-} from "@robotlegsjs/core";
+import { IContext, IExtension, IInjector } from "@robotlegsjs/core";
 
 import { IMediatorMap } from "./api/IMediatorMap";
 import { MediatorMap } from "./impl/MediatorMap";
@@ -20,7 +16,6 @@ import { IViewManager } from "../viewManager/api/IViewManager";
  * This extension installs a shared IMediatorMap into the context
  */
 export class MediatorMapExtension implements IExtension {
-
     /*============================================================================*/
     /* Private Properties                                                         */
     /*============================================================================*/
@@ -39,12 +34,16 @@ export class MediatorMapExtension implements IExtension {
      * @inheritDoc
      */
     public extend(context: IContext): void {
-        context.beforeInitializing(this.beforeInitializing.bind(this))
+        context
+            .beforeInitializing(this.beforeInitializing.bind(this))
             .beforeDestroying(this.beforeDestroying.bind(this))
             .whenDestroying(this.whenDestroying.bind(this));
         this._injector = context.injector;
         // this._injector.map(IMediatorMap).toSingleton(MediatorMap);
-        this._injector.bind(IMediatorMap).to(MediatorMap).inSingletonScope();
+        this._injector
+            .bind(IMediatorMap)
+            .to(MediatorMap)
+            .inSingletonScope();
     }
 
     /*============================================================================*/

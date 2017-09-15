@@ -11,7 +11,6 @@ import { ContainerBinding } from "./ContainerBinding";
  * @private
  */
 export class StageCrawler {
-
     /*============================================================================*/
     /* Private Properties                                                         */
     /*============================================================================*/

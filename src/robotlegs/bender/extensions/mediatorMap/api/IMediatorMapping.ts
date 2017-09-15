@@ -5,11 +5,7 @@
 //  in accordance with the terms of the license agreement accompanying it.
 // ------------------------------------------------------------------------------
 
-import {
-    ITypeFilter,
-    IGuard,
-    IHook
-} from "@robotlegsjs/core";
+import { ITypeFilter, IGuard, IHook } from "@robotlegsjs/core";
 
 /**
  * Represents a Mediator mapping

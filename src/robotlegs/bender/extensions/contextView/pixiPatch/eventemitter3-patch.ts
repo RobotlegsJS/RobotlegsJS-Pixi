@@ -10,8 +10,11 @@ import { DisplayObject } from "pixi.js";
 import { IEvent } from "@robotlegsjs/core";
 
 const EventDispatcherMixin = {
-
-    addEventListener: function(type: string, listener?: Function, thisObject?: any): void {
+    addEventListener: function(
+        type: string,
+        listener?: Function,
+        thisObject?: any
+    ): void {
         this.on(type, listener, thisObject);
     },
 
@@ -19,7 +22,11 @@ const EventDispatcherMixin = {
         return this.listeners(type).length > 0;
     },
 
-    removeEventListener: function(type: string, listener?: Function, thisObject?: any): void {
+    removeEventListener: function(
+        type: string,
+        listener?: Function,
+        thisObject?: any
+    ): void {
         this.off(type, listener, thisObject);
     },
 
@@ -36,8 +43,7 @@ const EventDispatcherMixin = {
             event.currentTarget.emit(event.type, event);
             currentTarget = currentTarget.parent;
         } while (currentTarget && event.bubbles);
-    },
-
+    }
 };
 
 Object.assign(DisplayObject.prototype, EventDispatcherMixin);

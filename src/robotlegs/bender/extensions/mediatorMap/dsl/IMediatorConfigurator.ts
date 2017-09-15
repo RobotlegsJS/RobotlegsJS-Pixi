@@ -5,10 +5,7 @@
 //  in accordance with the terms of the license agreement accompanying it.
 // ------------------------------------------------------------------------------
 
-import {
-    IGuard,
-    IHook
-} from "@robotlegsjs/core";
+import { IGuard, IHook } from "@robotlegsjs/core";
 
 /**
  * Configures a mediator mapping
