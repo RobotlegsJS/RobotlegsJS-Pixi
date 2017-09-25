@@ -70,7 +70,9 @@ export class MediatorMap implements IMediatorMap, IViewHandler {
     public mapMatcher(matcher: ITypeMatcher): IMediatorMapper {
         const desc = matcher.createTypeFilter().descriptor;
         let mapper = this._mappers.get(desc);
-        if (mapper) return mapper;
+        if (mapper) {
+            return mapper;
+        }
 
         mapper = this.createMapper(matcher);
         this._mappers.set(desc, mapper);
