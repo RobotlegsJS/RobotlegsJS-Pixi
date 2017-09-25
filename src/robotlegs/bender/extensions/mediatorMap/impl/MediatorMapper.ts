@@ -59,7 +59,7 @@ export class MediatorMapper implements IMediatorMapper, IMediatorUnmapper {
      * @inheritDoc
      */
     public toMediator(mediatorClass: any): IMediatorConfigurator {
-        let mapping: IMediatorMapping = this._mappings[<any>mediatorClass];
+        const mapping: IMediatorMapping = this._mappings.get(mediatorClass);
         return mapping
             ? this.overwriteMapping(mapping)
             : this.createMapping(mediatorClass);
@@ -69,7 +69,7 @@ export class MediatorMapper implements IMediatorMapper, IMediatorUnmapper {
      * @inheritDoc
      */
     public fromMediator(mediatorClass: any): void {
-        let mapping: IMediatorMapping = this._mappings[<any>mediatorClass];
+        const mapping: IMediatorMapping = this._mappings.get(mediatorClass);
 
         if (mapping) {
             this.deleteMapping(mapping);
@@ -80,10 +80,7 @@ export class MediatorMapper implements IMediatorMapper, IMediatorUnmapper {
      * @inheritDoc
      */
     public fromAll(): void {
-        for (let i in this._mappings) {
-            let mapping: IMediatorMapping = this._mappings[i];
-            this.deleteMapping(mapping);
-        }
+        this._mappings.forEach(this.deleteMapping, this);
     }
 
     /*============================================================================*/
@@ -96,7 +93,7 @@ export class MediatorMapper implements IMediatorMapper, IMediatorUnmapper {
             mediatorClass
         );
         this._handler.addMapping(mapping);
-        this._mappings[<any>mediatorClass] = mapping;
+        this._mappings.set(mediatorClass, mapping);
 
         if (this._logger) {
             this._logger.debug("{0} mapped to {1}", [
@@ -110,7 +107,7 @@ export class MediatorMapper implements IMediatorMapper, IMediatorUnmapper {
 
     private deleteMapping(mapping: IMediatorMapping): void {
         this._handler.removeMapping(mapping);
-        delete this._mappings[<any>mapping.mediatorClass];
+        this._mappings.delete(mapping.mediatorClass);
 
         if (this._logger) {
             this._logger.debug("{0} unmapped from {1}", [

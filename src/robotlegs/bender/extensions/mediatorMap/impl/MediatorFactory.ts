@@ -51,9 +51,8 @@ export class MediatorFactory {
      * @private
      */
     public getMediator(item: any, mapping: IMediatorMapping): any {
-        return this._mediators.get(item)
-            ? this._mediators.get(item).get(<any>mapping)
-            : null;
+        const mediators = this._mediators.get(item);
+        return mediators ? mediators.get(mapping) : null;
     }
 
     /**
@@ -138,9 +137,11 @@ export class MediatorFactory {
         item: any,
         mapping: IMediatorMapping
     ): void {
-        let mediatorMap =
-            this._mediators.get(item) || new Map<any, IMediatorMapping>();
-        this._mediators.set(item, mediatorMap);
+        let mediatorMap = this._mediators.get(item);
+        if (!mediatorMap) {
+            mediatorMap = new Map<any, IMediatorMapping>();
+            this._mediators.set(item, mediatorMap);
+        }
         mediatorMap.set(<any>mapping, mediator);
         this._manager.addMediator(mediator, item, mapping);
     }
