@@ -34,9 +34,9 @@ export class MediatorMap implements IMediatorMap, IViewHandler {
     /* Private Properties                                                         */
     /*============================================================================*/
 
-    private _mappers: Map<string, IMediatorMapper> = new Map<
+    private _mappers: Map<string, MediatorMapper> = new Map<
         string,
-        IMediatorMapper
+        MediatorMapper
     >();
 
     private _logger: ILogger;
@@ -133,7 +133,7 @@ export class MediatorMap implements IMediatorMap, IViewHandler {
     /* Private Functions                                                          */
     /*============================================================================*/
 
-    private createMapper(matcher: ITypeMatcher): IMediatorMapper {
+    private createMapper(matcher: ITypeMatcher): MediatorMapper {
         return new MediatorMapper(
             matcher.createTypeFilter(),
             this._viewHandler,
