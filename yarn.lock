@@ -4106,9 +4106,9 @@ pixi-gl-core@^1.0.3:
   version "1.1.0"
   resolved "https://registry.npmjs.org/pixi-gl-core/-/pixi-gl-core-1.1.0.tgz#a52cb4dd3254f9c7857a0e9c2356b00e6ec0c761"
 
-pixi.js@^4.5.5:
-  version "4.5.5"
-  resolved "https://registry.npmjs.org/pixi.js/-/pixi.js-4.5.5.tgz#c9097695dfdba5f3d7509f4224fb251210d92ce1"
+pixi.js@^4.5.6:
+  version "4.5.6"
+  resolved "https://registry.npmjs.org/pixi.js/-/pixi.js-4.5.6.tgz#54914e7935f9a9e346923b9f424e52fa417593cd"
   dependencies:
     bit-twiddle "^1.0.2"
     earcut "^2.0.7"

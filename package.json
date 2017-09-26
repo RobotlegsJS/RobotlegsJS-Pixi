@@ -41,7 +41,7 @@
   "dependencies": {
     "@robotlegsjs/core": "^0.0.6",
     "eventemitter3": "^2.0.3",
-    "pixi.js": "^4.5.5"
+    "pixi.js": "^4.5.6"
   },
   "devDependencies": {
     "@types/bluebird": "^3.5.12",
@@ -91,7 +91,6 @@
     "webpack-dev-server": "^2.8.2"
   },
   "peerDependencies": {
-    "pixi.js": "*",
     "reflect-metadata": "^0.1.10"
   }
 }
