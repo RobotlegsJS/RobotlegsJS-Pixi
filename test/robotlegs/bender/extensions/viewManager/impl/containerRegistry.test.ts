@@ -120,7 +120,7 @@ describe("ContainerRegistry", () => {
         let result: ContainerBinding = registry.findParentBinding(searchItem);
 
         assert.equal(
-            searchTrees[1].children[3],
+            searchTrees[1].treeChildren[3],
             result.container,
             "Binding returns with correct container view"
         );
