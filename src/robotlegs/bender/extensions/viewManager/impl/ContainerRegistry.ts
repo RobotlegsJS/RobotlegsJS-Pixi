@@ -60,10 +60,10 @@ export class ContainerRegistry extends EventDispatcher {
      */
     public addContainer(container: any): ContainerBinding {
         let binding = this._bindingByContainer.get(container);
-        if (binding) return binding;
-
-        binding = this.createBinding(container);
-        this._bindingByContainer.set(container, binding);
+        if (!binding) {
+            binding = this.createBinding(container);
+            this._bindingByContainer.set(container, binding);
+        }
         return binding;
     }
 
