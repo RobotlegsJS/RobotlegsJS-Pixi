@@ -133,6 +133,32 @@ describe("ContainerRegistry", () => {
         assert.equal(null, result.parent.parent, "Further parents are null");
     });
 
+    it("binding_returns_with_correct_interested_parent_chain_if_interested_views_added_in_wrong_order_with_gaps", () => {
+        let searchTrees: TreeContainer[] = createTrees(5, 4);
+
+        registry.addContainer(searchTrees[0]);
+        registry.addContainer(searchTrees[1].treeChildren[3].treeChildren[2]);
+        registry.addContainer(searchTrees[1]);
+
+        let searchItem: Sprite =
+            searchTrees[1].treeChildren[3].treeChildren[2].treeChildren[3]
+                .treeChildren[3];
+        let result: ContainerBinding = registry.findParentBinding(searchItem);
+
+        assert.equal(
+            searchTrees[1].treeChildren[3].treeChildren[2],
+            result.container,
+            "Binding returns with correct container view"
+        );
+
+        assert.equal(
+            searchTrees[1],
+            result.parent.container,
+            "Binding returns with correct container parent view"
+        );
+        assert.equal(null, result.parent.parent, "Further parents are null");
+    });
+
     function createTrees(
         treeDepth: number,
         treeWidth: number
