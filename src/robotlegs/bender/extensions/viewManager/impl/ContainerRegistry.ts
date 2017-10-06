@@ -71,9 +71,7 @@ export class ContainerRegistry extends EventDispatcher {
      * @private
      */
     public removeContainer(container: any): ContainerBinding {
-        const binding: ContainerBinding = this._bindingByContainer.get(
-            container
-        );
+        let binding: ContainerBinding = this._bindingByContainer.get(container);
 
         if (binding) {
             this.removeBinding(binding);
@@ -90,7 +88,7 @@ export class ContainerRegistry extends EventDispatcher {
     public findParentBinding(target: any): ContainerBinding {
         let parent: any = target.parent;
         while (parent) {
-            const binding: ContainerBinding = this._bindingByContainer.get(
+            let binding: ContainerBinding = this._bindingByContainer.get(
                 parent
             );
             if (binding) {
@@ -131,6 +129,8 @@ export class ContainerRegistry extends EventDispatcher {
         // Reparent any bindings which are contained within the new binding AND
         // A. Don't have a parent, OR
         // B. Have a parent that is not contained within the new binding
+        // TODO: PIXI don't have a implementation for 'contains' method, this loop will not work properly
+        /*
         this._bindingByContainer.forEach(childBinding => {
             if (container.contains(childBinding.container)) {
                 if (!childBinding.parent) {
@@ -141,6 +141,7 @@ export class ContainerRegistry extends EventDispatcher {
                 }
             }
         });
+        */
 
         this.dispatchEvent(
             new ContainerRegistryEvent(
