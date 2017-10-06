@@ -49,7 +49,7 @@
     "@types/mocha": "^2.2.43",
     "@types/pixi.js": "^4.5.6",
     "@types/sinon": "^2.3.5",
-    "bluebird": "^3.5.0",
+    "bluebird": "^3.5.1",
     "browserify-versionify": "^1.0.6",
     "chai": "^4.1.2",
     "es6-map": "^0.1.5",
