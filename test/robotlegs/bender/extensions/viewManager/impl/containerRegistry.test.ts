@@ -11,6 +11,8 @@ import { assert } from "chai";
 
 import { IContext, Context } from "@robotlegsjs/core";
 
+import { Sprite } from "pixi.js";
+
 import { ViewManagerExtension, IViewManager } from "../../../../../../src";
 
 import { ContainerBinding } from "../../../../../../src/robotlegs/bender/extensions/viewManager/impl/ContainerBinding";
@@ -27,6 +29,14 @@ describe("ContainerRegistry", () => {
 
     afterEach(() => {
         registry = null;
+    });
+
+    it("add_container", () => {
+        let container: Sprite = new Sprite();
+        let containerBinding: ContainerBinding = registry.addContainer(
+            container
+        );
+        assert.equal(containerBinding.container, container);
     });
 
     it("finds_correct_nearest_interested_container_view_and_returns_its_binding", () => {
