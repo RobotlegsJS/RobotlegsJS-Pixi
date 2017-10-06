@@ -117,7 +117,7 @@ export class ContainerRegistry extends EventDispatcher {
         // Add a listener so that we can remove this binding when it has no handlers
         binding.addEventListener(
             ContainerBindingEvent.BINDING_EMPTY,
-            this.onBindingEmpty
+            this.onBindingEmpty.bind(this)
         );
 
         // If the new binding doesn't have a parent it is a Root

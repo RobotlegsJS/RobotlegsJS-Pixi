@@ -5,6 +5,8 @@
 //  in accordance with the terms of the license agreement accompanying it.
 // ------------------------------------------------------------------------------
 
+import { Event } from "@robotlegsjs/core";
+
 /**
  * @private
  */
@@ -33,7 +35,7 @@ export class ContainerBindingEvent extends Event {
     /**
      * @inheritDoc
      */
-    public clone(): Event {
+    public clone(): ContainerBindingEvent {
         return new ContainerBindingEvent(this.type);
     }
 }
