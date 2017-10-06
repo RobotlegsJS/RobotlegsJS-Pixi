@@ -201,6 +201,33 @@ describe("ContainerRegistry", () => {
         );
     });
 
+    it("returns_null_if_search_item_is_not_inside_an_included_view", () => {
+        let searchTrees: TreeContainer[] = createTrees(5, 4);
+
+        registry.addContainer(searchTrees[0]);
+        registry.addContainer(searchTrees[1]);
+        registry.addContainer(
+            searchTrees[1].treeChildren[3].treeChildren[2].treeChildren[3]
+        );
+        registry.addContainer(searchTrees[1].treeChildren[3].treeChildren[2]);
+        registry.addContainer(searchTrees[1].treeChildren[3]);
+
+        registry.removeContainer(
+            searchTrees[1].treeChildren[3].treeChildren[2]
+        );
+
+        let searchItem: Sprite =
+            searchTrees[2].treeChildren[3].treeChildren[2].treeChildren[3]
+                .treeChildren[3];
+        let result: ContainerBinding = registry.findParentBinding(searchItem);
+
+        assert.equal(
+            null,
+            result,
+            "Returns null if not inside an included view"
+        );
+    });
+
     function createTrees(
         treeDepth: number,
         treeWidth: number
