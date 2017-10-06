@@ -55,6 +55,30 @@ describe("ContainerRegistry", () => {
         assert.equal(containerBinding1, containerBinding2);
     });
 
+    it("get_bindings", () => {
+        let container1: Sprite = new Sprite();
+        let container2: Sprite = new Sprite();
+        let container3: Sprite = new Sprite();
+
+        let containerBinding1: ContainerBinding = registry.addContainer(
+            container1
+        );
+        let containerBinding2: ContainerBinding = registry.addContainer(
+            container2
+        );
+        let containerBinding3: ContainerBinding = registry.addContainer(
+            container3
+        );
+
+        let expectedBindings: ContainerBinding[] = [
+            containerBinding1,
+            containerBinding2,
+            containerBinding3
+        ];
+
+        assert.deepEqual(expectedBindings, registry.bindings);
+    });
+
     it("finds_correct_nearest_interested_container_view_and_returns_its_binding", () => {
         let searchTrees: TreeContainer[] = createTrees(3, 3);
 
