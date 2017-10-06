@@ -228,6 +228,76 @@ describe("ContainerRegistry", () => {
         );
     });
 
+    it("returns_root_container_view_bindings_one_item", () => {
+        let searchTrees: TreeContainer[] = createTrees(1, 1);
+        let expectedBinding: ContainerBinding = registry.addContainer(
+            searchTrees[0]
+        );
+        let expectedRootBindings: ContainerBinding[] = [expectedBinding];
+        assert.deepEqual(
+            expectedRootBindings,
+            registry.rootBindings,
+            "Returns root container view bindings one item"
+        );
+    });
+
+    it("returns_root_container_view_bindings_many_items", () => {
+        let searchTrees: TreeContainer[] = createTrees(5, 4);
+        let firstExpectedBinding: ContainerBinding = registry.addContainer(
+            searchTrees[0]
+        );
+
+        registry.addContainer(
+            searchTrees[1].treeChildren[3].treeChildren[2].treeChildren[3]
+        );
+        registry.addContainer(searchTrees[1].treeChildren[3].treeChildren[2]);
+
+        let secondExpectedBinding: ContainerBinding = registry.addContainer(
+            searchTrees[1]
+        );
+
+        registry.addContainer(searchTrees[1].treeChildren[3]);
+
+        let expectedRootBindings: ContainerBinding[] = [
+            firstExpectedBinding,
+            secondExpectedBinding
+        ];
+        assert.deepEqual(
+            expectedRootBindings,
+            registry.rootBindings,
+            "Returns root container view bindings many items"
+        );
+    });
+
+    it("returns_root_container_view_bindings_many_items_after_removals", () => {
+        let searchTrees: TreeContainer[] = createTrees(5, 4);
+        let firstExpectedBinding: ContainerBinding = registry.addContainer(
+            searchTrees[0]
+        );
+
+        registry.addContainer(
+            searchTrees[1].treeChildren[3].treeChildren[2].treeChildren[3]
+        );
+        registry.addContainer(searchTrees[1].treeChildren[3].treeChildren[2]);
+        registry.addContainer(searchTrees[1]);
+
+        let secondExpectedBinding: ContainerBinding = registry.addContainer(
+            searchTrees[1].treeChildren[3]
+        );
+
+        registry.removeContainer(searchTrees[1]);
+
+        let expectedRootBindings: ContainerBinding[] = [
+            firstExpectedBinding,
+            secondExpectedBinding
+        ];
+        assert.deepEqual(
+            expectedRootBindings,
+            registry.rootBindings,
+            "Returns root container view bindings many items after removals"
+        );
+    });
+
     function createTrees(
         treeDepth: number,
         treeWidth: number
