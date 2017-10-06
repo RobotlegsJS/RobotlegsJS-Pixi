@@ -39,6 +39,19 @@ describe("ContainerRegistry", () => {
         assert.equal(containerBinding.container, container);
     });
 
+    it("add_twice_same_container", () => {
+        let container: Sprite = new Sprite();
+        let containerBinding1: ContainerBinding = registry.addContainer(
+            container
+        );
+        let containerBinding2: ContainerBinding = registry.addContainer(
+            container
+        );
+        assert.equal(containerBinding1.container, container);
+        assert.equal(containerBinding2.container, container);
+        assert.equal(containerBinding1, containerBinding2);
+    });
+
     it("finds_correct_nearest_interested_container_view_and_returns_its_binding", () => {
         let searchTrees: TreeContainer[] = createTrees(3, 3);
 
