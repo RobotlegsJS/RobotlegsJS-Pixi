@@ -30,18 +30,33 @@ describe("ContainerRegistry", () => {
     });
 
     it("finds_correct_nearest_interested_container_view_and_returns_its_binding", () => {
-        let searchTrees: TreeContainer[] = createTrees(2, 2);
+        let searchTrees: TreeContainer[] = createTrees(3, 3);
 
-        registry.addContainer(searchTrees[0]);
-        registry.addContainer(searchTrees[1]);
+        for (let searchTree of searchTrees) {
+            registry.addContainer(searchTree);
+        }
 
-        let correctTree: TreeContainer = searchTrees[0];
-        let searchItem: TreeContainer =
-            correctTree.treeChildren[0].treeChildren[0];
+        let correctTree: TreeContainer;
+        let result: ContainerBinding;
 
-        let result: ContainerBinding = registry.findParentBinding(searchItem);
+        for (correctTree of searchTrees) {
+            for (let treeChild of correctTree.treeChildren) {
+                result = registry.findParentBinding(treeChild);
+                assert.equal(result.container, correctTree);
 
-        assert.equal(result.container, correctTree);
+                for (let treeGrandchild of treeChild.treeChildren) {
+                    result = registry.findParentBinding(treeGrandchild);
+                    assert.equal(result.container, correctTree);
+
+                    for (let treeGreatGrandchild of treeGrandchild.treeChildren) {
+                        result = registry.findParentBinding(
+                            treeGreatGrandchild
+                        );
+                        assert.equal(result.container, correctTree);
+                    }
+                }
+            }
+        }
     });
 
     function createTrees(
