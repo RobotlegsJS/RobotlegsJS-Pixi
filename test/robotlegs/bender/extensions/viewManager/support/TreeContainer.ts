@@ -5,12 +5,12 @@
 //  in accordance with the terms of the license agreement accompanying it.
 // ------------------------------------------------------------------------------
 
-import { Container } from "pixi.js";
+import { Sprite } from "pixi.js";
 
 /**
  * @private
  */
-export class TreeContainer extends Container {
+export class TreeContainer extends Sprite {
     private _treeDepth: number = 0;
     private _treeWidth: number = 0;
     private _treeChildren: TreeContainer[] = [];
