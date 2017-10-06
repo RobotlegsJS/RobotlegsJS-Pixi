@@ -15,10 +15,12 @@ import { Sprite } from "pixi.js";
 
 import { ViewManagerExtension, IViewManager } from "../../../../../../src";
 
+import { IViewHandler } from "../../../../../../src/robotlegs/bender/extensions/viewManager/api/IViewHandler";
 import { ContainerBinding } from "../../../../../../src/robotlegs/bender/extensions/viewManager/impl/ContainerBinding";
 import { ContainerRegistry } from "../../../../../../src/robotlegs/bender/extensions/viewManager/impl/ContainerRegistry";
 import { ContainerRegistryEvent } from "../../../../../../src/robotlegs/bender/extensions/viewManager/impl/ContainerRegistryEvent";
 
+import { CallbackViewHandler } from "../support/CallbackViewHandler";
 import { TreeContainer } from "../support/TreeContainer";
 
 describe("ContainerRegistry", () => {
@@ -355,6 +357,14 @@ describe("ContainerRegistry", () => {
         registry.addContainer(container);
         registry.removeContainer(container);
         assert.equal(callCount, 1);
+    });
+
+    it("empty_binding_is_removed", () => {
+        let container: Sprite = new Sprite();
+        let handler: IViewHandler = new CallbackViewHandler();
+        registry.addContainer(container).addHandler(handler);
+        registry.getBinding(container).removeHandler(handler);
+        assert.isUndefined(registry.getBinding(container));
     });
 
     function createTrees(
