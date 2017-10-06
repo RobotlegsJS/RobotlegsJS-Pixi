@@ -17,6 +17,7 @@ import { ViewManagerExtension, IViewManager } from "../../../../../../src";
 
 import { ContainerBinding } from "../../../../../../src/robotlegs/bender/extensions/viewManager/impl/ContainerBinding";
 import { ContainerRegistry } from "../../../../../../src/robotlegs/bender/extensions/viewManager/impl/ContainerRegistry";
+import { ContainerRegistryEvent } from "../../../../../../src/robotlegs/bender/extensions/viewManager/impl/ContainerRegistryEvent";
 
 import { TreeContainer } from "../support/TreeContainer";
 
@@ -296,6 +297,64 @@ describe("ContainerRegistry", () => {
             registry.rootBindings,
             "Returns root container view bindings many items after removals"
         );
+    });
+
+    it("adding_container_dispatches_event", () => {
+        let container: Sprite = new Sprite();
+        let callCount: number = 0;
+        registry.addEventListener(
+            ContainerRegistryEvent.CONTAINER_ADD,
+            function onContainerAdd(event: ContainerRegistryEvent): void {
+                callCount++;
+            }
+        );
+        registry.addContainer(container);
+        registry.addContainer(container);
+        assert.equal(callCount, 1);
+    });
+
+    it("removing_container_dispatches_event", () => {
+        let container: Sprite = new Sprite();
+        let callCount: number = 0;
+        registry.addEventListener(
+            ContainerRegistryEvent.CONTAINER_REMOVE,
+            function onContainerRemove(event: ContainerRegistryEvent): void {
+                callCount++;
+            }
+        );
+        registry.addContainer(container);
+        registry.removeContainer(container);
+        registry.removeContainer(container);
+        assert.equal(callCount, 1);
+    });
+
+    it("adding_root_container_dispatches_event", () => {
+        let container: Sprite = new Sprite();
+        let callCount: number = 0;
+        registry.addEventListener(
+            ContainerRegistryEvent.ROOT_CONTAINER_ADD,
+            function onRootContainerAdd(event: ContainerRegistryEvent): void {
+                callCount++;
+            }
+        );
+        registry.addContainer(container);
+        assert.equal(callCount, 1);
+    });
+
+    it("removing_root_container_dispatches_event", () => {
+        let container: Sprite = new Sprite();
+        let callCount: number = 0;
+        registry.addEventListener(
+            ContainerRegistryEvent.ROOT_CONTAINER_REMOVE,
+            function onRootContainerRemove(
+                event: ContainerRegistryEvent
+            ): void {
+                callCount++;
+            }
+        );
+        registry.addContainer(container);
+        registry.removeContainer(container);
+        assert.equal(callCount, 1);
     });
 
     function createTrees(
