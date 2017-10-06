@@ -225,9 +225,7 @@ export class ContainerRegistry extends EventDispatcher {
      */
     private contains(container: any, child: any): boolean {
         let found: boolean = false;
-        if (container === child) {
-            found = true;
-        } else if (container.children.indexOf(child) >= 0) {
+        if (container === child || container.children.indexOf(child) >= 0) {
             found = true;
         } else {
             for (let c of container.children) {
