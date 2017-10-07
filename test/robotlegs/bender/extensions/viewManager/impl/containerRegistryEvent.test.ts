@@ -26,6 +26,7 @@ describe("ContainerRegistryEvent", () => {
     });
 
     afterEach(() => {
+        container = null;
         event = null;
     });
 
