@@ -9,6 +9,8 @@ import { injectable } from "inversify";
 
 import { EventDispatcher } from "@robotlegsjs/core";
 
+import { contains } from "./contains";
+
 import { IViewHandler } from "../api/IViewHandler";
 import { IViewManager } from "../api/IViewManager";
 
@@ -168,8 +170,8 @@ export class ViewManager extends EventDispatcher implements IViewManager {
             }
 
             if (
-                registeredContainer.contains(container) ||
-                container.contains(registeredContainer)
+                contains(registeredContainer, container) ||
+                contains(container, registeredContainer)
             ) {
                 throw new Error("Containers can not be nested");
             }

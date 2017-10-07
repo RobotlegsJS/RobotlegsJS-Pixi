@@ -7,6 +7,8 @@
 
 import { EventDispatcher } from "@robotlegsjs/core";
 
+import { contains } from "./contains";
+
 import { ContainerBinding } from "./ContainerBinding";
 import { ContainerBindingEvent } from "./ContainerBindingEvent";
 import { ContainerRegistryEvent } from "./ContainerRegistryEvent";
@@ -130,12 +132,12 @@ export class ContainerRegistry extends EventDispatcher {
         // A. Don't have a parent, OR
         // B. Have a parent that is not contained within the new binding
         this._bindingByContainer.forEach(childBinding => {
-            if (this.contains(container, childBinding.container)) {
+            if (contains(container, childBinding.container)) {
                 if (!childBinding.parent) {
                     this.removeRootBinding(childBinding);
                     childBinding.parent = binding;
                 } else if (
-                    !this.contains(container, childBinding.parent.container)
+                    !contains(container, childBinding.parent.container)
                 ) {
                     childBinding.parent = binding;
                 }
@@ -211,30 +213,5 @@ export class ContainerRegistry extends EventDispatcher {
 
     private onBindingEmpty(event: ContainerBindingEvent): void {
         this.removeBinding(<any>event.target);
-    }
-
-    /**
-     * Determines whether the specified child object is a child of the containter instance or the instance itself.
-     * The search includes the entire display list including the containter instance.
-     * Grandchildren, great-grandchildren, and so on each return true.
-     *
-     * @param container The container.
-     * @param child The child object to test.
-     *
-     * @return true if the child object is a child of the container or the container itself; otherwise false.
-     */
-    private contains(container: any, child: any): boolean {
-        let found: boolean = false;
-        if (container === child || container.children.indexOf(child) >= 0) {
-            found = true;
-        } else {
-            for (let c of container.children) {
-                if (this.contains(c, child)) {
-                    found = true;
-                    break;
-                }
-            }
-        }
-        return found;
     }
 }
