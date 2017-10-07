@@ -14,28 +14,32 @@ import { Sprite } from "pixi.js";
 import { ContainerRegistry } from "../../../../../../src/robotlegs/bender/extensions/viewManager/impl/ContainerRegistry";
 import { ViewManager } from "../../../../../../src/robotlegs/bender/extensions/viewManager/impl/ViewManager";
 
+import { CallbackViewHandler } from "../support/CallbackViewHandler";
+
 describe("ViewManager", () => {
+    let container: Sprite = null;
     let registry: ContainerRegistry = null;
-    let manager: ViewManager = null;
+    let viewManager: ViewManager = null;
 
     beforeEach(() => {
+        container = new Sprite();
         registry = new ContainerRegistry();
-        manager = new ViewManager(registry);
+        viewManager = new ViewManager(registry);
     });
 
     afterEach(() => {
+        container = null;
         registry = null;
-        manager = null;
+        viewManager = null;
     });
 
     it("container_is_added", () => {
-        manager.addContainer(new Sprite());
+        viewManager.addContainer(container);
     });
 
     it("container_is_stored", () => {
-        let container: Sprite = new Sprite();
         let expectedContainers: any[] = [container];
-        manager.addContainer(container);
-        assert.deepEqual(manager.containers, expectedContainers);
+        viewManager.addContainer(container);
+        assert.deepEqual(viewManager.containers, expectedContainers);
     });
 });
