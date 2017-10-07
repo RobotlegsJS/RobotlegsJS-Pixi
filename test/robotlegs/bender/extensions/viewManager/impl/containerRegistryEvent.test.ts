@@ -30,6 +30,22 @@ describe("ContainerRegistryEvent", () => {
         event = null;
     });
 
+    it("ensure_static_properties_will_not_change", () => {
+        assert.equal(ContainerRegistryEvent.CONTAINER_ADD, "containerAdd");
+        assert.equal(
+            ContainerRegistryEvent.CONTAINER_REMOVE,
+            "containerRemove"
+        );
+        assert.equal(
+            ContainerRegistryEvent.ROOT_CONTAINER_ADD,
+            "rootContainerAdd"
+        );
+        assert.equal(
+            ContainerRegistryEvent.ROOT_CONTAINER_REMOVE,
+            "rootContainerRemove"
+        );
+    });
+
     it("type_is_stored", () => {
         assert.equal(event.type, ContainerRegistryEvent.CONTAINER_ADD);
     });

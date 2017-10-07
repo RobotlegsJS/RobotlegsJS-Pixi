@@ -37,6 +37,13 @@ describe("ViewManagerEvent", () => {
         event = null;
     });
 
+    it("ensure_static_properties_will_not_change", () => {
+        assert.equal(ViewManagerEvent.CONTAINER_ADD, "containerAdd");
+        assert.equal(ViewManagerEvent.CONTAINER_REMOVE, "containerRemove");
+        assert.equal(ViewManagerEvent.HANDLER_ADD, "handlerAdd");
+        assert.equal(ViewManagerEvent.HANDLER_REMOVE, "handlerRemove");
+    });
+
     it("type_is_stored", () => {
         assert.equal(event.type, ViewManagerEvent.CONTAINER_ADD);
     });

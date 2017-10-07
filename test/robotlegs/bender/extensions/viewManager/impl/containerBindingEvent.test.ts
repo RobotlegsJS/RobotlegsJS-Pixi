@@ -22,6 +22,10 @@ describe("ContainerBindingEvent", () => {
         event = null;
     });
 
+    it("ensure_static_properties_will_not_change", () => {
+        assert.equal(ContainerBindingEvent.BINDING_EMPTY, "bindingEmpty");
+    });
+
     it("type_is_stored", () => {
         assert.equal(event.type, ContainerBindingEvent.BINDING_EMPTY);
     });
