@@ -9,6 +9,7 @@ export function applyPixiPatch(interaction: any) {
     let addChild = PIXI.Container.prototype.addChild;
     let addChildAt = PIXI.Container.prototype.addChildAt;
     let removeChild = PIXI.Container.prototype.removeChild;
+    let removeChildren = PIXI.Container.prototype.removeChildren;
     let removeChildAt = PIXI.Container.prototype.removeChildAt;
 
     PIXI.Container.prototype.addChild = function patchedAddChild<
@@ -38,7 +39,17 @@ export function applyPixiPatch(interaction: any) {
         }
         return this;
     };
+  PIXI.Container.prototype.removeChildren = function (beginIndex: number = 0, endIndex?: number) {
+    const end = endIndex || this.children.length;
+    const range = end - beginIndex;
+    const children = this.children.slice(beginIndex, range);
 
+    for (let child of children) {
+      interaction.emit("removed", { target: child });
+    }
+
+    return removeChildren.call(this, beginIndex, end);
+  };
     PIXI.Container.prototype.removeChildAt = function(
         index
     ): PIXI.DisplayObject {
