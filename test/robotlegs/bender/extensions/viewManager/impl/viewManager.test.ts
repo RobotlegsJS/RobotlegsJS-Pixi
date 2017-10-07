@@ -42,4 +42,26 @@ describe("ViewManager", () => {
         viewManager.addContainer(container);
         assert.deepEqual(viewManager.containers, expectedContainers);
     });
+
+    it("addContainer_throws_if_containers_are_nested_case1", () => {
+        function addNestedContainers(): void {
+            const container1: Sprite = new Sprite();
+            const container2: Sprite = new Sprite();
+            container1.addChild(container2);
+            viewManager.addContainer(container1);
+            viewManager.addContainer(container2);
+        }
+        assert.throws(addNestedContainers, Error);
+    });
+
+    it("addContainer_throws_if_containers_are_nested_case2", () => {
+        function addNestedContainers(): void {
+            const container1: Sprite = new Sprite();
+            const container2: Sprite = new Sprite();
+            container2.addChild(container1);
+            viewManager.addContainer(container1);
+            viewManager.addContainer(container2);
+        }
+        assert.throws(addNestedContainers, Error);
+    });
 });
