@@ -9,11 +9,7 @@ import "../../../../../entry";
 
 import { assert } from "chai";
 
-import { IContext, Context } from "@robotlegsjs/core";
-
 import { Sprite } from "pixi.js";
-
-import { ViewManagerExtension, IViewManager } from "../../../../../../src";
 
 import { IViewHandler } from "../../../../../../src/robotlegs/bender/extensions/viewManager/api/IViewHandler";
 import { ContainerBinding } from "../../../../../../src/robotlegs/bender/extensions/viewManager/impl/ContainerBinding";
