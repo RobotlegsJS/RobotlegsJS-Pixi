@@ -48,4 +48,13 @@ describe("MediatorMapExtension", () => {
         assert.isNotNull(mediatorMap);
         assert.instanceOf(mediatorMap, MediatorMap);
     });
+
+    it("mediatorMap_is_unmapped_from_injector_on_destroy", () => {
+        context.install(ViewManagerExtension, MediatorMapExtension);
+        context.afterDestroying(function(): void {
+            assert.isFalse(context.injector.isBound(IMediatorMap));
+        });
+        context.initialize();
+        context.destroy();
+    });
 });
