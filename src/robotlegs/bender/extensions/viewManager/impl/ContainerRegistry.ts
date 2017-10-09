@@ -7,6 +7,8 @@
 
 import { EventDispatcher } from "@robotlegsjs/core";
 
+import { contains } from "./contains";
+
 import { ContainerBinding } from "./ContainerBinding";
 import { ContainerBindingEvent } from "./ContainerBindingEvent";
 import { ContainerRegistryEvent } from "./ContainerRegistryEvent";
@@ -60,10 +62,10 @@ export class ContainerRegistry extends EventDispatcher {
      */
     public addContainer(container: any): ContainerBinding {
         let binding = this._bindingByContainer.get(container);
-        if (binding) return binding;
-
-        binding = this.createBinding(container);
-        this._bindingByContainer.set(container, binding);
+        if (!binding) {
+            binding = this.createBinding(container);
+            this._bindingByContainer.set(container, binding);
+        }
         return binding;
     }
 
@@ -71,9 +73,7 @@ export class ContainerRegistry extends EventDispatcher {
      * @private
      */
     public removeContainer(container: any): ContainerBinding {
-        const binding: ContainerBinding = this._bindingByContainer.get(
-            container
-        );
+        let binding: ContainerBinding = this._bindingByContainer.get(container);
 
         if (binding) {
             this.removeBinding(binding);
@@ -90,7 +90,7 @@ export class ContainerRegistry extends EventDispatcher {
     public findParentBinding(target: any): ContainerBinding {
         let parent: any = target.parent;
         while (parent) {
-            const binding: ContainerBinding = this._bindingByContainer.get(
+            let binding: ContainerBinding = this._bindingByContainer.get(
                 parent
             );
             if (binding) {
@@ -119,7 +119,7 @@ export class ContainerRegistry extends EventDispatcher {
         // Add a listener so that we can remove this binding when it has no handlers
         binding.addEventListener(
             ContainerBindingEvent.BINDING_EMPTY,
-            this.onBindingEmpty
+            this.onBindingEmpty.bind(this)
         );
 
         // If the new binding doesn't have a parent it is a Root
@@ -132,11 +132,13 @@ export class ContainerRegistry extends EventDispatcher {
         // A. Don't have a parent, OR
         // B. Have a parent that is not contained within the new binding
         this._bindingByContainer.forEach(childBinding => {
-            if (container.contains(childBinding.container)) {
+            if (contains(container, childBinding.container)) {
                 if (!childBinding.parent) {
                     this.removeRootBinding(childBinding);
                     childBinding.parent = binding;
-                } else if (!container.contains(childBinding.parent.container)) {
+                } else if (
+                    !contains(container, childBinding.parent.container)
+                ) {
                     childBinding.parent = binding;
                 }
             }

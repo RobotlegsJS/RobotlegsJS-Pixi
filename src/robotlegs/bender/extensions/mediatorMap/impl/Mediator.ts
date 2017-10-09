@@ -5,9 +5,13 @@
 //  in accordance with the terms of the license agreement accompanying it.
 // ------------------------------------------------------------------------------
 
-import { injectable, inject } from "inversify";
-
-import { IEventMap, IEventDispatcher, Event } from "@robotlegsjs/core";
+import {
+    injectable,
+    inject,
+    IEventMap,
+    IEventDispatcher,
+    Event
+} from "@robotlegsjs/core";
 
 import { IMediator } from "../api/IMediator";
 
