@@ -5,9 +5,9 @@
 //  in accordance with the terms of the license agreement accompanying it.
 // ------------------------------------------------------------------------------
 
-import { injectable } from "inversify";
+import { injectable, EventDispatcher } from "@robotlegsjs/core";
 
-import { EventDispatcher } from "@robotlegsjs/core";
+import { contains } from "./contains";
 
 import { IViewHandler } from "../api/IViewHandler";
 import { IViewManager } from "../api/IViewManager";
@@ -73,11 +73,10 @@ export class ViewManager extends EventDispatcher implements IViewManager {
         }
 
         this._containers.push(container);
-
-        for (let i in this._handlers) {
-            let handler: IViewHandler = this._handlers[i];
+        this._handlers.forEach(handler => {
             this._registry.addContainer(container).addHandler(handler);
-        }
+        });
+
         this.dispatchEvent(
             new ViewManagerEvent(ViewManagerEvent.CONTAINER_ADD, container)
         );
@@ -88,6 +87,7 @@ export class ViewManager extends EventDispatcher implements IViewManager {
      */
     public removeContainer(container: any): void {
         let index: number = this._containers.indexOf(container);
+
         if (index === -1) {
             return;
         }
@@ -95,10 +95,11 @@ export class ViewManager extends EventDispatcher implements IViewManager {
         this._containers.splice(index, 1);
 
         let binding: ContainerBinding = this._registry.getBinding(container);
-        for (let i in this._handlers) {
-            let handler: IViewHandler = this._handlers[i];
+
+        this._handlers.forEach(handler => {
             binding.removeHandler(handler);
-        }
+        });
+
         this.dispatchEvent(
             new ViewManagerEvent(ViewManagerEvent.CONTAINER_REMOVE, container)
         );
@@ -113,11 +114,9 @@ export class ViewManager extends EventDispatcher implements IViewManager {
         }
 
         this._handlers.push(handler);
-
-        for (let i in this._containers) {
-            let container: any = this._containers[i];
+        this._containers.forEach(container => {
             this._registry.addContainer(container).addHandler(handler);
-        }
+        });
 
         this.dispatchEvent(
             new ViewManagerEvent(ViewManagerEvent.HANDLER_ADD, null, handler)
@@ -136,10 +135,9 @@ export class ViewManager extends EventDispatcher implements IViewManager {
 
         this._handlers.splice(index, 1);
 
-        for (let i in this._containers) {
-            let container: any = this._containers[i];
+        this._containers.forEach(container => {
             this._registry.getBinding(container).removeHandler(handler);
-        }
+        });
 
         this.dispatchEvent(
             new ViewManagerEvent(ViewManagerEvent.HANDLER_REMOVE, null, handler)
@@ -150,16 +148,13 @@ export class ViewManager extends EventDispatcher implements IViewManager {
      * @inheritDoc
      */
     public removeAllHandlers(): void {
-        for (let i in this._containers) {
-            let container: any = this._containers[i];
-            var binding: ContainerBinding = this._registry.getBinding(
-                container
-            );
-            for (let j in this._handlers) {
-                let handler: IViewHandler = this._handlers[j];
+        let binding: ContainerBinding = null;
+        this._containers.forEach(container => {
+            binding = this._registry.getBinding(container);
+            this._handlers.forEach(handler => {
                 binding.removeHandler(handler);
-            }
-        }
+            });
+        });
     }
 
     /*============================================================================*/
@@ -167,19 +162,19 @@ export class ViewManager extends EventDispatcher implements IViewManager {
     /*============================================================================*/
 
     private validContainer(container: any): boolean {
-        for (let i in this._containers) {
-            let registeredContainer: any = this._containers[i];
+        this._containers.forEach(registeredContainer => {
             if (container === registeredContainer) {
                 return false;
             }
 
             if (
-                registeredContainer.contains(container) ||
-                container.contains(registeredContainer)
+                contains(registeredContainer, container) ||
+                contains(container, registeredContainer)
             ) {
                 throw new Error("Containers can not be nested");
             }
-        }
+        });
+
         return true;
     }
 }

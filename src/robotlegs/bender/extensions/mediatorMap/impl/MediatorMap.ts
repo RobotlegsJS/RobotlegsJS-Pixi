@@ -6,6 +6,8 @@
 // ------------------------------------------------------------------------------
 
 import {
+    injectable,
+    inject,
     IContext,
     ILogger,
     ITypeMatcher,
@@ -22,8 +24,6 @@ import { MediatorFactory } from "./MediatorFactory";
 import { MediatorViewHandler } from "./MediatorViewHandler";
 import { NullMediatorUnmapper } from "./NullMediatorUnmapper";
 import { MediatorMapper } from "./MediatorMapper";
-
-import { injectable, inject } from "inversify";
 
 /**
  * @private
