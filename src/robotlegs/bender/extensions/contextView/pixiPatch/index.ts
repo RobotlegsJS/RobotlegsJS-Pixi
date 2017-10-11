@@ -39,17 +39,20 @@ export function applyPixiPatch(interaction: any) {
         }
         return this;
     };
-  PIXI.Container.prototype.removeChildren = function (beginIndex: number = 0, endIndex?: number) {
-    const end = endIndex || this.children.length;
-    const range = end - beginIndex;
-    const children = this.children.slice(beginIndex, range);
 
-    for (let child of children) {
-      interaction.emit("removed", { target: child });
-    }
+    PIXI.Container.prototype.removeChildren = function(
+        beginIndex: number = 0,
+        endIndex?: number
+    ) {
+        let removedChildren = removeChildren.call(this, beginIndex, endIndex);
 
-    return removeChildren.call(this, beginIndex, end);
-  };
+        for (let child of removedChildren) {
+            interaction.emit("removed", { target: child });
+        }
+
+        return removedChildren;
+    };
+
     PIXI.Container.prototype.removeChildAt = function(
         index
     ): PIXI.DisplayObject {
