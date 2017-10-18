@@ -22,7 +22,7 @@ export class MediatorViewHandler implements IViewHandler {
 
     private _knownMappings: Map<
         FunctionConstructor,
-        IMediatorMapping[] | boolean
+        IMediatorMapping[]
     > = new Map<FunctionConstructor, IMediatorMapping[]>();
 
     private _factory: MediatorFactory;
@@ -51,7 +51,7 @@ export class MediatorViewHandler implements IViewHandler {
             return;
         }
         this._mappings.push(mapping);
-        this._knownMappings.clear();
+        this.flushCache();
     }
 
     /**
@@ -63,7 +63,7 @@ export class MediatorViewHandler implements IViewHandler {
             return;
         }
         this._mappings.splice(index, 1);
-        this._knownMappings.clear();
+        this.flushCache();
     }
 
     /**
@@ -90,36 +90,43 @@ export class MediatorViewHandler implements IViewHandler {
     /* Private Functions                                                          */
     /*============================================================================*/
 
+    private flushCache(): void {
+        this._knownMappings = new Map<
+            FunctionConstructor,
+            IMediatorMapping[]
+        >();
+    }
+
     private getInterestedMappingsFor(
         item: Object,
         type: any
     ): IMediatorMapping[] {
+        let mapping: IMediatorMapping;
+
         // we've seen this type before and nobody was interested
-        if (this._knownMappings.get(type) === false) {
+        if (this._knownMappings[type] === false) {
             return null;
         }
 
         // we haven't seen this type before
-        if (this._knownMappings.get(type) === undefined) {
-            this._knownMappings.set(type, false);
+        if (this._knownMappings[type] === undefined) {
+            this._knownMappings[type] = false;
             for (let i in this._mappings) {
                 let mapping: IMediatorMapping = this._mappings[i];
                 if (mapping.matcher.matches(item)) {
-                    if (!this._knownMappings.get(type)) {
-                        this._knownMappings.set(type, []);
+                    if (!this._knownMappings[type]) {
+                        this._knownMappings[type] = [];
                     }
-                    (this._knownMappings.get(type) as IMediatorMapping[]).push(
-                        mapping
-                    );
+                    this._knownMappings[type].push(mapping);
                 }
             }
             // nobody cares, let's get out of here
-            if (this._knownMappings.get(type) === false) {
+            if (this._knownMappings[type] === false) {
                 return null;
             }
         }
 
         // these mappings really do care
-        return this._knownMappings.get(type) as IMediatorMapping[];
+        return this._knownMappings[type];
     }
 }

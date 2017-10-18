@@ -34,9 +34,9 @@ export class MediatorMap implements IMediatorMap, IViewHandler {
     /* Private Properties                                                         */
     /*============================================================================*/
 
-    private _mappers: Map<string, MediatorMapper> = new Map<
+    private _mappers: Map<string, IMediatorMapper> = new Map<
         string,
-        MediatorMapper
+        IMediatorMapper
     >();
 
     private _logger: ILogger;
@@ -68,15 +68,10 @@ export class MediatorMap implements IMediatorMap, IViewHandler {
      * @inheritDoc
      */
     public mapMatcher(matcher: ITypeMatcher): IMediatorMapper {
-        const desc = matcher.createTypeFilter().descriptor;
-        let mapper = this._mappers.get(desc);
-        if (mapper) {
-            return mapper;
-        }
-
-        mapper = this.createMapper(matcher);
-        this._mappers.set(desc, mapper);
-        return mapper;
+        this._mappers[matcher.createTypeFilter().descriptor] =
+            this._mappers[matcher.createTypeFilter().descriptor] ||
+            this.createMapper(matcher);
+        return this._mappers[matcher.createTypeFilter().descriptor];
     }
 
     /**
@@ -91,7 +86,7 @@ export class MediatorMap implements IMediatorMap, IViewHandler {
      */
     public unmapMatcher(matcher: ITypeMatcher): IMediatorUnmapper {
         return (
-            this._mappers.get(matcher.createTypeFilter().descriptor) ||
+            this._mappers[matcher.createTypeFilter().descriptor] ||
             this.NULL_UNMAPPER
         );
     }
@@ -135,7 +130,7 @@ export class MediatorMap implements IMediatorMap, IViewHandler {
     /* Private Functions                                                          */
     /*============================================================================*/
 
-    private createMapper(matcher: ITypeMatcher): MediatorMapper {
+    private createMapper(matcher: ITypeMatcher): IMediatorMapper {
         return new MediatorMapper(
             matcher.createTypeFilter(),
             this._viewHandler,
