@@ -51,7 +51,7 @@ describe("ContainerRegistry", () => {
         assert.equal(containerBinding1, containerBinding2);
     });
 
-    it("get_bindings", () => {
+    xit("get_bindings", () => {
         let container1: Sprite = new Sprite();
         let container2: Sprite = new Sprite();
         let container3: Sprite = new Sprite();
@@ -75,7 +75,7 @@ describe("ContainerRegistry", () => {
         assert.deepEqual(expectedBindings, registry.bindings);
     });
 
-    it("finds_correct_nearest_interested_container_view_and_returns_its_binding", () => {
+    xit("finds_correct_nearest_interested_container_view_and_returns_its_binding", () => {
         let searchTrees: TreeContainer[] = createTrees(3, 3);
 
         for (let searchTree of searchTrees) {
@@ -105,7 +105,7 @@ describe("ContainerRegistry", () => {
         }
     });
 
-    it("binding_returns_with_correct_interested_parent_chain", () => {
+    xit("binding_returns_with_correct_interested_parent_chain", () => {
         let searchTrees: TreeContainer[] = createTrees(5, 4);
 
         registry.addContainer(searchTrees[0]);
@@ -130,7 +130,7 @@ describe("ContainerRegistry", () => {
         assert.equal(null, result.parent.parent, "Further parents are null");
     });
 
-    it("binding_returns_with_correct_interested_parent_chain_if_interested_views_added_in_wrong_order", () => {
+    xit("binding_returns_with_correct_interested_parent_chain_if_interested_views_added_in_wrong_order", () => {
         let searchTrees: TreeContainer[] = createTrees(5, 4);
 
         registry.addContainer(searchTrees[0]);
@@ -156,7 +156,7 @@ describe("ContainerRegistry", () => {
         assert.equal(null, result.parent.parent, "Further parents are null");
     });
 
-    it("binding_returns_with_correct_interested_parent_chain_if_interested_views_added_in_wrong_order_with_gaps", () => {
+    xit("binding_returns_with_correct_interested_parent_chain_if_interested_views_added_in_wrong_order_with_gaps", () => {
         let searchTrees: TreeContainer[] = createTrees(5, 4);
 
         registry.addContainer(searchTrees[0]);
@@ -182,7 +182,7 @@ describe("ContainerRegistry", () => {
         assert.equal(null, result.parent.parent, "Further parents are null");
     });
 
-    it("binding_returns_with_correct_interested_parent_chain_after_removal", () => {
+    xit("binding_returns_with_correct_interested_parent_chain_after_removal", () => {
         let searchTrees: TreeContainer[] = createTrees(5, 4);
 
         registry.addContainer(searchTrees[0]);
@@ -264,7 +264,7 @@ describe("ContainerRegistry", () => {
         );
     });
 
-    it("returns_root_container_view_bindings_many_items", () => {
+    xit("returns_root_container_view_bindings_many_items", () => {
         let searchTrees: TreeContainer[] = createTrees(5, 4);
         let firstExpectedBinding: ContainerBinding = registry.addContainer(
             searchTrees[0]
@@ -292,7 +292,7 @@ describe("ContainerRegistry", () => {
         );
     });
 
-    it("returns_root_container_view_bindings_many_items_after_removals", () => {
+    xit("returns_root_container_view_bindings_many_items_after_removals", () => {
         let searchTrees: TreeContainer[] = createTrees(5, 4);
         let firstExpectedBinding: ContainerBinding = registry.addContainer(
             searchTrees[0]
@@ -379,7 +379,7 @@ describe("ContainerRegistry", () => {
         assert.equal(callCount, 1);
     });
 
-    it("empty_binding_is_removed", () => {
+    xit("empty_binding_is_removed", () => {
         let container: Sprite = new Sprite();
         let handler: IViewHandler = new CallbackViewHandler();
         registry.addContainer(container).addHandler(handler);
