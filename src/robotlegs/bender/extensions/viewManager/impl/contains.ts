@@ -5,6 +5,8 @@
 //  in accordance with the terms of the license agreement accompanying it.
 // ------------------------------------------------------------------------------
 
+import { Container } from "pixi.js";
+
 /*============================================================================*/
 /* Public Functions                                                           */
 /*============================================================================*/
@@ -19,7 +21,7 @@
  *
  * @return true if the child object is a child of the container or the container itself; otherwise false.
  */
-export function contains(container: any, child: any): boolean {
+export function contains(container: Container, child: Container): boolean {
     let found: boolean = false;
     if (container === child || container.children.indexOf(child) >= 0) {
         found = true;

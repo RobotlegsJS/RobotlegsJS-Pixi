@@ -5,6 +5,8 @@
 //  in accordance with the terms of the license agreement accompanying it.
 // ------------------------------------------------------------------------------
 
+import { Container } from "pixi.js";
+
 /**
  * View Configuration Event
  * @private
@@ -20,12 +22,12 @@ export class ConfigureViewEvent extends Event {
     /* Public Properties                                                          */
     /*============================================================================*/
 
-    private _view: any;
+    private _view: Container;
 
     /**
      * The view instance associated with this event
      */
-    public get view(): any {
+    public get view(): Container {
         return this._view;
     }
 
@@ -38,7 +40,7 @@ export class ConfigureViewEvent extends Event {
      * @param type The event type
      * @param view The associated view instance
      */
-    constructor(type: string, view?: any) {
+    constructor(type: string, view?: Container) {
         // super(type, true, true);
         super(type);
         this._view = view;

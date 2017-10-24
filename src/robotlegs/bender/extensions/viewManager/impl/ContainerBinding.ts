@@ -5,6 +5,8 @@
 //  in accordance with the terms of the license agreement accompanying it.
 // ------------------------------------------------------------------------------
 
+import { Container } from "pixi.js";
+
 import { EventDispatcher } from "@robotlegsjs/core";
 
 import { IViewHandler } from "../api/IViewHandler";
@@ -36,12 +38,12 @@ export class ContainerBinding extends EventDispatcher {
         this._parent = value;
     }
 
-    private _container: any;
+    private _container: Container;
 
     /**
      * @private
      */
-    public get container(): any {
+    public get container(): Container {
         return this._container;
     }
 
@@ -58,7 +60,7 @@ export class ContainerBinding extends EventDispatcher {
     /**
      * @private
      */
-    constructor(container: any) {
+    constructor(container: Container) {
         super();
         this._container = container;
     }
@@ -97,7 +99,7 @@ export class ContainerBinding extends EventDispatcher {
     /**
      * @private
      */
-    public handleView(view: any, type: FunctionConstructor): void {
+    public handleView(view: Container, type: FunctionConstructor): void {
         let length: number = this._handlers.length;
         for (let i: number = 0; i < length; i++) {
             let handler: IViewHandler = this._handlers[i];

@@ -5,6 +5,8 @@
 //  in accordance with the terms of the license agreement accompanying it.
 // ------------------------------------------------------------------------------
 
+import { Container } from "pixi.js";
+
 import {
     injectable,
     inject,
@@ -101,7 +103,7 @@ export class MediatorMap implements IMediatorMap, IViewHandler {
     /**
      * @inheritDoc
      */
-    public handleView(view: any, type: any): void {
+    public handleView(view: Container, type: any): void {
         this._viewHandler.handleView(view, type);
     }
 

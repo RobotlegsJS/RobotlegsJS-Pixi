@@ -4,7 +4,8 @@
 //  NOTICE: You are permitted to use, modify, and distribute this file
 //  in accordance with the terms of the license agreement accompanying it.
 // ------------------------------------------------------------------------------
-import * as PIXI from "pixi.js";
+
+import { Container } from "pixi.js";
 
 import { IContext, IExtension, IInjector, ILogger } from "@robotlegsjs/core";
 
@@ -67,8 +68,8 @@ export class StageCrawlerExtension implements IExtension {
             IViewManager
         );
         for (let i in viewManager.containers) {
-            let container: any = viewManager.containers[i];
-            if (container instanceof PIXI.Container) {
+            let container: Container = viewManager.containers[i];
+            if (container instanceof Container) {
                 this.scanContainer(container);
             }
         }
@@ -86,7 +87,7 @@ export class StageCrawlerExtension implements IExtension {
         }
     }
 
-    private scanContainer(container: any): void {
+    private scanContainer(container: Container): void {
         let binding: ContainerBinding = this._containerRegistry.getBinding(
             container
         );

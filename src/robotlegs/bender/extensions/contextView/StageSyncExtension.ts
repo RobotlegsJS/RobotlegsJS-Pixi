@@ -5,6 +5,8 @@
 //  in accordance with the terms of the license agreement accompanying it.
 // ------------------------------------------------------------------------------
 
+import { Container } from "pixi.js";
+
 import {
     instanceOfType,
     IContext,
@@ -27,7 +29,7 @@ export class StageSyncExtension implements IExtension {
 
     private _context: IContext;
 
-    private _contextView: any;
+    private _contextView: Container;
 
     private _logger: ILogger;
 
@@ -60,7 +62,7 @@ export class StageSyncExtension implements IExtension {
             return;
         }
         this._contextView = contextView.view;
-        if (this._contextView.stage) {
+        if ((<any>this._contextView).stage) {
             this.initializeContext();
         } else {
             this._logger.debug("Context view is not yet on stage. Waiting...");

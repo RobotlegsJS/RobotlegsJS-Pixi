@@ -5,7 +5,7 @@
 import "./eventemitter3-patch";
 import PIXI = require("pixi.js");
 
-export function applyPixiPatch(stage: any) {
+export function applyPixiPatch(stage: PIXI.Container) {
     let addChild = PIXI.Container.prototype.addChild;
     let addChildAt = PIXI.Container.prototype.addChildAt;
     let removeChild = PIXI.Container.prototype.removeChild;

@@ -5,6 +5,8 @@
 //  in accordance with the terms of the license agreement accompanying it.
 // ------------------------------------------------------------------------------
 
+import { Container } from "pixi.js";
+
 import { EventDispatcher } from "@robotlegsjs/core";
 
 import { contains } from "./contains";
@@ -48,8 +50,8 @@ export class ContainerRegistry extends EventDispatcher {
     /* Private Properties                                                         */
     /*============================================================================*/
 
-    private _bindingByContainer: Map<any, ContainerBinding> = new Map<
-        any,
+    private _bindingByContainer: Map<Container, ContainerBinding> = new Map<
+        Container,
         ContainerBinding
     >();
 
@@ -60,7 +62,7 @@ export class ContainerRegistry extends EventDispatcher {
     /**
      * @private
      */
-    public addContainer(container: any): ContainerBinding {
+    public addContainer(container: Container): ContainerBinding {
         let binding = this._bindingByContainer.get(container);
         if (!binding) {
             binding = this.createBinding(container);
@@ -72,7 +74,7 @@ export class ContainerRegistry extends EventDispatcher {
     /**
      * @private
      */
-    public removeContainer(container: any): ContainerBinding {
+    public removeContainer(container: Container): ContainerBinding {
         let binding: ContainerBinding = this._bindingByContainer.get(container);
 
         if (binding) {
@@ -87,8 +89,8 @@ export class ContainerRegistry extends EventDispatcher {
      *
      * @private
      */
-    public findParentBinding(target: any): ContainerBinding {
-        let parent: any = target.parent;
+    public findParentBinding(target: Container): ContainerBinding {
+        let parent: Container = target.parent;
         while (parent) {
             let binding: ContainerBinding = this._bindingByContainer.get(
                 parent
@@ -104,7 +106,7 @@ export class ContainerRegistry extends EventDispatcher {
     /**
      * @private
      */
-    public getBinding(container: any): ContainerBinding {
+    public getBinding(container: Container): ContainerBinding {
         return this._bindingByContainer.get(container);
     }
 
@@ -112,7 +114,7 @@ export class ContainerRegistry extends EventDispatcher {
     /* Private Functions                                                          */
     /*============================================================================*/
 
-    private createBinding(container: any): ContainerBinding {
+    private createBinding(container: Container): ContainerBinding {
         let binding: ContainerBinding = new ContainerBinding(container);
         this._bindings.push(binding);
 

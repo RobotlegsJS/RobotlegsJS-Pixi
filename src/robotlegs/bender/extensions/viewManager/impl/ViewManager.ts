@@ -5,6 +5,8 @@
 //  in accordance with the terms of the license agreement accompanying it.
 // ------------------------------------------------------------------------------
 
+import { Container } from "pixi.js";
+
 import { injectable, EventDispatcher } from "@robotlegsjs/core";
 
 import { contains } from "./contains";
@@ -31,12 +33,12 @@ export class ViewManager extends EventDispatcher implements IViewManager {
     /* Public Properties                                                          */
     /*============================================================================*/
 
-    private _containers: any[] = [];
+    private _containers: Container[] = [];
 
     /**
      * @inheritDoc
      */
-    public get containers(): any[] {
+    public get containers(): Container[] {
         return this._containers;
     }
 
@@ -67,7 +69,7 @@ export class ViewManager extends EventDispatcher implements IViewManager {
     /**
      * @inheritDoc
      */
-    public addContainer(container: any): void {
+    public addContainer(container: Container): void {
         if (!this.validContainer(container)) {
             return;
         }
@@ -85,7 +87,7 @@ export class ViewManager extends EventDispatcher implements IViewManager {
     /**
      * @inheritDoc
      */
-    public removeContainer(container: any): void {
+    public removeContainer(container: Container): void {
         let index: number = this._containers.indexOf(container);
 
         if (index === -1) {
@@ -161,7 +163,7 @@ export class ViewManager extends EventDispatcher implements IViewManager {
     /* Private Functions                                                          */
     /*============================================================================*/
 
-    private validContainer(container: any): boolean {
+    private validContainer(container: Container): boolean {
         this._containers.forEach(registeredContainer => {
             if (container === registeredContainer) {
                 return false;
