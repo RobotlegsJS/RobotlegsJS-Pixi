@@ -8,7 +8,7 @@
     "start": "webpack-dev-server --config ./webpack.example.config.js",
     "test": "karma start --single-run",
     "mocha": "mocha test/**/*.test.ts --require ts-node/register",
-    "autoformat": "prettier --config .prettierrc --write {src,test}/**/*.ts",
+    "autoformat": "prettier --config .prettierrc --write {src,test,example}/**/*.ts",
     "tslint-check": "tslint-config-prettier-check ./tslint.json",
     "clean-up": "rm -rf .nyc_output && rm -rf coverage && rm -rf lib",
     "prepare": "npm run clean-up && tsc -d",
