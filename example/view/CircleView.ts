@@ -1,8 +1,7 @@
 import { Container, Graphics } from "pixi.js";
 
 export class CircleView extends Container {
-
-    constructor () {
+    constructor() {
         super();
 
         let g = new Graphics();
@@ -11,5 +10,4 @@ export class CircleView extends Container {
 
         this.addChild(g);
     }
-
 }
