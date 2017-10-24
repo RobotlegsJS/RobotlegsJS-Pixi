@@ -14,12 +14,12 @@ export function applyPixiPatch(stage: PIXI.Container) {
 
     PIXI.Container.prototype.addChild = function patchedAddChild<
         T extends PIXI.DisplayObject
-    >(...child: T[]) {
-        for (let i = 0, len = child.length; i < len; i++) {
-            addChild.call(this, child[i]);
-            stage.emit("added", { target: child[i] });
+    >(child: T, ...additionalChildren: PIXI.DisplayObject[]): T {
+        for (let i = 0, len = arguments.length; i < len; i++) {
+            addChild.call(this, arguments[i]);
+            stage.emit("added", { target: arguments[i] });
         }
-        return this;
+        return child;
     };
 
     PIXI.Container.prototype.addChildAt = function patchedAddChildAt<
@@ -27,7 +27,7 @@ export function applyPixiPatch(stage: PIXI.Container) {
     >(child: T, index: number): T {
         addChildAt.call(this, child, index);
         stage.emit("added", { target: child });
-        return this;
+        return child;
     };
 
     PIXI.Container.prototype.removeChild = function(
@@ -37,13 +37,13 @@ export function applyPixiPatch(stage: PIXI.Container) {
             removeChild.call(this, child[i]);
             stage.emit("removed", { target: child[i] });
         }
-        return this;
+        return child[0];
     };
 
     PIXI.Container.prototype.removeChildren = function(
         beginIndex: number = 0,
         endIndex?: number
-    ) {
+    ): PIXI.DisplayObject[] {
         let removedChildren = removeChildren.call(this, beginIndex, endIndex);
 
         for (let child of removedChildren) {
@@ -58,6 +58,6 @@ export function applyPixiPatch(stage: PIXI.Container) {
     ): PIXI.DisplayObject {
         let child = removeChildAt.call(this, index);
         stage.emit("removed", { target: child });
-        return this;
+        return child;
     };
 }
