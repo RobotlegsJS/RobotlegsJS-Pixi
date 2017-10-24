@@ -15,17 +15,53 @@ framework with [PixiJS](https://github.com/pixijs/pixi.js).
 Usage
 ---
 
-```ts
+```typescript
 /// <reference path="node_modules/@robotlegsjs/pixi/definitions/pixi.d.ts" />
 
-import { Context, MVCSBundle } from "@robotlegsjs/core";
-import { PixiBundle ,ContextView } from "@robotlegsjs/pixi";
+import "reflect-metadata";
 
-let context = new Context();
-context.
-  install( MVCSBundle, PixiBundle ).
-  configure( new ContextView((<any>this.renderer).plugins.interaction) );
+import PIXI = require('pixi.js');
+
+import { Context, MVCSBundle } from "@robotlegsjs/core";
+import { ContextView, PixiBundle } from "@robotlegsjs/pixi";
+
+import { MyConfig } from "./config/MyConfig";
+import { CircleView } from "./view/CircleView";
+
+class Main {
+
+    stage: PIXI.Container;
+    renderer: PIXI.CanvasRenderer | PIXI.WebGLRenderer;
+    context: Context;
+
+    constructor () {
+        this.renderer = PIXI.autoDetectRenderer(800, 600, {});
+        this.stage = new PIXI.Container();
+
+        this.context = new Context();
+        this.context.install(MVCSBundle, PixiBundle).
+            configure(new ContextView(this.stage)).
+            configure(MyConfig).
+            initialize();
+
+        this.stage.addChild(new CircleView())
+
+        document.body.appendChild(this.renderer.view);
+    }
+
+    render = () => {
+        this.renderer.render(this.stage);
+        window.requestAnimationFrame(this.render);
+    }
+
+}
+
+let main = new Main();
+main.render();
+
 ```
+
+[See full example here](example/index.ts)
 
 Running the example
 ---
