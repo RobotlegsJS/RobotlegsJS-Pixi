@@ -61,16 +61,19 @@ export class ContainerRegistry extends EventDispatcher {
      * @private
      */
     public addContainer(container: any): ContainerBinding {
-        return (this._bindingByContainer[container] =
-            this._bindingByContainer[container] ||
-            this.createBinding(container));
+        let binding = this._bindingByContainer.get(container);
+        if (!binding) {
+            binding = this.createBinding(container);
+            this._bindingByContainer.set(container, binding);
+        }
+        return binding;
     }
 
     /**
      * @private
      */
     public removeContainer(container: any): ContainerBinding {
-        let binding: ContainerBinding = this._bindingByContainer[container];
+        let binding: ContainerBinding = this._bindingByContainer.get(container);
 
         if (binding) {
             this.removeBinding(binding);
@@ -87,7 +90,9 @@ export class ContainerRegistry extends EventDispatcher {
     public findParentBinding(target: any): ContainerBinding {
         let parent: any = target.parent;
         while (parent) {
-            let binding: ContainerBinding = this._bindingByContainer[parent];
+            let binding: ContainerBinding = this._bindingByContainer.get(
+                parent
+            );
             if (binding) {
                 return binding;
             }
@@ -100,7 +105,7 @@ export class ContainerRegistry extends EventDispatcher {
      * @private
      */
     public getBinding(container: any): ContainerBinding {
-        return this._bindingByContainer[container];
+        return this._bindingByContainer.get(container);
     }
 
     /*============================================================================*/
@@ -114,7 +119,7 @@ export class ContainerRegistry extends EventDispatcher {
         // Add a listener so that we can remove this binding when it has no handlers
         binding.addEventListener(
             ContainerBindingEvent.BINDING_EMPTY,
-            this.onBindingEmpty
+            this.onBindingEmpty.bind(this)
         );
 
         // If the new binding doesn't have a parent it is a Root
@@ -126,8 +131,7 @@ export class ContainerRegistry extends EventDispatcher {
         // Reparent any bindings which are contained within the new binding AND
         // A. Don't have a parent, OR
         // B. Have a parent that is not contained within the new binding
-        for (let i in this._bindingByContainer) {
-            let childBinding: ContainerBinding = this._bindingByContainer[i];
+        this._bindingByContainer.forEach(childBinding => {
             if (contains(container, childBinding.container)) {
                 if (!childBinding.parent) {
                     this.removeRootBinding(childBinding);
@@ -138,7 +142,7 @@ export class ContainerRegistry extends EventDispatcher {
                     childBinding.parent = binding;
                 }
             }
-        }
+        });
 
         this.dispatchEvent(
             new ContainerRegistryEvent(
@@ -151,7 +155,7 @@ export class ContainerRegistry extends EventDispatcher {
 
     private removeBinding(binding: ContainerBinding): void {
         // Remove the binding itself
-        delete this._bindingByContainer[binding.container];
+        this._bindingByContainer.delete(binding.container);
         let index: number = this._bindings.indexOf(binding);
         this._bindings.splice(index, 1);
 
@@ -167,8 +171,7 @@ export class ContainerRegistry extends EventDispatcher {
         }
 
         // Re-parent the bindings
-        for (let i in this._bindingByContainer) {
-            let childBinding: ContainerBinding = this._bindingByContainer[i];
+        this._bindingByContainer.forEach(childBinding => {
             if (childBinding.parent === binding) {
                 childBinding.parent = binding.parent;
                 if (!childBinding.parent) {
@@ -177,7 +180,7 @@ export class ContainerRegistry extends EventDispatcher {
                     this.addRootBinding(childBinding);
                 }
             }
-        }
+        });
 
         this.dispatchEvent(
             new ContainerRegistryEvent(
