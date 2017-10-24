@@ -77,6 +77,30 @@ describe("PixiPatch", () => {
         stage.addChild(child1);
         stage.addChild(child2);
         stage.addChild(child3);
+        assert.deepEqual([child1, child2, child3], stage.removeChildren());
+    });
+
+    it("removeChildren_only_return_removed_children_case1", () => {
+        let child1: Container = new Container();
+        let child2: Container = new Container();
+        let child3: Container = new Container();
+        let child4: Container = new Container();
+        let child5: Container = new Container();
+        applyPixiPatch(stage);
+        stage.addChild(child1, child2, child3, child4, child5);
         assert.deepEqual([child1, child2, child3], stage.removeChildren(0, 3));
+        assert.deepEqual([child4, child5], stage.children);
+    });
+
+    it("removeChildren_only_return_removed_children_case2", () => {
+        let child1: Container = new Container();
+        let child2: Container = new Container();
+        let child3: Container = new Container();
+        let child4: Container = new Container();
+        let child5: Container = new Container();
+        applyPixiPatch(stage);
+        stage.addChild(child1, child2, child3, child4, child5);
+        assert.deepEqual([child3, child4, child5], stage.removeChildren(2, 5));
+        assert.deepEqual([child1, child2], stage.children);
     });
 });
