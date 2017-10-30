@@ -18,6 +18,7 @@ describe("ContextView", () => {
     let contextView: IContextView;
 
     beforeEach(() => {
+        container = new Container();
         contextView = new ContextView(container);
     });
 
@@ -27,6 +28,7 @@ describe("ContextView", () => {
     });
 
     it("container_is_stored", () => {
+        assert.isNotNull(contextView.view);
         assert.equal(contextView.view, container);
     });
 });
