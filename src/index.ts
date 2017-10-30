@@ -18,9 +18,6 @@ export {
 export {
     ContextViewExtension
 } from "./robotlegs/bender/extensions/contextView/ContextViewExtension";
-export {
-    StageSyncExtension
-} from "./robotlegs/bender/extensions/contextView/StageSyncExtension";
 
 // MediatorMap
 export {
