@@ -24,9 +24,9 @@
   version "4.5.7"
   resolved "https://registry.npmjs.org/@types/pixi.js/-/pixi.js-4.5.7.tgz#a17d6c3c164ccdabcc86d290ba28f2b3730f2e7d"
 
-"@types/sinon@^2.3.6":
-  version "2.3.6"
-  resolved "https://registry.npmjs.org/@types/sinon/-/sinon-2.3.6.tgz#ff600951c756286e38ce14d0b0e2924e38a91006"
+"@types/sinon@^2.3.7":
+  version "2.3.7"
+  resolved "https://registry.npmjs.org/@types/sinon/-/sinon-2.3.7.tgz#e92c2fed3297eae078d78d1da032b26788b4af86"
 
 abbrev@1:
   version "1.1.1"
