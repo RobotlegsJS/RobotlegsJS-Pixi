@@ -47,7 +47,7 @@ describe("ContextViewListenerConfig", () => {
         contextViewListenerConfig = null;
     });
 
-    it("container_is_stored", () => {
+    it("container_is_added_to_view_manager", () => {
         contextViewListenerConfig.configure();
         assert.deepEqual(viewManager.containers, [container]);
     });
