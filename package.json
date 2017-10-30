@@ -80,7 +80,7 @@
     "reflect-metadata": "^0.1.10",
     "remap-istanbul": "^0.9.5",
     "rimraf": "^2.6.2",
-    "sinon": "^4.0.1",
+    "sinon": "^4.0.2",
     "sinon-chai": "^2.14.0",
     "ts-loader": "^3.0.5",
     "ts-node": "^3.3.0",
