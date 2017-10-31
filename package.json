@@ -39,7 +39,7 @@
   },
   "homepage": "https://github.com/RobotlegsJS/RobotlegsJS-Pixi#readme",
   "dependencies": {
-    "@robotlegsjs/core": "^0.0.6",
+    "@robotlegsjs/core": "^0.0.7",
     "eventemitter3": "^2.0.3",
     "pixi.js": "^4.5.6"
   },
