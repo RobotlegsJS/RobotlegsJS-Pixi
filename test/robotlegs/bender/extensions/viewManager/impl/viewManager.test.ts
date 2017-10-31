@@ -26,6 +26,7 @@ describe("ViewManager", () => {
 
     beforeEach(() => {
         container = new Container();
+        applyPixiPatch(container);
         registry = new ContainerRegistry();
         viewManager = new ViewManager(registry);
         stageObserver = new StageObserver(registry);
@@ -74,7 +75,6 @@ describe("ViewManager", () => {
     it("handler_is_called", () => {
         const expected: Container = new Container();
         let actual: Container = null;
-        applyPixiPatch(container);
         viewManager.addContainer(container);
         viewManager.addViewHandler(
             new CallbackViewHandler(
@@ -90,7 +90,6 @@ describe("ViewManager", () => {
     it("handlers_are_called", () => {
         const expected: string[] = ["handler1", "handler2", "handler3"];
         let actual: string[] = [];
-        applyPixiPatch(container);
         viewManager.addContainer(container);
         viewManager.addViewHandler(
             new CallbackViewHandler(
@@ -115,5 +114,35 @@ describe("ViewManager", () => {
         );
         container.addChild(new Container());
         assert.deepEqual(actual, expected);
+    });
+
+    it("handler_is_not_called_after_container_removal", () => {
+        let callCount: number = 0;
+        viewManager.addContainer(container);
+        viewManager.addViewHandler(
+            new CallbackViewHandler(
+                (view: Container, type: FunctionConstructor) => {
+                    callCount++;
+                }
+            )
+        );
+        viewManager.removeContainer(container);
+        container.addChild(new Container());
+        assert.equal(callCount, 0);
+    });
+
+    it("handler_is_not_called_after_removeAll", () => {
+        let callCount: number = 0;
+        viewManager.addContainer(container);
+        viewManager.addViewHandler(
+            new CallbackViewHandler(
+                (view: Container, type: FunctionConstructor) => {
+                    callCount++;
+                }
+            )
+        );
+        viewManager.removeAllHandlers();
+        container.addChild(new Container());
+        assert.equal(callCount, 0);
     });
 });
