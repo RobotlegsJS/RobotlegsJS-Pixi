@@ -9,28 +9,34 @@ import "../../../../../entry";
 
 import { assert } from "chai";
 
-import { Sprite } from "pixi.js";
+import { Container } from "pixi.js";
 
+import { applyPixiPatch } from "../../../../../../src/robotlegs/bender/extensions/contextView/pixiPatch/pixi-patch";
 import { ContainerRegistry } from "../../../../../../src/robotlegs/bender/extensions/viewManager/impl/ContainerRegistry";
+import { StageObserver } from "../../../../../../src/robotlegs/bender/extensions/viewManager/impl/StageObserver";
 import { ViewManager } from "../../../../../../src/robotlegs/bender/extensions/viewManager/impl/ViewManager";
 
 import { CallbackViewHandler } from "../support/CallbackViewHandler";
 
 describe("ViewManager", () => {
-    let container: Sprite = null;
+    let container: Container = null;
     let registry: ContainerRegistry = null;
     let viewManager: ViewManager = null;
+    let stageObserver: StageObserver = null;
 
     beforeEach(() => {
-        container = new Sprite();
+        container = new Container();
         registry = new ContainerRegistry();
         viewManager = new ViewManager(registry);
+        stageObserver = new StageObserver(registry);
     });
 
     afterEach(() => {
-        container = null;
-        registry = null;
+        stageObserver.destroy();
+        stageObserver = null;
         viewManager = null;
+        registry = null;
+        container = null;
     });
 
     it("container_is_added", () => {
@@ -45,8 +51,8 @@ describe("ViewManager", () => {
 
     it("addContainer_throws_if_containers_are_nested_case1", () => {
         function addNestedContainers(): void {
-            const container1: Sprite = new Sprite();
-            const container2: Sprite = new Sprite();
+            const container1: Container = new Container();
+            const container2: Container = new Container();
             container1.addChild(container2);
             viewManager.addContainer(container1);
             viewManager.addContainer(container2);
@@ -56,12 +62,28 @@ describe("ViewManager", () => {
 
     it("addContainer_throws_if_containers_are_nested_case2", () => {
         function addNestedContainers(): void {
-            const container1: Sprite = new Sprite();
-            const container2: Sprite = new Sprite();
+            const container1: Container = new Container();
+            const container2: Container = new Container();
             container2.addChild(container1);
             viewManager.addContainer(container1);
             viewManager.addContainer(container2);
         }
         assert.throws(addNestedContainers, Error);
+    });
+
+    it("handler_is_called", () => {
+        const expected: Container = new Container();
+        let actual: Container = null;
+        applyPixiPatch(container);
+        viewManager.addContainer(container);
+        viewManager.addViewHandler(
+            new CallbackViewHandler(
+                (view: Container, type: FunctionConstructor) => {
+                    actual = view;
+                }
+            )
+        );
+        container.addChild(expected);
+        assert.equal(actual, expected);
     });
 });

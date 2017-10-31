@@ -5,6 +5,8 @@
 //  in accordance with the terms of the license agreement accompanying it.
 // ------------------------------------------------------------------------------
 
+import { Container } from "pixi.js";
+
 import { IViewHandler } from "../../../../../../src/robotlegs/bender/extensions/viewManager/api/IViewHandler";
 
 /**
@@ -17,7 +19,7 @@ export class CallbackViewHandler implements IViewHandler {
         this._callback = callback;
     }
 
-    public handleView(view: any, type: any): void {
+    public handleView(view: Container, type: FunctionConstructor): void {
         if (this._callback) {
             this._callback(view, type);
         }
