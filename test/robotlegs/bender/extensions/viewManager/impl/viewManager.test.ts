@@ -86,4 +86,34 @@ describe("ViewManager", () => {
         container.addChild(expected);
         assert.equal(actual, expected);
     });
+
+    it("handlers_are_called", () => {
+        const expected: string[] = ["handler1", "handler2", "handler3"];
+        let actual: string[] = [];
+        applyPixiPatch(container);
+        viewManager.addContainer(container);
+        viewManager.addViewHandler(
+            new CallbackViewHandler(
+                (view: Container, type: FunctionConstructor) => {
+                    actual.push("handler1");
+                }
+            )
+        );
+        viewManager.addViewHandler(
+            new CallbackViewHandler(
+                (view: Container, type: FunctionConstructor) => {
+                    actual.push("handler2");
+                }
+            )
+        );
+        viewManager.addViewHandler(
+            new CallbackViewHandler(
+                (view: Container, type: FunctionConstructor) => {
+                    actual.push("handler3");
+                }
+            )
+        );
+        container.addChild(new Container());
+        assert.deepEqual(actual, expected);
+    });
 });
