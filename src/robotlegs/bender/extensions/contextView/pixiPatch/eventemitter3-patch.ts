@@ -5,33 +5,37 @@
  * - Implements event bubbling on `dispatchEvent` when `bubbles` is true.
  */
 
-import EventEmitter = require("eventemitter3");
 import { DisplayObject } from "pixi.js";
+import { EventEmitter } from "eventemitter3";
 import { IEvent } from "@robotlegsjs/core";
 
 const EventDispatcherMixin = {
     addEventListener: function(
-        type: string,
-        listener?: Function,
-        thisObject?: any
+        event: string | symbol,
+        listener: Function,
+        context?: any
     ): void {
-        this.on(type, listener, thisObject);
+        this.on(event, listener, context);
     },
 
-    hasEventListener: function(type: string, listener?: Function): boolean {
+    hasEventListener: function(
+        type: string | symbol,
+        listener?: Function
+    ): boolean {
         return this.listeners(type).length > 0;
     },
 
     removeEventListener: function(
-        type: string,
+        event: string | symbol,
         listener?: Function,
-        thisObject?: any
+        context?: any,
+        once?: boolean
     ): void {
-        this.off(type, listener, thisObject);
+        this.off(event, listener, context, once);
     },
 
-    willTrigger: function(type: string): boolean {
-        return this.hasEventListener(type);
+    willTrigger: function(event: string | symbol): boolean {
+        return this.hasEventListener(event);
     },
 
     dispatchEvent: function(event: IEvent): void {
@@ -47,4 +51,4 @@ const EventDispatcherMixin = {
 };
 
 Object.assign(DisplayObject.prototype, EventDispatcherMixin);
-Object.assign((<any>EventEmitter).prototype, EventDispatcherMixin);
+Object.assign(EventEmitter.prototype, EventDispatcherMixin);
