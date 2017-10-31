@@ -88,16 +88,17 @@ describe("EventEmmiter3Patch", () => {
         assert.isTrue(dispatched);
     });
 
-    // TODO: test will fail because of a issue in robotlegsjs
-    xit("dispatchEvent_dispatch_a_event_with_bubbles", () => {
+    it("dispatchEvent_dispatch_a_event_with_bubbles", () => {
         let dispatched: boolean = false;
         let listener: Function = () => {
             dispatched = true;
         };
         let child: Container = new Container();
+        let grandChild: Container = new Container();
+        child.addChild(grandChild);
         container.addChild(child);
-        container.addEventListener("added", listener);
-        child.dispatchEvent(new Event("added", { bubbles: true }));
+        container.addEventListener("test", listener);
+        grandChild.dispatchEvent(new Event("test", { bubbles: true }));
         assert.isTrue(dispatched);
     });
 });
