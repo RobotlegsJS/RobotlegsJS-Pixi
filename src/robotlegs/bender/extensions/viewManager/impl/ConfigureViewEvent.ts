@@ -5,6 +5,8 @@
 //  in accordance with the terms of the license agreement accompanying it.
 // ------------------------------------------------------------------------------
 
+import { Event } from "@robotlegsjs/core";
+
 import { Container } from "pixi.js";
 
 /**
@@ -40,7 +42,7 @@ export class ConfigureViewEvent extends Event {
      * @param type The event type
      * @param view The associated view instance
      */
-    constructor(type: string, view?: Container) {
+    constructor(type: string, view: Container) {
         // super(type, true, true);
         super(type);
         this._view = view;
@@ -53,7 +55,7 @@ export class ConfigureViewEvent extends Event {
     /**
      * @inheritDoc
      */
-    public clone(): Event {
+    public clone(): ConfigureViewEvent {
         return new ConfigureViewEvent(this.type, this._view);
     }
 }
