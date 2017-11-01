@@ -39,8 +39,8 @@ export class ManualStageObserverExtension implements IExtension {
      * @inheritDoc
      */
     public extend(context: IContext): void {
-        context.whenInitializing(this.whenInitializing);
-        context.whenDestroying(this.whenDestroying);
+        context.whenInitializing(this.whenInitializing.bind(this));
+        context.whenDestroying(this.whenDestroying.bind(this));
         installCount++;
         this._injector = context.injector;
         this._logger = context.getLogger(this);
@@ -53,7 +53,6 @@ export class ManualStageObserverExtension implements IExtension {
     private whenInitializing(): void {
         // Hark, an actual Singleton!
         if (!ManualStageObserverExtension._manualStageObserver) {
-            // var containerRegistry: ContainerRegistry = this._injector.getInstance(ContainerRegistry);
             let containerRegistry: ContainerRegistry = this._injector.get<
                 ContainerRegistry
             >(ContainerRegistry);
