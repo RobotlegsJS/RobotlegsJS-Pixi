@@ -7,7 +7,7 @@
 
 import { Container } from "pixi.js";
 
-import { injectable, EventDispatcher } from "@robotlegsjs/core";
+import { injectable, inject, EventDispatcher } from "@robotlegsjs/core";
 
 import { contains } from "./contains";
 
@@ -57,7 +57,9 @@ export class ViewManager extends EventDispatcher implements IViewManager {
     /**
      * @private
      */
-    constructor(containerRegistry: ContainerRegistry) {
+    constructor(
+        @inject(ContainerRegistry) containerRegistry: ContainerRegistry
+    ) {
         super();
         this._registry = containerRegistry;
     }
