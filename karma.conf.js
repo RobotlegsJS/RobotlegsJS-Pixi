@@ -15,6 +15,7 @@ let frameworks = [
 ];
 
 let plugins = [
+  "karma-jasmine",
   "karma-webpack",
   "karma-sourcemap-writer",
   "karma-sourcemap-loader",
@@ -66,7 +67,8 @@ module.exports = function(config) {
     colors: true,
     logLevel: config.LOG_INFO,
     autoWatch: true,
-    browsers: []
+    browsers: [],
+    browserNoActivityTimeout: 50000
   };
 
   if (process.env.TRAVIS) {
