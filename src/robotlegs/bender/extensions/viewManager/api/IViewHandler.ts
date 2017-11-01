@@ -5,7 +5,7 @@
 //  in accordance with the terms of the license agreement accompanying it.
 // ------------------------------------------------------------------------------
 
-import { Container } from "pixi.js";
+import { DisplayObject } from "pixi.js";
 
 /**
  * View handler contract
@@ -16,5 +16,5 @@ export interface IViewHandler {
      * @param view The view instance to handle
      * @param type The class of the view instance
      */
-    handleView(view: Container, type: FunctionConstructor): void;
+    handleView(view: DisplayObject, type: FunctionConstructor): void;
 }

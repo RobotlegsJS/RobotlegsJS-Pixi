@@ -5,6 +5,8 @@
 //  in accordance with the terms of the license agreement accompanying it.
 // ------------------------------------------------------------------------------
 
+import { Container, DisplayObject } from "pixi.js";
+
 import { ContainerBinding } from "./ContainerBinding";
 
 /**
@@ -35,27 +37,29 @@ export class StageCrawler {
     /**
      * @private
      */
-    public scan(view: any): void {
-        this.scanContainer(view);
+    public scan(container: Container): void {
+        this.scanContainer(container);
     }
 
     /*============================================================================*/
     /* Private Functions                                                          */
     /*============================================================================*/
 
-    private scanContainer(container: any): void {
+    private scanContainer(container: Container): void {
         this.processView(container);
-        let numChildren: number = container.children.length;
-        for (let i: number = 0; i < numChildren; i++) {
-            // TODO: abstract view layer (pixi.js/three.js)
-            let child: any = container.getChildAt(i);
-            child["addChild"] // is a container?
-                ? this.scanContainer(<any>child)
-                : this.processView(child);
-        }
+
+        container.children.forEach(child => {
+            if (child instanceof Container) {
+                this.scanContainer(child);
+            } else {
+                this.processView(child);
+            }
+        });
     }
 
-    private processView(view: any): void {
-        this._binding.handleView(view, view["constructor"]);
+    private processView(view: DisplayObject): void {
+        this._binding.handleView(view, <FunctionConstructor>view[
+            "constructor"
+        ]);
     }
 }

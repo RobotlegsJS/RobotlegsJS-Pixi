@@ -5,7 +5,7 @@
 //  in accordance with the terms of the license agreement accompanying it.
 // ------------------------------------------------------------------------------
 
-import { Container } from "pixi.js";
+import { DisplayObject } from "pixi.js";
 
 import { IMediatorMapping } from "../api/IMediatorMapping";
 import { IViewHandler } from "../../viewManager/api/IViewHandler";
@@ -71,7 +71,7 @@ export class MediatorViewHandler implements IViewHandler {
     /**
      * @private
      */
-    public handleView(view: Container, type: FunctionConstructor): void {
+    public handleView(view: DisplayObject, type: FunctionConstructor): void {
         let interestedMappings = this.getInterestedMappingsFor(view, type);
         if (interestedMappings) {
             this._factory.createMediators(view, type, interestedMappings);
