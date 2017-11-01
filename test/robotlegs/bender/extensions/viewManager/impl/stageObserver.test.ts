@@ -69,6 +69,22 @@ describe("StageObserver", () => {
         assert.deepEqual(actual, expected);
     });
 
+    it("view_is_handled_when_container_was_already_added_into_registry", () => {
+        const expected: Container = new Container();
+        let containerObserver = null;
+        let actual: Container = null;
+        registry.addContainer(container).addHandler(
+            new CallbackViewHandler(
+                (view: Container, type: FunctionConstructor) => {
+                    actual = view;
+                }
+            )
+        );
+        containerObserver = new StageObserver(registry);
+        container.addChild(expected);
+        assert.equal(actual, expected);
+    });
+
     it("view_is_not_handled_when_added_outside_container", () => {
         let callCount: number = 0;
         registry.addContainer(container).addHandler(
