@@ -50,6 +50,13 @@ describe("ViewManager", () => {
         assert.deepEqual(viewManager.containers, expectedContainers);
     });
 
+    it("addContainer_ignores_container_when_added_twice", () => {
+        let expectedContainers: any[] = [container];
+        viewManager.addContainer(container);
+        viewManager.addContainer(container);
+        assert.deepEqual(viewManager.containers, expectedContainers);
+    });
+
     it("addContainer_throws_if_containers_are_nested_case1", () => {
         function addNestedContainers(): void {
             const container1: Container = new Container();
