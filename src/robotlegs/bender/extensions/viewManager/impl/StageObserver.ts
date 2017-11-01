@@ -5,6 +5,8 @@
 //  in accordance with the terms of the license agreement accompanying it.
 // ------------------------------------------------------------------------------
 
+import { Container } from "pixi.js";
+
 import { IEvent } from "@robotlegsjs/core";
 
 import { ContainerBinding } from "./ContainerBinding";
@@ -15,6 +17,10 @@ import { ContainerRegistryEvent } from "./ContainerRegistryEvent";
  * @private
  */
 export class StageObserver {
+    /*============================================================================*/
+    /* Private Properties                                                         */
+    /*============================================================================*/
+
     private _registry: ContainerRegistry;
 
     /*============================================================================*/
@@ -81,24 +87,19 @@ export class StageObserver {
         this.removeRootListener(event.container);
     }
 
-    private addRootListener(container: any): void {
+    private addRootListener(container: Container): void {
         container.addListener("added", this.onViewAddedToStage, this);
-
-        // Watch the root container itself - nobody else is going to pick it up!
-        // container.on("added", this.onContainerRootAddedToStage, this);
     }
 
-    private removeRootListener(container: any): void {
-        // container.removeEventListener(Event.ADDED_TO_STAGE, this.onViewAddedToStage, true);
-        // container.removeEventListener(Event.ADDED_TO_STAGE, this.onContainerRootAddedToStage);
-
+    private removeRootListener(container: Container): void {
         container.removeListener("added", this.onViewAddedToStage, this);
-        // container.on("removed", this.onContainerRootAddedToStage);
     }
 
     private onViewAddedToStage(event: IEvent): void {
-        let view: any = event.target;
-        let type: FunctionConstructor = view["constructor"];
+        let view: Container = event.target;
+        let type: FunctionConstructor = <FunctionConstructor>view[
+            "constructor"
+        ];
 
         // Walk upwards from the nearest binding
         let binding: ContainerBinding = this._registry.findParentBinding(view);
@@ -107,16 +108,4 @@ export class StageObserver {
             binding = binding.parent;
         }
     }
-
-    // private onContainerRootAddedToStage(event: Event): void {
-    //     console.log("onContainerRootAddedToStage");
-    //
-    //     var container: any = <any>event.target ;
-    //     // container.removeEventListener(Event.ADDED_TO_STAGE, this.onContainerRootAddedToStage);
-    //     container.on("added", this.onContainerRootAddedToStage, this);
-    //
-    //     var type: FunctionConstructor = container['constructor'];
-    //     var binding: ContainerBinding = this._registry.getBinding(container);
-    //     binding.handleView(container, type);
-    // }
 }
