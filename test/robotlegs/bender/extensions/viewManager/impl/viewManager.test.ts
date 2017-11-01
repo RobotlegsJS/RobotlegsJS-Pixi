@@ -138,6 +138,35 @@ describe("ViewManager", () => {
         assert.deepEqual(actual, expected);
     });
 
+    it("handlers_are_called_when_added_before_container", () => {
+        const expected: string[] = ["handler1", "handler2", "handler3"];
+        let actual: string[] = [];
+        viewManager.addViewHandler(
+            new CallbackViewHandler(
+                (view: Container, type: FunctionConstructor) => {
+                    actual.push("handler1");
+                }
+            )
+        );
+        viewManager.addViewHandler(
+            new CallbackViewHandler(
+                (view: Container, type: FunctionConstructor) => {
+                    actual.push("handler2");
+                }
+            )
+        );
+        viewManager.addViewHandler(
+            new CallbackViewHandler(
+                (view: Container, type: FunctionConstructor) => {
+                    actual.push("handler3");
+                }
+            )
+        );
+        viewManager.addContainer(container);
+        container.addChild(new Container());
+        assert.deepEqual(actual, expected);
+    });
+
     it("handler_is_not_called_after_container_removal", () => {
         let callCount: number = 0;
         viewManager.addContainer(container);
