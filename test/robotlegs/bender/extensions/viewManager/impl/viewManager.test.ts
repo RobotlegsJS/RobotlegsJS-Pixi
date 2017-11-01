@@ -94,6 +94,21 @@ describe("ViewManager", () => {
         assert.equal(actual, expected);
     });
 
+    it("handler_is_called_when_added_before_container", () => {
+        const expected: Container = new Container();
+        let actual: Container = null;
+        viewManager.addViewHandler(
+            new CallbackViewHandler(
+                (view: Container, type: FunctionConstructor) => {
+                    actual = view;
+                }
+            )
+        );
+        viewManager.addContainer(container);
+        container.addChild(expected);
+        assert.equal(actual, expected);
+    });
+
     it("handlers_are_called", () => {
         const expected: string[] = ["handler1", "handler2", "handler3"];
         let actual: string[] = [];
