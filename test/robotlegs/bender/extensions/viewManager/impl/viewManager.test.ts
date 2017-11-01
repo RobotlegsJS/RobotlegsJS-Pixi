@@ -182,6 +182,11 @@ describe("ViewManager", () => {
         assert.equal(callCount, 0);
     });
 
+    it("removeContainer_do_nothing_when_container_was_not_previously_added", () => {
+        viewManager.removeContainer(container);
+        assert.equal(viewManager.containers.length, 0);
+    });
+
     it("handler_is_not_called_after_removeAll", () => {
         let callCount: number = 0;
         viewManager.addContainer(container);
