@@ -40,10 +40,9 @@ export class StageObserver {
         );
 
         // We might have arrived late on the scene
-        for (let i in this._registry.rootBindings) {
-            let binding: ContainerBinding = this._registry.rootBindings[i];
+        this._registry.rootBindings.forEach((binding: ContainerBinding) => {
             this.addRootListener(binding.container);
-        }
+        });
     }
 
     /*============================================================================*/
@@ -65,10 +64,9 @@ export class StageObserver {
             this
         );
 
-        for (let i in this._registry.rootBindings) {
-            let binding: ContainerBinding = this._registry.rootBindings[i];
+        this._registry.rootBindings.forEach((binding: ContainerBinding) => {
             this.removeRootListener(binding.container);
-        }
+        });
     }
 
     /*============================================================================*/
