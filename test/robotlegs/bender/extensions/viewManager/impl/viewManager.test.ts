@@ -50,6 +50,17 @@ describe("ViewManager", () => {
         assert.deepEqual(viewManager.containers, expectedContainers);
     });
 
+    it("containers_are_stored", () => {
+        let container1: Container = new Container();
+        let container2: Container = new Container();
+        let container3: Container = new Container();
+        let expectedContainers: any[] = [container1, container2, container3];
+        viewManager.addContainer(container1);
+        viewManager.addContainer(container2);
+        viewManager.addContainer(container3);
+        assert.deepEqual(viewManager.containers, expectedContainers);
+    });
+
     it("addContainer_ignores_container_when_added_twice", () => {
         let expectedContainers: any[] = [container];
         viewManager.addContainer(container);
@@ -75,6 +86,23 @@ describe("ViewManager", () => {
             container2.addChild(container1);
             viewManager.addContainer(container1);
             viewManager.addContainer(container2);
+        }
+        assert.throws(addNestedContainers, Error);
+    });
+
+    it("addContainer_throws_if_containers_are_deeply_nested", () => {
+        function addNestedContainers(): void {
+            const container1: Container = new Container();
+            const container2: Container = new Container();
+            const container3: Container = new Container();
+            const container4: Container = new Container();
+            const container5: Container = new Container();
+            container1.addChild(container2);
+            container2.addChild(container3);
+            container3.addChild(container4);
+            container4.addChild(container5);
+            viewManager.addContainer(container1);
+            viewManager.addContainer(container5);
         }
         assert.throws(addNestedContainers, Error);
     });
@@ -107,6 +135,24 @@ describe("ViewManager", () => {
         viewManager.addContainer(container);
         container.addChild(expected);
         assert.equal(actual, expected);
+    });
+
+    it("handler_is_called__once_when_added_twice", () => {
+        const expected: Container = new Container();
+        let actual: Container = null;
+        let count: number = 0;
+        let handler: CallbackViewHandler = new CallbackViewHandler(
+            (view: Container, type: FunctionConstructor) => {
+                actual = view;
+                count++;
+            }
+        );
+        viewManager.addContainer(container);
+        viewManager.addViewHandler(handler);
+        viewManager.addViewHandler(handler);
+        container.addChild(expected);
+        assert.equal(actual, expected);
+        assert.equal(count, 1);
     });
 
     it("handlers_are_called", () => {
@@ -187,9 +233,67 @@ describe("ViewManager", () => {
         assert.equal(viewManager.containers.length, 0);
     });
 
+    it("handler_is_not_called_after_removeViewHandler", () => {
+        let callCount: number = 0;
+        let handler: CallbackViewHandler = new CallbackViewHandler(
+            (view: Container, type: FunctionConstructor) => {
+                callCount++;
+            }
+        );
+        viewManager.addContainer(container);
+        viewManager.addViewHandler(handler);
+        viewManager.removeViewHandler(handler);
+        container.addChild(new Container());
+        assert.equal(callCount, 0);
+    });
+
+    it("handler_is_not_called_after_removeViewHandler_called_twice", () => {
+        let callCount: number = 0;
+        let handler: CallbackViewHandler = new CallbackViewHandler(
+            (view: Container, type: FunctionConstructor) => {
+                callCount++;
+            }
+        );
+        viewManager.addContainer(container);
+        viewManager.addViewHandler(handler);
+        viewManager.removeViewHandler(handler);
+        viewManager.removeViewHandler(handler);
+        container.addChild(new Container());
+        assert.equal(callCount, 0);
+    });
+
     it("handler_is_not_called_after_removeAll", () => {
         let callCount: number = 0;
         viewManager.addContainer(container);
+        viewManager.addViewHandler(
+            new CallbackViewHandler(
+                (view: Container, type: FunctionConstructor) => {
+                    callCount++;
+                }
+            )
+        );
+        viewManager.removeAllHandlers();
+        container.addChild(new Container());
+        assert.equal(callCount, 0);
+    });
+
+    it("handlers_are_not_called_after_removeAll", () => {
+        let callCount: number = 0;
+        viewManager.addContainer(container);
+        viewManager.addViewHandler(
+            new CallbackViewHandler(
+                (view: Container, type: FunctionConstructor) => {
+                    callCount++;
+                }
+            )
+        );
+        viewManager.addViewHandler(
+            new CallbackViewHandler(
+                (view: Container, type: FunctionConstructor) => {
+                    callCount++;
+                }
+            )
+        );
         viewManager.addViewHandler(
             new CallbackViewHandler(
                 (view: Container, type: FunctionConstructor) => {
