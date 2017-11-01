@@ -51,7 +51,6 @@ export class StageCrawlerExtension implements IExtension {
     /*============================================================================*/
 
     private afterInitializing(): void {
-        // this._containerRegistry = this._injector.getInstance(ContainerRegistry);
         this._containerRegistry = this._injector.get<ContainerRegistry>(
             ContainerRegistry
         );
@@ -67,12 +66,9 @@ export class StageCrawlerExtension implements IExtension {
         let viewManager: IViewManager = this._injector.get<IViewManager>(
             IViewManager
         );
-        for (let i in viewManager.containers) {
-            let container: Container = viewManager.containers[i];
-            if (container instanceof Container) {
-                this.scanContainer(container);
-            }
-        }
+        viewManager.containers.forEach((container: Container) => {
+            this.scanContainer(container);
+        });
     }
 
     private scanContextView(): void {
