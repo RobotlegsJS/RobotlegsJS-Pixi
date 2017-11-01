@@ -164,19 +164,19 @@ export class ViewManager extends EventDispatcher implements IViewManager {
     /*============================================================================*/
 
     private validContainer(container: Container): boolean {
-        this._containers.forEach(registeredContainer => {
-            if (container === registeredContainer) {
-                return false;
-            }
+        let isValid: boolean = this._containers.indexOf(container) < 0;
 
-            if (
-                contains(registeredContainer, container) ||
-                contains(container, registeredContainer)
-            ) {
-                throw new Error("Containers can not be nested");
-            }
-        });
+        if (isValid) {
+            this._containers.forEach(registeredContainer => {
+                if (
+                    contains(registeredContainer, container) ||
+                    contains(container, registeredContainer)
+                ) {
+                    throw new Error("Containers can not be nested");
+                }
+            });
+        }
 
-        return true;
+        return isValid;
     }
 }
