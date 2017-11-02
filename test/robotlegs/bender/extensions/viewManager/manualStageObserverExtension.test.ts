@@ -27,6 +27,7 @@ describe("ManualStageObserverExtension", () => {
     });
 
     afterEach(() => {
+        context.destroy();
         context = null;
     });
 

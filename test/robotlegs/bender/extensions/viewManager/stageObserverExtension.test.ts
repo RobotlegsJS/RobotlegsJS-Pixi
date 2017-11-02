@@ -27,6 +27,7 @@ describe("StageObserverExtension", () => {
     });
 
     afterEach(() => {
+        context.destroy();
         context = null;
     });
 

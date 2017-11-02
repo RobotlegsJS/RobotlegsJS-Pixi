@@ -27,6 +27,7 @@ describe("MediatorMapExtension", () => {
     });
 
     afterEach(() => {
+        context.destroy();
         context = null;
     });
 

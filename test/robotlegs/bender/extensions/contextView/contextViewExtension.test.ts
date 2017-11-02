@@ -30,6 +30,7 @@ describe("ContextViewExtension", () => {
     });
 
     afterEach(() => {
+        context.destroy();
         context = null;
     });
 
