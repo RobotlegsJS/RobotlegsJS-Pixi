@@ -29,6 +29,10 @@ declare module "pixi.js" {
     export interface BaseTexture extends IEventDispatcher {}
     export interface Texture extends IEventDispatcher {}
 
+    export interface Container extends DisplayObject {
+        contains(child: DisplayObject): boolean;
+    }
+
     export namespace loaders {
         export interface Loader extends IEventDispatcher {}
         export interface Resource extends IEventDispatcher {}

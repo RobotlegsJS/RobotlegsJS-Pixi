@@ -9,8 +9,6 @@ import { Container } from "pixi.js";
 
 import { injectable, inject, EventDispatcher } from "@robotlegsjs/core";
 
-import { contains } from "./contains";
-
 import { IViewHandler } from "../api/IViewHandler";
 import { IViewManager } from "../api/IViewManager";
 
@@ -171,8 +169,8 @@ export class ViewManager extends EventDispatcher implements IViewManager {
         if (isValid) {
             this._containers.forEach(registeredContainer => {
                 if (
-                    contains(registeredContainer, container) ||
-                    contains(container, registeredContainer)
+                    registeredContainer.contains(container) ||
+                    container.contains(registeredContainer)
                 ) {
                     throw new Error("Containers can not be nested");
                 }

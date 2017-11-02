@@ -1,8 +1,19 @@
+// ------------------------------------------------------------------------------
+//  Copyright (c) 2017 RobotlegsJS. All Rights Reserved.
 //
-// Patch PIXI to emit "added"/"removed" events on stage
-//
+//  NOTICE: You are permitted to use, modify, and distribute this file
+//  in accordance with the terms of the license agreement accompanying it.
+// ------------------------------------------------------------------------------
+
+/**
+ * Patch PIXI to:
+ * - emit "added"/"removed" events on stage
+ * - implement PIXI.Container.contains method
+ */
 
 import "./eventemitter3-patch";
+import "./contains-patch";
+
 import PIXI = require("pixi.js");
 
 export function applyPixiPatch(stage: PIXI.Container) {

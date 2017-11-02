@@ -7,6 +7,8 @@
 
 import "../../../../../entry";
 
+import "../../../../../../src/robotlegs/bender/extensions/contextView/pixiPatch/contains-patch";
+
 import { assert } from "chai";
 
 import { Sprite } from "pixi.js";
