@@ -39,7 +39,6 @@ export class MediatorMapExtension implements IExtension {
             .beforeDestroying(this.beforeDestroying.bind(this))
             .whenDestroying(this.whenDestroying.bind(this));
         this._injector = context.injector;
-        // this._injector.map(IMediatorMap).toSingleton(MediatorMap);
         this._injector
             .bind(IMediatorMap)
             .to(MediatorMap)
@@ -52,7 +51,7 @@ export class MediatorMapExtension implements IExtension {
 
     private beforeInitializing(): void {
         this._mediatorMap = this._injector.get<MediatorMap>(IMediatorMap);
-        // if (this._injector.satisfiesDirectly(IViewManager)) {
+
         if (this._injector.isBound(IViewManager)) {
             this._viewManager = this._injector.get<IViewManager>(IViewManager);
             this._viewManager.addViewHandler(this._mediatorMap);
@@ -61,7 +60,7 @@ export class MediatorMapExtension implements IExtension {
 
     private beforeDestroying(): void {
         this._mediatorMap.unmediateAll();
-        // if (this._injector.satisfiesDirectly(IViewManager)) {
+
         if (this._injector.isBound(IViewManager)) {
             this._viewManager = this._injector.get<IViewManager>(IViewManager);
             this._viewManager.removeViewHandler(this._mediatorMap);
@@ -69,7 +68,6 @@ export class MediatorMapExtension implements IExtension {
     }
 
     private whenDestroying(): void {
-        // if (this._injector.satisfiesDirectly(IMediatorMap)) {
         if (this._injector.isBound(IMediatorMap)) {
             this._injector.unbind(IMediatorMap);
         }
