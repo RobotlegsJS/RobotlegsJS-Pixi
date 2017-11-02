@@ -11,11 +11,11 @@ import { IEvent } from "@robotlegsjs/core";
 
 const EventDispatcherMixin = {
     addEventListener: function(
-        event: string | symbol,
+        type: string | symbol,
         listener: Function,
         context?: any
     ): void {
-        this.on(event, listener, context);
+        this.on(type, listener, context);
     },
 
     hasEventListener: function(
@@ -26,16 +26,16 @@ const EventDispatcherMixin = {
     },
 
     removeEventListener: function(
-        event: string | symbol,
+        type: string | symbol,
         listener?: Function,
         context?: any,
         once?: boolean
     ): void {
-        this.off(event, listener, context, once);
+        this.off(type, listener, context, once);
     },
 
-    willTrigger: function(event: string | symbol): boolean {
-        return this.hasEventListener(event);
+    willTrigger: function(type: string | symbol): boolean {
+        return this.hasEventListener(type);
     },
 
     dispatchEvent: function(event: IEvent): void {

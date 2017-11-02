@@ -8,13 +8,13 @@ import { IEvent } from "@robotlegsjs/core";
 declare module "pixi.js" {
     interface IEventDispatcher {
         addEventListener(
-            event: string | symbol,
+            type: string | symbol,
             listener: Function,
             context?: any
         ): void;
         hasEventListener(type: string | symbol, listener?: Function): boolean;
         removeEventListener(
-            event: string | symbol,
+            type: string | symbol,
             listener?: Function,
             context?: any,
             once?: boolean
