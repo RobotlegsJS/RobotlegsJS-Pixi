@@ -84,7 +84,9 @@ describe("MediatorMap", () => {
 
     it("unmap_returns_mapper", () => {
         const mapper: MediatorMapper = <MediatorMapper>mediatorMap.map(Sprite);
-        const unmappedMapper: MediatorMapper = <MediatorMapper>mediatorMap.unmap(Sprite);
+        const unmappedMapper: MediatorMapper = <MediatorMapper>mediatorMap.unmap(
+            Sprite
+        );
         assert.equal(unmappedMapper, mapper);
     });
 
