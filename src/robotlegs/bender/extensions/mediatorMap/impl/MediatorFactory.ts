@@ -68,8 +68,7 @@ export class MediatorFactory {
     ): any[] {
         let createdMediators: any[] = [];
         let mediator: any;
-        for (let i in mappings) {
-            let mapping: IMediatorMapping = mappings[i];
+        mappings.forEach((mapping: IMediatorMapping) => {
             mediator = this.getMediator(item, mapping);
 
             if (!mediator) {
@@ -81,7 +80,7 @@ export class MediatorFactory {
             if (mediator) {
                 createdMediators.push(mediator);
             }
-        }
+        });
         return createdMediators;
     }
 
@@ -153,10 +152,9 @@ export class MediatorFactory {
         item: any
     ): void {
         let requiredTypes = this.requiredTypesFor(filter, type);
-        for (let i in requiredTypes) {
-            let requiredType: IType<any> = requiredTypes[i];
+        requiredTypes.forEach((requiredType: IType<any>) => {
             this._injector.bind(requiredType).toConstantValue(item);
-        }
+        });
     }
 
     private unmapTypeForFilterBinding(
@@ -165,11 +163,11 @@ export class MediatorFactory {
         item: any
     ): void {
         let requiredTypes = this.requiredTypesFor(filter, type);
-        for (let i in requiredTypes) {
-            let requiredType: IType<any> = requiredTypes[i];
-            if (this._injector.isBound(requiredType))
+        requiredTypes.forEach((requiredType: IType<any>) => {
+            if (this._injector.isBound(requiredType)) {
                 this._injector.unbind(requiredType);
-        }
+            }
+        });
     }
 
     private requiredTypesFor(
