@@ -83,7 +83,7 @@ export class MediatorViewHandler implements IViewHandler {
     /**
      * @private
      */
-    public handleItem(item: Object, type: IClass<any>): void {
+    public handleItem(item: any, type: IClass<any>): void {
         let interestedMappings = this.getInterestedMappingsFor(item, type);
         if (interestedMappings) {
             this._factory.createMediators(item, type, interestedMappings);
@@ -95,8 +95,8 @@ export class MediatorViewHandler implements IViewHandler {
     /*============================================================================*/
 
     private getInterestedMappingsFor(
-        item: Object,
-        type: any
+        item: any,
+        type: IClass<any>
     ): IMediatorMapping[] {
         // we've seen this type before and nobody was interested
         if (this._knownMappings.get(type) === false) {
