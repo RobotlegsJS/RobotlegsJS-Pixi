@@ -2,11 +2,11 @@
 # yarn lockfile v1
 
 
-"@robotlegsjs/core@^0.0.7":
-  version "0.0.7"
-  resolved "https://registry.npmjs.org/@robotlegsjs/core/-/core-0.0.7.tgz#354e17f0a2d0ea515cd599728be508e964935eb6"
+"@robotlegsjs/core@^0.1.0":
+  version "0.1.0"
+  resolved "https://registry.npmjs.org/@robotlegsjs/core/-/core-0.1.0.tgz#fed32c8852674e889c1ac120ede0260ebb94afe0"
   dependencies:
-    inversify "^4.4.0"
+    inversify "^4.5.1"
 
 "@types/bluebird@^3.5.18":
   version "3.5.18"
@@ -2616,9 +2616,9 @@ invariant@^2.2.2:
   dependencies:
     loose-envify "^1.0.0"
 
-inversify@^4.4.0:
-  version "4.4.0"
-  resolved "https://registry.npmjs.org/inversify/-/inversify-4.4.0.tgz#6bf7a6fb18fc381b6b9c954e5016b8b830da4feb"
+inversify@^4.5.1:
+  version "4.5.1"
+  resolved "https://registry.npmjs.org/inversify/-/inversify-4.5.1.tgz#2f8a249e1fc5346e4f28b4b86dfae5af1b673178"
 
 invert-kv@^1.0.0:
   version "1.0.0"
