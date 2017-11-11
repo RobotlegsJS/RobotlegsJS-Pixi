@@ -7,7 +7,7 @@
 
 import { Container, DisplayObject } from "pixi.js";
 
-import { EventDispatcher } from "@robotlegsjs/core";
+import { IClass, EventDispatcher } from "@robotlegsjs/core";
 
 import { IViewHandler } from "../api/IViewHandler";
 
@@ -99,7 +99,7 @@ export class ContainerBinding extends EventDispatcher {
     /**
      * @private
      */
-    public handleView(view: DisplayObject, type: FunctionConstructor): void {
+    public handleView(view: DisplayObject, type: IClass<any>): void {
         let length: number = this._handlers.length;
         for (let i: number = 0; i < length; i++) {
             let handler: IViewHandler = this._handlers[i];

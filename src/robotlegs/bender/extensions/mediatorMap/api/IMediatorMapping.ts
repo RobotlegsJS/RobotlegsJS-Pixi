@@ -5,7 +5,7 @@
 //  in accordance with the terms of the license agreement accompanying it.
 // ------------------------------------------------------------------------------
 
-import { ITypeFilter, IGuard, IHook } from "@robotlegsjs/core";
+import { IClass, ITypeFilter, IGuard, IHook } from "@robotlegsjs/core";
 
 /**
  * Represents a Mediator mapping
@@ -19,7 +19,7 @@ export interface IMediatorMapping {
     /**
      * The concrete mediator class
      */
-    mediatorClass: FunctionConstructor;
+    mediatorClass: IClass<any>;
 
     /**
      * A list of guards to check before allowing mediator creation

@@ -5,7 +5,7 @@
 //  in accordance with the terms of the license agreement accompanying it.
 // ------------------------------------------------------------------------------
 
-import { IGuard, IHook, ITypeFilter } from "@robotlegsjs/core";
+import { IClass, IGuard, IHook, ITypeFilter } from "@robotlegsjs/core";
 
 import { IMediatorMapping } from "../api/IMediatorMapping";
 import { IMediatorConfigurator } from "../dsl/IMediatorConfigurator";
@@ -28,12 +28,12 @@ export class MediatorMapping
         return this._matcher;
     }
 
-    private _mediatorClass: FunctionConstructor;
+    private _mediatorClass: IClass<any>;
 
     /**
      * @inheritDoc
      */
-    public get mediatorClass(): FunctionConstructor {
+    public get mediatorClass(): IClass<any> {
         return this._mediatorClass;
     }
 
@@ -71,7 +71,7 @@ export class MediatorMapping
     /**
      * @private
      */
-    constructor(matcher: ITypeFilter, mediatorClass: FunctionConstructor) {
+    constructor(matcher: ITypeFilter, mediatorClass: IClass<any>) {
         this._matcher = matcher;
         this._mediatorClass = mediatorClass;
     }

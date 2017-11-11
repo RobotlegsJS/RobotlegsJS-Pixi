@@ -10,6 +10,7 @@ import { DisplayObject } from "pixi.js";
 import {
     injectable,
     inject,
+    IClass,
     IContext,
     ILogger,
     ITypeMatcher,
@@ -85,7 +86,7 @@ export class MediatorMap implements IMediatorMap, IViewHandler {
     /**
      * @inheritDoc
      */
-    public map(type: any): IMediatorMapper {
+    public map(type: IClass<any>): IMediatorMapper {
         return this.mapMatcher(new TypeMatcher().allOf(type));
     }
 
@@ -102,14 +103,14 @@ export class MediatorMap implements IMediatorMap, IViewHandler {
     /**
      * @inheritDoc
      */
-    public unmap(type: any): IMediatorUnmapper {
+    public unmap(type: IClass<any>): IMediatorUnmapper {
         return this.unmapMatcher(new TypeMatcher().allOf(type));
     }
 
     /**
      * @inheritDoc
      */
-    public handleView(view: DisplayObject, type: any): void {
+    public handleView(view: DisplayObject, type: IClass<any>): void {
         this._viewHandler.handleView(view, type);
     }
 

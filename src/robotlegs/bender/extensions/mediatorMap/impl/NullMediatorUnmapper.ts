@@ -5,6 +5,8 @@
 //  in accordance with the terms of the license agreement accompanying it.
 // ------------------------------------------------------------------------------
 
+import { IClass } from "@robotlegsjs/core";
+
 import { IMediatorUnmapper } from "../dsl/IMediatorUnmapper";
 
 /**
@@ -18,7 +20,7 @@ export class NullMediatorUnmapper implements IMediatorUnmapper {
     /**
      * @private
      */
-    public fromMediator(mediatorClass: FunctionConstructor): void {}
+    public fromMediator(mediatorClass: IClass<any>): void {}
 
     /**
      * @private

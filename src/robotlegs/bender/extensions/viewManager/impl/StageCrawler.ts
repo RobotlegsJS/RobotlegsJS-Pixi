@@ -7,6 +7,8 @@
 
 import { Container, DisplayObject } from "pixi.js";
 
+import { IClass } from "@robotlegsjs/core";
+
 import { ContainerBinding } from "./ContainerBinding";
 
 /**
@@ -58,8 +60,6 @@ export class StageCrawler {
     }
 
     private processView(view: DisplayObject): void {
-        this._binding.handleView(view, <FunctionConstructor>view[
-            "constructor"
-        ]);
+        this._binding.handleView(view, <IClass<any>>view.constructor);
     }
 }

@@ -11,6 +11,8 @@ import { assert } from "chai";
 
 import { Container } from "pixi.js";
 
+import { IClass } from "@robotlegsjs/core";
+
 import { applyPixiPatch } from "../../../../../../src/robotlegs/bender/extensions/contextView/pixiPatch/pixi-patch";
 import { ContainerRegistry } from "../../../../../../src/robotlegs/bender/extensions/viewManager/impl/ContainerRegistry";
 import { StageObserver } from "../../../../../../src/robotlegs/bender/extensions/viewManager/impl/StageObserver";
@@ -112,11 +114,9 @@ describe("ViewManager", () => {
         let actual: Container = null;
         viewManager.addContainer(container);
         viewManager.addViewHandler(
-            new CallbackViewHandler(
-                (view: Container, type: FunctionConstructor) => {
-                    actual = view;
-                }
-            )
+            new CallbackViewHandler((view: Container, type: IClass<any>) => {
+                actual = view;
+            })
         );
         container.addChild(expected);
         assert.equal(actual, expected);
@@ -126,11 +126,9 @@ describe("ViewManager", () => {
         const expected: Container = new Container();
         let actual: Container = null;
         viewManager.addViewHandler(
-            new CallbackViewHandler(
-                (view: Container, type: FunctionConstructor) => {
-                    actual = view;
-                }
-            )
+            new CallbackViewHandler((view: Container, type: IClass<any>) => {
+                actual = view;
+            })
         );
         viewManager.addContainer(container);
         container.addChild(expected);
@@ -142,7 +140,7 @@ describe("ViewManager", () => {
         let actual: Container = null;
         let count: number = 0;
         let handler: CallbackViewHandler = new CallbackViewHandler(
-            (view: Container, type: FunctionConstructor) => {
+            (view: Container, type: IClass<any>) => {
                 actual = view;
                 count++;
             }
@@ -160,25 +158,19 @@ describe("ViewManager", () => {
         let actual: string[] = [];
         viewManager.addContainer(container);
         viewManager.addViewHandler(
-            new CallbackViewHandler(
-                (view: Container, type: FunctionConstructor) => {
-                    actual.push("handler1");
-                }
-            )
+            new CallbackViewHandler((view: Container, type: IClass<any>) => {
+                actual.push("handler1");
+            })
         );
         viewManager.addViewHandler(
-            new CallbackViewHandler(
-                (view: Container, type: FunctionConstructor) => {
-                    actual.push("handler2");
-                }
-            )
+            new CallbackViewHandler((view: Container, type: IClass<any>) => {
+                actual.push("handler2");
+            })
         );
         viewManager.addViewHandler(
-            new CallbackViewHandler(
-                (view: Container, type: FunctionConstructor) => {
-                    actual.push("handler3");
-                }
-            )
+            new CallbackViewHandler((view: Container, type: IClass<any>) => {
+                actual.push("handler3");
+            })
         );
         container.addChild(new Container());
         assert.deepEqual(actual, expected);
@@ -188,25 +180,19 @@ describe("ViewManager", () => {
         const expected: string[] = ["handler1", "handler2", "handler3"];
         let actual: string[] = [];
         viewManager.addViewHandler(
-            new CallbackViewHandler(
-                (view: Container, type: FunctionConstructor) => {
-                    actual.push("handler1");
-                }
-            )
+            new CallbackViewHandler((view: Container, type: IClass<any>) => {
+                actual.push("handler1");
+            })
         );
         viewManager.addViewHandler(
-            new CallbackViewHandler(
-                (view: Container, type: FunctionConstructor) => {
-                    actual.push("handler2");
-                }
-            )
+            new CallbackViewHandler((view: Container, type: IClass<any>) => {
+                actual.push("handler2");
+            })
         );
         viewManager.addViewHandler(
-            new CallbackViewHandler(
-                (view: Container, type: FunctionConstructor) => {
-                    actual.push("handler3");
-                }
-            )
+            new CallbackViewHandler((view: Container, type: IClass<any>) => {
+                actual.push("handler3");
+            })
         );
         viewManager.addContainer(container);
         container.addChild(new Container());
@@ -217,11 +203,9 @@ describe("ViewManager", () => {
         let callCount: number = 0;
         viewManager.addContainer(container);
         viewManager.addViewHandler(
-            new CallbackViewHandler(
-                (view: Container, type: FunctionConstructor) => {
-                    callCount++;
-                }
-            )
+            new CallbackViewHandler((view: Container, type: IClass<any>) => {
+                callCount++;
+            })
         );
         viewManager.removeContainer(container);
         container.addChild(new Container());
@@ -236,7 +220,7 @@ describe("ViewManager", () => {
     it("handler_is_not_called_after_removeViewHandler", () => {
         let callCount: number = 0;
         let handler: CallbackViewHandler = new CallbackViewHandler(
-            (view: Container, type: FunctionConstructor) => {
+            (view: Container, type: IClass<any>) => {
                 callCount++;
             }
         );
@@ -250,7 +234,7 @@ describe("ViewManager", () => {
     it("handler_is_not_called_after_removeViewHandler_called_twice", () => {
         let callCount: number = 0;
         let handler: CallbackViewHandler = new CallbackViewHandler(
-            (view: Container, type: FunctionConstructor) => {
+            (view: Container, type: IClass<any>) => {
                 callCount++;
             }
         );
@@ -266,11 +250,9 @@ describe("ViewManager", () => {
         let callCount: number = 0;
         viewManager.addContainer(container);
         viewManager.addViewHandler(
-            new CallbackViewHandler(
-                (view: Container, type: FunctionConstructor) => {
-                    callCount++;
-                }
-            )
+            new CallbackViewHandler((view: Container, type: IClass<any>) => {
+                callCount++;
+            })
         );
         viewManager.removeAllHandlers();
         container.addChild(new Container());
@@ -281,25 +263,19 @@ describe("ViewManager", () => {
         let callCount: number = 0;
         viewManager.addContainer(container);
         viewManager.addViewHandler(
-            new CallbackViewHandler(
-                (view: Container, type: FunctionConstructor) => {
-                    callCount++;
-                }
-            )
+            new CallbackViewHandler((view: Container, type: IClass<any>) => {
+                callCount++;
+            })
         );
         viewManager.addViewHandler(
-            new CallbackViewHandler(
-                (view: Container, type: FunctionConstructor) => {
-                    callCount++;
-                }
-            )
+            new CallbackViewHandler((view: Container, type: IClass<any>) => {
+                callCount++;
+            })
         );
         viewManager.addViewHandler(
-            new CallbackViewHandler(
-                (view: Container, type: FunctionConstructor) => {
-                    callCount++;
-                }
-            )
+            new CallbackViewHandler((view: Container, type: IClass<any>) => {
+                callCount++;
+            })
         );
         viewManager.removeAllHandlers();
         container.addChild(new Container());

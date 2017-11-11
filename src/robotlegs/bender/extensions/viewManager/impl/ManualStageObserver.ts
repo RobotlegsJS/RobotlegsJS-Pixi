@@ -7,6 +7,8 @@
 
 import { Container, DisplayObject } from "pixi.js";
 
+import { IClass } from "@robotlegsjs/core";
+
 import { ContainerRegistryEvent } from "./ContainerRegistryEvent";
 
 import { ContainerRegistry } from "./ContainerRegistry";
@@ -112,9 +114,7 @@ export class ManualStageObserver {
 
         let container: Container = <Container>event.currentTarget;
         let view: DisplayObject = <DisplayObject>event.target;
-        let type: FunctionConstructor = <FunctionConstructor>view[
-            "constructor"
-        ];
+        let type: IClass<any> = <IClass<any>>view.constructor;
         this._registry.getBinding(container).handleView(view, type);
     }
 }

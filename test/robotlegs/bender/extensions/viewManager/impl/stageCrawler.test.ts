@@ -11,6 +11,8 @@ import { assert } from "chai";
 
 import { Container, DisplayObject } from "pixi.js";
 
+import { IClass } from "@robotlegsjs/core";
+
 import { applyPixiPatch } from "../../../../../../src/robotlegs/bender/extensions/contextView/pixiPatch/pixi-patch";
 import { ContainerRegistry } from "../../../../../../src/robotlegs/bender/extensions/viewManager/impl/ContainerRegistry";
 import { ContainerBinding } from "../../../../../../src/robotlegs/bender/extensions/viewManager/impl/ContainerBinding";
@@ -37,11 +39,9 @@ describe("StageCrawler", () => {
     it("scan_finds_container_itself", () => {
         let actual: Container = null;
         registry.addContainer(container).addHandler(
-            new CallbackViewHandler(
-                (view: Container, type: FunctionConstructor) => {
-                    actual = view;
-                }
-            )
+            new CallbackViewHandler((view: Container, type: IClass<any>) => {
+                actual = view;
+            })
         );
         crawler = new StageCrawler(registry.getBinding(container));
         crawler.scan(container);
@@ -53,11 +53,9 @@ describe("StageCrawler", () => {
         const expected: Container[] = [container, child];
         let actual: Container[] = [];
         registry.addContainer(container).addHandler(
-            new CallbackViewHandler(
-                (view: Container, type: FunctionConstructor) => {
-                    actual.push(view);
-                }
-            )
+            new CallbackViewHandler((view: Container, type: IClass<any>) => {
+                actual.push(view);
+            })
         );
         container.addChild(child);
         crawler = new StageCrawler(registry.getBinding(container));
@@ -72,11 +70,9 @@ describe("StageCrawler", () => {
         const expected: Container[] = [container, child1, child2, child3];
         let actual: Container[] = [];
         registry.addContainer(container).addHandler(
-            new CallbackViewHandler(
-                (view: Container, type: FunctionConstructor) => {
-                    actual.push(view);
-                }
-            )
+            new CallbackViewHandler((view: Container, type: IClass<any>) => {
+                actual.push(view);
+            })
         );
         container.addChild(child1);
         container.addChild(child2);
@@ -93,11 +89,9 @@ describe("StageCrawler", () => {
         const expected: DisplayObject[] = [container, child1, child2, child3];
         let actual: Container[] = [];
         registry.addContainer(container).addHandler(
-            new CallbackViewHandler(
-                (view: Container, type: FunctionConstructor) => {
-                    actual.push(view);
-                }
-            )
+            new CallbackViewHandler((view: Container, type: IClass<any>) => {
+                actual.push(view);
+            })
         );
         container.addChild(child1);
         container.addChild(child2);
@@ -114,11 +108,9 @@ describe("StageCrawler", () => {
         const expected: Container[] = [container, intermediary, child1, child2];
         let actual: Container[] = [];
         registry.addContainer(container).addHandler(
-            new CallbackViewHandler(
-                (view: Container, type: FunctionConstructor) => {
-                    actual.push(view);
-                }
-            )
+            new CallbackViewHandler((view: Container, type: IClass<any>) => {
+                actual.push(view);
+            })
         );
         intermediary.addChild(child1);
         intermediary.addChild(child2);

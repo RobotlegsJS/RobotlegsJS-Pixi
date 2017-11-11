@@ -11,6 +11,8 @@ import { assert } from "chai";
 
 import { Container } from "pixi.js";
 
+import { IClass } from "@robotlegsjs/core";
+
 import { applyPixiPatch } from "../../../../../../src/robotlegs/bender/extensions/contextView/pixiPatch/pixi-patch";
 import { ContainerRegistry } from "../../../../../../src/robotlegs/bender/extensions/viewManager/impl/ContainerRegistry";
 import { StageObserver } from "../../../../../../src/robotlegs/bender/extensions/viewManager/impl/StageObserver";
@@ -40,11 +42,9 @@ describe("StageObserver", () => {
         const expected: Container = new Container();
         let actual: Container = null;
         registry.addContainer(container).addHandler(
-            new CallbackViewHandler(
-                (view: Container, type: FunctionConstructor) => {
-                    actual = view;
-                }
-            )
+            new CallbackViewHandler((view: Container, type: IClass<any>) => {
+                actual = view;
+            })
         );
         container.addChild(expected);
         assert.equal(actual, expected);
@@ -57,11 +57,9 @@ describe("StageObserver", () => {
         const expected: Container[] = [middle1, middle2, middle3];
         let actual: Container[] = [];
         registry.addContainer(container).addHandler(
-            new CallbackViewHandler(
-                (view: Container, type: FunctionConstructor) => {
-                    actual.push(view);
-                }
-            )
+            new CallbackViewHandler((view: Container, type: IClass<any>) => {
+                actual.push(view);
+            })
         );
         container.addChild(middle1);
         middle1.addChild(middle2);
@@ -74,11 +72,9 @@ describe("StageObserver", () => {
         let containerObserver = null;
         let actual: Container = null;
         registry.addContainer(container).addHandler(
-            new CallbackViewHandler(
-                (view: Container, type: FunctionConstructor) => {
-                    actual = view;
-                }
-            )
+            new CallbackViewHandler((view: Container, type: IClass<any>) => {
+                actual = view;
+            })
         );
         containerObserver = new StageObserver(registry);
         container.addChild(expected);
@@ -88,11 +84,9 @@ describe("StageObserver", () => {
     it("view_is_not_handled_when_added_outside_container", () => {
         let callCount: number = 0;
         registry.addContainer(container).addHandler(
-            new CallbackViewHandler(
-                (view: Container, type: FunctionConstructor) => {
-                    callCount++;
-                }
-            )
+            new CallbackViewHandler((view: Container, type: IClass<any>) => {
+                callCount++;
+            })
         );
         let container2: Container = new Container();
         container2.addChild(new Container());
@@ -102,11 +96,9 @@ describe("StageObserver", () => {
     it("view_is_not_handled_after_container_removal", () => {
         let callCount: number = 0;
         registry.addContainer(container).addHandler(
-            new CallbackViewHandler(
-                (view: Container, type: FunctionConstructor) => {
-                    callCount++;
-                }
-            )
+            new CallbackViewHandler((view: Container, type: IClass<any>) => {
+                callCount++;
+            })
         );
         registry.removeContainer(container);
         container.addChild(new Container());
@@ -116,11 +108,9 @@ describe("StageObserver", () => {
     it("view_is_not_handled_after_stageObserver_is_destroyed", () => {
         let callCount: number = 0;
         registry.addContainer(container).addHandler(
-            new CallbackViewHandler(
-                (view: Container, type: FunctionConstructor) => {
-                    callCount++;
-                }
-            )
+            new CallbackViewHandler((view: Container, type: IClass<any>) => {
+                callCount++;
+            })
         );
         observer.destroy();
         container.addChild(new Container());
@@ -131,11 +121,9 @@ describe("StageObserver", () => {
         const expected: Container = new Container();
         let actual: Container = null;
         registry.addContainer(container).addHandler(
-            new CallbackViewHandler(
-                (view: Container, type: FunctionConstructor) => {
-                    actual = view;
-                }
-            )
+            new CallbackViewHandler((view: Container, type: IClass<any>) => {
+                actual = view;
+            })
         );
         container.addChild(expected);
         assert.equal(actual, expected);

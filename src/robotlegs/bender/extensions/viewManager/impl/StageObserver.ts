@@ -7,7 +7,7 @@
 
 import { Container } from "pixi.js";
 
-import { IEvent } from "@robotlegsjs/core";
+import { IClass, IEvent } from "@robotlegsjs/core";
 
 import { ContainerBinding } from "./ContainerBinding";
 import { ContainerRegistry } from "./ContainerRegistry";
@@ -97,9 +97,7 @@ export class StageObserver {
 
     private onViewAddedToStage(event: IEvent): void {
         let view: Container = event.target;
-        let type: FunctionConstructor = <FunctionConstructor>view[
-            "constructor"
-        ];
+        let type: IClass<any> = <IClass<any>>view.constructor;
 
         // Walk upwards from the nearest binding
         let binding: ContainerBinding = this._registry.findParentBinding(view);

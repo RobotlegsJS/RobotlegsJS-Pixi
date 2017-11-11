@@ -6,6 +6,8 @@
 // ------------------------------------------------------------------------------
 
 import {
+    IClass,
+    IType,
     IInjector,
     applyHooks,
     guardsApprove,
@@ -61,7 +63,7 @@ export class MediatorFactory {
      */
     public createMediators(
         item: any,
-        type: FunctionConstructor,
+        type: IClass<any>,
         mappings: any[]
     ): any[] {
         let createdMediators: any[] = [];
@@ -121,7 +123,7 @@ export class MediatorFactory {
             mapping.guards.length === 0 ||
             guardsApprove(mapping.guards, this._injector)
         ) {
-            let mediatorClass: FunctionConstructor = mapping.mediatorClass;
+            let mediatorClass: IClass<any> = mapping.mediatorClass;
             mediator = instantiateUnmapped(this._injector, mediatorClass);
             if (mapping.hooks.length > 0) {
                 this._injector.bind(mediatorClass).toConstantValue(mediator);
@@ -147,24 +149,24 @@ export class MediatorFactory {
 
     private mapTypeForFilterBinding(
         filter: ITypeFilter,
-        type: FunctionConstructor,
+        type: IClass<any>,
         item: any
     ): void {
         let requiredTypes = this.requiredTypesFor(filter, type);
         for (let i in requiredTypes) {
-            let requiredType: FunctionConstructor = requiredTypes[i];
+            let requiredType: IType<any> = requiredTypes[i];
             this._injector.bind(requiredType).toConstantValue(item);
         }
     }
 
     private unmapTypeForFilterBinding(
         filter: ITypeFilter,
-        type: FunctionConstructor,
+        type: IClass<any>,
         item: any
     ): void {
         let requiredTypes = this.requiredTypesFor(filter, type);
         for (let i in requiredTypes) {
-            let requiredType: FunctionConstructor = requiredTypes[i];
+            let requiredType: IType<any> = requiredTypes[i];
             if (this._injector.isBound(requiredType))
                 this._injector.unbind(requiredType);
         }
@@ -172,9 +174,9 @@ export class MediatorFactory {
 
     private requiredTypesFor(
         filter: ITypeFilter,
-        type: FunctionConstructor
-    ): FunctionConstructor[] {
-        let requiredTypes: FunctionConstructor[] = filter.allOfTypes.concat(
+        type: IClass<any>
+    ): Array<IType<any>> {
+        let requiredTypes: Array<IType<any>> = filter.allOfTypes.concat(
             filter.anyOfTypes
         );
 

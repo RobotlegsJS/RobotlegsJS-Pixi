@@ -11,6 +11,8 @@ import { assert } from "chai";
 
 import { Container } from "pixi.js";
 
+import { IClass } from "@robotlegsjs/core";
+
 import { applyPixiPatch } from "../../../../../../src/robotlegs/bender/extensions/contextView/pixiPatch/pixi-patch";
 import { ConfigureViewEvent } from "../../../../../../src/robotlegs/bender/extensions/viewManager/impl/ConfigureViewEvent";
 import { ContainerRegistry } from "../../../../../../src/robotlegs/bender/extensions/viewManager/impl/ContainerRegistry";
@@ -41,11 +43,9 @@ describe("StageObserver", () => {
         const expected: Container = new Container();
         let actual: Container = null;
         registry.addContainer(container).addHandler(
-            new CallbackViewHandler(
-                (view: Container, type: FunctionConstructor) => {
-                    actual = view;
-                }
-            )
+            new CallbackViewHandler((view: Container, type: IClass<any>) => {
+                actual = view;
+            })
         );
         container.addChild(expected);
         expected.dispatchEvent(
@@ -61,11 +61,9 @@ describe("StageObserver", () => {
         const expected: Container = middle3;
         let actual: Container = null;
         registry.addContainer(container).addHandler(
-            new CallbackViewHandler(
-                (view: Container, type: FunctionConstructor) => {
-                    actual = view;
-                }
-            )
+            new CallbackViewHandler((view: Container, type: IClass<any>) => {
+                actual = view;
+            })
         );
         container.addChild(middle1);
         middle1.addChild(middle2);
@@ -81,11 +79,9 @@ describe("StageObserver", () => {
         let manualObserver: ManualStageObserver = null;
         let actual: Container = null;
         registry.addContainer(container).addHandler(
-            new CallbackViewHandler(
-                (view: Container, type: FunctionConstructor) => {
-                    actual = view;
-                }
-            )
+            new CallbackViewHandler((view: Container, type: IClass<any>) => {
+                actual = view;
+            })
         );
         manualObserver = new ManualStageObserver(registry);
         container.addChild(expected);
@@ -98,11 +94,9 @@ describe("StageObserver", () => {
     it("view_is_not_handled_when_added_outside_container", () => {
         let callCount: number = 0;
         registry.addContainer(container).addHandler(
-            new CallbackViewHandler(
-                (view: Container, type: FunctionConstructor) => {
-                    callCount++;
-                }
-            )
+            new CallbackViewHandler((view: Container, type: IClass<any>) => {
+                callCount++;
+            })
         );
         let container2: Container = new Container();
         let child: Container = new Container();
@@ -117,11 +111,9 @@ describe("StageObserver", () => {
         let child: Container = new Container();
         let callCount: number = 0;
         registry.addContainer(container).addHandler(
-            new CallbackViewHandler(
-                (view: Container, type: FunctionConstructor) => {
-                    callCount++;
-                }
-            )
+            new CallbackViewHandler((view: Container, type: IClass<any>) => {
+                callCount++;
+            })
         );
         registry.removeContainer(container);
         container.addChild(child);
@@ -135,11 +127,9 @@ describe("StageObserver", () => {
         let child: Container = new Container();
         let callCount: number = 0;
         registry.addContainer(container).addHandler(
-            new CallbackViewHandler(
-                (view: Container, type: FunctionConstructor) => {
-                    callCount++;
-                }
-            )
+            new CallbackViewHandler((view: Container, type: IClass<any>) => {
+                callCount++;
+            })
         );
         observer.destroy();
         container.addChild(child);
@@ -153,11 +143,9 @@ describe("StageObserver", () => {
         const expected: Container = new Container();
         let actual: Container = null;
         registry.addContainer(container).addHandler(
-            new CallbackViewHandler(
-                (view: Container, type: FunctionConstructor) => {
-                    actual = view;
-                }
-            )
+            new CallbackViewHandler((view: Container, type: IClass<any>) => {
+                actual = view;
+            })
         );
         container.addChild(expected);
         expected.dispatchEvent(

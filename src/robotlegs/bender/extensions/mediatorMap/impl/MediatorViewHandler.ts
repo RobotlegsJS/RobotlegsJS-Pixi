@@ -7,6 +7,8 @@
 
 import { DisplayObject } from "pixi.js";
 
+import { IClass } from "@robotlegsjs/core";
+
 import { IMediatorMapping } from "../api/IMediatorMapping";
 import { IViewHandler } from "../../viewManager/api/IViewHandler";
 
@@ -23,9 +25,9 @@ export class MediatorViewHandler implements IViewHandler {
     private _mappings: IMediatorMapping[] = [];
 
     private _knownMappings: Map<
-        FunctionConstructor,
+        IClass<any>,
         IMediatorMapping[] | boolean
-    > = new Map<FunctionConstructor, IMediatorMapping[]>();
+    > = new Map<IClass<any>, IMediatorMapping[]>();
 
     private _factory: MediatorFactory;
 
@@ -71,7 +73,7 @@ export class MediatorViewHandler implements IViewHandler {
     /**
      * @private
      */
-    public handleView(view: DisplayObject, type: FunctionConstructor): void {
+    public handleView(view: DisplayObject, type: IClass<any>): void {
         let interestedMappings = this.getInterestedMappingsFor(view, type);
         if (interestedMappings) {
             this._factory.createMediators(view, type, interestedMappings);
@@ -81,7 +83,7 @@ export class MediatorViewHandler implements IViewHandler {
     /**
      * @private
      */
-    public handleItem(item: Object, type: FunctionConstructor): void {
+    public handleItem(item: Object, type: IClass<any>): void {
         let interestedMappings = this.getInterestedMappingsFor(item, type);
         if (interestedMappings) {
             this._factory.createMediators(item, type, interestedMappings);

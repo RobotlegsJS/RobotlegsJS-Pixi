@@ -7,6 +7,8 @@
 
 import { Container } from "pixi.js";
 
+import { IClass } from "@robotlegsjs/core";
+
 import { IViewHandler } from "../../../../../../src/robotlegs/bender/extensions/viewManager/api/IViewHandler";
 
 /**
@@ -19,7 +21,7 @@ export class CallbackViewHandler implements IViewHandler {
         this._callback = callback;
     }
 
-    public handleView(view: Container, type: FunctionConstructor): void {
+    public handleView(view: Container, type: IClass<any>): void {
         if (this._callback) {
             this._callback(view, type);
         }

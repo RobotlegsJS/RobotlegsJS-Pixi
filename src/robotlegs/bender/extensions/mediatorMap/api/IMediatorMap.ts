@@ -5,7 +5,7 @@
 //  in accordance with the terms of the license agreement accompanying it.
 // ------------------------------------------------------------------------------
 
-import { ITypeMatcher } from "@robotlegsjs/core";
+import { IClass, ITypeMatcher } from "@robotlegsjs/core";
 
 import { IMediatorMapper } from "../dsl/IMediatorMapper";
 import { IMediatorUnmapper } from "../dsl/IMediatorUnmapper";
@@ -28,7 +28,7 @@ export interface IMediatorMap {
      * @param type The class or interface to be matched against.
      * @return the mapper so that you can continue the mapping.
      */
-    map(type: any): IMediatorMapper;
+    map(type: IClass<any>): IMediatorMapper;
 
     /**
      * Removes a mapping that was made against a matcher.
@@ -44,7 +44,7 @@ export interface IMediatorMap {
      * @param type The class or interface to be matched against.
      * @return the unmapper so that you can continue the unmapping.
      */
-    unmap(type: any): IMediatorUnmapper;
+    unmap(type: IClass<any>): IMediatorUnmapper;
 
     /**
      * Mediates an item directly. If the item matches any mapped matchers or types then it will be mediated according to those mappings.

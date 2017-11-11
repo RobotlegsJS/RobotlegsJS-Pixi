@@ -7,6 +7,8 @@
 
 import { DisplayObject } from "pixi.js";
 
+import { IClass } from "@robotlegsjs/core";
+
 /**
  * View handler contract
  */
@@ -16,5 +18,5 @@ export interface IViewHandler {
      * @param view The view instance to handle
      * @param type The class of the view instance
      */
-    handleView(view: DisplayObject, type: FunctionConstructor): void;
+    handleView(view: DisplayObject, type: IClass<any>): void;
 }
