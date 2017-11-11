@@ -8,6 +8,8 @@
 import {
     injectable,
     inject,
+    IClass,
+    IEvent,
     IEventMap,
     IEventDispatcher,
     Event
@@ -64,7 +66,7 @@ export abstract class Mediator<T extends IEventDispatcher>
      * Cleans up listeners mapped through the local EventMap.
      */
     public postDestroy(): void {
-        this.eventMap.unmapListeners();
+        this.eventMap.unmapAllListeners();
     }
 
     /*============================================================================*/
@@ -74,7 +76,7 @@ export abstract class Mediator<T extends IEventDispatcher>
     protected addViewListener(
         eventString: string,
         listener: Function,
-        eventClass?: Object
+        eventClass?: IClass<IEvent>
     ): void {
         this.eventMap.mapListener(
             this._viewComponent,
@@ -87,7 +89,7 @@ export abstract class Mediator<T extends IEventDispatcher>
     protected addContextListener(
         eventString: string,
         listener: Function,
-        eventClass?: Object
+        eventClass?: IClass<IEvent>
     ): void {
         this.eventMap.mapListener(
             this.eventDispatcher,
@@ -97,10 +99,18 @@ export abstract class Mediator<T extends IEventDispatcher>
         );
     }
 
+    protected addDomListener(
+        eventTarget: EventTarget,
+        eventString: string,
+        listener: EventListenerOrEventListenerObject
+    ): void {
+        this.eventMap.mapDomListener(eventTarget, eventString, listener);
+    }
+
     protected removeViewListener(
         eventString: string,
         listener: Function,
-        eventClass?: Object
+        eventClass?: IClass<IEvent>
     ): void {
         this.eventMap.unmapListener(
             this._viewComponent,
@@ -113,7 +123,7 @@ export abstract class Mediator<T extends IEventDispatcher>
     protected removeContextListener(
         eventString: string,
         listener: Function,
-        eventClass?: Object
+        eventClass?: IClass<IEvent>
     ): void {
         this.eventMap.unmapListener(
             this.eventDispatcher,
@@ -121,6 +131,14 @@ export abstract class Mediator<T extends IEventDispatcher>
             listener,
             eventClass
         );
+    }
+
+    protected removeDomListener(
+        eventTarget: EventTarget,
+        eventString: string,
+        listener: EventListenerOrEventListenerObject
+    ): void {
+        this.eventMap.unmapDomListener(eventTarget, eventString, listener);
     }
 
     protected dispatch(event: Event): void {
