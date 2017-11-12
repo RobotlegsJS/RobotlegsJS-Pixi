@@ -76,60 +76,86 @@ export abstract class Mediator<T extends IEventDispatcher>
     protected addViewListener(
         eventString: string,
         listener: Function,
-        eventClass?: IClass<IEvent>
+        thisObject?: any,
+        eventClass?: IClass<IEvent>,
+        useCapture?: boolean,
+        priority?: number
     ): void {
         this.eventMap.mapListener(
             this._viewComponent,
             eventString,
             listener,
-            eventClass
+            thisObject,
+            eventClass,
+            useCapture,
+            priority
         );
     }
 
     protected addContextListener(
         eventString: string,
         listener: Function,
-        eventClass?: IClass<IEvent>
+        thisObject?: any,
+        eventClass?: IClass<IEvent>,
+        useCapture?: boolean,
+        priority?: number
     ): void {
         this.eventMap.mapListener(
             this.eventDispatcher,
             eventString,
             listener,
-            eventClass
+            thisObject,
+            eventClass,
+            useCapture,
+            priority
         );
     }
 
     protected addDomListener(
         eventTarget: EventTarget,
         eventString: string,
-        listener: EventListenerOrEventListenerObject
+        listener: EventListenerOrEventListenerObject,
+        options?: boolean | AddEventListenerOptions
     ): void {
-        this.eventMap.mapDomListener(eventTarget, eventString, listener);
+        this.eventMap.mapDomListener(
+            eventTarget,
+            eventString,
+            listener,
+            options
+        );
     }
 
     protected removeViewListener(
         eventString: string,
         listener: Function,
-        eventClass?: IClass<IEvent>
+        thisObject?: any,
+        eventClass?: IClass<IEvent>,
+        useCapture?: boolean
     ): void {
         this.eventMap.unmapListener(
             this._viewComponent,
             eventString,
             listener,
-            eventClass
+            thisObject,
+            eventClass,
+            useCapture
         );
     }
 
     protected removeContextListener(
         eventString: string,
         listener: Function,
-        eventClass?: IClass<IEvent>
+        thisObject?: any,
+        eventClass?: IClass<IEvent>,
+        useCapture?: boolean
     ): void {
         this.eventMap.unmapListener(
             this.eventDispatcher,
             eventString,
             listener,
-            eventClass
+            thisObject,
+            eventClass,
+            useCapture
         );
     }
 
