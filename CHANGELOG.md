@@ -22,13 +22,15 @@
 
 - Add changelog (see #27).
 
+- Add code of conduct (see #28).
+
 - Update dev dependencies to latest version.
 
 ### [v0.0.6](https://github.com/RobotlegsJS/RobotlegsJS-Pixi/releases/tag/0.0.6) - 2017-10-18
 
 - Clean mediators array in MediatorFactory (see #14).
 
-- Revert Map changes.
+- Revert Map changes (see #22).
 
 - Update dev dependencies to latest version.
 
