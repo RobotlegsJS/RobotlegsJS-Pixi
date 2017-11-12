@@ -12,6 +12,7 @@
 CHANGELOG.md
 CODE_OF_CONDUCT.md
 CONTRIBUTING.md
+ISSUE_TEMPLATE.md
 bower.json
 karma.conf.js
 tsconfig.json
