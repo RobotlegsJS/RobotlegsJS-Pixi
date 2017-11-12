@@ -24,6 +24,8 @@
 
 - Add code of conduct (see #28).
 
+- Add issue template (see #29).
+
 - Update dev dependencies to latest version.
 
 ### [v0.0.6](https://github.com/RobotlegsJS/RobotlegsJS-Pixi/releases/tag/0.0.6) - 2017-10-18
