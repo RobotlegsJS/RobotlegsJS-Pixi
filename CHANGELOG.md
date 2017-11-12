@@ -20,7 +20,7 @@
 
 ### v0.0.7
 
-- Add changelog.
+- Add changelog (see #27).
 
 - Update dev dependencies to latest version.
 
