@@ -30,6 +30,7 @@ import { MediatorMapping } from "../../../../../../src/robotlegs/bender/extensio
 import { MediatorManager } from "../../../../../../src/robotlegs/bender/extensions/mediatorMap/impl/MediatorManager";
 
 import { CallbackMediator } from "../support/CallbackMediator";
+import { EmptyMediator } from "../support/EmptyMediator";
 import { LifecycleReportingMediator } from "../support/LifecycleReportingMediator";
 
 describe("MediatorManager", () => {
@@ -41,7 +42,7 @@ describe("MediatorManager", () => {
     beforeEach(() => {
         injector = new RobotlegsInjector();
         factory = new MediatorFactory(injector);
-        manager = new MediatorManager(factory);
+        manager = <MediatorManager>(<any>factory)._manager;
         container = new Container();
         applyPixiPatch(container);
     });
@@ -150,7 +151,7 @@ describe("MediatorManager", () => {
         assert.deepEqual(actual, expected);
     });
 
-    it("mediator_lifecycle_methods_are_invoked", () => {
+    it("mediator_is_given_view", () => {
         const view: Sprite = new Sprite();
         const mapping: IMediatorMapping = new MediatorMapping(
             createTypeFilter([Sprite]),
@@ -161,5 +162,44 @@ describe("MediatorManager", () => {
         >(injector, LifecycleReportingMediator);
         manager.addMediator(mediator, view, mapping);
         assert.equal(mediator.view, view);
+    });
+
+    it("empty_mediator_is_created", () => {
+        let managerMock = sinon.mock(manager);
+        managerMock.expects("initializeMediator").once();
+
+        const view: Sprite = new Sprite();
+        const mapping: IMediatorMapping = new MediatorMapping(
+            createTypeFilter([Sprite]),
+            EmptyMediator
+        );
+        const mediator: IMediator = factory.createMediators(view, Sprite, [
+            mapping
+        ])[0];
+
+        managerMock.restore();
+        managerMock.verify();
+    });
+
+    it("empty_mediator_is_destroyed", () => {
+        let managerMock = sinon.mock(manager);
+        managerMock.expects("initializeMediator").once();
+        managerMock.expects("destroyMediator").once();
+
+        const view: Sprite = new Sprite();
+
+        const mapping: IMediatorMapping = new MediatorMapping(
+            createTypeFilter([Sprite]),
+            EmptyMediator
+        );
+        const mediator: IMediator = factory.createMediators(view, Sprite, [
+            mapping
+        ])[0];
+
+        container.addChild(view);
+        container.removeChild(view);
+
+        managerMock.restore();
+        managerMock.verify();
     });
 });
