@@ -2,9 +2,9 @@
 # yarn lockfile v1
 
 
-"@robotlegsjs/core@^0.1.0":
-  version "0.1.0"
-  resolved "https://registry.npmjs.org/@robotlegsjs/core/-/core-0.1.0.tgz#fed32c8852674e889c1ac120ede0260ebb94afe0"
+"@robotlegsjs/core@^0.1.1":
+  version "0.1.1"
+  resolved "https://registry.npmjs.org/@robotlegsjs/core/-/core-0.1.1.tgz#7522c7481d12c562ab41e6b6653235cf76bafaf4"
   dependencies:
     inversify "^4.5.1"
 
