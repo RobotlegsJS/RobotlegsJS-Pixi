@@ -51,12 +51,13 @@ export class MediatorManager {
         item: any,
         mapping: IMediatorMapping
     ): void {
-        let displayObject: DisplayObject = <DisplayObject>item;
-
         // Watch Display Object for removal
-        if (displayObject && mapping.autoRemoveEnabled) {
-            item._onRemovedFromStage = this.onRemovedFromStage.bind(this, item);
-            displayObject.on("removed", item._onRemovedFromStage, this);
+        if (item instanceof DisplayObject && mapping.autoRemoveEnabled) {
+            (<any>item)._onRemovedFromStage = this.onRemovedFromStage.bind(
+                this,
+                item
+            );
+            item.on("removed", (<any>item)._onRemovedFromStage, this);
         }
 
         // Synchronize with item life-cycle
@@ -72,10 +73,7 @@ export class MediatorManager {
         mapping: IMediatorMapping
     ): void {
         if (item instanceof DisplayObject) {
-            (<DisplayObject>item).off(
-                "removed",
-                (<any>item)._onRemovedFromStage
-            );
+            item.off("removed", (<any>item)._onRemovedFromStage);
         }
 
         this.destroyMediator(mediator);
