@@ -24,6 +24,8 @@ import { HappyGuard } from "../support/HappyGuard";
 import { ExampleDisplayObjectMediator } from "../support/ExampleDisplayObjectMediator";
 import { HookWithMediatorAndViewInjectionReportFunction } from "../support/HookWithMediatorAndViewInjectionReportFunction";
 import { MediatorWatcher } from "../support/MediatorWatcher";
+import { NotAView } from "../support/NotAView";
+import { NotAViewMediator } from "../support/NotAViewMediator";
 import { OnlyIfViewHasChildrenGuard } from "../support/OnlyIfViewHasChildrenGuard";
 import { RectangleMediator } from "../support/RectangleMediator";
 
@@ -251,6 +253,33 @@ describe("MediatorMap", () => {
             "ExampleMediator2",
             "ExampleMediator destroy",
             "ExampleMediator2 destroy"
+        ];
+        assert.deepEqual(expectedNotifications, mediatorWatcher.notifications);
+    });
+
+    it("mediator_is_created_for_non_view_object", () => {
+        mediatorMap.map(NotAView).toMediator(NotAViewMediator);
+        const notAView: NotAView = new NotAView();
+        mediatorMap.mediate(notAView);
+        const expectedNotifications: string[] = ["NotAViewMediator"];
+        assert.deepEqual(expectedNotifications, mediatorWatcher.notifications);
+    });
+
+    it("non_view_object_injected_into_mediator_correctly", () => {
+        mediatorMap.map(NotAView).toMediator(NotAViewMediator);
+        const notAView: NotAView = new NotAView();
+        mediatorMap.mediate(notAView);
+        assert.equal(notAView.mediatorName, "NotAViewMediator");
+    });
+
+    it("mediator_is_destroyed_for_non_view_object", () => {
+        mediatorMap.map(NotAView).toMediator(NotAViewMediator);
+        const notAView: NotAView = new NotAView();
+        mediatorMap.mediate(notAView);
+        mediatorMap.unmediate(notAView);
+        const expectedNotifications: string[] = [
+            "NotAViewMediator",
+            "NotAViewMediator destroy"
         ];
         assert.deepEqual(expectedNotifications, mediatorWatcher.notifications);
     });
