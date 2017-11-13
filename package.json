@@ -6,7 +6,7 @@
   "typings": "lib/index.d.ts",
   "scripts": {
     "start": "webpack-dev-server --config ./webpack.example.config.js",
-    "test": "karma start --single-run",
+    "test": "node --max-old-space-size=2048 node_modules/.bin/karma start --single-run",
     "mocha": "mocha test/**/*.test.ts --require ts-node/register",
     "autoformat": "prettier --config .prettierrc --write {src,test,example,definitions}/**/*.ts",
     "tslint-check": "tslint-config-prettier-check ./tslint.json",
