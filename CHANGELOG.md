@@ -4,6 +4,8 @@
 
 ### v1.0.0 - Planned stable version
 
+- [ ] Add instructions of how to install the **@robotlegsjs/pixi** package into **README.md**.
+
 - [ ] Use [**Function Types**](https://www.typescriptlang.org/docs/handbook/functions.html) for handlers and callbacks instead of generic **Function** type.
 
 - [ ] Evaluate if **IMediator** interface should be mandatory.
@@ -20,7 +22,7 @@
 
 ## Robotlegs-Pixi 0.1.0
 
-### v0.1.0
+### [v0.1.0](https://github.com/RobotlegsJS/RobotlegsJS-Pixi/releases/tag/0.1.0) - 2017-11-13
 
 Major Breaking Changes:
 ---
@@ -39,7 +41,7 @@ Major Breaking Changes:
 
 - Map methods are used properly (see #26).
 
-- RobotlegsJS/Core is migrated to version 0.1.0 (see #26).
+- RobotlegsJS/Core is migrated to version 0.1.1 (see #26 and #31).
 
 Features Or Improvements:
 ---
