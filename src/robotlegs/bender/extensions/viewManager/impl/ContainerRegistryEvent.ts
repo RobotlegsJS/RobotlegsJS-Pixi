@@ -5,12 +5,14 @@
 //  in accordance with the terms of the license agreement accompanying it.
 // ------------------------------------------------------------------------------
 
+import { Container } from "pixi.js";
+
+import { Event } from "@robotlegsjs/core";
+
 /**
  * Container existence event
  * @private
  */
-import { Event } from "@robotlegsjs/core";
-
 export class ContainerRegistryEvent extends Event {
     /*============================================================================*/
     /* Public Static Properties                                                   */
@@ -28,12 +30,12 @@ export class ContainerRegistryEvent extends Event {
     /* Public Properties                                                          */
     /*============================================================================*/
 
-    private _container: any;
+    private _container: Container;
 
     /**
      * The container associated with this event
      */
-    public get container(): any {
+    public get container(): Container {
         return this._container;
     }
 
@@ -46,7 +48,7 @@ export class ContainerRegistryEvent extends Event {
      * @param type The event type
      * @param container The container associated with this event
      */
-    constructor(type: string, container: any) {
+    constructor(type: string, container: Container) {
         super(type);
         this._container = container;
     }

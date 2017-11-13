@@ -9,7 +9,6 @@ import { IBundle, IContext, LogLevel } from "@robotlegsjs/core";
 
 import { ContextViewExtension } from "../../extensions/contextView/ContextViewExtension";
 import { ContextViewListenerConfig } from "../../extensions/contextView/impl/ContextViewListenerConfig";
-import { StageSyncExtension } from "../../extensions/contextView/StageSyncExtension";
 import { MediatorMapExtension } from "../../extensions/mediatorMap/MediatorMapExtension";
 import { StageCrawlerExtension } from "../../extensions/viewManager/StageCrawlerExtension";
 import { StageObserverExtension } from "../../extensions/viewManager/StageObserverExtension";
@@ -35,8 +34,7 @@ export class PixiBundle implements IBundle {
             ViewManagerExtension,
             StageObserverExtension,
             MediatorMapExtension,
-            StageCrawlerExtension,
-            StageSyncExtension
+            StageCrawlerExtension
         );
 
         context.configure(ContextViewListenerConfig);

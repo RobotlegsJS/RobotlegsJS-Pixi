@@ -6,6 +6,8 @@
 
 - [ ] Use [**Function Types**](https://www.typescriptlang.org/docs/handbook/functions.html) for handlers and callbacks instead of generic **Function** type.
 
+- [ ] Evaluate if **IMediator** interface should be mandatory.
+
 - [ ] Update **Prettier** rules:
 
   - [ ] **printWidth** should be around **140** characters per line.
@@ -16,9 +18,33 @@
 
 - [ ] Migrate [original documentation](https://github.com/robotlegs/robotlegs-framework/blob/master/src/readme.md) and adapt it to TypeScript and Pixi.
 
-## Robotlegs-Pixi 0.0.1
+## Robotlegs-Pixi 0.1.0
 
-### v0.0.7
+### v0.1.0
+
+Major Breaking Changes:
+---
+
+- View property in **IContextView** is a **PIXI.Container** (see #26).
+
+- ContextView is initialised with a reference to the stage (see #26).
+
+- Helper methods on **Mediator** class are updated (see #26).
+
+- Internal dependencies to PIXI are explicit (see #26).
+
+- Fix patch for PIXI and add contains method (see #26).
+
+- StageSyncExtension class is removed (see #26).
+
+- Map methods are used properly (see #26).
+
+- RobotlegsJS/Core is migrated to version 0.1.0 (see #26).
+
+Features Or Improvements:
+---
+
+- Improve Code Coverage and Fix Bugs (see #26).
 
 - Add changelog (see #27).
 
@@ -29,6 +55,8 @@
 - Add pull request template (see #30).
 
 - Update dev dependencies to latest version.
+
+## Robotlegs-Pixi 0.0.1
 
 ### [v0.0.6](https://github.com/RobotlegsJS/RobotlegsJS-Pixi/releases/tag/0.0.6) - 2017-10-18
 

@@ -1,23 +1,19 @@
 import { inject } from "@robotlegsjs/core";
-import { ChildView } from "./ChildView"
+import { ChildView } from "./ChildView";
 import { Mediator } from "../../src/index";
 
 export class ChildMediator extends Mediator<ChildView> {
-
-    initialize()
-    {
+    initialize() {
         console.log("ChildMediator initialized!");
         this.view.interactive = true;
         this.addViewListener("click", this.onClick, this);
     }
 
-    onClick (e) {
+    onClick(e) {
         this.view.parent.removeChild(this.view);
     }
 
-    destroy () {
+    destroy() {
         console.log("ChildMediator destroyed!");
     }
-
 }
-

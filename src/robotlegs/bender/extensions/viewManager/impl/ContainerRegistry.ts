@@ -5,9 +5,9 @@
 //  in accordance with the terms of the license agreement accompanying it.
 // ------------------------------------------------------------------------------
 
-import { EventDispatcher } from "@robotlegsjs/core";
+import { Container } from "pixi.js";
 
-import { contains } from "./contains";
+import { EventDispatcher } from "@robotlegsjs/core";
 
 import { ContainerBinding } from "./ContainerBinding";
 import { ContainerBindingEvent } from "./ContainerBindingEvent";
@@ -48,8 +48,8 @@ export class ContainerRegistry extends EventDispatcher {
     /* Private Properties                                                         */
     /*============================================================================*/
 
-    private _bindingByContainer: Map<any, ContainerBinding> = new Map<
-        any,
+    private _bindingByContainer: Map<Container, ContainerBinding> = new Map<
+        Container,
         ContainerBinding
     >();
 
@@ -60,17 +60,20 @@ export class ContainerRegistry extends EventDispatcher {
     /**
      * @private
      */
-    public addContainer(container: any): ContainerBinding {
-        return (this._bindingByContainer[container] =
-            this._bindingByContainer[container] ||
-            this.createBinding(container));
+    public addContainer(container: Container): ContainerBinding {
+        let binding = this._bindingByContainer.get(container);
+        if (!binding) {
+            binding = this.createBinding(container);
+            this._bindingByContainer.set(container, binding);
+        }
+        return binding;
     }
 
     /**
      * @private
      */
-    public removeContainer(container: any): ContainerBinding {
-        let binding: ContainerBinding = this._bindingByContainer[container];
+    public removeContainer(container: Container): ContainerBinding {
+        let binding: ContainerBinding = this._bindingByContainer.get(container);
 
         if (binding) {
             this.removeBinding(binding);
@@ -84,10 +87,12 @@ export class ContainerRegistry extends EventDispatcher {
      *
      * @private
      */
-    public findParentBinding(target: any): ContainerBinding {
-        let parent: any = target.parent;
+    public findParentBinding(target: Container): ContainerBinding {
+        let parent: Container = target.parent;
         while (parent) {
-            let binding: ContainerBinding = this._bindingByContainer[parent];
+            let binding: ContainerBinding = this._bindingByContainer.get(
+                parent
+            );
             if (binding) {
                 return binding;
             }
@@ -99,22 +104,22 @@ export class ContainerRegistry extends EventDispatcher {
     /**
      * @private
      */
-    public getBinding(container: any): ContainerBinding {
-        return this._bindingByContainer[container];
+    public getBinding(container: Container): ContainerBinding {
+        return this._bindingByContainer.get(container);
     }
 
     /*============================================================================*/
     /* Private Functions                                                          */
     /*============================================================================*/
 
-    private createBinding(container: any): ContainerBinding {
+    private createBinding(container: Container): ContainerBinding {
         let binding: ContainerBinding = new ContainerBinding(container);
         this._bindings.push(binding);
 
         // Add a listener so that we can remove this binding when it has no handlers
         binding.addEventListener(
             ContainerBindingEvent.BINDING_EMPTY,
-            this.onBindingEmpty
+            this.onBindingEmpty.bind(this)
         );
 
         // If the new binding doesn't have a parent it is a Root
@@ -126,19 +131,16 @@ export class ContainerRegistry extends EventDispatcher {
         // Reparent any bindings which are contained within the new binding AND
         // A. Don't have a parent, OR
         // B. Have a parent that is not contained within the new binding
-        for (let i in this._bindingByContainer) {
-            let childBinding: ContainerBinding = this._bindingByContainer[i];
-            if (contains(container, childBinding.container)) {
+        this._bindingByContainer.forEach(childBinding => {
+            if (container.contains(childBinding.container)) {
                 if (!childBinding.parent) {
                     this.removeRootBinding(childBinding);
                     childBinding.parent = binding;
-                } else if (
-                    !contains(container, childBinding.parent.container)
-                ) {
+                } else if (!container.contains(childBinding.parent.container)) {
                     childBinding.parent = binding;
                 }
             }
-        }
+        });
 
         this.dispatchEvent(
             new ContainerRegistryEvent(
@@ -151,7 +153,7 @@ export class ContainerRegistry extends EventDispatcher {
 
     private removeBinding(binding: ContainerBinding): void {
         // Remove the binding itself
-        delete this._bindingByContainer[binding.container];
+        this._bindingByContainer.delete(binding.container);
         let index: number = this._bindings.indexOf(binding);
         this._bindings.splice(index, 1);
 
@@ -167,8 +169,7 @@ export class ContainerRegistry extends EventDispatcher {
         }
 
         // Re-parent the bindings
-        for (let i in this._bindingByContainer) {
-            let childBinding: ContainerBinding = this._bindingByContainer[i];
+        this._bindingByContainer.forEach(childBinding => {
             if (childBinding.parent === binding) {
                 childBinding.parent = binding.parent;
                 if (!childBinding.parent) {
@@ -177,7 +178,7 @@ export class ContainerRegistry extends EventDispatcher {
                     this.addRootBinding(childBinding);
                 }
             }
-        }
+        });
 
         this.dispatchEvent(
             new ContainerRegistryEvent(

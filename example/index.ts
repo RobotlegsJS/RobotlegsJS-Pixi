@@ -20,7 +20,7 @@ class Main {
 
         this.context = new Context();
         this.context.install(MVCSBundle, PixiBundle).
-            configure(new ContextView((<any>this.renderer).plugins.interaction)).
+            configure(new ContextView(this.stage)).
             configure(MyConfig).
             initialize();
 

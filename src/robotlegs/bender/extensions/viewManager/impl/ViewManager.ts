@@ -5,9 +5,9 @@
 //  in accordance with the terms of the license agreement accompanying it.
 // ------------------------------------------------------------------------------
 
-import { injectable, EventDispatcher } from "@robotlegsjs/core";
+import { Container } from "pixi.js";
 
-import { contains } from "./contains";
+import { injectable, inject, EventDispatcher } from "@robotlegsjs/core";
 
 import { IViewHandler } from "../api/IViewHandler";
 import { IViewManager } from "../api/IViewManager";
@@ -31,12 +31,12 @@ export class ViewManager extends EventDispatcher implements IViewManager {
     /* Public Properties                                                          */
     /*============================================================================*/
 
-    private _containers: any[] = [];
+    private _containers: Container[] = [];
 
     /**
      * @inheritDoc
      */
-    public get containers(): any[] {
+    public get containers(): Container[] {
         return this._containers;
     }
 
@@ -55,7 +55,9 @@ export class ViewManager extends EventDispatcher implements IViewManager {
     /**
      * @private
      */
-    constructor(containerRegistry: ContainerRegistry) {
+    constructor(
+        @inject(ContainerRegistry) containerRegistry: ContainerRegistry
+    ) {
         super();
         this._registry = containerRegistry;
     }
@@ -67,7 +69,7 @@ export class ViewManager extends EventDispatcher implements IViewManager {
     /**
      * @inheritDoc
      */
-    public addContainer(container: any): void {
+    public addContainer(container: Container): void {
         if (!this.validContainer(container)) {
             return;
         }
@@ -85,7 +87,7 @@ export class ViewManager extends EventDispatcher implements IViewManager {
     /**
      * @inheritDoc
      */
-    public removeContainer(container: any): void {
+    public removeContainer(container: Container): void {
         let index: number = this._containers.indexOf(container);
 
         if (index === -1) {
@@ -161,20 +163,20 @@ export class ViewManager extends EventDispatcher implements IViewManager {
     /* Private Functions                                                          */
     /*============================================================================*/
 
-    private validContainer(container: any): boolean {
-        this._containers.forEach(registeredContainer => {
-            if (container === registeredContainer) {
-                return false;
-            }
+    private validContainer(container: Container): boolean {
+        let isValid: boolean = this._containers.indexOf(container) < 0;
 
-            if (
-                contains(registeredContainer, container) ||
-                contains(container, registeredContainer)
-            ) {
-                throw new Error("Containers can not be nested");
-            }
-        });
+        if (isValid) {
+            this._containers.forEach(registeredContainer => {
+                if (
+                    registeredContainer.contains(container) ||
+                    container.contains(registeredContainer)
+                ) {
+                    throw new Error("Containers can not be nested");
+                }
+            });
+        }
 
-        return true;
+        return isValid;
     }
 }

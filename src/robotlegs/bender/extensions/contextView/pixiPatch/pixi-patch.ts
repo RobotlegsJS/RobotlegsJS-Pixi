@@ -1,11 +1,22 @@
+// ------------------------------------------------------------------------------
+//  Copyright (c) 2017 RobotlegsJS. All Rights Reserved.
 //
-// Patch PIXI to emit "added"/"removed" events on global event dispatcher
-//
+//  NOTICE: You are permitted to use, modify, and distribute this file
+//  in accordance with the terms of the license agreement accompanying it.
+// ------------------------------------------------------------------------------
+
+/**
+ * Patch PIXI to:
+ * - emit "added"/"removed" events on stage
+ * - implement PIXI.Container.contains method
+ */
 
 import "./eventemitter3-patch";
+import "./contains-patch";
+
 import PIXI = require("pixi.js");
 
-export function applyPixiPatch(interaction: any) {
+export function applyPixiPatch(stage: PIXI.Container) {
     let addChild = PIXI.Container.prototype.addChild;
     let addChildAt = PIXI.Container.prototype.addChildAt;
     let removeChild = PIXI.Container.prototype.removeChild;
@@ -14,20 +25,20 @@ export function applyPixiPatch(interaction: any) {
 
     PIXI.Container.prototype.addChild = function patchedAddChild<
         T extends PIXI.DisplayObject
-    >(...child: T[]) {
-        for (let i = 0, len = child.length; i < len; i++) {
-            addChild.call(this, child[i]);
-            interaction.emit("added", { target: child[i] });
+    >(child: T, ...additionalChildren: PIXI.DisplayObject[]): T {
+        for (let i = 0, len = arguments.length; i < len; i++) {
+            addChild.call(this, arguments[i]);
+            stage.emit("added", { target: arguments[i] });
         }
-        return this;
+        return child;
     };
 
     PIXI.Container.prototype.addChildAt = function patchedAddChildAt<
         T extends PIXI.DisplayObject
     >(child: T, index: number): T {
         addChildAt.call(this, child, index);
-        interaction.emit("added", { target: child });
-        return this;
+        stage.emit("added", { target: child });
+        return child;
     };
 
     PIXI.Container.prototype.removeChild = function(
@@ -35,19 +46,19 @@ export function applyPixiPatch(interaction: any) {
     ): PIXI.DisplayObject {
         for (let i = 0, len = child.length; i < len; i++) {
             removeChild.call(this, child[i]);
-            interaction.emit("removed", { target: child[i] });
+            stage.emit("removed", { target: child[i] });
         }
-        return this;
+        return child[0];
     };
 
     PIXI.Container.prototype.removeChildren = function(
         beginIndex: number = 0,
         endIndex?: number
-    ) {
+    ): PIXI.DisplayObject[] {
         let removedChildren = removeChildren.call(this, beginIndex, endIndex);
 
         for (let child of removedChildren) {
-            interaction.emit("removed", { target: child });
+            stage.emit("removed", { target: child });
         }
 
         return removedChildren;
@@ -57,7 +68,7 @@ export function applyPixiPatch(interaction: any) {
         index
     ): PIXI.DisplayObject {
         let child = removeChildAt.call(this, index);
-        interaction.emit("removed", { target: child });
-        return this;
+        stage.emit("removed", { target: child });
+        return child;
     };
 }

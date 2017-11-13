@@ -5,6 +5,10 @@
 //  in accordance with the terms of the license agreement accompanying it.
 // ------------------------------------------------------------------------------
 
+import { DisplayObject } from "pixi.js";
+
+import { IClass } from "@robotlegsjs/core";
+
 /**
  * View handler contract
  */
@@ -14,5 +18,5 @@ export interface IViewHandler {
      * @param view The view instance to handle
      * @param type The class of the view instance
      */
-    handleView(view: any, type: FunctionConstructor): void;
+    handleView(view: DisplayObject, type: IClass<any>): void;
 }

@@ -5,6 +5,10 @@
 //  in accordance with the terms of the license agreement accompanying it.
 // ------------------------------------------------------------------------------
 
+import { DisplayObject } from "pixi.js";
+
+import { IClass } from "@robotlegsjs/core";
+
 import { IMediatorMapping } from "../api/IMediatorMapping";
 import { IViewHandler } from "../../viewManager/api/IViewHandler";
 
@@ -21,9 +25,9 @@ export class MediatorViewHandler implements IViewHandler {
     private _mappings: IMediatorMapping[] = [];
 
     private _knownMappings: Map<
-        FunctionConstructor,
-        IMediatorMapping[]
-    > = new Map<FunctionConstructor, IMediatorMapping[]>();
+        IClass<any>,
+        IMediatorMapping[] | boolean
+    > = new Map<IClass<any>, IMediatorMapping[]>();
 
     private _factory: MediatorFactory;
 
@@ -51,7 +55,7 @@ export class MediatorViewHandler implements IViewHandler {
             return;
         }
         this._mappings.push(mapping);
-        this.flushCache();
+        this._knownMappings.clear();
     }
 
     /**
@@ -63,13 +67,13 @@ export class MediatorViewHandler implements IViewHandler {
             return;
         }
         this._mappings.splice(index, 1);
-        this.flushCache();
+        this._knownMappings.clear();
     }
 
     /**
      * @private
      */
-    public handleView(view: any, type: FunctionConstructor): void {
+    public handleView(view: DisplayObject, type: IClass<any>): void {
         let interestedMappings = this.getInterestedMappingsFor(view, type);
         if (interestedMappings) {
             this._factory.createMediators(view, type, interestedMappings);
@@ -79,7 +83,7 @@ export class MediatorViewHandler implements IViewHandler {
     /**
      * @private
      */
-    public handleItem(item: Object, type: FunctionConstructor): void {
+    public handleItem(item: any, type: IClass<any>): void {
         let interestedMappings = this.getInterestedMappingsFor(item, type);
         if (interestedMappings) {
             this._factory.createMediators(item, type, interestedMappings);
@@ -90,43 +94,36 @@ export class MediatorViewHandler implements IViewHandler {
     /* Private Functions                                                          */
     /*============================================================================*/
 
-    private flushCache(): void {
-        this._knownMappings = new Map<
-            FunctionConstructor,
-            IMediatorMapping[]
-        >();
-    }
-
     private getInterestedMappingsFor(
-        item: Object,
-        type: any
+        item: any,
+        type: IClass<any>
     ): IMediatorMapping[] {
-        let mapping: IMediatorMapping;
-
         // we've seen this type before and nobody was interested
-        if (this._knownMappings[type] === false) {
+        if (this._knownMappings.get(type) === false) {
             return null;
         }
 
         // we haven't seen this type before
-        if (this._knownMappings[type] === undefined) {
-            this._knownMappings[type] = false;
-            for (let i in this._mappings) {
-                let mapping: IMediatorMapping = this._mappings[i];
+        if (this._knownMappings.get(type) === undefined) {
+            this._knownMappings.set(type, false);
+
+            this._mappings.forEach((mapping: IMediatorMapping) => {
                 if (mapping.matcher.matches(item)) {
-                    if (!this._knownMappings[type]) {
-                        this._knownMappings[type] = [];
+                    if (!this._knownMappings.get(type)) {
+                        this._knownMappings.set(type, []);
                     }
-                    this._knownMappings[type].push(mapping);
+                    (this._knownMappings.get(type) as IMediatorMapping[]).push(
+                        mapping
+                    );
                 }
-            }
+            });
             // nobody cares, let's get out of here
-            if (this._knownMappings[type] === false) {
+            if (this._knownMappings.get(type) === false) {
                 return null;
             }
         }
 
         // these mappings really do care
-        return this._knownMappings[type];
+        return this._knownMappings.get(type) as IMediatorMapping[];
     }
 }

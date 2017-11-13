@@ -5,6 +5,10 @@
 //  in accordance with the terms of the license agreement accompanying it.
 // ------------------------------------------------------------------------------
 
+import { Container, DisplayObject } from "pixi.js";
+
+import { IClass } from "@robotlegsjs/core";
+
 import { ContainerRegistryEvent } from "./ContainerRegistryEvent";
 
 import { ContainerRegistry } from "./ContainerRegistry";
@@ -31,20 +35,23 @@ export class ManualStageObserver {
      */
     constructor(containerRegistry: ContainerRegistry) {
         this._registry = containerRegistry;
+
         // We care about all containers (not just roots)
         this._registry.addEventListener(
             ContainerRegistryEvent.CONTAINER_ADD,
-            this.onContainerAdd
+            this.onContainerAdd,
+            this
         );
         this._registry.addEventListener(
             ContainerRegistryEvent.CONTAINER_REMOVE,
-            this.onContainerRemove
+            this.onContainerRemove,
+            this
         );
+
         // We might have arrived late on the scene
-        for (let i in this._registry.bindings) {
-            let binding: ContainerBinding = this._registry.bindings[i];
+        this._registry.bindings.forEach((binding: ContainerBinding) => {
             this.addContainerListener(binding.container);
-        }
+        });
     }
 
     /*============================================================================*/
@@ -57,16 +64,18 @@ export class ManualStageObserver {
     public destroy(): void {
         this._registry.removeEventListener(
             ContainerRegistryEvent.CONTAINER_ADD,
-            this.onContainerAdd
+            this.onContainerAdd,
+            this
         );
         this._registry.removeEventListener(
             ContainerRegistryEvent.CONTAINER_REMOVE,
-            this.onContainerRemove
+            this.onContainerRemove,
+            this
         );
-        for (let i in this._registry.bindings) {
-            let binding: ContainerBinding = this._registry.bindings[i];
+
+        this._registry.rootBindings.forEach((binding: ContainerBinding) => {
             this.removeContainerListener(binding.container);
-        }
+        });
     }
 
     /*============================================================================*/
@@ -81,28 +90,31 @@ export class ManualStageObserver {
         this.removeContainerListener(event.container);
     }
 
-    private addContainerListener(container: any): void {
+    private addContainerListener(container: Container): void {
         // We're interested in ALL container bindings
         // but just for normal, bubbling events
         container.addEventListener(
             ConfigureViewEvent.CONFIGURE_VIEW,
-            this.onConfigureView
+            this.onConfigureView,
+            this
         );
     }
 
-    private removeContainerListener(container: any): void {
+    private removeContainerListener(container: Container): void {
         container.removeEventListener(
             ConfigureViewEvent.CONFIGURE_VIEW,
-            this.onConfigureView
+            this.onConfigureView,
+            this
         );
     }
 
     private onConfigureView(event: ConfigureViewEvent): void {
         // Stop that event!
-        event.stopImmediatePropagation();
-        let container: any = <any>event.currentTarget;
-        let view: any = <any>event.target;
-        let type: FunctionConstructor = view["constructor"];
+        event.stopPropagation();
+
+        let container: Container = <Container>event.currentTarget;
+        let view: DisplayObject = <DisplayObject>event.target;
+        let type: IClass<any> = <IClass<any>>view.constructor;
         this._registry.getBinding(container).handleView(view, type);
     }
 }

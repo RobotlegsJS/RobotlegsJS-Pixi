@@ -5,34 +5,36 @@
 //  in accordance with the terms of the license agreement accompanying it.
 // ------------------------------------------------------------------------------
 
+import { Container } from "pixi.js";
+
 import { IContextView } from "../api/IContextView";
 
 /**
- * The Context View represents the root any for a Context
+ * The Context View represents the root Container for a Context
  */
 export class ContextView implements IContextView {
-    /*============================================================================*/
-    /* Public Properties                                                          */
-    /*============================================================================*/
-
-    private _view: any;
-
-    /**
-     * The root DisplayObjectContainer for this Context
-     */
-    public get view(): any {
-        return this._view;
-    }
+    private _view: Container;
 
     /*============================================================================*/
     /* Constructor                                                                */
     /*============================================================================*/
 
     /**
-     * The Context View represents the root any for a Context
-     * @param view The root any for this Context
+     * The Context View represents the root Container for a Context
+     * @param view The root Container for this Context
      */
-    constructor(view: any) {
+    constructor(view: Container) {
         this._view = view;
+    }
+
+    /*============================================================================*/
+    /* Public Properties                                                          */
+    /*============================================================================*/
+
+    /**
+     * The root Container for this Context
+     */
+    public get view(): Container {
+        return this._view;
     }
 }

@@ -5,7 +5,7 @@
 //  in accordance with the terms of the license agreement accompanying it.
 // ------------------------------------------------------------------------------
 
-// import PIXI = require("pixi.js");
+import { Container } from "pixi.js";
 
 import { IEventDispatcher } from "@robotlegsjs/core";
 import { IViewHandler } from "./IViewHandler";
@@ -21,21 +21,21 @@ import { IViewHandler } from "./IViewHandler";
 export let IViewManager = Symbol("IViewManager");
 export interface IViewManager extends IEventDispatcher {
     /**
-     * A list of currently registered container
+     * A list of currently registered containers
      */
-    containers: any[];
+    containers: Container[];
 
     /**
      * Adds a container as a "view root" into the context
      * @param container
      */
-    addContainer(container: any): void;
+    addContainer(container: Container): void;
 
     /**
      * Removes a container from this context
      * @param container
      */
-    removeContainer(container: any): void;
+    removeContainer(container: Container): void;
 
     /**
      * Registers a view handler

@@ -16,7 +16,7 @@ import {
 import { IContextView } from "./api/IContextView";
 import { ContextView } from "./impl/ContextView";
 
-import { applyPixiPatch } from "./pixiPatch";
+import { applyPixiPatch } from "./pixiPatch/pixi-patch";
 
 /**
  * <p>This Extension waits for a ContextView to be added as a configuration

@@ -11,6 +11,8 @@ import { assert } from "chai";
 
 import { Sprite } from "pixi.js";
 
+import { IClass } from "@robotlegsjs/core";
+
 import { IViewHandler } from "../../../../../../src/robotlegs/bender/extensions/viewManager/api/IViewHandler";
 import { ContainerBinding } from "../../../../../../src/robotlegs/bender/extensions/viewManager/impl/ContainerBinding";
 import { ContainerBindingEvent } from "../../../../../../src/robotlegs/bender/extensions/viewManager/impl/ContainerBindingEvent";
@@ -49,15 +51,15 @@ describe("ContainerBinding", () => {
                 callCount++;
             })
         );
-        binding.handleView(container, <FunctionConstructor>Sprite.constructor);
+        binding.handleView(container, <IClass<any>>Sprite.constructor);
         assert.equal(callCount, 1);
     });
 
     it("handler_is_passed_correct_details", () => {
         const expectedView: Sprite = container;
-        const expectedType: FunctionConstructor = <FunctionConstructor>Sprite.constructor;
+        const expectedType: IClass<any> = <IClass<any>>Sprite.constructor;
         let actualView: Sprite = null;
-        let actualType: FunctionConstructor = null;
+        let actualType: IClass<any> = null;
         binding.addHandler(
             new CallbackViewHandler(function(view: any, type: any): void {
                 actualView = view;
@@ -79,7 +81,7 @@ describe("ContainerBinding", () => {
         });
         binding.addHandler(handler);
         binding.removeHandler(handler);
-        binding.handleView(container, <FunctionConstructor>Sprite.constructor);
+        binding.handleView(container, <IClass<any>>Sprite.constructor);
         assert.equal(callCount, 0);
     });
 
@@ -94,7 +96,7 @@ describe("ContainerBinding", () => {
         binding.addHandler(handler);
         binding.addHandler(handler);
         binding.addHandler(handler);
-        binding.handleView(container, <FunctionConstructor>Sprite.constructor);
+        binding.handleView(container, <IClass<any>>Sprite.constructor);
         assert.equal(callCount, 1);
     });
 
@@ -116,7 +118,7 @@ describe("ContainerBinding", () => {
                 actual.push("handler3");
             })
         );
-        binding.handleView(container, <FunctionConstructor>Sprite.constructor);
+        binding.handleView(container, <IClass<any>>Sprite.constructor);
         assert.deepEqual(actual, expected);
     });
 

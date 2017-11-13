@@ -5,6 +5,10 @@
 //  in accordance with the terms of the license agreement accompanying it.
 // ------------------------------------------------------------------------------
 
+import { Event } from "@robotlegsjs/core";
+
+import { Container } from "pixi.js";
+
 /**
  * View Configuration Event
  * @private
@@ -20,12 +24,12 @@ export class ConfigureViewEvent extends Event {
     /* Public Properties                                                          */
     /*============================================================================*/
 
-    private _view: any;
+    private _view: Container;
 
     /**
      * The view instance associated with this event
      */
-    public get view(): any {
+    public get view(): Container {
         return this._view;
     }
 
@@ -38,9 +42,8 @@ export class ConfigureViewEvent extends Event {
      * @param type The event type
      * @param view The associated view instance
      */
-    constructor(type: string, view?: any) {
-        // super(type, true, true);
-        super(type);
+    constructor(type: string, view: Container) {
+        super(type, { bubbles: true });
         this._view = view;
     }
 
@@ -51,7 +54,7 @@ export class ConfigureViewEvent extends Event {
     /**
      * @inheritDoc
      */
-    public clone(): Event {
+    public clone(): ConfigureViewEvent {
         return new ConfigureViewEvent(this.type, this._view);
     }
 }

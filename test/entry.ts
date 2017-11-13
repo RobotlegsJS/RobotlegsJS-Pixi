@@ -1,3 +1,4 @@
+/// <reference path="../definitions/pixi.d.ts" />
 /// <reference types="mocha" />
 
 import "bluebird/js/browser/bluebird";

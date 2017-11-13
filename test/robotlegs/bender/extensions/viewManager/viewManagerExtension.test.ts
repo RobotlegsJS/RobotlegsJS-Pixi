@@ -23,6 +23,7 @@ describe("ViewManagerExtension", () => {
     });
 
     afterEach(() => {
+        context.destroy();
         context = null;
     });
 

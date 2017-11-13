@@ -8,6 +8,8 @@
 import {
     injectable,
     inject,
+    IClass,
+    IEvent,
     IEventMap,
     IEventDispatcher,
     Event
@@ -64,7 +66,7 @@ export abstract class Mediator<T extends IEventDispatcher>
      * Cleans up listeners mapped through the local EventMap.
      */
     public postDestroy(): void {
-        this.eventMap.unmapListeners();
+        this.eventMap.unmapAllListeners();
     }
 
     /*============================================================================*/
@@ -74,53 +76,95 @@ export abstract class Mediator<T extends IEventDispatcher>
     protected addViewListener(
         eventString: string,
         listener: Function,
-        eventClass?: Object
+        thisObject?: any,
+        eventClass?: IClass<IEvent>,
+        useCapture?: boolean,
+        priority?: number
     ): void {
         this.eventMap.mapListener(
             this._viewComponent,
             eventString,
             listener,
-            eventClass
+            thisObject,
+            eventClass,
+            useCapture,
+            priority
         );
     }
 
     protected addContextListener(
         eventString: string,
         listener: Function,
-        eventClass?: Object
+        thisObject?: any,
+        eventClass?: IClass<IEvent>,
+        useCapture?: boolean,
+        priority?: number
     ): void {
         this.eventMap.mapListener(
             this.eventDispatcher,
             eventString,
             listener,
-            eventClass
+            thisObject,
+            eventClass,
+            useCapture,
+            priority
+        );
+    }
+
+    protected addDomListener(
+        eventTarget: EventTarget,
+        eventString: string,
+        listener: EventListenerOrEventListenerObject,
+        options?: boolean | AddEventListenerOptions
+    ): void {
+        this.eventMap.mapDomListener(
+            eventTarget,
+            eventString,
+            listener,
+            options
         );
     }
 
     protected removeViewListener(
         eventString: string,
         listener: Function,
-        eventClass?: Object
+        thisObject?: any,
+        eventClass?: IClass<IEvent>,
+        useCapture?: boolean
     ): void {
         this.eventMap.unmapListener(
             this._viewComponent,
             eventString,
             listener,
-            eventClass
+            thisObject,
+            eventClass,
+            useCapture
         );
     }
 
     protected removeContextListener(
         eventString: string,
         listener: Function,
-        eventClass?: Object
+        thisObject?: any,
+        eventClass?: IClass<IEvent>,
+        useCapture?: boolean
     ): void {
         this.eventMap.unmapListener(
             this.eventDispatcher,
             eventString,
             listener,
-            eventClass
+            thisObject,
+            eventClass,
+            useCapture
         );
+    }
+
+    protected removeDomListener(
+        eventTarget: EventTarget,
+        eventString: string,
+        listener: EventListenerOrEventListenerObject
+    ): void {
+        this.eventMap.unmapDomListener(eventTarget, eventString, listener);
     }
 
     protected dispatch(event: Event): void {
