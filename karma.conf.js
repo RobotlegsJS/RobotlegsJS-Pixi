@@ -15,7 +15,6 @@ let frameworks = [
 ];
 
 let plugins = [
-  "karma-jasmine",
   "karma-webpack",
   "karma-sourcemap-writer",
   "karma-sourcemap-loader",
