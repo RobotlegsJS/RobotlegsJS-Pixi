@@ -5,7 +5,7 @@
 //  in accordance with the terms of the license agreement accompanying it.
 // ------------------------------------------------------------------------------
 
-import { ILogger, ITypeFilter } from "@robotlegsjs/core";
+import { IClass, ILogger, ITypeFilter } from "@robotlegsjs/core";
 
 import { IMediatorMapping } from "../api/IMediatorMapping";
 import { IMediatorConfigurator } from "../dsl/IMediatorConfigurator";
@@ -23,8 +23,8 @@ export class MediatorMapper implements IMediatorMapper, IMediatorUnmapper {
     /* Private Properties                                                         */
     /*============================================================================*/
 
-    private _mappings: Map<any, IMediatorMapping> = new Map<
-        any,
+    private _mappings: Map<IClass<any>, IMediatorMapping> = new Map<
+        IClass<any>,
         IMediatorMapping
     >();
 
@@ -58,7 +58,7 @@ export class MediatorMapper implements IMediatorMapper, IMediatorUnmapper {
     /**
      * @inheritDoc
      */
-    public toMediator(mediatorClass: any): IMediatorConfigurator {
+    public toMediator(mediatorClass: IClass<any>): IMediatorConfigurator {
         const mapping: IMediatorMapping = this._mappings.get(mediatorClass);
         return mapping
             ? this.overwriteMapping(mapping)
@@ -68,7 +68,7 @@ export class MediatorMapper implements IMediatorMapper, IMediatorUnmapper {
     /**
      * @inheritDoc
      */
-    public fromMediator(mediatorClass: any): void {
+    public fromMediator(mediatorClass: IClass<any>): void {
         const mapping: IMediatorMapping = this._mappings.get(mediatorClass);
 
         if (mapping) {
@@ -87,7 +87,7 @@ export class MediatorMapper implements IMediatorMapper, IMediatorUnmapper {
     /* Private Functions                                                          */
     /*============================================================================*/
 
-    private createMapping(mediatorClass: any): MediatorMapping {
+    private createMapping(mediatorClass: IClass<any>): MediatorMapping {
         let mapping: MediatorMapping = new MediatorMapping(
             this._typeFilter,
             mediatorClass
