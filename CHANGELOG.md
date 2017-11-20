@@ -26,6 +26,8 @@
 
 - Update pixi.js to version 4.6.1 (see #33).
 
+- Validate IContextView on extensions that depend on it (see #34).
+
 - Update dev dependencies to latest version.
 
 ### [v0.1.0](https://github.com/RobotlegsJS/RobotlegsJS-Pixi/releases/tag/0.1.0) - 2017-11-13
