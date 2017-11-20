@@ -79,9 +79,7 @@ export class StageCrawlerExtension implements IExtension {
             let contextView: IContextView = this._injector.get<IContextView>(
                 IContextView
             );
-            if (contextView.view) {
-                this.scanContainer(contextView.view);
-            }
+            this.scanContainer(contextView.view);
         } else {
             this._logger.error(
                 "A ContextView must be installed if you install the StageCrawlerExtension."
