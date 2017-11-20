@@ -45,7 +45,7 @@
   },
   "devDependencies": {
     "@types/bluebird": "^3.5.18",
-    "@types/chai": "^4.0.4",
+    "@types/chai": "^4.0.5",
     "@types/mocha": "^2.2.44",
     "@types/pixi.js": "^4.6.0",
     "@types/sinon": "^4.0.0",
