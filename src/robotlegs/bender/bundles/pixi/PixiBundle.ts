@@ -5,10 +5,12 @@
 //  in accordance with the terms of the license agreement accompanying it.
 // ------------------------------------------------------------------------------
 
-import { IBundle, IContext, LogLevel } from "@robotlegsjs/core";
+import { IBundle, IContext, ILogger } from "@robotlegsjs/core";
+
+import { IContextView } from "../../extensions/contextView/api/IContextView";
+import { ContextViewListenerConfig } from "../../extensions/contextView/impl/ContextViewListenerConfig";
 
 import { ContextViewExtension } from "../../extensions/contextView/ContextViewExtension";
-import { ContextViewListenerConfig } from "../../extensions/contextView/impl/ContextViewListenerConfig";
 import { MediatorMapExtension } from "../../extensions/mediatorMap/MediatorMapExtension";
 import { StageCrawlerExtension } from "../../extensions/viewManager/StageCrawlerExtension";
 import { StageObserverExtension } from "../../extensions/viewManager/StageObserverExtension";
@@ -22,6 +24,13 @@ import { ViewManagerExtension } from "../../extensions/viewManager/ViewManagerEx
  */
 export class PixiBundle implements IBundle {
     /*============================================================================*/
+    /* Private Properties                                                         */
+    /*============================================================================*/
+
+    private _context: IContext;
+    private _logger: ILogger;
+
+    /*============================================================================*/
     /* Public Functions                                                           */
     /*============================================================================*/
 
@@ -29,7 +38,10 @@ export class PixiBundle implements IBundle {
      * @inheritDoc
      */
     public extend(context: IContext): void {
-        context.install(
+        this._context = context;
+        this._logger = context.getLogger(this);
+
+        this._context.install(
             ContextViewExtension,
             ViewManagerExtension,
             StageObserverExtension,
@@ -37,6 +49,24 @@ export class PixiBundle implements IBundle {
             StageCrawlerExtension
         );
 
-        context.configure(ContextViewListenerConfig);
+        this._context.whenInitializing(this.whenInitializing.bind(this));
+        this._context.afterDestroying(this.afterDestroying.bind(this));
+    }
+
+    /*============================================================================*/
+    /* Private Functions                                                          */
+    /*============================================================================*/
+
+    private whenInitializing(): void {
+        if (this._context.injector.isBound(IContextView)) {
+            this._context.configure(ContextViewListenerConfig);
+        } else {
+            this._logger.error("PixiBundle requires IContextView.");
+        }
+    }
+
+    private afterDestroying(): void {
+        this._context = null;
+        this._logger = null;
     }
 }
