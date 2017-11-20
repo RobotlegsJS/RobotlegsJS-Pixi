@@ -31,4 +31,18 @@ describe("ContextView", () => {
         assert.isNotNull(contextView.view);
         assert.equal(contextView.view, container);
     });
+
+    it("ContextView_throws_a_error_when_view_is_null", () => {
+        function inicializeContextViewWithNullView(): void {
+            contextView = new ContextView(null);
+        }
+        assert.throws(inicializeContextViewWithNullView, Error);
+    });
+
+    it("ContextView_throws_a_error_when_view_is_undefined", () => {
+        function inicializeContextViewWithUndefinedView(): void {
+            contextView = new ContextView(undefined);
+        }
+        assert.throws(inicializeContextViewWithUndefinedView, Error);
+    });
 });
