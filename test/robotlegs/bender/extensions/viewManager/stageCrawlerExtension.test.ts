@@ -130,4 +130,33 @@ describe("StageCrawlerExtension", () => {
         assert.isTrue(viewManagerIsNotInstalledLogged);
         assert.isTrue(scanningContainerLogged);
     });
+
+    it("extension_logs_error_when_context_initialized_without_contextView", () => {
+        let contextViewIsNotInstalledLogged: boolean = false;
+        let logTarget: CallbackLogTarget = new CallbackLogTarget(
+            (log: LogParams) => {
+                if (
+                    log.source instanceof StageCrawlerExtension &&
+                    log.level === LogLevel.ERROR
+                ) {
+                    if (!contextViewIsNotInstalledLogged) {
+                        contextViewIsNotInstalledLogged =
+                            log.message ===
+                            "A ContextView must be installed if you install the StageCrawlerExtension.";
+                    }
+                }
+            }
+        );
+        let handler: IViewHandler = new CallbackViewHandler();
+        let registry: ContainerRegistry = new ContainerRegistry();
+
+        registry.addContainer(container).addHandler(handler);
+
+        context.logLevel = LogLevel.DEBUG;
+        context.install(ContextViewExtension, StageCrawlerExtension);
+        context.injector.bind(ContainerRegistry).toConstantValue(registry);
+        context.addLogTarget(logTarget);
+        context.initialize();
+        assert.isTrue(contextViewIsNotInstalledLogged);
+    });
 });
