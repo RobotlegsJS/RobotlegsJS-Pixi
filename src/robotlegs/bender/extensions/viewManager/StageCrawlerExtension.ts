@@ -72,14 +72,18 @@ export class StageCrawlerExtension implements IExtension {
     }
 
     private scanContextView(): void {
-        this._logger.debug(
-            "ViewManager is not installed. Checking the ContextView..."
-        );
-        let contextView: IContextView = this._injector.get<IContextView>(
-            IContextView
-        );
-        if (contextView.view) {
+        if (this._injector.isBound(IContextView)) {
+            this._logger.debug(
+                "ViewManager is not installed. Checking the ContextView..."
+            );
+            let contextView: IContextView = this._injector.get<IContextView>(
+                IContextView
+            );
             this.scanContainer(contextView.view);
+        } else {
+            this._logger.error(
+                "A ContextView must be installed if you install the StageCrawlerExtension."
+            );
         }
     }
 

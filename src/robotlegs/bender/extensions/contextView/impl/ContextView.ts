@@ -24,7 +24,11 @@ export class ContextView implements IContextView {
      * @param view The root Container for this Context
      */
     constructor(view: Container) {
-        this._view = view;
+        if (view !== null && view !== undefined) {
+            this._view = view;
+        } else {
+            throw new Error("View can't be null or undefined");
+        }
     }
 
     /*============================================================================*/
