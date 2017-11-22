@@ -5,9 +5,10 @@
 //  in accordance with the terms of the license agreement accompanying it.
 // ------------------------------------------------------------------------------
 
-import { IBundle, IContext, ILogger } from "@robotlegsjs/core";
+import { IBundle, IContext, ILogger, instanceOfType } from "@robotlegsjs/core";
 
 import { IContextView } from "../../extensions/contextView/api/IContextView";
+import { ContextView } from "../../extensions/contextView/impl/ContextView";
 import { ContextViewListenerConfig } from "../../extensions/contextView/impl/ContextViewListenerConfig";
 
 import { ContextViewExtension } from "../../extensions/contextView/ContextViewExtension";
@@ -49,6 +50,10 @@ export class PixiBundle implements IBundle {
             StageCrawlerExtension
         );
 
+        this._context.addConfigHandler(
+            instanceOfType(ContextView),
+            this.handleContextView.bind(this)
+        );
         this._context.whenInitializing(this.whenInitializing.bind(this));
         this._context.afterDestroying(this.afterDestroying.bind(this));
     }
@@ -57,10 +62,12 @@ export class PixiBundle implements IBundle {
     /* Private Functions                                                          */
     /*============================================================================*/
 
+    private handleContextView(): void {
+        this._context.configure(ContextViewListenerConfig);
+    }
+
     private whenInitializing(): void {
-        if (this._context.injector.isBound(IContextView)) {
-            this._context.configure(ContextViewListenerConfig);
-        } else {
+        if (!this._context.injector.isBound(IContextView)) {
             this._logger.error("PixiBundle requires IContextView.");
         }
     }
