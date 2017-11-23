@@ -12,6 +12,25 @@ RobotlegsJS PixiJS Extension
 Integrate [RobotlegsJS](https://github.com/RobotlegsJS/RobotlegsJS)
 framework with [PixiJS](https://github.com/pixijs/pixi.js).
 
+Installation
+---
+
+You can get the latest release and the type definitions using [NPM](https://www.npmjs.com/):
+
+```bash
+npm install @robotlegsjs/pixi
+```
+
+Or using [Yarn](https://yarnpkg.com/en/):
+
+```bash
+yarn add @robotlegsjs/pixi
+```
+**Dependencies**
+
++ [RobotlegsJS](https://github.com/RobotlegsJS/RobotlegsJS)
++ [PixiJS](https://github.com/pixijs/pixi.js)
+
 Usage
 ---
 
