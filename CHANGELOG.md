@@ -22,7 +22,7 @@
 
 ## Robotlegs-Pixi 0.1.0
 
-### v0.1.2
+### [v0.1.2](https://github.com/RobotlegsJS/RobotlegsJS-Pixi/releases/tag/0.1.2) - 2017-11-23
 
 - Add ContextView handler (see #35).
 
