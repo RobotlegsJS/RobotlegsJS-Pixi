@@ -22,6 +22,16 @@
 
 ## Robotlegs-Pixi 0.1.0
 
+### v0.1.3
+
+- Update @robotlegsjs/core to version 0.1.3 (see #52).
+
+- Update eventemitter3 to version 3.1.0 (see #52).
+
+- Update pixi.js to version 4.7.3 (see #52).
+
+- Update dev dependencies to latest version.
+
 ### [v0.1.2](https://github.com/RobotlegsJS/RobotlegsJS-Pixi/releases/tag/0.1.2) - 2017-11-23
 
 - Add ContextView handler (see #35).
