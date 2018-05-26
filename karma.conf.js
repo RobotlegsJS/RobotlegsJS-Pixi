@@ -62,7 +62,8 @@ module.exports = function(config) {
     colors: true,
     logLevel: config.LOG_INFO,
     autoWatch: true,
-    browsers: []
+    browsers: [],
+    browserNoActivityTimeout: 50000
   };
 
   if (process.env.TRAVIS) {
