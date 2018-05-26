@@ -28,6 +28,8 @@
 
 - Update pixi.js to version 4.8.0 (see #59).
 
+- Fix example (see #60).
+
 - Enforce TSLint rules (see #58).
 
 - Update TypeScript Compiler Options (see #57).
