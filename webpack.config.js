@@ -1,29 +1,42 @@
 const webpack = require('webpack');
 const path = require('path');
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
-module.exports = (function(options) {
+module.exports = (env => {
 
-  if (!options) options = {isTest: false};
+  if (!env) env = { production: false, karma: false };
 
-  var tsconfig = options.isTest ? "tsconfig.test.json" : "tsconfig.json";
+  let mode = env.production ? "production" : "development";
+  let tsconfig = !env.karma ? "tsconfig.json" : "tsconfig.test.json";
+  let output = env.production ? "dist" : "dev";
+  let filename = env.production ? "robotlegs-pixi.min.js" : "robotlegs-pixi.js";
 
   return {
+    mode: mode,
     entry: {
       main: path.join(__dirname, "src/index.ts")
     },
 
     output: {
-      path: path.join(__dirname, "dist"),
-      filename: "bundle.js"
+      path: path.join(__dirname, output),
+      filename: filename,
+
+      libraryTarget: "var",
+      library: "RobotlegsJSPixi"
     },
 
-    devtool: 'inline-source-map',
+    devtool: env.production ? undefined : "inline-source-map",
 
     module: {
       rules: [
-        { test: /\.ts$/, loader: "ts-loader?configFile=" + tsconfig },
         {
-          test: /^(.(?!\.test))*\.ts$/,
+          test: /\.ts$/,
+          loader: "ts-loader?configFile=" + tsconfig
+        },
+        {
+          test: ((env.production) /* disable this loader for production builds */
+            ? /^$/
+            : /^(.(?!\.test))*\.ts$/),
           loader: "istanbul-instrumenter-loader",
           query: {
             embedSource: true
@@ -33,16 +46,14 @@ module.exports = (function(options) {
       ]
     },
 
-    plugins: [
-      // new webpack.optimize.UglifyJsPlugin()
-      new webpack.SourceMapDevToolPlugin({ test: /\.ts$/i })
-    ],
+    plugins: (
+      (env.production)
+        ? [ new UglifyJSPlugin() ]
+        : [ new webpack.SourceMapDevToolPlugin({ test: /\.ts$/i }) ]
+    ),
 
     resolve: {
-      extensions: ['.ts', '.js', '.json'],
-      alias: {
-        // sinon: 'sinon/pkg/sinon'
-      }
+      extensions: ['.ts', '.js', '.json']
     }
   }
 });

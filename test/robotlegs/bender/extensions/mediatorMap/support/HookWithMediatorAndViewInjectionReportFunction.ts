@@ -5,9 +5,9 @@
 //  in accordance with the terms of the license agreement accompanying it.
 // ------------------------------------------------------------------------------
 
-import { Sprite, Graphics } from "pixi.js";
+import { Sprite } from "pixi.js";
 
-import { injectable, inject, named, optional } from "inversify";
+import { injectable, inject, named } from "inversify";
 
 import { IHook } from "@robotlegsjs/core";
 

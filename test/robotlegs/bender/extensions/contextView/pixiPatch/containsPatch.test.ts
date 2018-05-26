@@ -11,8 +11,6 @@ import { assert } from "chai";
 
 import { Container, DisplayObject } from "pixi.js";
 
-import { Event } from "@robotlegsjs/core";
-
 import "../../../../../../src/robotlegs/bender/extensions/contextView/pixiPatch/pixi-patch";
 
 describe("ContainsPatch", () => {

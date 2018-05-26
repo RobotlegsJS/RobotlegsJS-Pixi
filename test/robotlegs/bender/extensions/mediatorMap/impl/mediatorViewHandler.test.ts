@@ -7,8 +7,6 @@
 
 import "../../../../../entry";
 
-import sinon = require("sinon");
-
 import { assert } from "chai";
 
 import { Container, Sprite } from "pixi.js";
@@ -29,8 +27,6 @@ describe("MediatorViewHandler", () => {
     let handler: MediatorViewHandler = null;
 
     beforeEach(() => {
-        const matcher: TypeMatcher = new TypeMatcher().allOf(Sprite);
-
         context = new Context();
         injector = context.injector;
         factory = new MediatorFactory(injector);

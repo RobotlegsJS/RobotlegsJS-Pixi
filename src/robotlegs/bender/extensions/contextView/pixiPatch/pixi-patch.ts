@@ -40,7 +40,7 @@ export function applyPixiPatch(stage: PIXI.Container) {
         return child;
     };
 
-    PIXI.Container.prototype.removeChild = function(...child): PIXI.DisplayObject {
+    PIXI.Container.prototype.removeChild = function(...child: PIXI.DisplayObject[]): PIXI.DisplayObject {
         for (let i = 0, len = child.length; i < len; i++) {
             removeChild.call(this, child[i]);
             stage.emit("removed", { target: child[i] });

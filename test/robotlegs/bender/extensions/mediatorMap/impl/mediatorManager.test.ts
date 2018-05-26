@@ -130,7 +130,8 @@ describe("MediatorManager", () => {
 
         const view: Sprite = new Sprite();
         const mapping: IMediatorMapping = new MediatorMapping(createTypeFilter([Sprite]), EmptyMediator);
-        const mediator: IMediator = factory.createMediators(view, Sprite, [mapping])[0];
+
+        factory.createMediators(view, Sprite, [mapping]);
 
         managerMock.restore();
         managerMock.verify();
@@ -144,7 +145,8 @@ describe("MediatorManager", () => {
         const view: Sprite = new Sprite();
 
         const mapping: IMediatorMapping = new MediatorMapping(createTypeFilter([Sprite]), EmptyMediator);
-        const mediator: IMediator = factory.createMediators(view, Sprite, [mapping])[0];
+
+        factory.createMediators(view, Sprite, [mapping]);
 
         container.addChild(view);
         container.removeChild(view);
