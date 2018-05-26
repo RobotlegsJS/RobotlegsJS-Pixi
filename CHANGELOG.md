@@ -28,6 +28,8 @@
 
 - Update pixi.js to version 4.7.3 (see #52).
 
+- Enforce TSLint rules (see #58).
+
 - Update TypeScript Compiler Options (see #57).
 
 - Update codeclimate config to version 2 (see #56).
