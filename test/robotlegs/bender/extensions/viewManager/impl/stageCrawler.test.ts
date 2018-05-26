@@ -15,7 +15,6 @@ import { IClass } from "@robotlegsjs/core";
 
 import { applyPixiPatch } from "../../../../../../src/robotlegs/bender/extensions/contextView/pixiPatch/pixi-patch";
 import { ContainerRegistry } from "../../../../../../src/robotlegs/bender/extensions/viewManager/impl/ContainerRegistry";
-import { ContainerBinding } from "../../../../../../src/robotlegs/bender/extensions/viewManager/impl/ContainerBinding";
 import { StageCrawler } from "../../../../../../src/robotlegs/bender/extensions/viewManager/impl/StageCrawler";
 
 import { CallbackViewHandler } from "../support/CallbackViewHandler";

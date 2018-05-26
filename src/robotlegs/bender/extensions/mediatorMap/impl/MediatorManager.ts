@@ -7,8 +7,6 @@
 
 import { DisplayObject } from "pixi.js";
 
-import { IClass } from "@robotlegsjs/core";
-
 import { IMediatorMapping } from "../api/IMediatorMapping";
 import { MediatorFactory } from "./MediatorFactory";
 
@@ -16,12 +14,6 @@ import { MediatorFactory } from "./MediatorFactory";
  * @private
  */
 export class MediatorManager {
-    /*============================================================================*/
-    /* Private Static Properties                                                  */
-    /*============================================================================*/
-
-    private static UIComponentClass: IClass<any>;
-
     /*============================================================================*/
     /* Private Properties                                                         */
     /*============================================================================*/

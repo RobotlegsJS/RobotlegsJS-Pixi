@@ -69,14 +69,12 @@ describe("StageObserver", () => {
 
     it("view_is_handled_when_container_was_already_added_into_registry", () => {
         const expected: Container = new Container();
-        let containerObserver = null;
         let actual: Container = null;
         registry.addContainer(container).addHandler(
             new CallbackViewHandler((view: Container, type: IClass<any>) => {
                 actual = view;
             })
         );
-        containerObserver = new StageObserver(registry);
         container.addChild(expected);
         assert.equal(actual, expected);
     });

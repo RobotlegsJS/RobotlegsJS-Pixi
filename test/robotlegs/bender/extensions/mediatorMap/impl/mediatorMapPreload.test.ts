@@ -13,9 +13,7 @@ import { Container, DisplayObject, Sprite } from "pixi.js";
 
 import { IInjector, IContext, Context, TypeMatcher } from "@robotlegsjs/core";
 
-import { IMediatorMapper } from "../../../../../../src/robotlegs/bender/extensions/mediatorMap/dsl/IMediatorMapper";
 import { MediatorMap } from "../../../../../../src/robotlegs/bender/extensions/mediatorMap/impl/MediatorMap";
-import { MediatorMapper } from "../../../../../../src/robotlegs/bender/extensions/mediatorMap/impl/MediatorMapper";
 
 import { Alpha50PercentHook } from "../support/Alpha50PercentHook";
 import { ExampleMediator } from "../support/ExampleMediator";

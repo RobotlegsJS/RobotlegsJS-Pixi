@@ -11,7 +11,7 @@ import { assert } from "chai";
 
 import { Container } from "pixi.js";
 
-import { IContextView, IViewManager, ContextView, ContextViewListenerConfig } from "../../../../../../src";
+import { IContextView, ContextView, ContextViewListenerConfig } from "../../../../../../src";
 
 import { ContainerRegistry } from "../../../../../../src/robotlegs/bender/extensions/viewManager/impl/ContainerRegistry";
 import { ViewManager } from "../../../../../../src/robotlegs/bender/extensions/viewManager/impl/ViewManager";

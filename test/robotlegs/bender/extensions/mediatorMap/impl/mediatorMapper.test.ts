@@ -9,11 +9,9 @@ import "../../../../../entry";
 
 import sinon = require("sinon");
 
-import { assert } from "chai";
+import { Sprite } from "pixi.js";
 
-import { Sprite, Texture } from "pixi.js";
-
-import { IContext, IInjector, ILogger, ITypeFilter, Context, TypeMatcher } from "@robotlegsjs/core";
+import { IContext, IInjector, ILogger, Context, TypeMatcher } from "@robotlegsjs/core";
 
 import { MediatorFactory } from "../../../../../../src/robotlegs/bender/extensions/mediatorMap/impl/MediatorFactory";
 import { MediatorMapper } from "../../../../../../src/robotlegs/bender/extensions/mediatorMap/impl/MediatorMapper";
@@ -28,7 +26,6 @@ describe("MediatorMapper", () => {
     let logger: ILogger = null;
     let factory: MediatorFactory = null;
     let handler: MediatorViewHandler = null;
-    let filter: ITypeFilter = null;
     let mapper: MediatorMapper = null;
 
     beforeEach(() => {
@@ -38,7 +35,7 @@ describe("MediatorMapper", () => {
         injector = context.injector;
         factory = new MediatorFactory(injector);
         handler = new MediatorViewHandler(factory);
-        filter = matcher.createTypeFilter();
+        matcher.createTypeFilter();
         mapper = new MediatorMapper(matcher.createTypeFilter(), handler);
         context.initialize();
     });
@@ -53,7 +50,6 @@ describe("MediatorMapper", () => {
         logger = null;
         factory = null;
         handler = null;
-        filter = null;
         mapper = null;
     });
 
