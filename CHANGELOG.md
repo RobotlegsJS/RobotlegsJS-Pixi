@@ -26,7 +26,7 @@
 
 - Update eventemitter3 to version 3.1.0 (see #52).
 
-- Update pixi.js to version 4.7.3 (see #52).
+- Update pixi.js to version 4.8.0 (see #59).
 
 - Enforce TSLint rules (see #58).
 
