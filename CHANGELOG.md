@@ -28,6 +28,8 @@
 
 - Update pixi.js to version 4.7.3 (see #52).
 
+- Use `rimraf` instead of `rm -rf` (see #55).
+
 - Update Prettier rules (see #54).
 
 - Update dev dependencies to latest version.
