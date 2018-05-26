@@ -1,3 +1,5 @@
+/// <reference path="../definitions/pixi.d.ts" />
+
 import "reflect-metadata";
 
 import PIXI = require('pixi.js');
@@ -10,9 +12,9 @@ import { CircleView } from "./view/CircleView";
 
 class Main {
 
-    stage: PIXI.Container;
-    renderer: PIXI.CanvasRenderer | PIXI.WebGLRenderer;
-    context: Context;
+    private stage: PIXI.Container;
+    private renderer: PIXI.CanvasRenderer | PIXI.WebGLRenderer;
+    private context: Context;
 
     constructor () {
         this.renderer = PIXI.autoDetectRenderer(800, 600, {});
@@ -29,7 +31,7 @@ class Main {
         document.body.appendChild(this.renderer.view);
     }
 
-    render = () => {
+    public render = () => {
         this.renderer.render(this.stage);
         window.requestAnimationFrame(this.render);
     }
