@@ -6,13 +6,17 @@
     "module": "commonjs",
     "moduleResolution": "node",
     "declaration": true,
-    "noImplicitAny": false,
-    "sourceMap": true,
     "experimentalDecorators": true,
-    "emitDecoratorMetadata": true
+    "emitDecoratorMetadata": true,
+    "noImplicitAny": true,
+    "noUnusedParameters": false,
+    "noUnusedLocals": true,
+    "removeComments": true,
+    "sourceMap": true
   },
   "include": [
-    "./src/**/*.ts"
+    "./src/**/*.ts",
+    "./test/**/*.ts"
   ],
   "files": [
     "./definitions/pixi.d.ts"
