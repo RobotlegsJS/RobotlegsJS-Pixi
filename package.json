@@ -79,14 +79,14 @@
     "reflect-metadata": "^0.1.12",
     "remap-istanbul": "^0.11.1",
     "rimraf": "^2.6.2",
-    "sinon": "^5.0.7",
+    "sinon": "^5.0.10",
     "sinon-chai": "^3.1.0",
     "ts-loader": "^4.3.0",
-    "ts-node": "^6.0.3",
+    "ts-node": "^6.0.5",
     "tslint": "^5.10.0",
     "tslint-config-prettier": "^1.13.0",
     "typescript": "^2.8.3",
-    "webpack": "^4.8.3",
+    "webpack": "^4.9.1",
     "webpack-dev-server": "^3.1.4"
   },
   "peerDependencies": {
