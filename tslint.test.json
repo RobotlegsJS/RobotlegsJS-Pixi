@@ -1,0 +1,9 @@
+{
+  "extends": [
+    "./tslint.json"
+  ],
+  "rules": {
+    "no-reference": false,
+    "no-implicit-dependencies": false
+  }
+}
