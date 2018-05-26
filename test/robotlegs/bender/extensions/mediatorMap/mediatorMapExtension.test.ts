@@ -11,11 +11,7 @@ import { assert } from "chai";
 
 import { IContext, Context } from "@robotlegsjs/core";
 
-import {
-    ViewManagerExtension,
-    MediatorMapExtension,
-    IMediatorMap
-} from "../../../../../src";
+import { ViewManagerExtension, MediatorMapExtension, IMediatorMap } from "../../../../../src";
 
 import { MediatorMap } from "../../../../../src/robotlegs/bender/extensions/mediatorMap/impl/MediatorMap";
 

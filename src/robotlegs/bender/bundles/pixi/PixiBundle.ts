@@ -50,10 +50,7 @@ export class PixiBundle implements IBundle {
             StageCrawlerExtension
         );
 
-        this._context.addConfigHandler(
-            instanceOfType(ContextView),
-            this.handleContextView.bind(this)
-        );
+        this._context.addConfigHandler(instanceOfType(ContextView), this.handleContextView.bind(this));
         this._context.whenInitializing(this.whenInitializing.bind(this));
         this._context.afterDestroying(this.afterDestroying.bind(this));
     }

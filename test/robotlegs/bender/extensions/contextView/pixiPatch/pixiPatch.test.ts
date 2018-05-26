@@ -64,13 +64,7 @@ describe("PixiPatch", () => {
             count++;
         });
 
-        stage.addChild(
-            container1,
-            container2,
-            container3,
-            container4,
-            container5
-        );
+        stage.addChild(container1, container2, container3, container4, container5);
 
         assert.equal(count, 5);
     });
@@ -175,13 +169,7 @@ describe("PixiPatch", () => {
             count++;
         });
 
-        stage.addChild(
-            container1,
-            container2,
-            container3,
-            container4,
-            container5
-        );
+        stage.addChild(container1, container2, container3, container4, container5);
 
         stage.removeChild(container1);
         stage.removeChild(container2);
@@ -244,13 +232,7 @@ describe("PixiPatch", () => {
             count++;
         });
 
-        stage.addChild(
-            container1,
-            container2,
-            container3,
-            container4,
-            container5
-        );
+        stage.addChild(container1, container2, container3, container4, container5);
 
         stage.removeChildAt(0);
         stage.removeChildAt(0);
@@ -341,13 +323,7 @@ describe("PixiPatch", () => {
             count++;
         });
 
-        stage.addChild(
-            container1,
-            container2,
-            container3,
-            container4,
-            container5
-        );
+        stage.addChild(container1, container2, container3, container4, container5);
 
         stage.removeChildren();
 

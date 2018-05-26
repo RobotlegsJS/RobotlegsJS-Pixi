@@ -7,15 +7,7 @@
 
 import { DisplayObject } from "pixi.js";
 
-import {
-    injectable,
-    inject,
-    IClass,
-    IContext,
-    ILogger,
-    ITypeMatcher,
-    TypeMatcher
-} from "@robotlegsjs/core";
+import { injectable, inject, IClass, IContext, ILogger, ITypeMatcher, TypeMatcher } from "@robotlegsjs/core";
 
 import { IMediatorMap } from "../api/IMediatorMap";
 import { IMediatorMapper } from "../dsl/IMediatorMapper";
@@ -37,10 +29,7 @@ export class MediatorMap implements IMediatorMap, IViewHandler {
     /* Private Properties                                                         */
     /*============================================================================*/
 
-    private _mappers: Map<string, MediatorMapper> = new Map<
-        string,
-        MediatorMapper
-    >();
+    private _mappers: Map<string, MediatorMapper> = new Map<string, MediatorMapper>();
 
     private _logger: ILogger;
 
@@ -94,10 +83,7 @@ export class MediatorMap implements IMediatorMap, IViewHandler {
      * @inheritDoc
      */
     public unmapMatcher(matcher: ITypeMatcher): IMediatorUnmapper {
-        return (
-            this._mappers.get(matcher.createTypeFilter().descriptor) ||
-            this.NULL_UNMAPPER
-        );
+        return this._mappers.get(matcher.createTypeFilter().descriptor) || this.NULL_UNMAPPER;
     }
 
     /**
@@ -140,10 +126,6 @@ export class MediatorMap implements IMediatorMap, IViewHandler {
     /*============================================================================*/
 
     private createMapper(matcher: ITypeMatcher): MediatorMapper {
-        return new MediatorMapper(
-            matcher.createTypeFilter(),
-            this._viewHandler,
-            this._logger
-        );
+        return new MediatorMapper(matcher.createTypeFilter(), this._viewHandler, this._logger);
     }
 }

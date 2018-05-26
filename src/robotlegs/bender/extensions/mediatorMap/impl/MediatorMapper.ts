@@ -23,10 +23,7 @@ export class MediatorMapper implements IMediatorMapper, IMediatorUnmapper {
     /* Private Properties                                                         */
     /*============================================================================*/
 
-    private _mappings: Map<IClass<any>, IMediatorMapping> = new Map<
-        IClass<any>,
-        IMediatorMapping
-    >();
+    private _mappings: Map<IClass<any>, IMediatorMapping> = new Map<IClass<any>, IMediatorMapping>();
 
     private _typeFilter: ITypeFilter;
 
@@ -41,11 +38,7 @@ export class MediatorMapper implements IMediatorMapper, IMediatorUnmapper {
     /**
      * @private
      */
-    constructor(
-        typeFilter: ITypeFilter,
-        handler: MediatorViewHandler,
-        logger?: ILogger
-    ) {
+    constructor(typeFilter: ITypeFilter, handler: MediatorViewHandler, logger?: ILogger) {
         this._typeFilter = typeFilter;
         this._handler = handler;
         this._logger = logger;
@@ -60,9 +53,7 @@ export class MediatorMapper implements IMediatorMapper, IMediatorUnmapper {
      */
     public toMediator(mediatorClass: IClass<any>): IMediatorConfigurator {
         const mapping: IMediatorMapping = this._mappings.get(mediatorClass);
-        return mapping
-            ? this.overwriteMapping(mapping)
-            : this.createMapping(mediatorClass);
+        return mapping ? this.overwriteMapping(mapping) : this.createMapping(mediatorClass);
     }
 
     /**
@@ -88,18 +79,12 @@ export class MediatorMapper implements IMediatorMapper, IMediatorUnmapper {
     /*============================================================================*/
 
     private createMapping(mediatorClass: IClass<any>): MediatorMapping {
-        let mapping: MediatorMapping = new MediatorMapping(
-            this._typeFilter,
-            mediatorClass
-        );
+        let mapping: MediatorMapping = new MediatorMapping(this._typeFilter, mediatorClass);
         this._handler.addMapping(mapping);
         this._mappings.set(mediatorClass, mapping);
 
         if (this._logger) {
-            this._logger.debug("{0} mapped to {1}", [
-                this._typeFilter,
-                mapping
-            ]);
+            this._logger.debug("{0} mapped to {1}", [this._typeFilter, mapping]);
         }
 
         return mapping;
@@ -110,10 +95,7 @@ export class MediatorMapper implements IMediatorMapper, IMediatorUnmapper {
         this._mappings.delete(mapping.mediatorClass);
 
         if (this._logger) {
-            this._logger.debug("{0} unmapped from {1}", [
-                this._typeFilter,
-                mapping
-            ]);
+            this._logger.debug("{0} unmapped from {1}", [this._typeFilter, mapping]);
         }
     }
 

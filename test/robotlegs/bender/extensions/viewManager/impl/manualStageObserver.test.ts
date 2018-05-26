@@ -48,9 +48,7 @@ describe("StageObserver", () => {
             })
         );
         container.addChild(expected);
-        expected.dispatchEvent(
-            new ConfigureViewEvent(ConfigureViewEvent.CONFIGURE_VIEW, expected)
-        );
+        expected.dispatchEvent(new ConfigureViewEvent(ConfigureViewEvent.CONFIGURE_VIEW, expected));
         assert.equal(actual, expected);
     });
 
@@ -68,9 +66,7 @@ describe("StageObserver", () => {
         container.addChild(middle1);
         middle1.addChild(middle2);
         middle2.addChild(middle3);
-        middle3.dispatchEvent(
-            new ConfigureViewEvent(ConfigureViewEvent.CONFIGURE_VIEW, middle3)
-        );
+        middle3.dispatchEvent(new ConfigureViewEvent(ConfigureViewEvent.CONFIGURE_VIEW, middle3));
         assert.deepEqual(actual, expected);
     });
 
@@ -85,9 +81,7 @@ describe("StageObserver", () => {
         );
         manualObserver = new ManualStageObserver(registry);
         container.addChild(expected);
-        expected.dispatchEvent(
-            new ConfigureViewEvent(ConfigureViewEvent.CONFIGURE_VIEW, expected)
-        );
+        expected.dispatchEvent(new ConfigureViewEvent(ConfigureViewEvent.CONFIGURE_VIEW, expected));
         assert.equal(actual, expected);
     });
 
@@ -101,9 +95,7 @@ describe("StageObserver", () => {
         let container2: Container = new Container();
         let child: Container = new Container();
         container2.addChild(child);
-        child.dispatchEvent(
-            new ConfigureViewEvent(ConfigureViewEvent.CONFIGURE_VIEW, child)
-        );
+        child.dispatchEvent(new ConfigureViewEvent(ConfigureViewEvent.CONFIGURE_VIEW, child));
         assert.equal(callCount, 0);
     });
 
@@ -117,9 +109,7 @@ describe("StageObserver", () => {
         );
         registry.removeContainer(container);
         container.addChild(child);
-        child.dispatchEvent(
-            new ConfigureViewEvent(ConfigureViewEvent.CONFIGURE_VIEW, child)
-        );
+        child.dispatchEvent(new ConfigureViewEvent(ConfigureViewEvent.CONFIGURE_VIEW, child));
         assert.equal(callCount, 0);
     });
 
@@ -133,9 +123,7 @@ describe("StageObserver", () => {
         );
         observer.destroy();
         container.addChild(child);
-        child.dispatchEvent(
-            new ConfigureViewEvent(ConfigureViewEvent.CONFIGURE_VIEW, child)
-        );
+        child.dispatchEvent(new ConfigureViewEvent(ConfigureViewEvent.CONFIGURE_VIEW, child));
         assert.equal(callCount, 0);
     });
 
@@ -148,9 +136,7 @@ describe("StageObserver", () => {
             })
         );
         container.addChild(expected);
-        expected.dispatchEvent(
-            new ConfigureViewEvent(ConfigureViewEvent.CONFIGURE_VIEW, expected)
-        );
+        expected.dispatchEvent(new ConfigureViewEvent(ConfigureViewEvent.CONFIGURE_VIEW, expected));
         assert.equal(actual, expected);
     });
 });

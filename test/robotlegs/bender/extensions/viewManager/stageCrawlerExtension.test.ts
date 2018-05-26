@@ -58,33 +58,19 @@ describe("StageCrawlerExtension", () => {
     it("extension_logs_debug_message_when_initializing_and_view_manager_is_installed", () => {
         let viewManagerIsInstalledLogged: boolean = false;
         let scanningContainerLogged: boolean = false;
-        let logTarget: CallbackLogTarget = new CallbackLogTarget(
-            (log: LogParams) => {
-                if (
-                    log.source instanceof StageCrawlerExtension &&
-                    log.level === LogLevel.DEBUG
-                ) {
-                    if (!viewManagerIsInstalledLogged) {
-                        viewManagerIsInstalledLogged =
-                            log.message ===
-                            "ViewManager is installed. Checking for managed containers...";
-                    }
+        let logTarget: CallbackLogTarget = new CallbackLogTarget((log: LogParams) => {
+            if (log.source instanceof StageCrawlerExtension && log.level === LogLevel.DEBUG) {
+                if (!viewManagerIsInstalledLogged) {
+                    viewManagerIsInstalledLogged = log.message === "ViewManager is installed. Checking for managed containers...";
+                }
 
-                    if (!scanningContainerLogged) {
-                        scanningContainerLogged =
-                            log.message ===
-                            "StageCrawler scanning container {0} ...";
-                    }
+                if (!scanningContainerLogged) {
+                    scanningContainerLogged = log.message === "StageCrawler scanning container {0} ...";
                 }
             }
-        );
+        });
         context.logLevel = LogLevel.DEBUG;
-        context.install(
-            ContextViewExtension,
-            ViewManagerExtension,
-            MediatorMapExtension,
-            StageCrawlerExtension
-        );
+        context.install(ContextViewExtension, ViewManagerExtension, MediatorMapExtension, StageCrawlerExtension);
         context.configure(new ContextView(container));
         context.configure(ContextViewListenerConfig);
         context.addLogTarget(logTarget);
@@ -96,26 +82,17 @@ describe("StageCrawlerExtension", () => {
     it("extension_logs_debug_message_when_initializing_and_view_manager_is_not_installed", () => {
         let viewManagerIsNotInstalledLogged: boolean = false;
         let scanningContainerLogged: boolean = false;
-        let logTarget: CallbackLogTarget = new CallbackLogTarget(
-            (log: LogParams) => {
-                if (
-                    log.source instanceof StageCrawlerExtension &&
-                    log.level === LogLevel.DEBUG
-                ) {
-                    if (!viewManagerIsNotInstalledLogged) {
-                        viewManagerIsNotInstalledLogged =
-                            log.message ===
-                            "ViewManager is not installed. Checking the ContextView...";
-                    }
+        let logTarget: CallbackLogTarget = new CallbackLogTarget((log: LogParams) => {
+            if (log.source instanceof StageCrawlerExtension && log.level === LogLevel.DEBUG) {
+                if (!viewManagerIsNotInstalledLogged) {
+                    viewManagerIsNotInstalledLogged = log.message === "ViewManager is not installed. Checking the ContextView...";
+                }
 
-                    if (!scanningContainerLogged) {
-                        scanningContainerLogged =
-                            log.message ===
-                            "StageCrawler scanning container {0} ...";
-                    }
+                if (!scanningContainerLogged) {
+                    scanningContainerLogged = log.message === "StageCrawler scanning container {0} ...";
                 }
             }
-        );
+        });
         let handler: IViewHandler = new CallbackViewHandler();
         let registry: ContainerRegistry = new ContainerRegistry();
 
@@ -133,20 +110,14 @@ describe("StageCrawlerExtension", () => {
 
     it("extension_logs_error_when_context_initialized_without_contextView", () => {
         let contextViewIsNotInstalledLogged: boolean = false;
-        let logTarget: CallbackLogTarget = new CallbackLogTarget(
-            (log: LogParams) => {
-                if (
-                    log.source instanceof StageCrawlerExtension &&
-                    log.level === LogLevel.ERROR
-                ) {
-                    if (!contextViewIsNotInstalledLogged) {
-                        contextViewIsNotInstalledLogged =
-                            log.message ===
-                            "A ContextView must be installed if you install the StageCrawlerExtension.";
-                    }
+        let logTarget: CallbackLogTarget = new CallbackLogTarget((log: LogParams) => {
+            if (log.source instanceof StageCrawlerExtension && log.level === LogLevel.ERROR) {
+                if (!contextViewIsNotInstalledLogged) {
+                    contextViewIsNotInstalledLogged =
+                        log.message === "A ContextView must be installed if you install the StageCrawlerExtension.";
                 }
             }
-        );
+        });
         let handler: IViewHandler = new CallbackViewHandler();
         let registry: ContainerRegistry = new ContainerRegistry();
 

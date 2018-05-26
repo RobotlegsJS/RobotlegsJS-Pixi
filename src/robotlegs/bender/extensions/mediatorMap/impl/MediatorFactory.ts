@@ -5,15 +5,7 @@
 //  in accordance with the terms of the license agreement accompanying it.
 // ------------------------------------------------------------------------------
 
-import {
-    IClass,
-    IType,
-    IInjector,
-    applyHooks,
-    guardsApprove,
-    instantiateUnmapped,
-    ITypeFilter
-} from "@robotlegsjs/core";
+import { IClass, IType, IInjector, applyHooks, guardsApprove, instantiateUnmapped, ITypeFilter } from "@robotlegsjs/core";
 
 import { IMediatorMapping } from "../api/IMediatorMapping";
 
@@ -53,19 +45,13 @@ export class MediatorFactory {
      * @private
      */
     public getMediator(item: any, mapping: IMediatorMapping): any {
-        return this._mediators.get(item)
-            ? this._mediators.get(item).get(<any>mapping)
-            : null;
+        return this._mediators.get(item) ? this._mediators.get(item).get(<any>mapping) : null;
     }
 
     /**
      * @private
      */
-    public createMediators(
-        item: any,
-        type: IClass<any>,
-        mappings: any[]
-    ): any[] {
+    public createMediators(item: any, type: IClass<any>, mappings: any[]): any[] {
         let createdMediators: any[] = [];
         let mediator: any;
         mappings.forEach((mapping: IMediatorMapping) => {
@@ -93,9 +79,7 @@ export class MediatorFactory {
             return;
         }
 
-        mediators.forEach((value, key) =>
-            this._manager.removeMediator(value, item, key)
-        );
+        mediators.forEach((value, key) => this._manager.removeMediator(value, item, key));
 
         this._mediators.delete(item);
     }
@@ -118,10 +102,7 @@ export class MediatorFactory {
             return mediator;
         }
 
-        if (
-            mapping.guards.length === 0 ||
-            guardsApprove(mapping.guards, this._injector)
-        ) {
+        if (mapping.guards.length === 0 || guardsApprove(mapping.guards, this._injector)) {
             let mediatorClass: IClass<any> = mapping.mediatorClass;
             mediator = instantiateUnmapped(this._injector, mediatorClass);
             if (mapping.hooks.length > 0) {
@@ -134,34 +115,21 @@ export class MediatorFactory {
         return mediator;
     }
 
-    private addMediator(
-        mediator: any,
-        item: any,
-        mapping: IMediatorMapping
-    ): void {
-        let mediatorMap =
-            this._mediators.get(item) || new Map<any, IMediatorMapping>();
+    private addMediator(mediator: any, item: any, mapping: IMediatorMapping): void {
+        let mediatorMap = this._mediators.get(item) || new Map<any, IMediatorMapping>();
         this._mediators.set(item, mediatorMap);
         mediatorMap.set(<any>mapping, mediator);
         this._manager.addMediator(mediator, item, mapping);
     }
 
-    private mapTypeForFilterBinding(
-        filter: ITypeFilter,
-        type: IClass<any>,
-        item: any
-    ): void {
+    private mapTypeForFilterBinding(filter: ITypeFilter, type: IClass<any>, item: any): void {
         let requiredTypes = this.requiredTypesFor(filter, type);
         requiredTypes.forEach((requiredType: IType<any>) => {
             this._injector.bind(requiredType).toConstantValue(item);
         });
     }
 
-    private unmapTypeForFilterBinding(
-        filter: ITypeFilter,
-        type: IClass<any>,
-        item: any
-    ): void {
+    private unmapTypeForFilterBinding(filter: ITypeFilter, type: IClass<any>, item: any): void {
         let requiredTypes = this.requiredTypesFor(filter, type);
         requiredTypes.forEach((requiredType: IType<any>) => {
             if (this._injector.isBound(requiredType)) {
@@ -170,13 +138,8 @@ export class MediatorFactory {
         });
     }
 
-    private requiredTypesFor(
-        filter: ITypeFilter,
-        type: IClass<any>
-    ): Array<IType<any>> {
-        let requiredTypes: Array<IType<any>> = filter.allOfTypes.concat(
-            filter.anyOfTypes
-        );
+    private requiredTypesFor(filter: ITypeFilter, type: IClass<any>): Array<IType<any>> {
+        let requiredTypes: Array<IType<any>> = filter.allOfTypes.concat(filter.anyOfTypes);
 
         if (requiredTypes.indexOf(type) === -1) {
             requiredTypes.push(type);

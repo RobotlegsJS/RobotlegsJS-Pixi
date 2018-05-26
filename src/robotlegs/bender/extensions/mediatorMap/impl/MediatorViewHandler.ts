@@ -24,10 +24,7 @@ export class MediatorViewHandler implements IViewHandler {
 
     private _mappings: IMediatorMapping[] = [];
 
-    private _knownMappings: Map<
-        IClass<any>,
-        IMediatorMapping[] | boolean
-    > = new Map<IClass<any>, IMediatorMapping[]>();
+    private _knownMappings: Map<IClass<any>, IMediatorMapping[] | boolean> = new Map<IClass<any>, IMediatorMapping[]>();
 
     private _factory: MediatorFactory;
 
@@ -94,10 +91,7 @@ export class MediatorViewHandler implements IViewHandler {
     /* Private Functions                                                          */
     /*============================================================================*/
 
-    private getInterestedMappingsFor(
-        item: any,
-        type: IClass<any>
-    ): IMediatorMapping[] {
+    private getInterestedMappingsFor(item: any, type: IClass<any>): IMediatorMapping[] {
         // we've seen this type before and nobody was interested
         if (this._knownMappings.get(type) === false) {
             return null;
@@ -112,9 +106,7 @@ export class MediatorViewHandler implements IViewHandler {
                     if (!this._knownMappings.get(type)) {
                         this._knownMappings.set(type, []);
                     }
-                    (this._knownMappings.get(type) as IMediatorMapping[]).push(
-                        mapping
-                    );
+                    (this._knownMappings.get(type) as IMediatorMapping[]).push(mapping);
                 }
             });
             // nobody cares, let's get out of here
