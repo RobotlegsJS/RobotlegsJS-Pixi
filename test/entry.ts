@@ -1,6 +1,7 @@
 /// <reference path="../definitions/pixi.d.ts" />
 /// <reference types="mocha" />
 
-import "bluebird";
-import "es6-symbol";
-import "es6-map";
+import "reflect-metadata";
+import "bluebird/js/browser/bluebird";
+import "es6-symbol/implement";
+import "es6-map/implement";
