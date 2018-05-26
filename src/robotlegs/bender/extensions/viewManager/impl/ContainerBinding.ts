@@ -87,11 +87,7 @@ export class ContainerBinding extends EventDispatcher {
         if (index > -1) {
             this._handlers.splice(index, 1);
             if (this._handlers.length === 0) {
-                this.dispatchEvent(
-                    new ContainerBindingEvent(
-                        ContainerBindingEvent.BINDING_EMPTY
-                    )
-                );
+                this.dispatchEvent(new ContainerBindingEvent(ContainerBindingEvent.BINDING_EMPTY));
             }
         }
     }

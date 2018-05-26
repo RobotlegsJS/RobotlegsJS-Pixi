@@ -11,10 +11,7 @@ import { assert } from "chai";
 
 import { IContext, Context, LogLevel } from "@robotlegsjs/core";
 
-import {
-    StageObserverExtension,
-    ViewManagerExtension
-} from "../../../../../src";
+import { StageObserverExtension, ViewManagerExtension } from "../../../../../src";
 
 import { CallbackLogTarget } from "../contextView/support/CallbackLogTarget";
 import { LogParams } from "../contextView/support/LogParams";
@@ -42,25 +39,16 @@ describe("StageObserverExtension", () => {
     it("extension_logs_debug_messages_when_initializing_and_destroying", () => {
         let whenInitializingLogged: boolean = false;
         let whenDestroyingLogged: boolean = false;
-        let logTarget: CallbackLogTarget = new CallbackLogTarget(
-            (log: LogParams) => {
-                if (
-                    log.source instanceof StageObserverExtension &&
-                    log.level === LogLevel.DEBUG
-                ) {
-                    if (!whenInitializingLogged) {
-                        whenInitializingLogged =
-                            log.message ===
-                            "Creating genuine StageObserver Singleton";
-                    }
-                    if (!whenDestroyingLogged) {
-                        whenDestroyingLogged =
-                            log.message ===
-                            "Destroying genuine StageObserver Singleton";
-                    }
+        let logTarget: CallbackLogTarget = new CallbackLogTarget((log: LogParams) => {
+            if (log.source instanceof StageObserverExtension && log.level === LogLevel.DEBUG) {
+                if (!whenInitializingLogged) {
+                    whenInitializingLogged = log.message === "Creating genuine StageObserver Singleton";
+                }
+                if (!whenDestroyingLogged) {
+                    whenDestroyingLogged = log.message === "Destroying genuine StageObserver Singleton";
                 }
             }
-        );
+        });
         context.logLevel = LogLevel.DEBUG;
         context.install(ViewManagerExtension, StageObserverExtension);
         context.addLogTarget(logTarget);

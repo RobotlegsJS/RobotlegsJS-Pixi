@@ -13,14 +13,7 @@ import { assert } from "chai";
 
 import { Sprite, Texture } from "pixi.js";
 
-import {
-    IContext,
-    IInjector,
-    ILogger,
-    ITypeFilter,
-    Context,
-    TypeMatcher
-} from "@robotlegsjs/core";
+import { IContext, IInjector, ILogger, ITypeFilter, Context, TypeMatcher } from "@robotlegsjs/core";
 
 import { MediatorFactory } from "../../../../../../src/robotlegs/bender/extensions/mediatorMap/impl/MediatorFactory";
 import { MediatorMapper } from "../../../../../../src/robotlegs/bender/extensions/mediatorMap/impl/MediatorMapper";
@@ -127,11 +120,7 @@ describe("MediatorMapper", () => {
     it("toMediator_logs_debug_when_creating_mapping", () => {
         const matcher: TypeMatcher = new TypeMatcher().allOf(Sprite);
         logger = context.getLogger(context);
-        mapper = new MediatorMapper(
-            matcher.createTypeFilter(),
-            handler,
-            logger
-        );
+        mapper = new MediatorMapper(matcher.createTypeFilter(), handler, logger);
 
         let loggerMock = sinon.mock(logger);
         loggerMock.expects("debug").once();
@@ -145,11 +134,7 @@ describe("MediatorMapper", () => {
     it("toMediator_warns_when_overwritten", () => {
         const matcher: TypeMatcher = new TypeMatcher().allOf(Sprite);
         logger = context.getLogger(context);
-        mapper = new MediatorMapper(
-            matcher.createTypeFilter(),
-            handler,
-            logger
-        );
+        mapper = new MediatorMapper(matcher.createTypeFilter(), handler, logger);
 
         let loggerMock = sinon.mock(logger);
         loggerMock.expects("warn").once();
@@ -164,11 +149,7 @@ describe("MediatorMapper", () => {
     it("fromMediator_logs_debug_when_removing_mapping", () => {
         const matcher: TypeMatcher = new TypeMatcher().allOf(Sprite);
         logger = context.getLogger(context);
-        mapper = new MediatorMapper(
-            matcher.createTypeFilter(),
-            handler,
-            logger
-        );
+        mapper = new MediatorMapper(matcher.createTypeFilter(), handler, logger);
 
         let loggerMock = sinon.mock(logger);
         loggerMock.expects("debug").twice();
@@ -183,11 +164,7 @@ describe("MediatorMapper", () => {
     it("fromMediator_does_nothing_when_mediator_is_not_mapped", () => {
         const matcher: TypeMatcher = new TypeMatcher().allOf(Sprite);
         logger = context.getLogger(context);
-        mapper = new MediatorMapper(
-            matcher.createTypeFilter(),
-            handler,
-            logger
-        );
+        mapper = new MediatorMapper(matcher.createTypeFilter(), handler, logger);
 
         let loggerMock = sinon.mock(logger);
         loggerMock.expects("debug").never();

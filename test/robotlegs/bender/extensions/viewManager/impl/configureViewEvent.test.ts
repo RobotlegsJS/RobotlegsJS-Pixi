@@ -19,10 +19,7 @@ describe("ConfigureViewEvent", () => {
 
     beforeEach(() => {
         container = new Container();
-        event = new ConfigureViewEvent(
-            ConfigureViewEvent.CONFIGURE_VIEW,
-            container
-        );
+        event = new ConfigureViewEvent(ConfigureViewEvent.CONFIGURE_VIEW, container);
     });
 
     afterEach(() => {

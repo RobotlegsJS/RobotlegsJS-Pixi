@@ -24,11 +24,7 @@ describe("ViewManagerEvent", () => {
     beforeEach(() => {
         container = new Sprite();
         handler = new CallbackViewHandler();
-        event = new ViewManagerEvent(
-            ViewManagerEvent.CONTAINER_ADD,
-            container,
-            handler
-        );
+        event = new ViewManagerEvent(ViewManagerEvent.CONTAINER_ADD, container, handler);
     });
 
     afterEach(() => {

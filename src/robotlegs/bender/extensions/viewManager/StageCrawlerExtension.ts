@@ -51,21 +51,13 @@ export class StageCrawlerExtension implements IExtension {
     /*============================================================================*/
 
     private afterInitializing(): void {
-        this._containerRegistry = this._injector.get<ContainerRegistry>(
-            ContainerRegistry
-        );
-        this._injector.isBound(IViewManager)
-            ? this.scanViewManagedContainers()
-            : this.scanContextView();
+        this._containerRegistry = this._injector.get<ContainerRegistry>(ContainerRegistry);
+        this._injector.isBound(IViewManager) ? this.scanViewManagedContainers() : this.scanContextView();
     }
 
     private scanViewManagedContainers(): void {
-        this._logger.debug(
-            "ViewManager is installed. Checking for managed containers..."
-        );
-        let viewManager: IViewManager = this._injector.get<IViewManager>(
-            IViewManager
-        );
+        this._logger.debug("ViewManager is installed. Checking for managed containers...");
+        let viewManager: IViewManager = this._injector.get<IViewManager>(IViewManager);
         viewManager.containers.forEach((container: Container) => {
             this.scanContainer(container);
         });
@@ -73,27 +65,17 @@ export class StageCrawlerExtension implements IExtension {
 
     private scanContextView(): void {
         if (this._injector.isBound(IContextView)) {
-            this._logger.debug(
-                "ViewManager is not installed. Checking the ContextView..."
-            );
-            let contextView: IContextView = this._injector.get<IContextView>(
-                IContextView
-            );
+            this._logger.debug("ViewManager is not installed. Checking the ContextView...");
+            let contextView: IContextView = this._injector.get<IContextView>(IContextView);
             this.scanContainer(contextView.view);
         } else {
-            this._logger.error(
-                "A ContextView must be installed if you install the StageCrawlerExtension."
-            );
+            this._logger.error("A ContextView must be installed if you install the StageCrawlerExtension.");
         }
     }
 
     private scanContainer(container: Container): void {
-        let binding: ContainerBinding = this._containerRegistry.getBinding(
-            container
-        );
-        this._logger.debug("StageCrawler scanning container {0} ...", [
-            container
-        ]);
+        let binding: ContainerBinding = this._containerRegistry.getBinding(container);
+        this._logger.debug("StageCrawler scanning container {0} ...", [container]);
         new StageCrawler(binding).scan(container);
         this._logger.debug("StageCrawler finished scanning {0}", [container]);
     }

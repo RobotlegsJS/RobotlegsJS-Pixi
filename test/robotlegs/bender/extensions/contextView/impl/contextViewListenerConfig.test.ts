@@ -11,12 +11,7 @@ import { assert } from "chai";
 
 import { Container } from "pixi.js";
 
-import {
-    IContextView,
-    IViewManager,
-    ContextView,
-    ContextViewListenerConfig
-} from "../../../../../../src";
+import { IContextView, IViewManager, ContextView, ContextViewListenerConfig } from "../../../../../../src";
 
 import { ContainerRegistry } from "../../../../../../src/robotlegs/bender/extensions/viewManager/impl/ContainerRegistry";
 import { ViewManager } from "../../../../../../src/robotlegs/bender/extensions/viewManager/impl/ViewManager";
@@ -33,10 +28,7 @@ describe("ContextViewListenerConfig", () => {
         contextView = new ContextView(container);
         containerRegistry = new ContainerRegistry();
         viewManager = new ViewManager(containerRegistry);
-        contextViewListenerConfig = new ContextViewListenerConfig(
-            contextView,
-            viewManager
-        );
+        contextViewListenerConfig = new ContextViewListenerConfig(contextView, viewManager);
     });
 
     afterEach(() => {

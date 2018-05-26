@@ -5,15 +5,7 @@
 //  in accordance with the terms of the license agreement accompanying it.
 // ------------------------------------------------------------------------------
 
-import {
-    injectable,
-    inject,
-    IClass,
-    IEvent,
-    IEventMap,
-    IEventDispatcher,
-    Event
-} from "@robotlegsjs/core";
+import { injectable, inject, IClass, IEvent, IEventMap, IEventDispatcher, Event } from "@robotlegsjs/core";
 
 import { IMediator } from "../api/IMediator";
 
@@ -23,8 +15,7 @@ import { IMediator } from "../api/IMediator";
  * <p>Override initialize and destroy to hook into the mediator lifecycle.</p>
  */
 @injectable()
-export abstract class Mediator<T extends IEventDispatcher>
-    implements IMediator {
+export abstract class Mediator<T extends IEventDispatcher> implements IMediator {
     /*============================================================================*/
     /* Protected Properties                                                       */
     /*============================================================================*/
@@ -81,15 +72,7 @@ export abstract class Mediator<T extends IEventDispatcher>
         useCapture?: boolean,
         priority?: number
     ): void {
-        this.eventMap.mapListener(
-            this._viewComponent,
-            eventString,
-            listener,
-            thisObject,
-            eventClass,
-            useCapture,
-            priority
-        );
+        this.eventMap.mapListener(this._viewComponent, eventString, listener, thisObject, eventClass, useCapture, priority);
     }
 
     protected addContextListener(
@@ -100,15 +83,7 @@ export abstract class Mediator<T extends IEventDispatcher>
         useCapture?: boolean,
         priority?: number
     ): void {
-        this.eventMap.mapListener(
-            this.eventDispatcher,
-            eventString,
-            listener,
-            thisObject,
-            eventClass,
-            useCapture,
-            priority
-        );
+        this.eventMap.mapListener(this.eventDispatcher, eventString, listener, thisObject, eventClass, useCapture, priority);
     }
 
     protected addDomListener(
@@ -117,12 +92,7 @@ export abstract class Mediator<T extends IEventDispatcher>
         listener: EventListenerOrEventListenerObject,
         options?: boolean | AddEventListenerOptions
     ): void {
-        this.eventMap.mapDomListener(
-            eventTarget,
-            eventString,
-            listener,
-            options
-        );
+        this.eventMap.mapDomListener(eventTarget, eventString, listener, options);
     }
 
     protected removeViewListener(
@@ -132,14 +102,7 @@ export abstract class Mediator<T extends IEventDispatcher>
         eventClass?: IClass<IEvent>,
         useCapture?: boolean
     ): void {
-        this.eventMap.unmapListener(
-            this._viewComponent,
-            eventString,
-            listener,
-            thisObject,
-            eventClass,
-            useCapture
-        );
+        this.eventMap.unmapListener(this._viewComponent, eventString, listener, thisObject, eventClass, useCapture);
     }
 
     protected removeContextListener(
@@ -149,21 +112,10 @@ export abstract class Mediator<T extends IEventDispatcher>
         eventClass?: IClass<IEvent>,
         useCapture?: boolean
     ): void {
-        this.eventMap.unmapListener(
-            this.eventDispatcher,
-            eventString,
-            listener,
-            thisObject,
-            eventClass,
-            useCapture
-        );
+        this.eventMap.unmapListener(this.eventDispatcher, eventString, listener, thisObject, eventClass, useCapture);
     }
 
-    protected removeDomListener(
-        eventTarget: EventTarget,
-        eventString: string,
-        listener: EventListenerOrEventListenerObject
-    ): void {
+    protected removeDomListener(eventTarget: EventTarget, eventString: string, listener: EventListenerOrEventListenerObject): void {
         this.eventMap.unmapDomListener(eventTarget, eventString, listener);
     }
 

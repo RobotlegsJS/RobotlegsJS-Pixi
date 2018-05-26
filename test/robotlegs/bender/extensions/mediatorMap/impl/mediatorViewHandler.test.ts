@@ -13,13 +13,7 @@ import { assert } from "chai";
 
 import { Container, Sprite } from "pixi.js";
 
-import {
-    IContext,
-    IInjector,
-    ITypeFilter,
-    Context,
-    TypeMatcher
-} from "@robotlegsjs/core";
+import { IContext, IInjector, ITypeFilter, Context, TypeMatcher } from "@robotlegsjs/core";
 
 import { MediatorFactory } from "../../../../../../src/robotlegs/bender/extensions/mediatorMap/impl/MediatorFactory";
 import { MediatorMapping } from "../../../../../../src/robotlegs/bender/extensions/mediatorMap/impl/MediatorMapping";
@@ -55,11 +49,7 @@ describe("MediatorViewHandler", () => {
         handler = null;
     });
 
-    function createTypeFilter(
-        allOf: any[],
-        anyOf: any[] = null,
-        noneOf: any[] = null
-    ): ITypeFilter {
+    function createTypeFilter(allOf: any[], anyOf: any[] = null, noneOf: any[] = null): ITypeFilter {
         const matcher: TypeMatcher = new TypeMatcher();
 
         if (allOf) {
@@ -83,10 +73,7 @@ describe("MediatorViewHandler", () => {
                 createdMediator = mediator;
             })
             .whenTargetNamed("executeCallback");
-        const mapping: MediatorMapping = new MediatorMapping(
-            createTypeFilter([Container]),
-            CallbackMediator
-        );
+        const mapping: MediatorMapping = new MediatorMapping(createTypeFilter([Container]), CallbackMediator);
         handler.addMapping(mapping);
         handler.handleView(new Container(), Container);
         assert.isNotNull(createdMediator);
@@ -101,10 +88,7 @@ describe("MediatorViewHandler", () => {
                 createdMediator = mediator;
             })
             .whenTargetNamed("executeCallback");
-        const mapping: MediatorMapping = new MediatorMapping(
-            createTypeFilter([Sprite]),
-            CallbackMediator
-        );
+        const mapping: MediatorMapping = new MediatorMapping(createTypeFilter([Sprite]), CallbackMediator);
         handler.addMapping(mapping);
         handler.handleView(new Container(), Container);
         assert.isNull(createdMediator);
@@ -118,10 +102,7 @@ describe("MediatorViewHandler", () => {
                 createdMediators.push(mediator);
             })
             .whenTargetNamed("executeCallback");
-        const mapping: MediatorMapping = new MediatorMapping(
-            createTypeFilter([Container]),
-            CallbackMediator
-        );
+        const mapping: MediatorMapping = new MediatorMapping(createTypeFilter([Container]), CallbackMediator);
         handler.addMapping(mapping);
         handler.addMapping(mapping);
         handler.handleView(new Container(), Container);
@@ -136,10 +117,7 @@ describe("MediatorViewHandler", () => {
                 createdMediators.push(mediator);
             })
             .whenTargetNamed("executeCallback");
-        const mapping: MediatorMapping = new MediatorMapping(
-            createTypeFilter([Container]),
-            CallbackMediator
-        );
+        const mapping: MediatorMapping = new MediatorMapping(createTypeFilter([Container]), CallbackMediator);
         handler.addMapping(mapping);
         handler.removeMapping(mapping);
         handler.handleView(new Container(), Container);
@@ -154,10 +132,7 @@ describe("MediatorViewHandler", () => {
                 createdMediators.push(mediator);
             })
             .whenTargetNamed("executeCallback");
-        const mapping: MediatorMapping = new MediatorMapping(
-            createTypeFilter([Container]),
-            CallbackMediator
-        );
+        const mapping: MediatorMapping = new MediatorMapping(createTypeFilter([Container]), CallbackMediator);
         handler.addMapping(mapping);
         handler.removeMapping(mapping);
         handler.removeMapping(mapping);
@@ -173,10 +148,7 @@ describe("MediatorViewHandler", () => {
                 createdMediators.push(mediator);
             })
             .whenTargetNamed("executeCallback");
-        const mapping: MediatorMapping = new MediatorMapping(
-            createTypeFilter([NotAView]),
-            CallbackMediator
-        );
+        const mapping: MediatorMapping = new MediatorMapping(createTypeFilter([NotAView]), CallbackMediator);
         handler.addMapping(mapping);
         handler.handleItem(new NotAView(), NotAView);
         assert.equal(createdMediators.length, 1);
@@ -190,10 +162,7 @@ describe("MediatorViewHandler", () => {
                 createdMediators.push(mediator);
             })
             .whenTargetNamed("executeCallback");
-        const mapping: MediatorMapping = new MediatorMapping(
-            createTypeFilter([NotAView]),
-            CallbackMediator
-        );
+        const mapping: MediatorMapping = new MediatorMapping(createTypeFilter([NotAView]), CallbackMediator);
         handler.addMapping(mapping);
         handler.handleItem(new Sprite(), Sprite);
         assert.equal(createdMediators.length, 0);
@@ -207,15 +176,9 @@ describe("MediatorViewHandler", () => {
                 createdMediators.push(mediator);
             })
             .whenTargetNamed("executeCallback");
-        const mapping1: MediatorMapping = new MediatorMapping(
-            createTypeFilter([Container]),
-            CallbackMediator
-        );
+        const mapping1: MediatorMapping = new MediatorMapping(createTypeFilter([Container]), CallbackMediator);
         handler.addMapping(mapping1);
-        const mapping2: MediatorMapping = new MediatorMapping(
-            createTypeFilter([Sprite]),
-            CallbackMediator
-        );
+        const mapping2: MediatorMapping = new MediatorMapping(createTypeFilter([Sprite]), CallbackMediator);
         handler.addMapping(mapping2);
 
         handler.handleItem(new NotAView(), NotAView);
@@ -232,15 +195,9 @@ describe("MediatorViewHandler", () => {
                 createdMediators.push(mediator);
             })
             .whenTargetNamed("executeCallback");
-        const mapping1: MediatorMapping = new MediatorMapping(
-            createTypeFilter([Container]),
-            CallbackMediator
-        );
+        const mapping1: MediatorMapping = new MediatorMapping(createTypeFilter([Container]), CallbackMediator);
         handler.addMapping(mapping1);
-        const mapping2: MediatorMapping = new MediatorMapping(
-            createTypeFilter([Sprite]),
-            CallbackMediator
-        );
+        const mapping2: MediatorMapping = new MediatorMapping(createTypeFilter([Sprite]), CallbackMediator);
         handler.addMapping(mapping2);
 
         handler.handleView(new Sprite(), Sprite);

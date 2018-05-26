@@ -48,10 +48,7 @@ export class ContainerRegistry extends EventDispatcher {
     /* Private Properties                                                         */
     /*============================================================================*/
 
-    private _bindingByContainer: Map<Container, ContainerBinding> = new Map<
-        Container,
-        ContainerBinding
-    >();
+    private _bindingByContainer: Map<Container, ContainerBinding> = new Map<Container, ContainerBinding>();
 
     /*============================================================================*/
     /* Public Functions                                                           */
@@ -90,9 +87,7 @@ export class ContainerRegistry extends EventDispatcher {
     public findParentBinding(target: Container): ContainerBinding {
         let parent: Container = target.parent;
         while (parent) {
-            let binding: ContainerBinding = this._bindingByContainer.get(
-                parent
-            );
+            let binding: ContainerBinding = this._bindingByContainer.get(parent);
             if (binding) {
                 return binding;
             }
@@ -117,10 +112,7 @@ export class ContainerRegistry extends EventDispatcher {
         this._bindings.push(binding);
 
         // Add a listener so that we can remove this binding when it has no handlers
-        binding.addEventListener(
-            ContainerBindingEvent.BINDING_EMPTY,
-            this.onBindingEmpty.bind(this)
-        );
+        binding.addEventListener(ContainerBindingEvent.BINDING_EMPTY, this.onBindingEmpty.bind(this));
 
         // If the new binding doesn't have a parent it is a Root
         binding.parent = this.findParentBinding(container);
@@ -142,12 +134,7 @@ export class ContainerRegistry extends EventDispatcher {
             }
         });
 
-        this.dispatchEvent(
-            new ContainerRegistryEvent(
-                ContainerRegistryEvent.CONTAINER_ADD,
-                binding.container
-            )
-        );
+        this.dispatchEvent(new ContainerRegistryEvent(ContainerRegistryEvent.CONTAINER_ADD, binding.container));
         return binding;
     }
 
@@ -158,10 +145,7 @@ export class ContainerRegistry extends EventDispatcher {
         this._bindings.splice(index, 1);
 
         // Drop the empty binding listener
-        binding.removeEventListener(
-            ContainerBindingEvent.BINDING_EMPTY,
-            this.onBindingEmpty
-        );
+        binding.removeEventListener(ContainerBindingEvent.BINDING_EMPTY, this.onBindingEmpty);
 
         if (!binding.parent) {
             // This binding didn't have a parent, so it was a Root
@@ -180,33 +164,18 @@ export class ContainerRegistry extends EventDispatcher {
             }
         });
 
-        this.dispatchEvent(
-            new ContainerRegistryEvent(
-                ContainerRegistryEvent.CONTAINER_REMOVE,
-                binding.container
-            )
-        );
+        this.dispatchEvent(new ContainerRegistryEvent(ContainerRegistryEvent.CONTAINER_REMOVE, binding.container));
     }
 
     private addRootBinding(binding: ContainerBinding): void {
         this._rootBindings.push(binding);
-        this.dispatchEvent(
-            new ContainerRegistryEvent(
-                ContainerRegistryEvent.ROOT_CONTAINER_ADD,
-                binding.container
-            )
-        );
+        this.dispatchEvent(new ContainerRegistryEvent(ContainerRegistryEvent.ROOT_CONTAINER_ADD, binding.container));
     }
 
     private removeRootBinding(binding: ContainerBinding): void {
         let index: number = this._rootBindings.indexOf(binding);
         this._rootBindings.splice(index, 1);
-        this.dispatchEvent(
-            new ContainerRegistryEvent(
-                ContainerRegistryEvent.ROOT_CONTAINER_REMOVE,
-                binding.container
-            )
-        );
+        this.dispatchEvent(new ContainerRegistryEvent(ContainerRegistryEvent.ROOT_CONTAINER_REMOVE, binding.container));
     }
 
     private onBindingEmpty(event: ContainerBindingEvent): void {

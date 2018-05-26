@@ -108,9 +108,7 @@ describe("MediatorMap", () => {
     });
 
     it("doesnt_leave_view_and_mediator_mappings_lying_around", () => {
-        mediatorMap
-            .mapMatcher(new TypeMatcher().anyOf(Container, Sprite))
-            .toMediator(ExampleMediator);
+        mediatorMap.mapMatcher(new TypeMatcher().anyOf(Container, Sprite)).toMediator(ExampleMediator);
         mediatorMap.handleView(new Sprite(), Sprite);
 
         assert.isFalse(injector.isBound(Container));
@@ -119,23 +117,17 @@ describe("MediatorMap", () => {
     });
 
     it("handler_creates_mediator_for_view_mapped_by_matcher", () => {
-        mediatorMap
-            .mapMatcher(new TypeMatcher().allOf(DisplayObject))
-            .toMediator(ExampleDisplayObjectMediator);
+        mediatorMap.mapMatcher(new TypeMatcher().allOf(DisplayObject)).toMediator(ExampleDisplayObjectMediator);
 
         mediatorMap.handleView(new Sprite(), Sprite);
 
-        const expectedNotifications: string[] = [
-            "ExampleDisplayObjectMediator"
-        ];
+        const expectedNotifications: string[] = ["ExampleDisplayObjectMediator"];
 
         assert.deepEqual(expectedNotifications, mediatorWatcher.notifications);
     });
 
     it("handler_doesnt_create_mediator_for_wrong_view_mapped_by_matcher", () => {
-        mediatorMap
-            .mapMatcher(new TypeMatcher().allOf(Container))
-            .toMediator(ExampleDisplayObjectMediator);
+        mediatorMap.mapMatcher(new TypeMatcher().allOf(Container)).toMediator(ExampleDisplayObjectMediator);
 
         mediatorMap.handleView(new DisplayObject(), null);
 
@@ -182,10 +174,7 @@ describe("MediatorMap", () => {
         const view: Sprite = new Sprite();
         mediatorMap.mediate(view);
         mediatorMap.unmediate(view);
-        const expectedNotifications: string[] = [
-            "ExampleMediator",
-            "ExampleMediator destroy"
-        ];
+        const expectedNotifications: string[] = ["ExampleMediator", "ExampleMediator destroy"];
         assert.deepEqual(expectedNotifications, mediatorWatcher.notifications);
     });
 
@@ -193,10 +182,7 @@ describe("MediatorMap", () => {
         mediatorMap.map(Sprite).toMediator(ExampleMediator);
         mediatorMap.map(Sprite).toMediator(ExampleMediator2);
         mediatorMap.mediate(new Sprite());
-        const expectedNotifications: string[] = [
-            "ExampleMediator",
-            "ExampleMediator2"
-        ];
+        const expectedNotifications: string[] = ["ExampleMediator", "ExampleMediator2"];
         assert.deepEqual(expectedNotifications, mediatorWatcher.notifications);
     });
 
@@ -277,10 +263,7 @@ describe("MediatorMap", () => {
         const notAView: NotAView = new NotAView();
         mediatorMap.mediate(notAView);
         mediatorMap.unmediate(notAView);
-        const expectedNotifications: string[] = [
-            "NotAViewMediator",
-            "NotAViewMediator destroy"
-        ];
+        const expectedNotifications: string[] = ["NotAViewMediator", "NotAViewMediator destroy"];
         assert.deepEqual(expectedNotifications, mediatorWatcher.notifications);
     });
 });

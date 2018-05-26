@@ -46,17 +46,10 @@ export class MediatorManager {
     /**
      * @private
      */
-    public addMediator(
-        mediator: any,
-        item: any,
-        mapping: IMediatorMapping
-    ): void {
+    public addMediator(mediator: any, item: any, mapping: IMediatorMapping): void {
         // Watch Display Object for removal
         if (item instanceof DisplayObject && mapping.autoRemoveEnabled) {
-            (<any>item)._onRemovedFromStage = this.onRemovedFromStage.bind(
-                this,
-                item
-            );
+            (<any>item)._onRemovedFromStage = this.onRemovedFromStage.bind(this, item);
             item.on("removed", (<any>item)._onRemovedFromStage, this);
         }
 
@@ -67,11 +60,7 @@ export class MediatorManager {
     /**
      * @private
      */
-    public removeMediator(
-        mediator: any,
-        item: any,
-        mapping: IMediatorMapping
-    ): void {
+    public removeMediator(mediator: any, item: any, mapping: IMediatorMapping): void {
         if (item instanceof DisplayObject) {
             item.off("removed", (<any>item)._onRemovedFromStage);
         }

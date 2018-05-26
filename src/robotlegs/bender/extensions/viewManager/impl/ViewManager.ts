@@ -55,9 +55,7 @@ export class ViewManager extends EventDispatcher implements IViewManager {
     /**
      * @private
      */
-    constructor(
-        @inject(ContainerRegistry) containerRegistry: ContainerRegistry
-    ) {
+    constructor(@inject(ContainerRegistry) containerRegistry: ContainerRegistry) {
         super();
         this._registry = containerRegistry;
     }
@@ -79,9 +77,7 @@ export class ViewManager extends EventDispatcher implements IViewManager {
             this._registry.addContainer(container).addHandler(handler);
         });
 
-        this.dispatchEvent(
-            new ViewManagerEvent(ViewManagerEvent.CONTAINER_ADD, container)
-        );
+        this.dispatchEvent(new ViewManagerEvent(ViewManagerEvent.CONTAINER_ADD, container));
     }
 
     /**
@@ -102,9 +98,7 @@ export class ViewManager extends EventDispatcher implements IViewManager {
             binding.removeHandler(handler);
         });
 
-        this.dispatchEvent(
-            new ViewManagerEvent(ViewManagerEvent.CONTAINER_REMOVE, container)
-        );
+        this.dispatchEvent(new ViewManagerEvent(ViewManagerEvent.CONTAINER_REMOVE, container));
     }
 
     /**
@@ -120,9 +114,7 @@ export class ViewManager extends EventDispatcher implements IViewManager {
             this._registry.addContainer(container).addHandler(handler);
         });
 
-        this.dispatchEvent(
-            new ViewManagerEvent(ViewManagerEvent.HANDLER_ADD, null, handler)
-        );
+        this.dispatchEvent(new ViewManagerEvent(ViewManagerEvent.HANDLER_ADD, null, handler));
     }
 
     /**
@@ -141,9 +133,7 @@ export class ViewManager extends EventDispatcher implements IViewManager {
             this._registry.getBinding(container).removeHandler(handler);
         });
 
-        this.dispatchEvent(
-            new ViewManagerEvent(ViewManagerEvent.HANDLER_REMOVE, null, handler)
-        );
+        this.dispatchEvent(new ViewManagerEvent(ViewManagerEvent.HANDLER_REMOVE, null, handler));
     }
 
     /**
@@ -168,10 +158,7 @@ export class ViewManager extends EventDispatcher implements IViewManager {
 
         if (isValid) {
             this._containers.forEach(registeredContainer => {
-                if (
-                    registeredContainer.contains(container) ||
-                    container.contains(registeredContainer)
-                ) {
+                if (registeredContainer.contains(container) || container.contains(registeredContainer)) {
                     throw new Error("Containers can not be nested");
                 }
             });

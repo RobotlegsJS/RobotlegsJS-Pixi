@@ -73,10 +73,7 @@ describe("ContainerBinding", () => {
 
     it("handler_is_not_invoked_after_removal", () => {
         let callCount: number = 0;
-        const handler: IViewHandler = new CallbackViewHandler(function(
-            view: any,
-            type: any
-        ): void {
+        const handler: IViewHandler = new CallbackViewHandler(function(view: any, type: any): void {
             callCount++;
         });
         binding.addHandler(handler);
@@ -87,10 +84,7 @@ describe("ContainerBinding", () => {
 
     it("handler_is_not_invoked_multiple_times_when_added_multiple_times", () => {
         let callCount: number = 0;
-        const handler: IViewHandler = new CallbackViewHandler(function(
-            view: any,
-            type: any
-        ): void {
+        const handler: IViewHandler = new CallbackViewHandler(function(view: any, type: any): void {
             callCount++;
         });
         binding.addHandler(handler);
@@ -125,9 +119,7 @@ describe("ContainerBinding", () => {
     it("binding_fires_event_on_empty", () => {
         const handler: IViewHandler = new CallbackViewHandler();
         let callCount: number = 0;
-        binding.addEventListener(ContainerBindingEvent.BINDING_EMPTY, function(
-            event: ContainerBindingEvent
-        ): void {
+        binding.addEventListener(ContainerBindingEvent.BINDING_EMPTY, function(event: ContainerBindingEvent): void {
             callCount++;
         });
         binding.addHandler(handler);
@@ -138,9 +130,7 @@ describe("ContainerBinding", () => {
     it("event_on_empty_is_not_invoked_multiple_times_when_handler_is_removed_multiple_times", () => {
         const handler: IViewHandler = new CallbackViewHandler();
         let callCount: number = 0;
-        binding.addEventListener(ContainerBindingEvent.BINDING_EMPTY, function(
-            event: ContainerBindingEvent
-        ): void {
+        binding.addEventListener(ContainerBindingEvent.BINDING_EMPTY, function(event: ContainerBindingEvent): void {
             callCount++;
         });
         binding.addHandler(handler);
@@ -155,9 +145,7 @@ describe("ContainerBinding", () => {
         const handler2: IViewHandler = new CallbackViewHandler();
         const handler3: IViewHandler = new CallbackViewHandler();
         let callCount: number = 0;
-        binding.addEventListener(ContainerBindingEvent.BINDING_EMPTY, function(
-            event: ContainerBindingEvent
-        ): void {
+        binding.addEventListener(ContainerBindingEvent.BINDING_EMPTY, function(event: ContainerBindingEvent): void {
             callCount++;
         });
         binding.addHandler(handler1);

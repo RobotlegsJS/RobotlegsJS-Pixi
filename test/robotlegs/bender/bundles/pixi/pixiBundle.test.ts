@@ -13,13 +13,7 @@ import { Container } from "pixi.js";
 
 import { IContext, Context, LogLevel } from "@robotlegsjs/core";
 
-import {
-    IContextView,
-    IMediatorMap,
-    IViewManager,
-    ContextView,
-    PixiBundle
-} from "../../../../../src";
+import { IContextView, IMediatorMap, IViewManager, ContextView, PixiBundle } from "../../../../../src";
 
 import { ContainerRegistry } from "../../../../../src/robotlegs/bender/extensions/viewManager/impl/ContainerRegistry";
 
@@ -52,17 +46,11 @@ describe("PixiBundle", () => {
 
     it("bundle_logs_an_error_message_when_context_view_is_not_provided", () => {
         let errorLogged: boolean = false;
-        let logTarget: CallbackLogTarget = new CallbackLogTarget(
-            (log: LogParams) => {
-                if (
-                    log.source instanceof PixiBundle &&
-                    log.level === LogLevel.ERROR
-                ) {
-                    errorLogged =
-                        log.message === "PixiBundle requires IContextView.";
-                }
+        let logTarget: CallbackLogTarget = new CallbackLogTarget((log: LogParams) => {
+            if (log.source instanceof PixiBundle && log.level === LogLevel.ERROR) {
+                errorLogged = log.message === "PixiBundle requires IContextView.";
             }
-        );
+        });
 
         context = new Context();
         context.addLogTarget(logTarget);
