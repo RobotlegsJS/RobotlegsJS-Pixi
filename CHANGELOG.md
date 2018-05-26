@@ -28,6 +28,8 @@
 
 - Update pixi.js to version 4.7.3 (see #52).
 
+- Update TypeScript Compiler Options (see #57).
+
 - Update codeclimate config to version 2 (see #56).
 
 - Use `rimraf` instead of `rm -rf` (see #55).
