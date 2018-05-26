@@ -10,11 +10,9 @@
 
 - [ ] Evaluate if **IMediator** interface should be mandatory.
 
-- [ ] Update **Prettier** rules:
+- [x] Update **Prettier** rules:
 
-  - [ ] **printWidth** should be around **140** characters per line.
-
-  - [ ] Find a way to keep a new line between **@inject** anotation and property declarations.
+  - [x] **printWidth** should be around **140** characters per line.
 
 - [ ] Improve Code Coverage to reach 100%.
 
@@ -29,6 +27,8 @@
 - Update eventemitter3 to version 3.1.0 (see #52).
 
 - Update pixi.js to version 4.7.3 (see #52).
+
+- Update Prettier rules (see #54).
 
 - Update dev dependencies to latest version.
 
