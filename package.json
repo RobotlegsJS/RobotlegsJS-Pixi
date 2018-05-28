@@ -80,7 +80,7 @@
     "karma-sourcemap-writer": "^0.1.2",
     "karma-webpack": "^3.0.0",
     "mocha": "^5.2.0",
-    "prettier": "^1.12.1",
+    "prettier": "^1.13.0",
     "publish-please": "^2.4.1",
     "reflect-metadata": "^0.1.12",
     "remap-istanbul": "^0.11.1",
