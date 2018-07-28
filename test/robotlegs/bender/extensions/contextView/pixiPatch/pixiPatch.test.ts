@@ -1,3 +1,4 @@
+import { Container } from 'pixi.js';
 // ------------------------------------------------------------------------------
 //  Copyright (c) 2017 RobotlegsJS. All Rights Reserved.
 //
@@ -8,8 +9,6 @@
 import "../../../../../entry";
 
 import { assert } from "chai";
-
-import { Container } from "pixi.js";
 
 import { applyPixiPatch } from "../../../../../../src/robotlegs/bender/extensions/contextView/pixiPatch/pixi-patch";
 
@@ -47,6 +46,37 @@ describe("PixiPatch", () => {
         let child3: Container = new Container();
         applyPixiPatch(stage);
         assert.equal(child1, stage.addChild(child1, child2, child3));
+    });
+
+    it("addChild_stage_capture_added_events_only_when_object_is_attached_to_stage", () => {
+        applyPixiPatch(stage);
+
+        let container1: Container = new Container();
+        let container2: Container = new Container();
+        let container3: Container = new Container();
+        let container4: Container = new Container();
+        let container5: Container = new Container();
+
+        let count: number = 0;
+
+        stage.on("added", () => {
+            count++;
+        });
+
+        container1.addChild(container2);
+        assert.equal(count, 0);
+
+        container1.addChild(container3);
+        assert.equal(count, 0);
+
+        container1.addChild(container4);
+        assert.equal(count, 0);
+
+        container5.addChild(container1);
+        assert.equal(count, 0);
+
+        stage.addChild(container5);
+        assert.equal(count, 5);
     });
 
     it("addChild_stage_capture_added_events_on_flat_hierarchy", () => {
