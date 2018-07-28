@@ -1,4 +1,3 @@
-import { Container } from 'pixi.js';
 // ------------------------------------------------------------------------------
 //  Copyright (c) 2017 RobotlegsJS. All Rights Reserved.
 //
@@ -9,6 +8,8 @@ import { Container } from 'pixi.js';
 import "../../../../../entry";
 
 import { assert } from "chai";
+
+import { Container } from "pixi.js";
 
 import { applyPixiPatch } from "../../../../../../src/robotlegs/bender/extensions/contextView/pixiPatch/pixi-patch";
 
