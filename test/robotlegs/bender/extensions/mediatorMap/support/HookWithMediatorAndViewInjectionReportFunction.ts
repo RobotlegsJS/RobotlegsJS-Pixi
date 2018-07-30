@@ -15,9 +15,11 @@ import { RectangleMediator } from "./RectangleMediator";
 
 @injectable()
 export class HookWithMediatorAndViewInjectionReportFunction implements IHook {
-    @inject(RectangleMediator) public mediator: RectangleMediator;
+    @inject(RectangleMediator)
+    public mediator: RectangleMediator;
 
-    @inject(Sprite) public view: Sprite;
+    @inject(Sprite)
+    public view: Sprite;
 
     @inject("Function")
     @named("reportView")

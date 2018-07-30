@@ -20,9 +20,11 @@ export class MediatorHook implements IHook {
     @optional()
     public callback: Function;
 
-    @inject(Sprite) public mediatedItem: Sprite;
+    @inject(Sprite)
+    public mediatedItem: Sprite;
 
-    @inject(ViewInjectedMediator) public mediator: ViewInjectedMediator;
+    @inject(ViewInjectedMediator)
+    public mediator: ViewInjectedMediator;
 
     public hook(): void {
         if (this.callback) {
