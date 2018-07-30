@@ -40,6 +40,8 @@
 
 - Update Prettier rules (see #54).
 
+- Adopts year-agnostic copyright message (see #70).
+
 - Update dev dependencies to latest version.
 
 ### [v0.1.2](https://github.com/RobotlegsJS/RobotlegsJS-Pixi/releases/tag/0.1.2) - 2017-11-23
