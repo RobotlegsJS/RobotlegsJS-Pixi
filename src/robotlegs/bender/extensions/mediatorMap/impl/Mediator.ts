@@ -20,9 +20,11 @@ export abstract class Mediator<T extends IEventDispatcher> implements IMediator 
     /* Protected Properties                                                       */
     /*============================================================================*/
 
-    @inject(IEventMap) protected eventMap: IEventMap;
+    @inject(IEventMap)
+    protected eventMap: IEventMap;
 
-    @inject(IEventDispatcher) protected eventDispatcher: IEventDispatcher;
+    @inject(IEventDispatcher)
+    protected eventDispatcher: IEventDispatcher;
 
     protected _viewComponent: T;
 

@@ -12,9 +12,11 @@ import { NotAView } from "./NotAView";
 
 @injectable()
 export class NotAViewMediator {
-    @inject(MediatorWatcher) public mediatorWatcher: MediatorWatcher;
+    @inject(MediatorWatcher)
+    public mediatorWatcher: MediatorWatcher;
 
-    @inject(NotAView) public view: NotAView;
+    @inject(NotAView)
+    public view: NotAView;
 
     public initialize(): void {
         this.view.mediatorName = "NotAViewMediator";

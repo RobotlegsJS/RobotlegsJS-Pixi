@@ -13,7 +13,8 @@ import { IGuard } from "@robotlegsjs/core";
 
 @injectable()
 export class OnlyIfViewHasChildrenGuard implements IGuard {
-    @inject(Sprite) public view: Sprite;
+    @inject(Sprite)
+    public view: Sprite;
 
     public approve(): boolean {
         return this.view.children.length > 0;

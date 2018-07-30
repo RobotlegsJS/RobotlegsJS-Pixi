@@ -11,7 +11,8 @@ import { DisplayObject } from "pixi.js";
 
 @injectable()
 export class ViewInjectedAsRequestedMediator {
-    @inject(DisplayObject) public mediatedItem: DisplayObject;
+    @inject(DisplayObject)
+    public mediatedItem: DisplayObject;
 
     public initialize(): void {}
 

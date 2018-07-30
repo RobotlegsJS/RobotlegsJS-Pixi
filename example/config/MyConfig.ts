@@ -8,7 +8,8 @@ import { IMediatorMap } from "../../src/index";
 
 @injectable()
 export class MyConfig implements IConfig {
-    @inject(IMediatorMap) private mediatorMap: IMediatorMap;
+    @inject(IMediatorMap)
+    private mediatorMap: IMediatorMap;
 
     public configure(): void {
         this.mediatorMap.map(CircleView).toMediator(CircleMediator);

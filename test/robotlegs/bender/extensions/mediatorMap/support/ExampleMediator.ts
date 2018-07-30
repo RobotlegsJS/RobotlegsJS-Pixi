@@ -13,9 +13,11 @@ import { MediatorWatcher } from "./MediatorWatcher";
 
 @injectable()
 export class ExampleMediator {
-    @inject(MediatorWatcher) public mediatorWatcher: MediatorWatcher;
+    @inject(MediatorWatcher)
+    public mediatorWatcher: MediatorWatcher;
 
-    @inject(Sprite) public view: Sprite;
+    @inject(Sprite)
+    public view: Sprite;
 
     public initialize(): void {
         this.mediatorWatcher.notify("ExampleMediator");

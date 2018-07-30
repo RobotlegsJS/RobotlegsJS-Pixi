@@ -9,7 +9,8 @@ import { injectable, inject } from "inversify";
 
 @injectable()
 export class InjectedMediator {
-    @inject(Number) public number: number;
+    @inject(Number)
+    public number: number;
 
     public initialize(): void {}
 

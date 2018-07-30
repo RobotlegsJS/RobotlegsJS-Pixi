@@ -13,7 +13,8 @@ import { IHook } from "@robotlegsjs/core";
 
 @injectable()
 export class Alpha50PercentHook implements IHook {
-    @inject(Sprite) public view: Sprite;
+    @inject(Sprite)
+    public view: Sprite;
 
     public hook(): void {
         this.view.alpha = 0.5;

@@ -11,7 +11,8 @@ import { Sprite } from "pixi.js";
 
 @injectable()
 export class ViewInjectedMediator {
-    @inject(Sprite) public mediatedItem: Sprite;
+    @inject(Sprite)
+    public mediatedItem: Sprite;
 
     public initialize(): void {}
 
