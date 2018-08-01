@@ -1,5 +1,5 @@
 // ------------------------------------------------------------------------------
-//  Copyright (c) 2017 RobotlegsJS. All Rights Reserved.
+//  Copyright (c) 2017-present, RobotlegsJS. All Rights Reserved.
 //
 //  NOTICE: You are permitted to use, modify, and distribute this file
 //  in accordance with the terms of the license agreement accompanying it.
@@ -20,9 +20,11 @@ export class MediatorHook implements IHook {
     @optional()
     public callback: Function;
 
-    @inject(Sprite) public mediatedItem: Sprite;
+    @inject(Sprite)
+    public mediatedItem: Sprite;
 
-    @inject(ViewInjectedMediator) public mediator: ViewInjectedMediator;
+    @inject(ViewInjectedMediator)
+    public mediator: ViewInjectedMediator;
 
     public hook(): void {
         if (this.callback) {

@@ -32,13 +32,17 @@
 
 - Enforce TSLint rules (see #58).
 
-- Update TypeScript Compiler Options (see #57).
+- Update TypeScript Compiler Options (see #57, #71).
+
+- Use [tslib](https://github.com/Microsoft/tslib) library to avoid duplicated declarations (see #71).
 
 - Update codeclimate config to version 2 (see #56).
 
 - Use `rimraf` instead of `rm -rf` (see #55).
 
 - Update Prettier rules (see #54).
+
+- Adopts year-agnostic copyright message (see #70).
 
 - Update dev dependencies to latest version.
 

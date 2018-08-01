@@ -1,5 +1,5 @@
 // ------------------------------------------------------------------------------
-//  Copyright (c) 2017 RobotlegsJS. All Rights Reserved.
+//  Copyright (c) 2017-present, RobotlegsJS. All Rights Reserved.
 //
 //  NOTICE: You are permitted to use, modify, and distribute this file
 //  in accordance with the terms of the license agreement accompanying it.
@@ -20,9 +20,11 @@ export abstract class Mediator<T extends IEventDispatcher> implements IMediator 
     /* Protected Properties                                                       */
     /*============================================================================*/
 
-    @inject(IEventMap) protected eventMap: IEventMap;
+    @inject(IEventMap)
+    protected eventMap: IEventMap;
 
-    @inject(IEventDispatcher) protected eventDispatcher: IEventDispatcher;
+    @inject(IEventDispatcher)
+    protected eventDispatcher: IEventDispatcher;
 
     protected _viewComponent: T;
 
