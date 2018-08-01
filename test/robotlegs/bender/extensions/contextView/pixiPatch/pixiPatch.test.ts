@@ -469,4 +469,60 @@ describe("PixiPatch", () => {
 
         assert.equal(count, 5);
     });
+
+    it("stage_does_not_capture_events_dispatched_in_another_stage", () => {
+        applyPixiPatch(stage);
+
+        let container1: Container = new Container();
+        let container2: Container = new Container();
+        let child1: DisplayObject = new DisplayObject();
+        let child2: DisplayObject = new DisplayObject();
+        let child3: DisplayObject = new DisplayObject();
+
+        let stageX: Container = new Container();
+
+        applyPixiPatch(stageX);
+
+        let containerX1: Container = new Container();
+        let containerX2: Container = new Container();
+        let childX1: DisplayObject = new DisplayObject();
+        let childX2: DisplayObject = new DisplayObject();
+        let childX3: DisplayObject = new DisplayObject();
+
+        let countAdded: number = 0;
+        let countRemoved: number = 0;
+
+        stage.on("added", () => {
+            countAdded++;
+        });
+
+        stage.on("removed", () => {
+            countRemoved++;
+        });
+
+        container2.addChildAt(child1, 0);
+        container2.addChildAt(child2, 1);
+        container2.addChildAt(child3, 2);
+        container1.addChild(container2);
+        stage.addChild(container1);
+
+        containerX2.addChildAt(childX1, 0);
+        containerX2.addChildAt(childX2, 1);
+        containerX2.addChildAt(childX3, 2);
+        containerX1.addChild(containerX2);
+        stageX.addChild(containerX1);
+
+        assert.equal(countAdded, 5);
+        assert.equal(countRemoved, 0);
+
+        container2.removeChildren(0, 2);
+        container1.removeChild(container2);
+        stage.removeChild(container1);
+
+        containerX2.removeChildren(0, 2);
+        containerX1.removeChild(containerX2);
+        stageX.removeChild(containerX1);
+
+        assert.equal(countRemoved, 5);
+    });
 });
