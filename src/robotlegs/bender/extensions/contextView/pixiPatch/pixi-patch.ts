@@ -16,6 +16,38 @@ import "./contains-patch";
 
 import PIXI = require("pixi.js");
 
+
+interface AddedEventEmitable {
+    __addedEventEmited: boolean;
+}
+
+function isConnectedToStage(stage: PIXI.Container, object: PIXI.DisplayObject): boolean {
+    if (object === stage) {
+        return true;
+    } else if (object.parent) {
+        return isConnectedToStage(stage, object.parent);
+    } else {
+        return false;
+    }
+}
+
+function addedEventAlreadyEmited(object: PIXI.DisplayObject): boolean {
+    return (<any>object as AddedEventEmitable).__addedEventEmited;
+}
+
+function emitAddedEvent(stage: PIXI.Container, target: PIXI.DisplayObject): void {
+    if (addedEventAlreadyEmited(target)) {
+        return;
+    }
+
+    stage.emit("added", { target });
+    (<any>target as AddedEventEmitable).__addedEventEmited = true;
+
+    if (target instanceof PIXI.Container) {
+        target.children.forEach(child => emitAddedEvent(stage, child));
+    }
+}
+
 export function applyPixiPatch(stage: PIXI.Container) {
     let addChild = PIXI.Container.prototype.addChild;
     let addChildAt = PIXI.Container.prototype.addChildAt;
@@ -28,15 +60,23 @@ export function applyPixiPatch(stage: PIXI.Container) {
         ...additionalChildren: PIXI.DisplayObject[]
     ): T {
         for (let i = 0, len = arguments.length; i < len; i++) {
-            addChild.call(this, arguments[i]);
-            stage.emit("added", { target: arguments[i] });
+            const object = arguments[i];
+            addChild.call(this, object);
+
+            if (isConnectedToStage(stage, object)) {
+                emitAddedEvent(stage, object);
+            }
+
         }
         return child;
     };
 
     PIXI.Container.prototype.addChildAt = function patchedAddChildAt<T extends PIXI.DisplayObject>(child: T, index: number): T {
         addChildAt.call(this, child, index);
-        stage.emit("added", { target: child });
+
+        if (isConnectedToStage(stage, child)) {
+            emitAddedEvent(stage, child);
+        }
         return child;
     };
 
@@ -44,6 +84,7 @@ export function applyPixiPatch(stage: PIXI.Container) {
         for (let i = 0, len = child.length; i < len; i++) {
             removeChild.call(this, child[i]);
             stage.emit("removed", { target: child[i] });
+            (<any>child[i] as AddedEventEmitable).__addedEventEmited = false;
         }
         return child[0];
     };
@@ -53,6 +94,7 @@ export function applyPixiPatch(stage: PIXI.Container) {
 
         for (let child of removedChildren) {
             stage.emit("removed", { target: child });
+            (<any>child as AddedEventEmitable).__addedEventEmited = false;
         }
 
         return removedChildren;
@@ -61,6 +103,7 @@ export function applyPixiPatch(stage: PIXI.Container) {
     PIXI.Container.prototype.removeChildAt = function(index): PIXI.DisplayObject {
         let child = removeChildAt.call(this, index);
         stage.emit("removed", { target: child });
+        (<any>child as AddedEventEmitable).__addedEventEmited = false;
         return child;
     };
 }
