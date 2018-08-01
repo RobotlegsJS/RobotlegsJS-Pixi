@@ -9,7 +9,7 @@ import "../../../../../entry";
 
 import { assert } from "chai";
 
-import { Container } from "pixi.js";
+import { Container, DisplayObject } from "pixi.js";
 
 import { applyPixiPatch } from "../../../../../../src/robotlegs/bender/extensions/contextView/pixiPatch/pixi-patch";
 
@@ -124,6 +124,60 @@ describe("PixiPatch", () => {
         assert.equal(count, 5);
     });
 
+    it("addChild_stage_capture_added_events_on_nested_hierarchy_added_in_reverse", () => {
+        applyPixiPatch(stage);
+
+        let container1: Container = new Container();
+        let container2: Container = new Container();
+        let container3: Container = new Container();
+        let container4: Container = new Container();
+        let container5: Container = new Container();
+
+        let count: number = 0;
+
+        stage.on("added", () => {
+            count++;
+        });
+
+        container4.addChild(container5);
+        container3.addChild(container4);
+        container2.addChild(container3);
+        container1.addChild(container2);
+        stage.addChild(container1);
+
+        assert.equal(count, 5);
+    });
+
+    it("addChild_stage_capture_added_events_on_nested_hierarchy_with_display_objects", () => {
+        applyPixiPatch(stage);
+
+        let container: Container = new Container();
+        let containerL: Container = new Container();
+        let containerR: Container = new Container();
+
+        let childL1: DisplayObject = new DisplayObject();
+        let childL2: DisplayObject = new DisplayObject();
+        let childR1: DisplayObject = new DisplayObject();
+        let childR2: DisplayObject = new DisplayObject();
+
+        let count: number = 0;
+
+        stage.on("added", () => {
+            count++;
+        });
+
+        containerL.addChild(childL1);
+        containerL.addChild(childL2);
+        containerR.addChild(childR1);
+        containerR.addChild(childR2);
+
+        container.addChild(containerL, containerR);
+        assert.equal(count, 0);
+
+        stage.addChild(container);
+        assert.equal(count, 7);
+    });
+
     it("addChildAt_return_reference_of_child_added", () => {
         let child: Container = new Container();
         applyPixiPatch(stage);
@@ -175,6 +229,31 @@ describe("PixiPatch", () => {
         container3.addChildAt(container4, 0);
         container4.addChildAt(container5, 0);
 
+        assert.equal(count, 5);
+    });
+
+    it("addChildAt_stage_capture_added_events_on_nested_hierarchy_added_in_reverse", () => {
+        applyPixiPatch(stage);
+
+        let container1: Container = new Container();
+        let container2: Container = new Container();
+        let container3: Container = new Container();
+        let container4: Container = new Container();
+        let container5: Container = new Container();
+
+        let count: number = 0;
+
+        stage.on("added", () => {
+            count++;
+        });
+
+        container4.addChildAt(container5, 0);
+        container3.addChildAt(container4, 0);
+        container2.addChildAt(container3, 0);
+        container1.addChildAt(container2, 0);
+        assert.equal(count, 0);
+
+        stage.addChildAt(container1, 0);
         assert.equal(count, 5);
     });
 
