@@ -44,6 +44,8 @@
 
 - Adopts year-agnostic copyright message (see #70).
 
+- Only dispatch 'added' or 'removed' events when view is related to current stage (see #67, #68, #72).
+
 - Update dev dependencies to latest version.
 
 ### [v0.1.2](https://github.com/RobotlegsJS/RobotlegsJS-Pixi/releases/tag/0.1.2) - 2017-11-23
