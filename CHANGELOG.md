@@ -18,11 +18,11 @@
 
 - [ ] Migrate [original documentation](https://github.com/robotlegs/robotlegs-framework/blob/master/src/readme.md) and adapt it to TypeScript and Pixi.
 
-## Robotlegs-Pixi 0.1.0
+## Robotlegs-Pixi 0.2.0
 
-### v0.1.3
+### v0.2.0
 
-- Update @robotlegsjs/core to version 0.1.3 (see #52).
+- Update @robotlegsjs/core to version 0.2.0 (see #74).
 
 - Update eventemitter3 to version 3.1.0 (see #52).
 
@@ -47,6 +47,8 @@
 - Only dispatch 'added' or 'removed' events when view is related to current stage (see #67, #68, #72).
 
 - Update dev dependencies to latest version.
+
+## Robotlegs-Pixi 0.1.0
 
 ### [v0.1.2](https://github.com/RobotlegsJS/RobotlegsJS-Pixi/releases/tag/0.1.2) - 2017-11-23
 
