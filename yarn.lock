@@ -19,11 +19,12 @@
   version "1.1.0"
   resolved "https://registry.npmjs.org/@nodelib/fs.stat/-/fs.stat-1.1.0.tgz#50c1e2260ac0ed9439a181de3725a0168d59c48a"
 
-"@robotlegsjs/core@^0.1.3":
-  version "0.1.3"
-  resolved "https://registry.npmjs.org/@robotlegsjs/core/-/core-0.1.3.tgz#0899fc6f25ac2b07c652e1a348feba23c7842abe"
+"@robotlegsjs/core@^0.2.0":
+  version "0.2.0"
+  resolved "https://registry.npmjs.org/@robotlegsjs/core/-/core-0.2.0.tgz#f1204017f9cd3666d41e5a355a566b33c8ced2cd"
   dependencies:
-    inversify "^4.11.1"
+    inversify "^4.13.0"
+    tslib "^1.9.3"
 
 "@sinonjs/formatio@^2.0.0":
   version "2.0.0"
@@ -3344,7 +3345,7 @@ invariant@^2.2.2:
   dependencies:
     loose-envify "^1.0.0"
 
-inversify@^4.11.1:
+inversify@^4.13.0:
   version "4.13.0"
   resolved "https://registry.npmjs.org/inversify/-/inversify-4.13.0.tgz#0ab40570bfa4474b04d5b919bbab3a4f682a72f5"
 
@@ -5227,7 +5228,7 @@ pixi-gl-core@^1.1.4:
   version "1.1.4"
   resolved "https://registry.npmjs.org/pixi-gl-core/-/pixi-gl-core-1.1.4.tgz#8b4b5c433b31e419bc379dc565ce1b835a91b372"
 
-pixi.js@^4.8.0:
+pixi.js@^4.8.1:
   version "4.8.1"
   resolved "https://registry.npmjs.org/pixi.js/-/pixi.js-4.8.1.tgz#e35f370b0c635b5c542014d0649317d63d2ec7c4"
   dependencies:
