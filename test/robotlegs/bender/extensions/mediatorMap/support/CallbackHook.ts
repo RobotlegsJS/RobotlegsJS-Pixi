@@ -5,9 +5,7 @@
 //  in accordance with the terms of the license agreement accompanying it.
 // ------------------------------------------------------------------------------
 
-import { injectable, inject, named } from "inversify";
-
-import { IHook } from "@robotlegsjs/core";
+import { injectable, inject, named, IHook } from "@robotlegsjs/core";
 
 @injectable()
 export class CallbackHook implements IHook {

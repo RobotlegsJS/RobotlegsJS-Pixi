@@ -5,7 +5,7 @@
 //  in accordance with the terms of the license agreement accompanying it.
 // ------------------------------------------------------------------------------
 
-import { injectable, inject, named, optional } from "inversify";
+import { injectable, inject, named, optional } from "@robotlegsjs/core";
 
 @injectable()
 export class CallbackMediator {

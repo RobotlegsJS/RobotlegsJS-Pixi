@@ -7,9 +7,7 @@
 
 import { Sprite } from "pixi.js";
 
-import { injectable, inject } from "inversify";
-
-import { IHook } from "@robotlegsjs/core";
+import { injectable, inject, IHook } from "@robotlegsjs/core";
 
 @injectable()
 export class Alpha50PercentHook implements IHook {

@@ -7,9 +7,7 @@
 
 import { Sprite } from "pixi.js";
 
-import { injectable, inject, named, optional } from "inversify";
-
-import { IHook } from "@robotlegsjs/core";
+import { injectable, inject, named, optional, IHook } from "@robotlegsjs/core";
 
 import { ViewInjectedMediator } from "./ViewInjectedMediator";
 

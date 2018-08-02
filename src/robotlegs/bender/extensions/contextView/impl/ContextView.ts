@@ -7,12 +7,14 @@
 
 import { Container } from "pixi.js";
 
+import { IConfig } from "@robotlegsjs/core";
+
 import { IContextView } from "../api/IContextView";
 
 /**
  * The Context View represents the root Container for a Context
  */
-export class ContextView implements IContextView {
+export class ContextView implements IContextView, IConfig {
     private _view: Container;
 
     /*============================================================================*/
@@ -34,6 +36,11 @@ export class ContextView implements IContextView {
     /*============================================================================*/
     /* Public Properties                                                          */
     /*============================================================================*/
+
+    /**
+     *
+     */
+    public configure(): void {}
 
     /**
      * The root Container for this Context

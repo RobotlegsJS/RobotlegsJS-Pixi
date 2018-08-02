@@ -7,9 +7,7 @@
 
 import { Sprite } from "pixi.js";
 
-import { injectable, inject, named } from "inversify";
-
-import { IHook } from "@robotlegsjs/core";
+import { injectable, inject, named, IHook } from "@robotlegsjs/core";
 
 import { RectangleMediator } from "./RectangleMediator";
 
