@@ -98,7 +98,7 @@ describe("EventEmmiter3Patch", () => {
         child.addChild(grandChild);
         container.addChild(child);
         container.addEventListener("test", listener);
-        grandChild.dispatchEvent(new Event("test", { bubbles: true }));
+        grandChild.dispatchEvent(new Event("test", true));
         assert.isTrue(dispatched);
     });
 });
