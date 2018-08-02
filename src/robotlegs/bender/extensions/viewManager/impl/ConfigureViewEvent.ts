@@ -43,7 +43,7 @@ export class ConfigureViewEvent extends Event {
      * @param view The associated view instance
      */
     constructor(type: string, view: Container) {
-        super(type, { bubbles: true });
+        super(type, true);
         this._view = view;
     }
 
