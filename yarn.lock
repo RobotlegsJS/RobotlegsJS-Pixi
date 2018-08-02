@@ -5228,7 +5228,7 @@ pixi-gl-core@^1.1.4:
   version "1.1.4"
   resolved "https://registry.npmjs.org/pixi-gl-core/-/pixi-gl-core-1.1.4.tgz#8b4b5c433b31e419bc379dc565ce1b835a91b372"
 
-pixi.js@^4.8.1:
+pixi.js@^4.8.0:
   version "4.8.1"
   resolved "https://registry.npmjs.org/pixi.js/-/pixi.js-4.8.1.tgz#e35f370b0c635b5c542014d0649317d63d2ec7c4"
   dependencies:
