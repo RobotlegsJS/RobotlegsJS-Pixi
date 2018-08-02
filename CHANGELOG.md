@@ -20,13 +20,13 @@
 
 ## Robotlegs-Pixi 0.2.0
 
-### v0.2.0
+### [v0.2.0](https://github.com/RobotlegsJS/RobotlegsJS-Pixi/releases/tag/0.2.0) - 2018-08-02
 
 - Update @robotlegsjs/core to version 0.2.0 (see #74).
 
-- Update eventemitter3 to version 3.1.0 (see #52).
+- Move `pixi.js` and `eventemitter3` libraries to **peerDependencies** (see #76).
 
-- Update pixi.js to version 4.8.0 (see #59).
+- Only dispatch 'added' or 'removed' events when view is related to current stage (see #67, #68, #72).
 
 - Fix example (see #60).
 
@@ -43,10 +43,6 @@
 - Update Prettier rules (see #54).
 
 - Adopts year-agnostic copyright message (see #70).
-
-- Only dispatch 'added' or 'removed' events when view is related to current stage (see #67, #68, #72).
-
-- Move `pixi.js` and `eventemitter3` libraries to **peerDependencies** (see #76).
 
 - Update dev dependencies to latest version.
 
