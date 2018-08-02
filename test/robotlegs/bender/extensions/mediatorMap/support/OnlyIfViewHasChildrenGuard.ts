@@ -5,11 +5,9 @@
 //  in accordance with the terms of the license agreement accompanying it.
 // ------------------------------------------------------------------------------
 
-import { injectable, inject } from "inversify";
-
 import { Sprite } from "pixi.js";
 
-import { IGuard } from "@robotlegsjs/core";
+import { injectable, inject, IGuard } from "@robotlegsjs/core";
 
 @injectable()
 export class OnlyIfViewHasChildrenGuard implements IGuard {
