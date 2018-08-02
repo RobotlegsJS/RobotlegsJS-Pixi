@@ -46,6 +46,8 @@
 
 - Only dispatch 'added' or 'removed' events when view is related to current stage (see #67, #68, #72).
 
+- Move `pixi.js` and `eventemitter3` libraries to **peerDependencies** (see #76).
+
 - Update dev dependencies to latest version.
 
 ## Robotlegs-Pixi 0.1.0
