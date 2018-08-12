@@ -17,8 +17,10 @@ CONTRIBUTING.md
 ISSUE_TEMPLATE.md
 PULL_REQUEST_TEMPLATE.md
 karma.conf.js
+tsconfig.example.json
 tsconfig.json
 tsconfig.test.json
+tslint.example.json
 tslint.json
 tslint.test.json
 webpack.config.js

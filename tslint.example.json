@@ -1,0 +1,9 @@
+{
+  "extends": [
+    "./tslint.json"
+  ],
+  "rules": {
+    "no-reference": false,
+    "object-literal-sort-keys": false
+  }
+}
