@@ -22,7 +22,7 @@ export class Game {
 
     constructor () {
         this.canvas = <HTMLCanvasElement>(document.getElementById("canvas"));
-        this.renderer = PIXI.autoDetectRenderer(960, 400, { view: this.canvas });
+        this.renderer = PIXI.autoDetectRenderer(960, 400, { view: this.canvas, backgroundColor: 0xFFFFFF });
         this.stage = new PIXI.Container();
 
         this.context = new Context();
