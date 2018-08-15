@@ -1,10 +1,19 @@
+// ------------------------------------------------------------------------------
+//  Copyright (c) 2017-present, RobotlegsJS. All Rights Reserved.
+//
+//  NOTICE: You are permitted to use, modify, and distribute this file
+//  in accordance with the terms of the license agreement accompanying it.
+// ------------------------------------------------------------------------------
+
 import { inject, injectable, IConfig } from "@robotlegsjs/core";
 
-import { CircleMediator } from "../view/CircleMediator";
+import { IMediatorMap } from "../../src";
+
+import { CircleMediator } from "../mediator/CircleMediator";
+import { ChildMediator } from "../mediator/ChildMediator";
+
 import { CircleView } from "../view/CircleView";
-import { ChildMediator } from "../view/ChildMediator";
 import { ChildView } from "../view/ChildView";
-import { IMediatorMap } from "../../src/index";
 
 @injectable()
 export class MyConfig implements IConfig {
