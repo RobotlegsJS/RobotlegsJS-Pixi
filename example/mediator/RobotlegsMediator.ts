@@ -7,20 +7,21 @@
 
 import { Mediator } from "../../src";
 
+import { RobotlegsView } from "../view/RobotlegsView";
 import { ChildView } from "../view/ChildView";
 
-export class RobotlegsMediator extends Mediator<ChildView> {
+export class RobotlegsMediator extends Mediator<RobotlegsView> {
     public initialize(): void {
-        console.log("ChildMediator initialized!");
+        console.log("CircleMediator initialized!");
         this.view.interactive = true;
         this.addViewListener("click", this.onClick, this);
     }
 
     public onClick(e: any): void {
-        this.view.parent.removeChild(this.view);
+        this.view.parent.addChild(new ChildView());
     }
 
     public destroy(): void {
-        console.log("ChildMediator destroyed!");
+        console.log("CircleMediator destroyed!");
     }
 }

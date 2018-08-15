@@ -11,7 +11,7 @@ export class RobotlegsView extends Container {
     constructor() {
         super();
 
-       this.loadLogo();
+        this.loadLogo();
     }
 
     private loadLogo(): void {

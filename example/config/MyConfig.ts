@@ -9,8 +9,8 @@ import { inject, injectable, IConfig } from "@robotlegsjs/core";
 
 import { IMediatorMap } from "../../src";
 
-import { CircleMediator } from "../mediator/CircleMediator";
 import { RobotlegsMediator } from "../mediator/RobotlegsMediator";
+import { ChildMediator } from "../mediator/ChildMediator";
 
 import { RobotlegsView } from "../view/RobotlegsView";
 import { ChildView } from "../view/ChildView";
@@ -21,7 +21,7 @@ export class MyConfig implements IConfig {
     private mediatorMap: IMediatorMap;
 
     public configure(): void {
-        this.mediatorMap.map(RobotlegsView).toMediator(CircleMediator);
-        this.mediatorMap.map(ChildView).toMediator(RobotlegsMediator);
+        this.mediatorMap.map(RobotlegsView).toMediator(RobotlegsMediator);
+        this.mediatorMap.map(ChildView).toMediator(ChildMediator);
     }
 }
