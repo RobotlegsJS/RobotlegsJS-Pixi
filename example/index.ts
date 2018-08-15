@@ -1,42 +1,17 @@
+// ------------------------------------------------------------------------------
+//  Copyright (c) 2017-present, RobotlegsJS. All Rights Reserved.
+//
+//  NOTICE: You are permitted to use, modify, and distribute this file
+//  in accordance with the terms of the license agreement accompanying it.
+// ------------------------------------------------------------------------------
+
 /// <reference path="../definitions/pixi.d.ts" />
 
 import "reflect-metadata";
 
-import PIXI = require('pixi.js');
+import { Game } from "./Game";
 
-import { Context, MVCSBundle } from "@robotlegsjs/core";
-import { ContextView, PixiBundle } from "../src";
-
-import { MyConfig } from "./config/MyConfig";
-import { CircleView } from "./view/CircleView";
-
-class Main {
-
-    private stage: PIXI.Container;
-    private renderer: PIXI.CanvasRenderer | PIXI.WebGLRenderer;
-    private context: Context;
-
-    constructor () {
-        this.renderer = PIXI.autoDetectRenderer(800, 600, {});
-        this.stage = new PIXI.Container();
-
-        this.context = new Context();
-        this.context.install(MVCSBundle, PixiBundle).
-            configure(new ContextView(this.stage)).
-            configure(MyConfig).
-            initialize();
-
-        this.stage.addChild(new CircleView())
-
-        document.body.appendChild(this.renderer.view);
-    }
-
-    public render = () => {
-        this.renderer.render(this.stage);
-        window.requestAnimationFrame(this.render);
-    }
-
-}
-
-let main = new Main();
-main.render();
+(<any>window).initGame = () => {
+    let game: Game = new Game();
+    (<any>window).game = game;
+};

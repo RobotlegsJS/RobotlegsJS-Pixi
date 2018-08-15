@@ -1,8 +1,10 @@
-const webpack = require('webpack');
-const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const webpack = require("webpack");
+const path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const OpenBrowserPlugin = require("open-browser-webpack-plugin");
+const SimpleProgressPlugin = require("webpack-simple-progress-plugin");
 
-module.exports = (function(options) {
+module.exports = options => {
   return {
     mode: "development",
 
@@ -12,10 +14,10 @@ module.exports = (function(options) {
 
     output: {
       path: __dirname + "/dist",
-      filename: "bundle.js"
+      filename: "game.[hash].js"
     },
 
-    devtool: 'source-map',
+    devtool: "source-map",
 
     module: {
       rules: [
@@ -23,11 +25,28 @@ module.exports = (function(options) {
       ]
     },
 
-    plugins: [ new HtmlWebpackPlugin() ],
+    plugins: [
+      new HtmlWebpackPlugin({
+        template: path.resolve("static/index.html"),
+        inject: false
+      }),
+
+      new SimpleProgressPlugin(),
+
+      new OpenBrowserPlugin({ url: "http://0.0.0.0:8080/webpack-dev-server/" })
+    ],
 
     resolve: {
-      extensions: ['.ts', '.js', '.json']
+      extensions: [".ts", ".js", ".json"]
+    },
+
+    devServer: {
+      host: "0.0.0.0",
+      contentBase: path.join(__dirname, "static"),
+      hot: true,
+      disableHostCheck: true,
+      inline:false
     }
 
   }
-})();
+};

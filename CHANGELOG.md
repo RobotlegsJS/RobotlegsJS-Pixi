@@ -24,6 +24,8 @@
 
 - Update `karma` setup to generate code coverage report only for `src` folder (see #77).
 
+- Improve webpack configuration used to run example project. The `npm start` script will generate hashed files (to avoid browser cache) and open the broswer automatically (see #78).
+
 - Update dev dependencies to latest version.
 
 ### [v0.2.0](https://github.com/RobotlegsJS/RobotlegsJS-Pixi/releases/tag/0.2.0) - 2018-08-02
