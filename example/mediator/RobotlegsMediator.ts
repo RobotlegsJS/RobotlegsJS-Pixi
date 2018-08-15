@@ -8,7 +8,7 @@
 import { Mediator } from "../../src";
 
 import { RobotlegsView } from "../view/RobotlegsView";
-import { ChildView } from "../view/ChildView";
+import { SmileyView } from "../view/SmileyView";
 
 export class RobotlegsMediator extends Mediator<RobotlegsView> {
     public initialize(): void {
@@ -18,7 +18,8 @@ export class RobotlegsMediator extends Mediator<RobotlegsView> {
     }
 
     public onClick(e: any): void {
-        this.view.parent.addChild(new ChildView());
+        let radius: number = 50 + Math.random() * 50;
+        this.view.parent.addChild(new SmileyView(radius));
     }
 
     public destroy(): void {

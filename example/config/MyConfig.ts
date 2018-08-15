@@ -13,7 +13,7 @@ import { RobotlegsMediator } from "../mediator/RobotlegsMediator";
 import { ChildMediator } from "../mediator/ChildMediator";
 
 import { RobotlegsView } from "../view/RobotlegsView";
-import { ChildView } from "../view/ChildView";
+import { SmileyView } from "../view/SmileyView";
 
 @injectable()
 export class MyConfig implements IConfig {
@@ -22,6 +22,6 @@ export class MyConfig implements IConfig {
 
     public configure(): void {
         this.mediatorMap.map(RobotlegsView).toMediator(RobotlegsMediator);
-        this.mediatorMap.map(ChildView).toMediator(ChildMediator);
+        this.mediatorMap.map(SmileyView).toMediator(ChildMediator);
     }
 }

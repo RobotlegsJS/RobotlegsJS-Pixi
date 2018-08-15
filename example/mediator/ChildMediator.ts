@@ -7,9 +7,9 @@
 
 import { Mediator } from "../../src";
 
-import { ChildView } from "../view/ChildView";
+import { SmileyView } from "../view/SmileyView";
 
-export class ChildMediator extends Mediator<ChildView> {
+export class ChildMediator extends Mediator<SmileyView> {
     public initialize(): void {
         console.log("ChildMediator initialized!");
         this.view.interactive = true;
