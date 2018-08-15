@@ -74,16 +74,18 @@ import { Context, MVCSBundle } from "@robotlegsjs/core";
 import { ContextView, PixiBundle } from "@robotlegsjs/pixi";
 
 import { MyConfig } from "./config/MyConfig";
-import { CircleView } from "./view/CircleView";
+import { RobotlegsView } from "./view/RobotlegsView";
 
-class Main {
+export class Game {
 
+    private canvas: HTMLCanvasElement;
     private stage: PIXI.Container;
     private renderer: PIXI.CanvasRenderer | PIXI.WebGLRenderer;
     private context: Context;
 
     constructor () {
-        this.renderer = PIXI.autoDetectRenderer(800, 600, {});
+        this.canvas = <HTMLCanvasElement>(document.getElementById("canvas"));
+        this.renderer = PIXI.autoDetectRenderer(960, 400, { view: this.canvas, backgroundColor: 0xFFFFFF });
         this.stage = new PIXI.Container();
 
         this.context = new Context();
@@ -92,9 +94,11 @@ class Main {
             configure(MyConfig).
             initialize();
 
-        this.stage.addChild(new CircleView())
+        this.stage.addChild(new RobotlegsView());
 
         document.body.appendChild(this.renderer.view);
+
+        this.render();
     }
 
     public render = () => {
@@ -104,8 +108,7 @@ class Main {
 
 }
 
-let main = new Main();
-main.render();
+let game: Game = new Game();
 
 ```
 
