@@ -7,10 +7,10 @@
 
 import { Mediator } from "../../src";
 
-import { CircleView } from "../view/CircleView";
+import { RobotlegsView } from "../view/RobotlegsView";
 import { ChildView } from "../view/ChildView";
 
-export class CircleMediator extends Mediator<CircleView> {
+export class CircleMediator extends Mediator<RobotlegsView> {
     public initialize(): void {
         console.log("CircleMediator initialized!");
         this.view.interactive = true;

@@ -12,7 +12,7 @@ import { IMediatorMap } from "../../src";
 import { CircleMediator } from "../mediator/CircleMediator";
 import { ChildMediator } from "../mediator/ChildMediator";
 
-import { CircleView } from "../view/CircleView";
+import { RobotlegsView } from "../view/RobotlegsView";
 import { ChildView } from "../view/ChildView";
 
 @injectable()
@@ -21,7 +21,7 @@ export class MyConfig implements IConfig {
     private mediatorMap: IMediatorMap;
 
     public configure(): void {
-        this.mediatorMap.map(CircleView).toMediator(CircleMediator);
+        this.mediatorMap.map(RobotlegsView).toMediator(CircleMediator);
         this.mediatorMap.map(ChildView).toMediator(ChildMediator);
     }
 }

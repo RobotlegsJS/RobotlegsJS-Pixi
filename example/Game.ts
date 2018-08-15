@@ -11,7 +11,7 @@ import { Context, MVCSBundle } from "@robotlegsjs/core";
 import { ContextView, PixiBundle } from "../src";
 
 import { MyConfig } from "./config/MyConfig";
-import { CircleView } from "./view/CircleView";
+import { RobotlegsView } from "./view/RobotlegsView";
 
 export class Game {
 
@@ -31,7 +31,7 @@ export class Game {
             configure(MyConfig).
             initialize();
 
-        this.stage.addChild(new CircleView());
+        this.stage.addChild(new RobotlegsView());
 
         document.body.appendChild(this.renderer.view);
 
