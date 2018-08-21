@@ -54,7 +54,7 @@ describe("EventEmmiter3Patch", () => {
             return;
         };
         container.addEventListener("addedToStage", listener);
-        assert.isTrue(container.hasEventListener("addedToStage", listener));
+        assert.isTrue(container.hasEventListener("addedToStage"));
         assert.isFalse(container.hasEventListener("removedFromStage"));
     });
 
