@@ -5,6 +5,10 @@
 //  in accordance with the terms of the license agreement accompanying it.
 // ------------------------------------------------------------------------------
 
+/// <reference path="../definitions/pixi.d.ts" />
+
+import "reflect-metadata";
+
 import PIXI = require('pixi.js');
 
 import { Context, MVCSBundle } from "@robotlegsjs/core";
@@ -42,5 +46,4 @@ export class Game {
         this.renderer.render(this.stage);
         window.requestAnimationFrame(this.render);
     }
-
 }

@@ -5,10 +5,6 @@
 //  in accordance with the terms of the license agreement accompanying it.
 // ------------------------------------------------------------------------------
 
-/// <reference path="../definitions/pixi.d.ts" />
-
-import "reflect-metadata";
-
 import { Game } from "./Game";
 
 (<any>window).initGame = () => {
