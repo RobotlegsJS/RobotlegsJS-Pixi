@@ -5,7 +5,7 @@
 //  in accordance with the terms of the license agreement accompanying it.
 // ------------------------------------------------------------------------------
 
-import { DisplayObject } from "pixi.js";
+import { Event } from "@robotlegsjs/core";
 
 import { IMediatorMapping } from "../api/IMediatorMapping";
 import { MediatorFactory } from "./MediatorFactory";
@@ -40,9 +40,8 @@ export class MediatorManager {
      */
     public addMediator(mediator: any, item: any, mapping: IMediatorMapping): void {
         // Watch Display Object for removal
-        if (item instanceof DisplayObject && mapping.autoRemoveEnabled) {
-            (<any>item)._onRemovedFromStage = this.onRemovedFromStage.bind(this, item);
-            item.on("removed", (<any>item)._onRemovedFromStage, this);
+        if (item.addEventListener !== undefined && mapping.autoRemoveEnabled) {
+            item.addEventListener("removedFromStage", this.onRemovedFromStage);
         }
 
         // Synchronize with item life-cycle
@@ -53,8 +52,9 @@ export class MediatorManager {
      * @private
      */
     public removeMediator(mediator: any, item: any, mapping: IMediatorMapping): void {
-        if (item instanceof DisplayObject) {
-            item.off("removed", (<any>item)._onRemovedFromStage);
+        // Watch Display Object for removal
+        if (item.removeEventListener !== undefined && mapping.autoRemoveEnabled) {
+            item.removeEventListener("removedFromStage", this.onRemovedFromStage);
         }
 
         this.destroyMediator(mediator);
@@ -64,9 +64,9 @@ export class MediatorManager {
     /* Private Functions                                                          */
     /*============================================================================*/
 
-    private onRemovedFromStage(displayObject: any, fromContainer: any): void {
-        this._factory.removeMediators(displayObject);
-    }
+    private onRemovedFromStage = (event: Event): void => {
+        this._factory.removeMediators(event.target);
+    };
 
     private initializeMediator(mediator: any, mediatedItem: any): void {
         if ("preInitialize" in mediator) {

@@ -5,9 +5,10 @@
 //  in accordance with the terms of the license agreement accompanying it.
 // ------------------------------------------------------------------------------
 
-import { Container } from "pixi.js";
-
 import { IEventDispatcher } from "@robotlegsjs/core";
+
+import { IDisplayObjectContainer } from "../../contextView/api/IDisplayObjectContainer";
+
 import { IViewHandler } from "./IViewHandler";
 
 /*[Event(name="containerAdd", type="robotlegs.bender.extensions.viewManager.impl.ViewManagerEvent")]*/
@@ -23,19 +24,19 @@ export interface IViewManager extends IEventDispatcher {
     /**
      * A list of currently registered containers
      */
-    containers: Container[];
+    containers: IDisplayObjectContainer[];
 
     /**
      * Adds a container as a "view root" into the context
      * @param container
      */
-    addContainer(container: Container): void;
+    addContainer(container: IDisplayObjectContainer): void;
 
     /**
      * Removes a container from this context
      * @param container
      */
-    removeContainer(container: Container): void;
+    removeContainer(container: IDisplayObjectContainer): void;
 
     /**
      * Registers a view handler

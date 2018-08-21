@@ -5,9 +5,9 @@
 //  in accordance with the terms of the license agreement accompanying it.
 // ------------------------------------------------------------------------------
 
-import { Container } from "pixi.js";
-
 import { injectable, inject, EventDispatcher } from "@robotlegsjs/core";
+
+import { IDisplayObjectContainer } from "../../contextView/api/IDisplayObjectContainer";
 
 import { IViewHandler } from "../api/IViewHandler";
 import { IViewManager } from "../api/IViewManager";
@@ -31,12 +31,12 @@ export class ViewManager extends EventDispatcher implements IViewManager {
     /* Public Properties                                                          */
     /*============================================================================*/
 
-    private _containers: Container[] = [];
+    private _containers: IDisplayObjectContainer[] = [];
 
     /**
      * @inheritDoc
      */
-    public get containers(): Container[] {
+    public get containers(): IDisplayObjectContainer[] {
         return this._containers;
     }
 
@@ -67,7 +67,7 @@ export class ViewManager extends EventDispatcher implements IViewManager {
     /**
      * @inheritDoc
      */
-    public addContainer(container: Container): void {
+    public addContainer(container: IDisplayObjectContainer): void {
         if (!this.validContainer(container)) {
             return;
         }
@@ -83,7 +83,7 @@ export class ViewManager extends EventDispatcher implements IViewManager {
     /**
      * @inheritDoc
      */
-    public removeContainer(container: Container): void {
+    public removeContainer(container: IDisplayObjectContainer): void {
         let index: number = this._containers.indexOf(container);
 
         if (index === -1) {
@@ -153,7 +153,7 @@ export class ViewManager extends EventDispatcher implements IViewManager {
     /* Private Functions                                                          */
     /*============================================================================*/
 
-    private validContainer(container: Container): boolean {
+    private validContainer(container: IDisplayObjectContainer): boolean {
         let isValid: boolean = this._containers.indexOf(container) < 0;
 
         if (isValid) {
