@@ -105,11 +105,7 @@ export class Game {
         this.renderer.render(this.stage);
         window.requestAnimationFrame(this.render);
     }
-
 }
-
-let game: Game = new Game();
-
 ```
 
 [See full example here](example/index.ts)
