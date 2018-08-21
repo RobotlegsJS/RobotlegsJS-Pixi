@@ -13,7 +13,7 @@ import { Container } from "pixi.js";
 
 import { Event } from "@robotlegsjs/core";
 
-import "../../../../../../src/robotlegs/bender/extensions/contextView/pixiPatch/eventemitter3-patch";
+import "../../../../../../src/robotlegs/bender/bundles/pixi/patch/eventemitter3-patch";
 
 describe("EventEmmiter3Patch", () => {
     let container: Container;

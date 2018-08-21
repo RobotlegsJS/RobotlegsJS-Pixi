@@ -22,7 +22,7 @@ import {
     ViewManagerExtension
 } from "../../../../../src";
 
-import { applyPixiPatch } from "../../../../../src/robotlegs/bender/extensions/contextView/pixiPatch/pixi-patch";
+import { applyPixiPatch } from "../../../../../src/robotlegs/bender/bundles/pixi/patch/pixi-patch";
 import { IViewHandler } from "../../../../../src/robotlegs/bender/extensions/viewManager/api/IViewHandler";
 import { ContainerRegistry } from "../../../../../src/robotlegs/bender/extensions/viewManager/impl/ContainerRegistry";
 

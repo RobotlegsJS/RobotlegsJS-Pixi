@@ -11,7 +11,7 @@ import { assert } from "chai";
 
 import { Container, DisplayObject } from "pixi.js";
 
-import "../../../../../../src/robotlegs/bender/extensions/contextView/pixiPatch/pixi-patch";
+import "../../../../../../src/robotlegs/bender/bundles/pixi/patch/pixi-patch";
 
 describe("ContainsPatch", () => {
     let container: Container;

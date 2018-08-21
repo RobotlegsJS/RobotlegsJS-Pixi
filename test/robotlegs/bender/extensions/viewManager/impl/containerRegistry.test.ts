@@ -7,7 +7,7 @@
 
 import "../../../../../entry";
 
-import "../../../../../../src/robotlegs/bender/extensions/contextView/pixiPatch/contains-patch";
+import "../../../../../../src/robotlegs/bender/bundles/pixi/patch/contains-patch";
 
 import { assert } from "chai";
 
