@@ -17,6 +17,10 @@ import { StageCrawlerExtension } from "../../extensions/viewManager/StageCrawler
 import { StageObserverExtension } from "../../extensions/viewManager/StageObserverExtension";
 import { ViewManagerExtension } from "../../extensions/viewManager/ViewManagerExtension";
 
+import { applyPixiPatch } from "./patch/pixi-patch";
+
+import { Container } from "pixi.js";
+
 /**
  * For that Classic Robotlegs flavour
  *
@@ -59,7 +63,9 @@ export class PixiBundle implements IBundle {
     /* Private Functions                                                          */
     /*============================================================================*/
 
-    private handleContextView(): void {
+    private handleContextView(contextView: ContextView): void {
+        applyPixiPatch(<Container>contextView.view);
+
         this._context.configure(ContextViewListenerConfig);
     }
 
