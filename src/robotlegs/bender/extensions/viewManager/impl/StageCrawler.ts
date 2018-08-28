@@ -51,13 +51,25 @@ export class StageCrawler {
     private scanContainer(container: IDisplayObjectContainer): void {
         this.processView(container);
 
-        container.children.forEach((child: IDisplayObject) => {
-            if ((<IDisplayObjectContainer>child).children !== undefined) {
-                this.scanContainer(<IDisplayObjectContainer>child);
-            } else {
-                this.processView(child);
+        if (container.children !== undefined) {
+            container.children.forEach((child: IDisplayObject) => {
+                if ((<IDisplayObjectContainer>child).children !== undefined) {
+                    this.scanContainer(<IDisplayObjectContainer>child);
+                } else {
+                    this.processView(child);
+                }
+            });
+        } else if (container.numChildren !== undefined && container.getChildAt !== undefined) {
+            for (let i: number = 0; i < container.numChildren; i++) {
+                let child: any = container.getChildAt(i);
+
+                if (child.numChildren !== undefined && child.getChildAt !== undefined) {
+                    this.scanContainer(child);
+                } else {
+                    this.processView(child);
+                }
             }
-        });
+        }
     }
 
     private processView(view: IDisplayObject): void {
