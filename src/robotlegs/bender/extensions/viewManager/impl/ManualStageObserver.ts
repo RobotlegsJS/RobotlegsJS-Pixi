@@ -9,13 +9,13 @@ import { IClass } from "@robotlegsjs/core";
 
 import { IDisplayObject } from "../../../displayList/api/IDisplayObject";
 import { IDisplayObjectContainer } from "../../../displayList/api/IDisplayObjectContainer";
+import { IDisplayObjectObserver } from "../../../displayList/api/IDisplayObjectObserver";
+import { IDisplayObjectObserverFactory } from "../../../displayList/api/IDisplayObjectObserverFactory";
 
 import { ContainerRegistryEvent } from "./ContainerRegistryEvent";
 
 import { ContainerRegistry } from "./ContainerRegistry";
 import { ContainerBinding } from "./ContainerBinding";
-
-import { ConfigureViewEvent } from "./ConfigureViewEvent";
 
 /**
  * @private
@@ -27,6 +27,10 @@ export class ManualStageObserver {
 
     private _registry: ContainerRegistry;
 
+    private _displayObjectObserverFactory: IDisplayObjectObserverFactory;
+
+    private _observers: Map<IDisplayObject, IDisplayObjectObserver> = new Map();
+
     /*============================================================================*/
     /* Constructor                                                                */
     /*============================================================================*/
@@ -34,8 +38,9 @@ export class ManualStageObserver {
     /**
      * @private
      */
-    constructor(containerRegistry: ContainerRegistry) {
+    constructor(containerRegistry: ContainerRegistry, displayObjectObserverFactory: IDisplayObjectObserverFactory) {
         this._registry = containerRegistry;
+        this._displayObjectObserverFactory = displayObjectObserverFactory;
 
         // We care about all containers (not just roots)
         this._registry.addEventListener(ContainerRegistryEvent.CONTAINER_ADD, this.onContainerAdd);
@@ -61,6 +66,10 @@ export class ManualStageObserver {
         this._registry.rootBindings.forEach((binding: ContainerBinding) => {
             this.removeContainerListener(binding.container);
         });
+
+        this._registry = null;
+        this._displayObjectObserverFactory = null;
+        this._observers = null;
     }
 
     /*============================================================================*/
@@ -78,19 +87,22 @@ export class ManualStageObserver {
     private addContainerListener(container: IDisplayObjectContainer): void {
         // We're interested in ALL container bindings
         // but just for normal, bubbling events
-        container.addEventListener(ConfigureViewEvent.CONFIGURE_VIEW, this.onConfigureView);
+        let observer: IDisplayObjectObserver = this._displayObjectObserverFactory(container, false);
+
+        observer.addConfigureViewHandler(this.onConfigureView);
+
+        this._observers.set(container, observer);
     }
 
     private removeContainerListener(container: IDisplayObjectContainer): void {
-        container.removeEventListener(ConfigureViewEvent.CONFIGURE_VIEW, this.onConfigureView);
+        let observer: IDisplayObjectObserver = this._observers.get(container);
+
+        observer.destroy();
+
+        this._observers.delete(container);
     }
 
-    private onConfigureView = (event: ConfigureViewEvent): void => {
-        // Stop that event!
-        event.stopPropagation();
-
-        let container: IDisplayObjectContainer = <IDisplayObjectContainer>event.currentTarget;
-        let view: IDisplayObject = <IDisplayObject>event.target;
+    private onConfigureView = (container: IDisplayObjectContainer, view: IDisplayObject): void => {
         let type: IClass<any> = <IClass<any>>view.constructor;
         this._registry.getBinding(container).handleView(view, type);
     };
