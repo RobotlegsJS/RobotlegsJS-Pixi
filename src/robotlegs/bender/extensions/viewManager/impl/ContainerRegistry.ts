@@ -7,7 +7,7 @@
 
 import { EventDispatcher } from "@robotlegsjs/core";
 
-import { IDisplayObjectContainer } from "../../contextView/api/IDisplayObjectContainer";
+import { IDisplayObjectContainer } from "../../../displayList/api/IDisplayObjectContainer";
 
 import { ContainerBinding } from "./ContainerBinding";
 import { ContainerBindingEvent } from "./ContainerBindingEvent";

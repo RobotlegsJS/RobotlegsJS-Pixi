@@ -7,7 +7,7 @@
 
 import { IClass } from "@robotlegsjs/core";
 
-import { IDisplayObject } from "../../contextView/api/IDisplayObject";
+import { IDisplayObject } from "../../../displayList/api/IDisplayObject";
 
 import { IMediatorMapping } from "../api/IMediatorMapping";
 import { IViewHandler } from "../../viewManager/api/IViewHandler";

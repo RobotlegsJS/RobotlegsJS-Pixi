@@ -7,7 +7,7 @@
 
 import { IEventDispatcher } from "@robotlegsjs/core";
 
-import { IDisplayObjectContainer } from "../../contextView/api/IDisplayObjectContainer";
+import { IDisplayObjectContainer } from "../../../displayList/api/IDisplayObjectContainer";
 
 import { IViewHandler } from "./IViewHandler";
 

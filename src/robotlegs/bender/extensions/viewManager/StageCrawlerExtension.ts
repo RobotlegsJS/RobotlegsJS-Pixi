@@ -7,7 +7,7 @@
 
 import { IContext, IExtension, IInjector, ILogger } from "@robotlegsjs/core";
 
-import { IDisplayObjectContainer } from "../contextView/api/IDisplayObjectContainer";
+import { IDisplayObjectContainer } from "../../displayList/api/IDisplayObjectContainer";
 
 import { IContextView } from "../contextView/api/IContextView";
 

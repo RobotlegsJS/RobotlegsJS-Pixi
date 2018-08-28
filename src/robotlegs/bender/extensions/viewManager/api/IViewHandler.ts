@@ -7,7 +7,7 @@
 
 import { IClass } from "@robotlegsjs/core";
 
-import { IDisplayObject } from "../../contextView/api/IDisplayObject";
+import { IDisplayObject } from "../../../displayList/api/IDisplayObject";
 
 /**
  * View handler contract

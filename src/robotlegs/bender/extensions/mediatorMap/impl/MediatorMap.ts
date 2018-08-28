@@ -7,7 +7,7 @@
 
 import { injectable, inject, IClass, IContext, ILogger, ITypeMatcher, TypeMatcher } from "@robotlegsjs/core";
 
-import { IDisplayObject } from "../../contextView/api/IDisplayObject";
+import { IDisplayObject } from "../../../displayList/api/IDisplayObject";
 
 import { IMediatorMap } from "../api/IMediatorMap";
 import { IMediatorMapper } from "../dsl/IMediatorMapper";

@@ -7,7 +7,7 @@
 
 import { injectable, inject, EventDispatcher } from "@robotlegsjs/core";
 
-import { IDisplayObjectContainer } from "../../contextView/api/IDisplayObjectContainer";
+import { IDisplayObjectContainer } from "../../../displayList/api/IDisplayObjectContainer";
 
 import { IViewHandler } from "../api/IViewHandler";
 import { IViewManager } from "../api/IViewManager";
