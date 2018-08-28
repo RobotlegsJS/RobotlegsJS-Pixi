@@ -9,11 +9,11 @@ import { injectable, inject, IClass, IContext, ILogger, ITypeMatcher, TypeMatche
 
 import { IDisplayObject } from "../../../displayList/api/IDisplayObject";
 
+import { IViewHandler } from "../../viewManager/api/IViewHandler";
+
 import { IMediatorMap } from "../api/IMediatorMap";
 import { IMediatorMapper } from "../dsl/IMediatorMapper";
 import { IMediatorUnmapper } from "../dsl/IMediatorUnmapper";
-
-import { IViewHandler } from "../../viewManager/api/IViewHandler";
 
 import { MediatorFactory } from "./MediatorFactory";
 import { MediatorViewHandler } from "./MediatorViewHandler";
