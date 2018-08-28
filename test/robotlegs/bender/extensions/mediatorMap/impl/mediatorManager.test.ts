@@ -13,7 +13,13 @@ import { assert } from "chai";
 
 import { Container, Sprite } from "pixi.js";
 
-import { instantiateUnmapped, IInjector, ITypeFilter, RobotlegsInjector, TypeMatcher } from "@robotlegsjs/core";
+import { instantiateUnmapped, interfaces, IInjector, ITypeFilter, RobotlegsInjector, TypeMatcher } from "@robotlegsjs/core";
+
+import { DisplayObjectObserver } from "../../../../../../src/robotlegs/bender/bundles/pixi/observer/DisplayObjectObserver";
+
+import { IDisplayObject } from "../../../../../../src/robotlegs/bender/displayList/api/IDisplayObject";
+import { IDisplayObjectObserver } from "../../../../../../src/robotlegs/bender/displayList/api/IDisplayObjectObserver";
+import { IDisplayObjectObserverFactory } from "../../../../../../src/robotlegs/bender/displayList/api/IDisplayObjectObserverFactory";
 
 import { applyPixiPatch } from "../../../../../../src/robotlegs/bender/bundles/pixi/patch/pixi-patch";
 
@@ -35,6 +41,11 @@ describe("MediatorManager", () => {
 
     beforeEach(() => {
         injector = new RobotlegsInjector();
+        injector.bind<interfaces.Factory<IDisplayObjectObserver>>(IDisplayObjectObserverFactory).toFactory<IDisplayObjectObserver>(() => {
+            return (view: IDisplayObject, useCapture: boolean): IDisplayObjectObserver => {
+                return new DisplayObjectObserver(view, useCapture);
+            };
+        });
         factory = new MediatorFactory(injector);
         manager = <MediatorManager>(<any>factory)._manager;
         container = new Container();
