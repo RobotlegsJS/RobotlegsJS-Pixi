@@ -7,8 +7,9 @@
 
 import { IConfig } from "@robotlegsjs/core";
 
-import { IContextView } from "../api/IContextView";
 import { IDisplayObjectContainer } from "../../../displayList/api/IDisplayObjectContainer";
+
+import { IContextView } from "../api/IContextView";
 
 /**
  * The Context View represents the root Container for a Context
