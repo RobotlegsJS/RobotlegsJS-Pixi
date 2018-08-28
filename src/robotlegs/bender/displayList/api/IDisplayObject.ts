@@ -5,11 +5,9 @@
 //  in accordance with the terms of the license agreement accompanying it.
 // ------------------------------------------------------------------------------
 
-import { IEventDispatcher } from "@robotlegsjs/core";
-
 import { IDisplayObjectContainer } from "./IDisplayObjectContainer";
 
-export let IDisplayObject = Symbol("IDisplayObject");
-export interface IDisplayObject extends IEventDispatcher {
+export const IDisplayObject = Symbol("IDisplayObject");
+export interface IDisplayObject {
     parent: IDisplayObjectContainer;
 }
