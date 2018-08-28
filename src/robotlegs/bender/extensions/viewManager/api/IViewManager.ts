@@ -19,7 +19,7 @@ import { IViewHandler } from "./IViewHandler";
 /**
  * The View Manager allows you to add multiple "view root" containers to a context
  */
-export let IViewManager = Symbol("IViewManager");
+export const IViewManager = Symbol("IViewManager");
 export interface IViewManager extends IEventDispatcher {
     /**
      * A list of currently registered containers
