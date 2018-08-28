@@ -7,9 +7,12 @@
 
 import { IDisplayObject } from "./IDisplayObject";
 
-export let IDisplayObjectContainer = Symbol("IDisplayObjectContainer");
+export const IDisplayObjectContainer = Symbol("IDisplayObjectContainer");
 export interface IDisplayObjectContainer extends IDisplayObject {
-    children: IDisplayObject[];
+    children?: IDisplayObject[];
+
+    numChildren?: number;
+    getChildAt?(index: number): IDisplayObject;
 
     contains(child: IDisplayObject): boolean;
 }
