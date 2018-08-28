@@ -116,7 +116,7 @@ export class ContainerRegistry extends EventDispatcher {
 
         // If the new binding doesn't have a parent it is a Root
         binding.parent = this.findParentBinding(container);
-        if (binding.parent == null) {
+        if (!binding.parent) {
             this.addRootBinding(binding);
         }
 
