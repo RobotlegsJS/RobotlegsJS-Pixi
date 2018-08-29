@@ -9,7 +9,13 @@ import "../../../../entry";
 
 import { assert } from "chai";
 
-import { IContext, Context, LogLevel } from "@robotlegsjs/core";
+import { interfaces, IContext, Context, LogLevel } from "@robotlegsjs/core";
+
+import { DisplayObjectObserver } from "../../../../../src/robotlegs/bender/bundles/pixi/observer/DisplayObjectObserver";
+
+import { IDisplayObject } from "../../../../../src/robotlegs/bender/displayList/api/IDisplayObject";
+import { IDisplayObjectObserver } from "../../../../../src/robotlegs/bender/displayList/api/IDisplayObjectObserver";
+import { IDisplayObjectObserverFactory } from "../../../../../src/robotlegs/bender/displayList/api/IDisplayObjectObserverFactory";
 
 import { StageObserverExtension, ViewManagerExtension } from "../../../../../src";
 
@@ -21,6 +27,13 @@ describe("StageObserverExtension", () => {
 
     beforeEach(() => {
         context = new Context();
+        context.injector
+            .bind<interfaces.Factory<IDisplayObjectObserver>>(IDisplayObjectObserverFactory)
+            .toFactory<IDisplayObjectObserver>(() => {
+                return (view: IDisplayObject, useCapture: boolean): IDisplayObjectObserver => {
+                    return new DisplayObjectObserver(view, useCapture);
+                };
+            });
     });
 
     afterEach(() => {
