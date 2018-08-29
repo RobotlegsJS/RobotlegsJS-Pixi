@@ -11,7 +11,13 @@ import sinon = require("sinon");
 
 import { Sprite } from "pixi.js";
 
-import { IContext, IInjector, ILogger, Context, TypeMatcher } from "@robotlegsjs/core";
+import { interfaces, IContext, IInjector, ILogger, Context, TypeMatcher } from "@robotlegsjs/core";
+
+import { DisplayObjectObserver } from "../../../../../../src/robotlegs/bender/bundles/pixi/observer/DisplayObjectObserver";
+
+import { IDisplayObject } from "../../../../../../src/robotlegs/bender/displayList/api/IDisplayObject";
+import { IDisplayObjectObserver } from "../../../../../../src/robotlegs/bender/displayList/api/IDisplayObjectObserver";
+import { IDisplayObjectObserverFactory } from "../../../../../../src/robotlegs/bender/displayList/api/IDisplayObjectObserverFactory";
 
 import { MediatorFactory } from "../../../../../../src/robotlegs/bender/extensions/mediatorMap/impl/MediatorFactory";
 import { MediatorMapper } from "../../../../../../src/robotlegs/bender/extensions/mediatorMap/impl/MediatorMapper";
@@ -33,6 +39,11 @@ describe("MediatorMapper", () => {
 
         context = new Context();
         injector = context.injector;
+        injector.bind<interfaces.Factory<IDisplayObjectObserver>>(IDisplayObjectObserverFactory).toFactory<IDisplayObjectObserver>(() => {
+            return (view: IDisplayObject, useCapture: boolean): IDisplayObjectObserver => {
+                return new DisplayObjectObserver(view, useCapture);
+            };
+        });
         factory = new MediatorFactory(injector);
         handler = new MediatorViewHandler(factory);
         matcher.createTypeFilter();
