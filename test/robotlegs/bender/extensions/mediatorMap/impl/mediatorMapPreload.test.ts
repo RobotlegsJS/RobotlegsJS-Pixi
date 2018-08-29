@@ -11,7 +11,13 @@ import { assert } from "chai";
 
 import { Container, DisplayObject, Sprite } from "pixi.js";
 
-import { IInjector, IContext, Context, TypeMatcher } from "@robotlegsjs/core";
+import { interfaces, IContext, IInjector, Context, TypeMatcher } from "@robotlegsjs/core";
+
+import { DisplayObjectObserver } from "../../../../../../src/robotlegs/bender/bundles/pixi/observer/DisplayObjectObserver";
+
+import { IDisplayObject } from "../../../../../../src/robotlegs/bender/displayList/api/IDisplayObject";
+import { IDisplayObjectObserver } from "../../../../../../src/robotlegs/bender/displayList/api/IDisplayObjectObserver";
+import { IDisplayObjectObserverFactory } from "../../../../../../src/robotlegs/bender/displayList/api/IDisplayObjectObserverFactory";
 
 import { MediatorMap } from "../../../../../../src/robotlegs/bender/extensions/mediatorMap/impl/MediatorMap";
 
@@ -36,6 +42,11 @@ describe("MediatorMap", () => {
     beforeEach(() => {
         context = new Context();
         injector = context.injector;
+        injector.bind<interfaces.Factory<IDisplayObjectObserver>>(IDisplayObjectObserverFactory).toFactory<IDisplayObjectObserver>(() => {
+            return (view: IDisplayObject, useCapture: boolean): IDisplayObjectObserver => {
+                return new DisplayObjectObserver(view, useCapture);
+            };
+        });
         mediatorMap = new MediatorMap(context);
         mediatorWatcher = new MediatorWatcher();
         injector.bind(MediatorWatcher).toConstantValue(mediatorWatcher);
