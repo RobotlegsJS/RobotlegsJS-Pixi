@@ -68,6 +68,12 @@ export class StageObserver {
             });
         }
 
+        if (this._observers) {
+            this._observers.forEach((observer: IDisplayObjectObserver) => {
+                observer.destroy();
+            });
+        }
+
         this._registry = null;
         this._displayObjectObserverFactory = null;
         this._observers = null;
