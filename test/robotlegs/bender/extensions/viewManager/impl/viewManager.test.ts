@@ -11,7 +11,13 @@ import { assert } from "chai";
 
 import { Container } from "pixi.js";
 
-import { IClass } from "@robotlegsjs/core";
+import { interfaces, IClass, IContext, IInjector, Context } from "@robotlegsjs/core";
+
+import { DisplayObjectObserver } from "../../../../../../src/robotlegs/bender/bundles/pixi/observer/DisplayObjectObserver";
+
+import { IDisplayObject } from "../../../../../../src/robotlegs/bender/displayList/api/IDisplayObject";
+import { IDisplayObjectObserver } from "../../../../../../src/robotlegs/bender/displayList/api/IDisplayObjectObserver";
+import { IDisplayObjectObserverFactory } from "../../../../../../src/robotlegs/bender/displayList/api/IDisplayObjectObserverFactory";
 
 import { applyPixiPatch } from "../../../../../../src/robotlegs/bender/bundles/pixi/patch/pixi-patch";
 import { ContainerRegistry } from "../../../../../../src/robotlegs/bender/extensions/viewManager/impl/ContainerRegistry";
@@ -21,20 +27,36 @@ import { ViewManager } from "../../../../../../src/robotlegs/bender/extensions/v
 import { CallbackViewHandler } from "../support/CallbackViewHandler";
 
 describe("ViewManager", () => {
+    let context: IContext = null;
+    let injector: IInjector = null;
     let container: Container = null;
     let registry: ContainerRegistry = null;
     let viewManager: ViewManager = null;
     let stageObserver: StageObserver = null;
 
     beforeEach(() => {
+        context = new Context();
+        injector = context.injector;
+        injector.bind<interfaces.Factory<IDisplayObjectObserver>>(IDisplayObjectObserverFactory).toFactory<IDisplayObjectObserver>(() => {
+            return (view: IDisplayObject, useCapture: boolean): IDisplayObjectObserver => {
+                return new DisplayObjectObserver(view, useCapture);
+            };
+        });
         container = new Container();
         applyPixiPatch(container);
         registry = new ContainerRegistry();
         viewManager = new ViewManager(registry);
-        stageObserver = new StageObserver(registry);
+        stageObserver = new StageObserver(registry, injector.get(IDisplayObjectObserverFactory));
     });
 
     afterEach(() => {
+        if (context.initialized) {
+            context.destroy();
+        }
+
+        context = null;
+        injector = null;
+
         stageObserver.destroy();
         stageObserver = null;
         viewManager = null;
