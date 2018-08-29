@@ -60,12 +60,20 @@ export class ManualStageObserver {
      * @private
      */
     public destroy(): void {
-        this._registry.removeEventListener(ContainerRegistryEvent.CONTAINER_ADD, this.onContainerAdd);
-        this._registry.removeEventListener(ContainerRegistryEvent.CONTAINER_REMOVE, this.onContainerRemove);
+        if (this._registry) {
+            this._registry.removeEventListener(ContainerRegistryEvent.CONTAINER_ADD, this.onContainerAdd);
+            this._registry.removeEventListener(ContainerRegistryEvent.CONTAINER_REMOVE, this.onContainerRemove);
 
-        this._registry.rootBindings.forEach((binding: ContainerBinding) => {
-            this.removeContainerListener(binding.container);
-        });
+            this._registry.rootBindings.forEach((binding: ContainerBinding) => {
+                this.removeContainerListener(binding.container);
+            });
+        }
+
+        if (this._observers) {
+            this._observers.forEach((observer: IDisplayObjectObserver) => {
+                observer.destroy();
+            });
+        }
 
         this._registry = null;
         this._displayObjectObserverFactory = null;
@@ -85,21 +93,21 @@ export class ManualStageObserver {
     };
 
     private addContainerListener(container: IDisplayObjectContainer): void {
-        // We're interested in ALL container bindings
-        // but just for normal, bubbling events
-        let observer: IDisplayObjectObserver = this._displayObjectObserverFactory(container, false);
-
-        observer.addConfigureViewHandler(this.onConfigureView);
-
-        this._observers.set(container, observer);
+        if (!this._observers.has(container)) {
+            // We're interested in ALL container bindings
+            // but just for normal, bubbling events
+            let observer: IDisplayObjectObserver = this._displayObjectObserverFactory(container, false);
+            observer.addConfigureViewHandler(this.onConfigureView);
+            this._observers.set(container, observer);
+        }
     }
 
     private removeContainerListener(container: IDisplayObjectContainer): void {
-        let observer: IDisplayObjectObserver = this._observers.get(container);
-
-        observer.destroy();
-
-        this._observers.delete(container);
+        if (this._observers.has(container)) {
+            let observer: IDisplayObjectObserver = this._observers.get(container);
+            observer.destroy();
+            this._observers.delete(container);
+        }
     }
 
     private onConfigureView = (container: IDisplayObjectContainer, view: IDisplayObject): void => {
