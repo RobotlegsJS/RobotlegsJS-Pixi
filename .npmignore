@@ -18,6 +18,7 @@ CONTRIBUTING.md
 ISSUE_TEMPLATE.md
 PULL_REQUEST_TEMPLATE.md
 karma.conf.js
+package-lock.json
 tsconfig.example.json
 tsconfig.json
 tsconfig.test.json
@@ -27,6 +28,7 @@ tslint.test.json
 webpack.config.js
 webpack.example.config.js
 yarn.lock
+.auditignore
 .editorconfig
 .gitignore
 .istanbul.yml
