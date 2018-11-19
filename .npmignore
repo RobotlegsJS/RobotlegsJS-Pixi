@@ -27,6 +27,7 @@ tslint.test.json
 webpack.config.js
 webpack.example.config.js
 yarn.lock
+.auditignore
 .editorconfig
 .gitignore
 .istanbul.yml
