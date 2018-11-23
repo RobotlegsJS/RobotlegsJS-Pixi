@@ -5,7 +5,13 @@
 //  in accordance with the terms of the license agreement accompanying it.
 // ------------------------------------------------------------------------------
 
-import { IBundle, IContext, ILogger, instanceOfType } from "@robotlegsjs/core";
+import { interfaces, IBundle, IContext, ILogger, instanceOfType } from "@robotlegsjs/core";
+
+import { Container } from "pixi.js";
+
+import { IDisplayObject } from "../../displayList/api/IDisplayObject";
+import { IDisplayObjectObserver } from "../../displayList/api/IDisplayObjectObserver";
+import { IDisplayObjectObserverFactory } from "../../displayList/api/IDisplayObjectObserverFactory";
 
 import { IContextView } from "../../extensions/contextView/api/IContextView";
 import { ContextView } from "../../extensions/contextView/impl/ContextView";
@@ -16,6 +22,10 @@ import { MediatorMapExtension } from "../../extensions/mediatorMap/MediatorMapEx
 import { StageCrawlerExtension } from "../../extensions/viewManager/StageCrawlerExtension";
 import { StageObserverExtension } from "../../extensions/viewManager/StageObserverExtension";
 import { ViewManagerExtension } from "../../extensions/viewManager/ViewManagerExtension";
+
+import { DisplayObjectObserver } from "./observer/DisplayObjectObserver";
+
+import { applyPixiPatch } from "./patch/pixi-patch";
 
 /**
  * For that Classic Robotlegs flavour
@@ -42,6 +52,14 @@ export class PixiBundle implements IBundle {
         this._context = context;
         this._logger = context.getLogger(this);
 
+        this._context.injector
+            .bind<interfaces.Factory<IDisplayObjectObserver>>(IDisplayObjectObserverFactory)
+            .toFactory<IDisplayObjectObserver>(() => {
+                return (view: IDisplayObject, useCapture: boolean): IDisplayObjectObserver => {
+                    return new DisplayObjectObserver(view, useCapture);
+                };
+            });
+
         this._context.install(
             ContextViewExtension,
             ViewManagerExtension,
@@ -59,7 +77,9 @@ export class PixiBundle implements IBundle {
     /* Private Functions                                                          */
     /*============================================================================*/
 
-    private handleContextView(): void {
+    private handleContextView(contextView: ContextView): void {
+        applyPixiPatch(<Container>contextView.view);
+
         this._context.configure(ContextViewListenerConfig);
     }
 

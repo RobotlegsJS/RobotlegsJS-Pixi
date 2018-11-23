@@ -5,9 +5,9 @@
 //  in accordance with the terms of the license agreement accompanying it.
 // ------------------------------------------------------------------------------
 
-import { Container } from "pixi.js";
-
 import { IConfig } from "@robotlegsjs/core";
+
+import { IDisplayObjectContainer } from "../../../displayList/api/IDisplayObjectContainer";
 
 import { IContextView } from "../api/IContextView";
 
@@ -15,7 +15,7 @@ import { IContextView } from "../api/IContextView";
  * The Context View represents the root Container for a Context
  */
 export class ContextView implements IContextView, IConfig {
-    private _view: Container;
+    private _view: IDisplayObjectContainer;
 
     /*============================================================================*/
     /* Constructor                                                                */
@@ -25,7 +25,7 @@ export class ContextView implements IContextView, IConfig {
      * The Context View represents the root Container for a Context
      * @param view The root Container for this Context
      */
-    constructor(view: Container) {
+    constructor(view: IDisplayObjectContainer) {
         if (view !== null && view !== undefined) {
             this._view = view;
         } else {
@@ -45,7 +45,7 @@ export class ContextView implements IContextView, IConfig {
     /**
      * The root Container for this Context
      */
-    public get view(): Container {
+    public get view(): IDisplayObjectContainer {
         return this._view;
     }
 }

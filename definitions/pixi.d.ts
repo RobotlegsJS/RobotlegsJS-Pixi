@@ -1,3 +1,10 @@
+// ------------------------------------------------------------------------------
+//  Copyright (c) 2017-present, RobotlegsJS. All Rights Reserved.
+//
+//  NOTICE: You are permitted to use, modify, and distribute this file
+//  in accordance with the terms of the license agreement accompanying it.
+// ------------------------------------------------------------------------------
+
 /// <reference types="@robotlegsjs/core" />
 
 import { IEvent } from "@robotlegsjs/core";
@@ -7,11 +14,11 @@ import { IEvent } from "@robotlegsjs/core";
  */
 declare module "pixi.js" {
     interface IEventDispatcher {
-        addEventListener(type: string | symbol, listener: Function, context?: any): void;
-        hasEventListener(type: string | symbol, listener?: Function): boolean;
-        removeEventListener(type: string | symbol, listener?: Function, context?: any, once?: boolean): void;
-        willTrigger(type: string | symbol): boolean;
+        addEventListener(type: string, listener: Function, thisObject?: any, useCapture?: boolean, priority?: number): void;
+        removeEventListener(type: string, listener: Function, thisObject?: any, useCapture?: boolean): void;
+        hasEventListener(type: string): boolean;
         dispatchEvent(event: IEvent): boolean;
+        willTrigger(type: string): boolean;
     }
 
     export interface DisplayObject extends IEventDispatcher {}

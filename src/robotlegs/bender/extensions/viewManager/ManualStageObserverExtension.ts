@@ -9,6 +9,7 @@ import { IContext, IExtension, IInjector, ILogger } from "@robotlegsjs/core";
 
 import { ContainerRegistry } from "./impl/ContainerRegistry";
 import { ManualStageObserver } from "./impl/ManualStageObserver";
+import { IDisplayObjectObserverFactory } from "../../displayList/api/IDisplayObjectObserverFactory";
 
 let installCount: number = 0;
 
@@ -54,8 +55,9 @@ export class ManualStageObserverExtension implements IExtension {
         // Hark, an actual Singleton!
         if (!ManualStageObserverExtension._manualStageObserver) {
             let containerRegistry: ContainerRegistry = this._injector.get<ContainerRegistry>(ContainerRegistry);
+            let factory: IDisplayObjectObserverFactory = this._injector.get(IDisplayObjectObserverFactory);
             this._logger.debug("Creating genuine ManualStageObserver Singleton");
-            ManualStageObserverExtension._manualStageObserver = new ManualStageObserver(containerRegistry);
+            ManualStageObserverExtension._manualStageObserver = new ManualStageObserver(containerRegistry, factory);
         }
     }
 

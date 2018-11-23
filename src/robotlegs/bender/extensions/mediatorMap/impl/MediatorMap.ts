@@ -5,15 +5,15 @@
 //  in accordance with the terms of the license agreement accompanying it.
 // ------------------------------------------------------------------------------
 
-import { DisplayObject } from "pixi.js";
-
 import { injectable, inject, IClass, IContext, ILogger, ITypeMatcher, TypeMatcher } from "@robotlegsjs/core";
+
+import { IDisplayObject } from "../../../displayList/api/IDisplayObject";
+
+import { IViewHandler } from "../../viewManager/api/IViewHandler";
 
 import { IMediatorMap } from "../api/IMediatorMap";
 import { IMediatorMapper } from "../dsl/IMediatorMapper";
 import { IMediatorUnmapper } from "../dsl/IMediatorUnmapper";
-
-import { IViewHandler } from "../../viewManager/api/IViewHandler";
 
 import { MediatorFactory } from "./MediatorFactory";
 import { MediatorViewHandler } from "./MediatorViewHandler";
@@ -96,7 +96,7 @@ export class MediatorMap implements IMediatorMap, IViewHandler {
     /**
      * @inheritDoc
      */
-    public handleView(view: DisplayObject, type: IClass<any>): void {
+    public handleView(view: IDisplayObject, type: IClass<any>): void {
         this._viewHandler.handleView(view, type);
     }
 

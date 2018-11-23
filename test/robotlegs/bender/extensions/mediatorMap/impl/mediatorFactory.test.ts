@@ -13,7 +13,13 @@ import { assert } from "chai";
 
 import { DisplayObject, Sprite } from "pixi.js";
 
-import { IInjector, ITypeFilter, RobotlegsInjector, TypeMatcher } from "@robotlegsjs/core";
+import { interfaces, IInjector, ITypeFilter, RobotlegsInjector, TypeMatcher } from "@robotlegsjs/core";
+
+import { DisplayObjectObserver } from "../../../../../../src/robotlegs/bender/bundles/pixi/observer/DisplayObjectObserver";
+
+import { IDisplayObject } from "../../../../../../src/robotlegs/bender/displayList/api/IDisplayObject";
+import { IDisplayObjectObserver } from "../../../../../../src/robotlegs/bender/displayList/api/IDisplayObjectObserver";
+import { IDisplayObjectObserverFactory } from "../../../../../../src/robotlegs/bender/displayList/api/IDisplayObjectObserverFactory";
 
 import { IMediator } from "../../../../../../src/robotlegs/bender/extensions/mediatorMap/api/IMediator";
 import { IMediatorMapping } from "../../../../../../src/robotlegs/bender/extensions/mediatorMap/api/IMediatorMapping";
@@ -37,6 +43,11 @@ describe("MediatorFactory", () => {
 
     beforeEach(() => {
         injector = new RobotlegsInjector();
+        injector.bind<interfaces.Factory<IDisplayObjectObserver>>(IDisplayObjectObserverFactory).toFactory<IDisplayObjectObserver>(() => {
+            return (view: IDisplayObject, useCapture: boolean): IDisplayObjectObserver => {
+                return new DisplayObjectObserver(view, useCapture);
+            };
+        });
         factory = new MediatorFactory(injector);
     });
 
@@ -188,7 +199,7 @@ describe("MediatorFactory", () => {
     it("creating_mediator_gives_mediator_to_mediator_manager", () => {
         const mediatedItem: Sprite = new Sprite();
         const mapping: IMediatorMapping = new MediatorMapping(createTypeFilter([Sprite]), CallbackMediator);
-        manager = new MediatorManager(factory);
+        manager = new MediatorManager(factory, injector.get(IDisplayObjectObserverFactory));
         let managerMock = sinon.mock(manager);
         managerMock.expects("addMediator").once();
         factory = new MediatorFactory(injector, manager);
@@ -201,7 +212,7 @@ describe("MediatorFactory", () => {
     it("removeMediator_removes_mediator_from_manager", () => {
         const mediatedItem: Sprite = new Sprite();
         const mapping: IMediatorMapping = new MediatorMapping(createTypeFilter([Sprite]), CallbackMediator);
-        manager = new MediatorManager(factory);
+        manager = new MediatorManager(factory, injector.get(IDisplayObjectObserverFactory));
         let managerMock = sinon.mock(manager);
         managerMock.expects("removeMediator").once();
         factory = new MediatorFactory(injector, manager);
@@ -217,7 +228,7 @@ describe("MediatorFactory", () => {
         const mediatedItem2: Sprite = new Sprite();
         const mapping1: IMediatorMapping = new MediatorMapping(createTypeFilter([Sprite]), CallbackMediator);
         const mapping2: IMediatorMapping = new MediatorMapping(createTypeFilter([DisplayObject]), ViewInjectedAsRequestedMediator);
-        manager = new MediatorManager(factory);
+        manager = new MediatorManager(factory, injector.get(IDisplayObjectObserverFactory));
         let managerMock = sinon.mock(manager);
         managerMock.expects("removeMediator").exactly(4);
         factory = new MediatorFactory(injector, manager);

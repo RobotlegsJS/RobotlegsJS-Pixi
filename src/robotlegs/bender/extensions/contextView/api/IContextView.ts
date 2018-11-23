@@ -5,9 +5,9 @@
 //  in accordance with the terms of the license agreement accompanying it.
 // ------------------------------------------------------------------------------
 
-import { Container } from "pixi.js";
+import { IDisplayObjectContainer } from "../../../displayList/api/IDisplayObjectContainer";
 
-export let IContextView = Symbol("IContextView");
+export const IContextView = Symbol("IContextView");
 export interface IContextView {
-    view: Container;
+    view: IDisplayObjectContainer;
 }

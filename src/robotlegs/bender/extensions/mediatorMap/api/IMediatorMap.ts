@@ -13,7 +13,7 @@ import { IMediatorUnmapper } from "../dsl/IMediatorUnmapper";
 /**
  * The Mediator Map allows you to bind Mediators to objects
  */
-export let IMediatorMap = Symbol("IMediatorMap");
+export const IMediatorMap = Symbol("IMediatorMap");
 export interface IMediatorMap {
     /**
      * Maps a matcher that will be tested against incoming items to be handled.

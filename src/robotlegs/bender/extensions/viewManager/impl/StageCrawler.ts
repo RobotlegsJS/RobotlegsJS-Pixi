@@ -5,9 +5,10 @@
 //  in accordance with the terms of the license agreement accompanying it.
 // ------------------------------------------------------------------------------
 
-import { Container, DisplayObject } from "pixi.js";
-
 import { IClass } from "@robotlegsjs/core";
+
+import { IDisplayObject } from "../../../displayList/api/IDisplayObject";
+import { IDisplayObjectContainer } from "../../../displayList/api/IDisplayObjectContainer";
 
 import { ContainerBinding } from "./ContainerBinding";
 
@@ -39,7 +40,7 @@ export class StageCrawler {
     /**
      * @private
      */
-    public scan(container: Container): void {
+    public scan(container: IDisplayObjectContainer): void {
         this.scanContainer(container);
     }
 
@@ -47,19 +48,31 @@ export class StageCrawler {
     /* Private Functions                                                          */
     /*============================================================================*/
 
-    private scanContainer(container: Container): void {
+    private scanContainer(container: IDisplayObjectContainer): void {
         this.processView(container);
 
-        container.children.forEach(child => {
-            if (child instanceof Container) {
-                this.scanContainer(child);
-            } else {
-                this.processView(child);
+        if (container.children !== undefined) {
+            container.children.forEach((child: IDisplayObject) => {
+                if ((<IDisplayObjectContainer>child).children !== undefined) {
+                    this.scanContainer(<IDisplayObjectContainer>child);
+                } else {
+                    this.processView(child);
+                }
+            });
+        } else if (container.numChildren !== undefined && container.getChildAt !== undefined) {
+            for (let i: number = 0; i < container.numChildren; i++) {
+                let child: any = container.getChildAt(i);
+
+                if (child.numChildren !== undefined && child.getChildAt !== undefined) {
+                    this.scanContainer(child);
+                } else {
+                    this.processView(child);
+                }
             }
-        });
+        }
     }
 
-    private processView(view: DisplayObject): void {
+    private processView(view: IDisplayObject): void {
         this._binding.handleView(view, <IClass<any>>view.constructor);
     }
 }

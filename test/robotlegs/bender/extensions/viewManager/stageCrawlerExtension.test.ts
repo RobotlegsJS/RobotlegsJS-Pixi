@@ -11,7 +11,13 @@ import { assert } from "chai";
 
 import { Container } from "pixi.js";
 
-import { IContext, Context, LogLevel } from "@robotlegsjs/core";
+import { interfaces, IContext, Context, LogLevel } from "@robotlegsjs/core";
+
+import { DisplayObjectObserver } from "../../../../../src/robotlegs/bender/bundles/pixi/observer/DisplayObjectObserver";
+
+import { IDisplayObject } from "../../../../../src/robotlegs/bender/displayList/api/IDisplayObject";
+import { IDisplayObjectObserver } from "../../../../../src/robotlegs/bender/displayList/api/IDisplayObjectObserver";
+import { IDisplayObjectObserverFactory } from "../../../../../src/robotlegs/bender/displayList/api/IDisplayObjectObserverFactory";
 
 import {
     ContextView,
@@ -22,7 +28,7 @@ import {
     ViewManagerExtension
 } from "../../../../../src";
 
-import { applyPixiPatch } from "../../../../../src/robotlegs/bender/extensions/contextView/pixiPatch/pixi-patch";
+import { applyPixiPatch } from "../../../../../src/robotlegs/bender/bundles/pixi/patch/pixi-patch";
 import { IViewHandler } from "../../../../../src/robotlegs/bender/extensions/viewManager/api/IViewHandler";
 import { ContainerRegistry } from "../../../../../src/robotlegs/bender/extensions/viewManager/impl/ContainerRegistry";
 
@@ -39,6 +45,13 @@ describe("StageCrawlerExtension", () => {
         container = new Container();
         applyPixiPatch(container);
         context = new Context();
+        context.injector
+            .bind<interfaces.Factory<IDisplayObjectObserver>>(IDisplayObjectObserverFactory)
+            .toFactory<IDisplayObjectObserver>(() => {
+                return (view: IDisplayObject, useCapture: boolean): IDisplayObjectObserver => {
+                    return new DisplayObjectObserver(view, useCapture);
+                };
+            });
     });
 
     afterEach(() => {

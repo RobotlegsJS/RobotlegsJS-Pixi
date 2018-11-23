@@ -11,28 +11,50 @@ import { assert } from "chai";
 
 import { Container } from "pixi.js";
 
-import { IClass } from "@robotlegsjs/core";
+import { interfaces, IClass, IContext, IInjector, Context } from "@robotlegsjs/core";
 
-import { applyPixiPatch } from "../../../../../../src/robotlegs/bender/extensions/contextView/pixiPatch/pixi-patch";
+import { DisplayObjectObserver } from "../../../../../../src/robotlegs/bender/bundles/pixi/observer/DisplayObjectObserver";
+
+import { IDisplayObject } from "../../../../../../src/robotlegs/bender/displayList/api/IDisplayObject";
+import { IDisplayObjectObserver } from "../../../../../../src/robotlegs/bender/displayList/api/IDisplayObjectObserver";
+import { IDisplayObjectObserverFactory } from "../../../../../../src/robotlegs/bender/displayList/api/IDisplayObjectObserverFactory";
+
+import { applyPixiPatch } from "../../../../../../src/robotlegs/bender/bundles/pixi/patch/pixi-patch";
 import { ConfigureViewEvent } from "../../../../../../src/robotlegs/bender/extensions/viewManager/impl/ConfigureViewEvent";
 import { ContainerRegistry } from "../../../../../../src/robotlegs/bender/extensions/viewManager/impl/ContainerRegistry";
 import { ManualStageObserver } from "../../../../../../src/robotlegs/bender/extensions/viewManager/impl/ManualStageObserver";
 
 import { CallbackViewHandler } from "../support/CallbackViewHandler";
 
-describe("StageObserver", () => {
+describe("ManualStageObserver", () => {
+    let context: IContext = null;
+    let injector: IInjector = null;
     let container: Container = null;
     let registry: ContainerRegistry = null;
     let observer: ManualStageObserver = null;
 
     beforeEach(() => {
+        context = new Context();
+        injector = context.injector;
+        injector.bind<interfaces.Factory<IDisplayObjectObserver>>(IDisplayObjectObserverFactory).toFactory<IDisplayObjectObserver>(() => {
+            return (view: IDisplayObject, useCapture: boolean): IDisplayObjectObserver => {
+                return new DisplayObjectObserver(view, useCapture);
+            };
+        });
         container = new Container();
         applyPixiPatch(container);
         registry = new ContainerRegistry();
-        observer = new ManualStageObserver(registry);
+        observer = new ManualStageObserver(registry, injector.get(IDisplayObjectObserverFactory));
     });
 
     afterEach(() => {
+        if (context.initialized) {
+            context.destroy();
+        }
+
+        context = null;
+        injector = null;
+
         observer.destroy();
         observer = null;
         registry = null;

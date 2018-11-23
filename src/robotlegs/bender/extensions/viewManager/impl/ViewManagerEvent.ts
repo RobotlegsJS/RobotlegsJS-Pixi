@@ -5,9 +5,9 @@
 //  in accordance with the terms of the license agreement accompanying it.
 // ------------------------------------------------------------------------------
 
-import { Container } from "pixi.js";
-
 import { Event } from "@robotlegsjs/core";
+
+import { IDisplayObjectContainer } from "../../../displayList/api/IDisplayObjectContainer";
 
 import { IViewHandler } from "../api/IViewHandler";
 
@@ -32,12 +32,12 @@ export class ViewManagerEvent extends Event {
     /* Public Properties                                                          */
     /*============================================================================*/
 
-    private _container: Container;
+    private _container: IDisplayObjectContainer;
 
     /**
      * The container associated with this event
      */
-    public get container(): Container {
+    public get container(): IDisplayObjectContainer {
         return this._container;
     }
 
@@ -60,7 +60,7 @@ export class ViewManagerEvent extends Event {
      * @param container The container associated with this event
      * @param handler The view handler associated with this event
      */
-    constructor(type: string, container?: Container, handler?: IViewHandler) {
+    constructor(type: string, container?: IDisplayObjectContainer, handler?: IViewHandler) {
         super(type);
         this._container = container;
         this._handler = handler;

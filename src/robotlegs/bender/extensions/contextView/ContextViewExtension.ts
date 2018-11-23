@@ -10,8 +10,6 @@ import { instanceOfType, IContext, IExtension, IInjector, ILogger } from "@robot
 import { IContextView } from "./api/IContextView";
 import { ContextView } from "./impl/ContextView";
 
-import { applyPixiPatch } from "./pixiPatch/pixi-patch";
-
 /**
  * <p>This Extension waits for a ContextView to be added as a configuration
  * and maps it into the context's injector.</p>
@@ -50,8 +48,6 @@ export class ContextViewExtension implements IExtension {
             this._logger.warn("A contextView has already been installed, ignoring {0}", [contextView.view]);
         } else {
             this._logger.debug("Mapping {0} as contextView", [contextView.view]);
-
-            applyPixiPatch(contextView.view);
 
             this._injector.bind(IContextView).toConstantValue(contextView);
         }

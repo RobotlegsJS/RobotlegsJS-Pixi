@@ -11,7 +11,7 @@ import { assert } from "chai";
 
 import { Container, DisplayObject } from "pixi.js";
 
-import { applyPixiPatch } from "../../../../../../src/robotlegs/bender/extensions/contextView/pixiPatch/pixi-patch";
+import { applyPixiPatch } from "../../../../../../src/robotlegs/bender/bundles/pixi/patch/pixi-patch";
 
 describe("PixiPatch", () => {
     let stage: Container;
@@ -60,7 +60,7 @@ describe("PixiPatch", () => {
 
         let count: number = 0;
 
-        stage.on("added", () => {
+        stage.on("addedToStage", () => {
             count++;
         });
 
@@ -91,7 +91,7 @@ describe("PixiPatch", () => {
 
         let count: number = 0;
 
-        stage.on("added", () => {
+        stage.on("addedToStage", () => {
             count++;
         });
 
@@ -111,7 +111,7 @@ describe("PixiPatch", () => {
 
         let count: number = 0;
 
-        stage.on("added", () => {
+        stage.on("addedToStage", () => {
             count++;
         });
 
@@ -135,7 +135,7 @@ describe("PixiPatch", () => {
 
         let count: number = 0;
 
-        stage.on("added", () => {
+        stage.on("addedToStage", () => {
             count++;
         });
 
@@ -162,7 +162,7 @@ describe("PixiPatch", () => {
 
         let count: number = 0;
 
-        stage.on("added", () => {
+        stage.on("addedToStage", () => {
             count++;
         });
 
@@ -195,7 +195,7 @@ describe("PixiPatch", () => {
 
         let count: number = 0;
 
-        stage.on("added", () => {
+        stage.on("addedToStage", () => {
             count++;
         });
 
@@ -219,7 +219,7 @@ describe("PixiPatch", () => {
 
         let count: number = 0;
 
-        stage.on("added", () => {
+        stage.on("addedToStage", () => {
             count++;
         });
 
@@ -243,7 +243,7 @@ describe("PixiPatch", () => {
 
         let count: number = 0;
 
-        stage.on("added", () => {
+        stage.on("addedToStage", () => {
             count++;
         });
 
@@ -275,7 +275,7 @@ describe("PixiPatch", () => {
 
         let count: number = 0;
 
-        stage.on("removed", () => {
+        stage.on("removedFromStage", () => {
             count++;
         });
 
@@ -301,7 +301,7 @@ describe("PixiPatch", () => {
 
         let count: number = 0;
 
-        stage.on("removed", () => {
+        stage.on("removedFromStage", () => {
             count++;
         });
 
@@ -338,7 +338,7 @@ describe("PixiPatch", () => {
 
         let count: number = 0;
 
-        stage.on("removed", () => {
+        stage.on("removedFromStage", () => {
             count++;
         });
 
@@ -364,7 +364,7 @@ describe("PixiPatch", () => {
 
         let count: number = 0;
 
-        stage.on("removed", () => {
+        stage.on("removedFromStage", () => {
             count++;
         });
 
@@ -429,7 +429,7 @@ describe("PixiPatch", () => {
 
         let count: number = 0;
 
-        stage.on("removed", () => {
+        stage.on("removedFromStage", () => {
             count++;
         });
 
@@ -451,7 +451,7 @@ describe("PixiPatch", () => {
 
         let count: number = 0;
 
-        stage.on("removed", () => {
+        stage.on("removedFromStage", () => {
             count++;
         });
 
@@ -492,11 +492,11 @@ describe("PixiPatch", () => {
         let countAdded: number = 0;
         let countRemoved: number = 0;
 
-        stage.on("added", () => {
+        stage.on("addedToStage", () => {
             countAdded++;
         });
 
-        stage.on("removed", () => {
+        stage.on("removedFromStage", () => {
             countRemoved++;
         });
 

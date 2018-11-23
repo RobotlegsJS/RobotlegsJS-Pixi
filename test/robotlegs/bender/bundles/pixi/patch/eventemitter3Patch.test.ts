@@ -13,7 +13,7 @@ import { Container } from "pixi.js";
 
 import { Event } from "@robotlegsjs/core";
 
-import "../../../../../../src/robotlegs/bender/extensions/contextView/pixiPatch/eventemitter3-patch";
+import "../../../../../../src/robotlegs/bender/bundles/pixi/patch/eventemitter3-patch";
 
 describe("EventEmmiter3Patch", () => {
     let container: Container;
@@ -44,8 +44,8 @@ describe("EventEmmiter3Patch", () => {
             // no nothing
             return;
         };
-        container.addEventListener("added", listener);
-        assert.deepEqual(container.listeners("added"), [listener]);
+        container.addEventListener("addedToStage", listener);
+        assert.deepEqual(container.listeners("addedToStage"), [listener]);
     });
 
     it("hasEventListener_check_if_a_listener_was_added", () => {
@@ -53,9 +53,9 @@ describe("EventEmmiter3Patch", () => {
             // no nothing
             return;
         };
-        container.addEventListener("added", listener);
-        assert.isTrue(container.hasEventListener("added", listener));
-        assert.isFalse(container.hasEventListener("removed"));
+        container.addEventListener("addedToStage", listener);
+        assert.isTrue(container.hasEventListener("addedToStage"));
+        assert.isFalse(container.hasEventListener("removedFromStage"));
     });
 
     it("removeEventListener_remove_a_listener", () => {
@@ -63,10 +63,10 @@ describe("EventEmmiter3Patch", () => {
             // no nothing
             return;
         };
-        container.addEventListener("added", listener);
-        container.removeEventListener("added", listener);
-        assert.isEmpty(container.listeners("added"));
-        assert.isFalse(container.hasEventListener("added"));
+        container.addEventListener("addedToStage", listener);
+        container.removeEventListener("addedToStage", listener);
+        assert.isEmpty(container.listeners("addedToStage"));
+        assert.isFalse(container.hasEventListener("addedToStage"));
     });
 
     it("willTrigger_ensure_that_a_event_will_be_dispatched", () => {
@@ -74,8 +74,8 @@ describe("EventEmmiter3Patch", () => {
             // no nothing
             return;
         };
-        container.addEventListener("added", listener);
-        assert.isTrue(container.willTrigger("added"));
+        container.addEventListener("addedToStage", listener);
+        assert.isTrue(container.willTrigger("addedToStage"));
     });
 
     it("dispatchEvent_dispatch_a_event", () => {
@@ -83,8 +83,8 @@ describe("EventEmmiter3Patch", () => {
         let listener: Function = () => {
             dispatched = true;
         };
-        container.addEventListener("added", listener);
-        container.dispatchEvent(new Event("added"));
+        container.addEventListener("addedToStage", listener);
+        container.dispatchEvent(new Event("addedToStage"));
         assert.isTrue(dispatched);
     });
 

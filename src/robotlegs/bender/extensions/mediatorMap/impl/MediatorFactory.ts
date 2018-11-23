@@ -7,6 +7,8 @@
 
 import { IClass, IType, IInjector, applyHooks, guardsApprove, instantiateUnmapped, ITypeFilter } from "@robotlegsjs/core";
 
+import { IDisplayObjectObserverFactory } from "../../../displayList/api/IDisplayObjectObserverFactory";
+
 import { IMediatorMapping } from "../api/IMediatorMapping";
 
 import { MediatorManager } from "./MediatorManager";
@@ -34,7 +36,7 @@ export class MediatorFactory {
      */
     constructor(injector: IInjector, manager?: MediatorManager) {
         this._injector = injector;
-        this._manager = manager || new MediatorManager(this);
+        this._manager = manager || new MediatorManager(this, this._injector.get(IDisplayObjectObserverFactory));
     }
 
     /*============================================================================*/

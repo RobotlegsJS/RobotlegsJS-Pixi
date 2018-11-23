@@ -5,7 +5,9 @@
 //  in accordance with the terms of the license agreement accompanying it.
 // ------------------------------------------------------------------------------
 
-import { DisplayObject } from "pixi.js";
+import { IDisplayObject } from "../../../displayList/api/IDisplayObject";
+import { IDisplayObjectObserver } from "../../../displayList/api/IDisplayObjectObserver";
+import { IDisplayObjectObserverFactory } from "../../../displayList/api/IDisplayObjectObserverFactory";
 
 import { IMediatorMapping } from "../api/IMediatorMapping";
 import { MediatorFactory } from "./MediatorFactory";
@@ -18,7 +20,10 @@ export class MediatorManager {
     /* Private Properties                                                         */
     /*============================================================================*/
 
-    private _factory: MediatorFactory;
+    private _mediatorFactory: MediatorFactory;
+    private _displayObjectObserverFactory: IDisplayObjectObserverFactory;
+
+    private _observers: Map<IDisplayObject, IDisplayObjectObserver> = new Map();
 
     /*============================================================================*/
     /* Constructor                                                                */
@@ -27,8 +32,9 @@ export class MediatorManager {
     /**
      * @private
      */
-    constructor(factory: MediatorFactory) {
-        this._factory = factory;
+    constructor(factory: MediatorFactory, displayObjectObserverFactory: IDisplayObjectObserverFactory) {
+        this._mediatorFactory = factory;
+        this._displayObjectObserverFactory = displayObjectObserverFactory;
     }
 
     /*============================================================================*/
@@ -39,10 +45,15 @@ export class MediatorManager {
      * @private
      */
     public addMediator(mediator: any, item: any, mapping: IMediatorMapping): void {
+        const displayObject: IDisplayObject = <IDisplayObject>item;
+
         // Watch Display Object for removal
-        if (item instanceof DisplayObject && mapping.autoRemoveEnabled) {
-            (<any>item)._onRemovedFromStage = this.onRemovedFromStage.bind(this, item);
-            item.on("removed", (<any>item)._onRemovedFromStage, this);
+        if (displayObject !== undefined && mapping.autoRemoveEnabled) {
+            if (!this._observers.has(displayObject)) {
+                let observer: IDisplayObjectObserver = this._displayObjectObserverFactory(displayObject, false);
+                observer.addRemovedFromStageHandler(this.onRemovedFromStage);
+                this._observers.set(displayObject, observer);
+            }
         }
 
         // Synchronize with item life-cycle
@@ -53,8 +64,15 @@ export class MediatorManager {
      * @private
      */
     public removeMediator(mediator: any, item: any, mapping: IMediatorMapping): void {
-        if (item instanceof DisplayObject) {
-            item.off("removed", (<any>item)._onRemovedFromStage);
+        const displayObject: IDisplayObject = <IDisplayObject>item;
+
+        // Watch Display Object for removal
+        if (displayObject !== undefined && mapping.autoRemoveEnabled) {
+            if (this._observers.has(displayObject)) {
+                let observer = this._observers.get(displayObject);
+                observer.destroy();
+                this._observers.delete(displayObject);
+            }
         }
 
         this.destroyMediator(mediator);
@@ -64,9 +82,9 @@ export class MediatorManager {
     /* Private Functions                                                          */
     /*============================================================================*/
 
-    private onRemovedFromStage(displayObject: any, fromContainer: any): void {
-        this._factory.removeMediators(displayObject);
-    }
+    private onRemovedFromStage = (view: IDisplayObject): void => {
+        this._mediatorFactory.removeMediators(view);
+    };
 
     private initializeMediator(mediator: any, mediatedItem: any): void {
         if ("preInitialize" in mediator) {

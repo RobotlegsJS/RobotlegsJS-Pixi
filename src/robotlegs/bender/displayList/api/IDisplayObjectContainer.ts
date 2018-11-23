@@ -5,9 +5,14 @@
 //  in accordance with the terms of the license agreement accompanying it.
 // ------------------------------------------------------------------------------
 
-import { Game } from "./Game";
+import { IDisplayObject } from "./IDisplayObject";
 
-(<any>window).initGame = () => {
-    let game: Game = new Game();
-    (<any>window).game = game;
-};
+export const IDisplayObjectContainer = Symbol("IDisplayObjectContainer");
+export interface IDisplayObjectContainer extends IDisplayObject {
+    children?: IDisplayObject[];
+
+    numChildren?: number;
+    getChildAt?(index: number): IDisplayObject;
+
+    contains(child: IDisplayObject): boolean;
+}

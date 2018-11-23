@@ -4,6 +4,7 @@ coverage
 dist/lib
 dist-test
 lib
+lib-example
 lib-test
 node_modules
 *.as

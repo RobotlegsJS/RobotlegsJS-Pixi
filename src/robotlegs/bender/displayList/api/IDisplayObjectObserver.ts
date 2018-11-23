@@ -5,18 +5,19 @@
 //  in accordance with the terms of the license agreement accompanying it.
 // ------------------------------------------------------------------------------
 
-import { IClass } from "@robotlegsjs/core";
-
-import { IDisplayObject } from "../../../displayList/api/IDisplayObject";
+import { IDisplayObject } from "./IDisplayObject";
 
 /**
- * View handler contract
+ *
  */
-export interface IViewHandler {
-    /**
-     * View handler method
-     * @param view The view instance to handle
-     * @param type The class of the view instance
-     */
-    handleView(view: IDisplayObject, type: IClass<any>): void;
+export interface IDisplayObjectObserver {
+    displayObject: IDisplayObject;
+
+    addAddedToStageHandler(handler: Function): void;
+
+    addRemovedFromStageHandler(handler: Function): void;
+
+    addConfigureViewHandler(handler: Function): void;
+
+    destroy(): void;
 }

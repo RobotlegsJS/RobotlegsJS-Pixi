@@ -5,9 +5,9 @@
 //  in accordance with the terms of the license agreement accompanying it.
 // ------------------------------------------------------------------------------
 
-import { Game } from "./Game";
+import { IDisplayObjectContainer } from "./IDisplayObjectContainer";
 
-(<any>window).initGame = () => {
-    let game: Game = new Game();
-    (<any>window).game = game;
-};
+export const IDisplayObject = Symbol("IDisplayObject");
+export interface IDisplayObject {
+    parent: IDisplayObjectContainer;
+}
