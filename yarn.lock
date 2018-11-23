@@ -151,6 +151,11 @@
   resolved "https://registry.npmjs.org/@types/sinon/-/sinon-5.0.6.tgz#2d362a14209fb6a85dd5d54a595a13c3e355f4d7"
   integrity sha512-qipHQv36qZsFGVXs/RMYuTUXvniBKXVCBBxiIP7WTzEBKjVYELeCXt6W4H8sNnUdd+IULItwQ/C6NmIqJrW4Kw==
 
+"@types/webpack-env@^1.13.6":
+  version "1.13.6"
+  resolved "http://registry.npmjs.org/@types/webpack-env/-/webpack-env-1.13.6.tgz#128d1685a7c34d31ed17010fc87d6a12c1de6976"
+  integrity sha512-5Th3OsZ4gTRdr9Mho83BQ23cex4sRhOR4XTG+m+cJc0FhtUBK9Vn62hBJ+pnQYnSxoPOsKoAPOx6FcphxBC8ng==
+
 "@webassemblyjs/ast@1.7.11":
   version "1.7.11"
   resolved "https://registry.npmjs.org/@webassemblyjs/ast/-/ast-1.7.11.tgz#b988582cafbb2b095e8b556526f30c90d057cace"
@@ -3684,11 +3689,6 @@ just-extend@^3.0.0:
   resolved "https://registry.npmjs.org/just-extend/-/just-extend-3.0.0.tgz#cee004031eaabf6406da03a7b84e4fe9d78ef288"
   integrity sha512-Fu3T6pKBuxjWT/p4DkqGHFRsysc8OauWr4ZRTY9dIx07Y9O0RkoR5jcv28aeD1vuAwhm3nLkDurwLXoALp4DpQ==
 
-karma-chai@^0.1.0:
-  version "0.1.0"
-  resolved "https://registry.npmjs.org/karma-chai/-/karma-chai-0.1.0.tgz#bee5ad40400517811ae34bb945f762909108b79a"
-  integrity sha1-vuWtQEAFF4Ea40u5RfdikJEIt5o=
-
 karma-chrome-launcher@^2.2.0:
   version "2.2.0"
   resolved "https://registry.npmjs.org/karma-chrome-launcher/-/karma-chrome-launcher-2.2.0.tgz#cf1b9d07136cc18fe239327d24654c3dbc368acf"
@@ -3741,11 +3741,6 @@ karma-sinon-chai@^2.0.2:
   version "2.0.2"
   resolved "https://registry.npmjs.org/karma-sinon-chai/-/karma-sinon-chai-2.0.2.tgz#e28c109b989973abafc28a7c9f09ef24a05e07c2"
   integrity sha512-SDgh6V0CUd+7ruL1d3yG6lFzmJNGRNQuEuCYXLaorruNP9nwQfA7hpsp4clx4CbOo5Gsajh3qUOT7CrVStUKMw==
-
-karma-sinon@^1.0.5:
-  version "1.0.5"
-  resolved "https://registry.npmjs.org/karma-sinon/-/karma-sinon-1.0.5.tgz#4e3443f2830fdecff624d3747163f1217daa2a9a"
-  integrity sha1-TjRD8oMP3s/2JNN0cWPxIX2qKpo=
 
 karma-sourcemap-loader@^0.3.7:
   version "0.3.7"
