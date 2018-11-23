@@ -33,6 +33,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Migrate to Headless Chrome and improve performance of `karma` (see #93).
 
+- Prepare package for stable version (see #94).
+
 - Update dev dependencies to latest version.
 
 ## Robotlegs-Pixi 0.2.0
