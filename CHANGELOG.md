@@ -1,10 +1,13 @@
-# RobotlegsJS Pixi Changelog:
+# RobotlegsJS Pixi Changelog
 
-## Robotlegs-Pixi 1.0.0
+All notable changes to this project will be documented in this file.
 
-### v1.0.0 - Planned stable version
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-- [ ] Add instructions of how to install the **@robotlegsjs/pixi** package into **README.md**.
+## Suggestions or improvements for further versions
+
+- [x] Add instructions of how to install the **@robotlegsjs/pixi** package into **README.md**.
 
 - [ ] Use [**Function Types**](https://www.typescriptlang.org/docs/handbook/functions.html) for handlers and callbacks instead of generic **Function** type.
 
@@ -18,27 +21,31 @@
 
 - [ ] Migrate [original documentation](https://github.com/robotlegs/robotlegs-framework/blob/master/src/readme.md) and adapt it to TypeScript and Pixi.
 
-## Robotlegs-Pixi 0.2.0
+## [Unreleased]
 
-### v0.2.1
+### v1.0.0
+
+#### Changed
 
 - Update `karma` setup to generate code coverage report only for `src` folder (see #77).
 
-- Improve webpack configuration used to run example project. The `npm start` script will generate hashed files (to avoid browser cache) and open the broswer automatically (see #78).
+- Improve `webpack` configuration used to run example project. The `npm start` script will generate hashed files (to avoid browser cache) and open the broswer automatically (see #78).
 
-- Migrate to Headless Chrome and improve performance of Karma (see #93).
+- Migrate to Headless Chrome and improve performance of `karma` (see #93).
+
+- Prepare package for stable version (see #94).
 
 - Update dev dependencies to latest version.
 
+## Robotlegs-Pixi 0.2.0
+
 ### [v0.2.0](https://github.com/RobotlegsJS/RobotlegsJS-Pixi/releases/tag/0.2.0) - 2018-08-02
 
-- Update @robotlegsjs/core to version 0.2.0 (see #74).
+#### Changed
+
+- Update `@robotlegsjs/core` to version `0.2.0` (see #74).
 
 - Move `pixi.js` and `eventemitter3` libraries to **peerDependencies** (see #76).
-
-- Only dispatch 'added' or 'removed' events when view is related to current stage (see #67, #68, #72).
-
-- Fix example (see #60).
 
 - Enforce TSLint rules (see #58).
 
@@ -56,11 +63,21 @@
 
 - Update dev dependencies to latest version.
 
+#### Fixed
+
+- Fix example (see #60).
+
+- Only dispatch `added` or `removed` events when view is related to current stage (see #67, #68, #72).
+
 ## Robotlegs-Pixi 0.1.0
 
 ### [v0.1.2](https://github.com/RobotlegsJS/RobotlegsJS-Pixi/releases/tag/0.1.2) - 2017-11-23
 
-- Add ContextView handler (see #35).
+#### Added
+
+- Add `ContextView` handler (see #35).
+
+#### Changed
 
 - Update README (see #36).
 
@@ -68,37 +85,17 @@
 
 ### [v0.1.1](https://github.com/RobotlegsJS/RobotlegsJS-Pixi/releases/tag/0.1.1) - 2017-11-20
 
-- Update pixi.js to version 4.6.1 (see #33).
+#### Changed
 
-- Validate IContextView on extensions that depend on it (see #34).
+- Update `pixi.js` to version `4.6.1` (see #33).
+
+- Validate `IContextView` on extensions that depend on it (see #34).
 
 - Update dev dependencies to latest version.
 
 ### [v0.1.0](https://github.com/RobotlegsJS/RobotlegsJS-Pixi/releases/tag/0.1.0) - 2017-11-13
 
-Major Breaking Changes:
----
-
-- View property in **IContextView** is a **PIXI.Container** (see #26).
-
-- ContextView is initialised with a reference to the stage (see #26).
-
-- Helper methods on **Mediator** class are updated (see #26).
-
-- Internal dependencies to PIXI are explicit (see #26).
-
-- Fix patch for PIXI and add contains method (see #26).
-
-- StageSyncExtension class is removed (see #26).
-
-- Map methods are used properly (see #26).
-
-- RobotlegsJS/Core is migrated to version 0.1.1 (see #26 and #31).
-
-Features Or Improvements:
----
-
-- Improve Code Coverage and Fix Bugs (see #26).
+#### Added
 
 - Add changelog (see #27).
 
@@ -108,13 +105,39 @@ Features Or Improvements:
 
 - Add pull request template (see #30).
 
+#### Changed
+
+- View property in **IContextView** is a **PIXI.Container** (see #26).
+
+- `ContextView` is initialised with a reference to the stage (see #26).
+
+- Helper methods on **Mediator** class are updated (see #26).
+
+- Internal dependencies to PIXI are explicit (see #26).
+
+- Map methods are used properly (see #26).
+
+- RobotlegsJS/Core is migrated to version 0.1.1 (see #26 and #31).
+
+- Improve Code Coverage and Fix Bugs (see #26).
+
 - Update dev dependencies to latest version.
+
+#### Removed
+
+- `StageSyncExtension` class is removed (see #26).
+
+#### Fixed
+
+- Fix patch for PIXI and add contains method (see #26).
 
 ## Robotlegs-Pixi 0.0.1
 
 ### [v0.0.6](https://github.com/RobotlegsJS/RobotlegsJS-Pixi/releases/tag/0.0.6) - 2017-10-18
 
-- Clean mediators array in MediatorFactory (see #14).
+#### Changed
+
+- Clean mediators array in `MediatorFactory` (see #14).
 
 - Revert Map changes (see #22).
 
@@ -122,33 +145,43 @@ Features Or Improvements:
 
 ### [v0.0.5](https://github.com/RobotlegsJS/RobotlegsJS-Pixi/releases/tag/0.0.5) - 2017-10-11
 
+#### Changed
+
 - Improve code coverage of ContainerRegistry (see #17).
 
 - Update dev dependencies to latest version.
 
 ### [v0.0.4](https://github.com/RobotlegsJS/RobotlegsJS-Pixi/releases/tag/0.0.4) - 2017-09-26
 
+#### Changed
+
 - Adapt to NPM [v5.0.0](http://blog.npmjs.org/post/161081169345/v500) (see #7).
 
 - Use Map methods properly (see #8).
 
-- Update @robotlegsjs/core to version 0.0.6 (see #10).
+- Update `@robotlegsjs/core` to version `0.0.6` (see #10).
 
 - Update dev dependencies to latest version.
 
 ### [v0.0.3](https://github.com/RobotlegsJS/RobotlegsJS-Pixi/releases/tag/0.0.3) - 2017-09-15
 
-- Update @robotlegsjs/core to version 0.0.5 (see #4).
-
-- Update TSLint rules (see #5).
+#### Added
 
 - Add support to [Prettier](https://prettier.io) code formatter (see #5).
 
 - Add integration with [CodeBeat](https://codebeat.co) (see #5).
 
+#### Changed
+
+- Update `@robotlegsjs/core` to version `0.0.5` (see #4).
+
+- Update TSLint rules (see #5).
+
 ### [v0.0.2](https://github.com/RobotlegsJS/RobotlegsJS-Pixi/releases/tag/0.0.2) - 2017-08-30
 
-- Update @robotlegsjs/core to version 0.0.4 (see #3).
+#### Changed
+
+- Update `@robotlegsjs/core` to version `0.0.4` (see #3).
 
 - Enable GreenKeeper.
 
