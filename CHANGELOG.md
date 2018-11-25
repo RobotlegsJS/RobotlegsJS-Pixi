@@ -23,7 +23,31 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-### v1.0.0
+<!--
+Types of changes:
+
+#### Added
+- for new features.
+
+#### Changed
+- for changes in existing functionality.
+
+#### Deprecated
+- for soon-to-be removed features.
+
+#### Removed
+- for now removed features.
+
+#### Fixed
+- for any bug fixes.
+
+#### Security
+- in case of vulnerabilities.
+-->
+
+## Robotlegs-Pixi 1.0.0
+
+### [v1.0.0](https://github.com/RobotlegsJS/RobotlegsJS-Pixi/releases/tag/1.0.0) - 2018-11-25
 
 #### Changed
 

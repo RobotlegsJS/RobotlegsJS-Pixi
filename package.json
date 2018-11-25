@@ -1,6 +1,6 @@
 {
   "name": "@robotlegsjs/pixi",
-  "version": "0.2.0",
+  "version": "1.0.0",
   "description": "PIXI View Integration with RobotlegsJS",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
@@ -51,6 +51,7 @@
   },
   "homepage": "https://github.com/RobotlegsJS/RobotlegsJS-Pixi#readme",
   "files": [
+    "definitions",
     "lib"
   ],
   "directories": {
