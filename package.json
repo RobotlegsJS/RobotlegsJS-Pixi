@@ -57,7 +57,7 @@
     "lib": "./lib"
   },
   "dependencies": {
-    "@robotlegsjs/core": "^0.2.1",
+    "@robotlegsjs/core": "^1.0.0",
     "tslib": "^1.9.3"
   },
   "peerDependencies": {

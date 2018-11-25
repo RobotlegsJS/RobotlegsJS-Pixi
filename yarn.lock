@@ -97,12 +97,12 @@
   dependencies:
     commander "^2.15.1"
 
-"@robotlegsjs/core@^0.2.1":
-  version "0.2.1"
-  resolved "https://registry.npmjs.org/@robotlegsjs/core/-/core-0.2.1.tgz#4a77f0b85e67343866c44772387617470b67f6c3"
-  integrity sha512-GookVVseOR1cuG3FimiBPuUQkt9pV8k0HWH7ZqgPwrh17/Yq2109Q4z9E8gVcQVgzs7RQiyafVCw5d84Ree1ew==
+"@robotlegsjs/core@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.npmjs.org/@robotlegsjs/core/-/core-1.0.0.tgz#7a187196765772830cb524f995b6eb1eb2c67f49"
+  integrity sha512-hW7wCN87kxOZkPPXpIcYzYmQ5C19RN/IK9g4g1qLH4z4shzct4m9SR5ccQiGPbZwsepSv6aN4t7grTBzdjfxLw==
   dependencies:
-    inversify "^4.13.0"
+    inversify "^5.0.1"
     tslib "^1.9.3"
 
 "@sinonjs/commons@^1.2.0":
@@ -3237,10 +3237,10 @@ invariant@^2.2.2:
   dependencies:
     loose-envify "^1.0.0"
 
-inversify@^4.13.0:
-  version "4.13.0"
-  resolved "https://registry.npmjs.org/inversify/-/inversify-4.13.0.tgz#0ab40570bfa4474b04d5b919bbab3a4f682a72f5"
-  integrity sha512-O5d8y7gKtyRwrvTLZzYET3kdFjqUy58sGpBYMARF13mzqDobpfBXVOPLH7HmnD2VR6Q+1HzZtslGvsdQfeb0SA==
+inversify@^5.0.1:
+  version "5.0.1"
+  resolved "https://registry.npmjs.org/inversify/-/inversify-5.0.1.tgz#500d709b1434896ce5a0d58915c4a4210e34fb6e"
+  integrity sha512-Ieh06s48WnEYGcqHepdsJUIJUXpwH5o5vodAX+DK2JA/gjy4EbEcQZxw+uFfzysmKjiLXGYwNG3qDZsKVMcINQ==
 
 invert-kv@^2.0.0:
   version "2.0.0"

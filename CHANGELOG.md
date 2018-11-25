@@ -27,6 +27,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 #### Changed
 
+- Update `@robotlegsjs/core` to version `1.0.0` (see #97).
+
 - Update `karma` setup to generate code coverage report only for `src` folder (see #77).
 
 - Improve `webpack` configuration used to run example project. The `npm start` script will generate hashed files (to avoid browser cache) and open the broswer automatically (see #78).
