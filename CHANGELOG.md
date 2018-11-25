@@ -35,6 +35,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Prepare package for stable version (see #94).
 
+- Update GitHub Templates (see #96).
+
 - Update dev dependencies to latest version.
 
 ## Robotlegs-Pixi 0.2.0
