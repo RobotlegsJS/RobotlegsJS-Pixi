@@ -50,6 +50,12 @@
     "url": "https://github.com/RobotlegsJS/RobotlegsJS-Pixi/issues"
   },
   "homepage": "https://github.com/RobotlegsJS/RobotlegsJS-Pixi#readme",
+  "files": [
+    "lib"
+  ],
+  "directories": {
+    "lib": "./lib"
+  },
   "dependencies": {
     "@robotlegsjs/core": "^0.2.1",
     "tslib": "^1.9.3"
