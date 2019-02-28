@@ -84,7 +84,7 @@
     "imports-loader": "^0.8.0",
     "istanbul": "^0.4.5",
     "istanbul-instrumenter-loader": "^3.0.1",
-    "karma": "^3.1.1",
+    "karma": "^4.0.1",
     "karma-chrome-launcher": "^2.2.0",
     "karma-coverage-istanbul-reporter": "^2.0.4",
     "karma-es6-shim": "^1.0.0",
