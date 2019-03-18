@@ -74,19 +74,25 @@ export function applyPixiPatch(stage: PIXI.Container) {
         return child;
     };
 
-    PIXI.Container.prototype.removeChild = function(...child: PIXI.DisplayObject[]): PIXI.DisplayObject {
-        for (let i = 0, len = child.length; i < len; i++) {
-            if (isConnectedToStage(stage, child[i])) {
-                emitRemovedEvent(stage, child[i]);
+    PIXI.Container.prototype.removeChild = function patchedRemoveChild<T extends PIXI.DisplayObject = PIXI.Container>(
+        child: PIXI.DisplayObject,
+        ...additionalChildren: PIXI.DisplayObject[]
+    ): T {
+        for (let i = 0, len = arguments.length; i < len; i++) {
+            if (isConnectedToStage(stage, arguments[i])) {
+                emitRemovedEvent(stage, arguments[i]);
             }
 
-            removeChild.call(this, child[i]);
+            removeChild.call(this, arguments[i]);
         }
 
-        return child[0];
+        return <T>child;
     };
 
-    PIXI.Container.prototype.removeChildren = function(beginIndex: number = 0, endIndex?: number): PIXI.DisplayObject[] {
+    PIXI.Container.prototype.removeChildren = function patchedRemoveChildren<T extends PIXI.DisplayObject = PIXI.Container>(
+        beginIndex: number = 0,
+        endIndex?: number
+    ): T[] {
         let removedChildren = removeChildren.call(this, beginIndex, endIndex);
 
         if (isConnectedToStage(stage, this) && removedChildren.length) {
@@ -98,7 +104,9 @@ export function applyPixiPatch(stage: PIXI.Container) {
         return removedChildren;
     };
 
-    PIXI.Container.prototype.removeChildAt = function(index): PIXI.DisplayObject {
+    PIXI.Container.prototype.removeChildAt = function patchedRemoveChildAt<T extends PIXI.DisplayObject = PIXI.Container>(
+        index: number
+    ): T {
         let child = removeChildAt.call(this, index);
 
         if (isConnectedToStage(stage, this) && child) {
