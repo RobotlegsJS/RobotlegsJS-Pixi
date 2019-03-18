@@ -5,11 +5,11 @@
   "display": "standalone",
   "orientation": "landscape",
   "icons": [
-  	{
-  		"src": "icon.png",
-  		"sizes": "512x512",
-  		"type": "image/png"
-  	},
+    {
+      "src": "icon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
     {
       "src": "launcher-icon-2x.png",
       "sizes": "96x96",
