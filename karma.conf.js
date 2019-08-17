@@ -41,7 +41,6 @@ module.exports = config => {
       "karma-webpack",
       "karma-sourcemap-writer",
       "karma-sourcemap-loader",
-      "karma-remap-istanbul",
       "karma-mocha-reporter",
       "karma-mocha",
       "karma-sinon-chai",
