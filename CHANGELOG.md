@@ -53,6 +53,10 @@ Types of changes:
 
 - Update dev dependencies to latest version.
 
+#### Security
+
+- Remove `open-browser-webpack-plugin` to solve security alert (see #113).
+
 ## Robotlegs-Pixi 1.0.0
 
 ### [v1.0.0](https://github.com/RobotlegsJS/RobotlegsJS-Pixi/releases/tag/1.0.0) - 2018-11-25
