@@ -4876,7 +4876,7 @@ pixi-gl-core@^1.1.4:
   resolved "https://registry.npmjs.org/pixi-gl-core/-/pixi-gl-core-1.1.4.tgz#8b4b5c433b31e419bc379dc565ce1b835a91b372"
   integrity sha1-i0tcQzsx5Bm8N53FZc4bg1qRs3I=
 
-pixi.js@^4.8.6:
+pixi.js@^4.8.8:
   version "4.8.8"
   resolved "https://registry.npmjs.org/pixi.js/-/pixi.js-4.8.8.tgz#eb73c94e6ee087fc4566471a20f2357c067f93aa"
   integrity sha512-wQzuLAWSMfV+x2guL5jZBp37pwCmYXHiTXG7ZWXu4E/5IsC9xozwmOfLeCNEyPzlyucOgxAx/HS+tLqxWPYX7Q==
