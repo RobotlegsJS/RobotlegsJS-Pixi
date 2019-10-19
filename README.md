@@ -4,7 +4,7 @@ RobotlegsJS PixiJS Extension
 [![GitHub license](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/RobotlegsJS/RobotlegsJS-Pixi/blob/master/LICENSE)
 [![Gitter chat](https://badges.gitter.im/RobotlegsJS/RobotlegsJS.svg)](https://gitter.im/RobotlegsJS/RobotlegsJS)
 [![Build Status](https://secure.travis-ci.org/RobotlegsJS/RobotlegsJS-Pixi.svg?branch=master)](https://travis-ci.org/RobotlegsJS/RobotlegsJS-Pixi)
-[![codebeat badge](https://codebeat.co/badges/e3792494-1875-4826-be00-2124148b9287)](https://codebeat.co/projects/github-com-robotlegsjs-robotlegsjs-pixi-master)
+[![codebeat badge](https://codebeat.co/badges/f9e9f52e-ddef-4f51-82b7-9e6a695474ab)](https://codebeat.co/projects/github-com-robotlegsjs-robotlegsjs-pixi-master)
 [![Test Coverage](https://codeclimate.com/github/RobotlegsJS/RobotlegsJS-Pixi/badges/coverage.svg)](https://codeclimate.com/github/RobotlegsJS/RobotlegsJS-Pixi/coverage)
 [![npm version](https://badge.fury.io/js/%40robotlegsjs%2Fpixi.svg)](https://badge.fury.io/js/%40robotlegsjs%2Fpixi)
 [![Greenkeeper badge](https://badges.greenkeeper.io/RobotlegsJS/RobotlegsJS-Pixi.svg)](https://greenkeeper.io/)
