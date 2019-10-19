@@ -14,20 +14,16 @@ module.exports = config => {
   var configuration = {
     client: {
       mocha: {
-        timeout : 5000
+        timeout: 5000
       }
     },
     basePath: "",
-    frameworks: [
-      "mocha",
-      "sinon-chai",
-      "es6-shim"
-    ],
+    frameworks: ["mocha", "sinon-chai", "es6-shim"],
     files: [
       { pattern: "node_modules/reflect-metadata/Reflect.js", include: true },
       { pattern: "node_modules/bluebird/js/browser/bluebird.js", include: true },
       { pattern: "./test/index.ts", include: true },
-      { pattern: '**/*.map', served: true, included: false, watched: true }
+      { pattern: "**/*.map", served: true, included: false, watched: true }
     ],
     preprocessors: {
       "./test/index.ts": ["webpack"],
@@ -48,13 +44,9 @@ module.exports = config => {
       "karma-coverage-istanbul-reporter"
     ],
     mime: {
-      "text/x-typescript": ["ts","tsx"]
+      "text/x-typescript": ["ts", "tsx"]
     },
-    reporters: (
-      config.singleRun ?
-        ["dots", "mocha", "coverage-istanbul"] :
-        ["dots", "mocha"]
-    ),
+    reporters: config.singleRun ? ["dots", "mocha", "coverage-istanbul"] : ["dots", "mocha"],
     coverageIstanbulReporter: {
       reports: ["html", "lcov", "lcovonly", "text-summary"],
       dir: "coverage",
