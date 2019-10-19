@@ -51,6 +51,8 @@ Types of changes:
 
 - Enable `"editor.formatOnSave"` rule for `VS Code` (see #105).
 
+- Update `codebeat` Project UUID.
+
 - Update dev dependencies to latest version.
 
 ## Robotlegs-Pixi 1.0.0
