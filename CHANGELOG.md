@@ -47,6 +47,8 @@ Types of changes:
 
 #### Changed
 
+- Remove `instanbul` dependency (see #116).
+
 - Improve `prettier` rules and `autoformat` script (see #105).
 
 - Enable `"editor.formatOnSave"` rule for `VS Code` (see #105).
