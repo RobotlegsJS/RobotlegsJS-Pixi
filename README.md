@@ -3,7 +3,7 @@ RobotlegsJS PixiJS Extension
 
 [![GitHub license](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/RobotlegsJS/RobotlegsJS-Pixi/blob/master/LICENSE)
 [![Gitter chat](https://badges.gitter.im/RobotlegsJS/RobotlegsJS.svg)](https://gitter.im/RobotlegsJS/RobotlegsJS)
-[![Build Status](https://secure.travis-ci.org/RobotlegsJS/RobotlegsJS-Pixi.svg?branch=master)](https://travis-ci.org/RobotlegsJS/RobotlegsJS-Pixi)
+[![Build Status](https://travis-ci.com/RobotlegsJS/RobotlegsJS-Pixi.svg?branch=master)](https://travis-ci.com/RobotlegsJS/RobotlegsJS-Pixi)
 [![codebeat badge](https://codebeat.co/badges/f9e9f52e-ddef-4f51-82b7-9e6a695474ab)](https://codebeat.co/projects/github-com-robotlegsjs-robotlegsjs-pixi-master)
 [![Test Coverage](https://codeclimate.com/github/RobotlegsJS/RobotlegsJS-Pixi/badges/coverage.svg)](https://codeclimate.com/github/RobotlegsJS/RobotlegsJS-Pixi/coverage)
 [![npm version](https://badge.fury.io/js/%40robotlegsjs%2Fpixi.svg)](https://badge.fury.io/js/%40robotlegsjs%2Fpixi)
