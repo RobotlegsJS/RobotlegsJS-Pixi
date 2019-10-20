@@ -47,6 +47,8 @@ Types of changes:
 
 #### Changed
 
+- Update `@robotlegsjs/core` to version `1.0.3` (see #117).
+
 - Remove `instanbul` dependency (see #116).
 
 - Improve `prettier` rules and `autoformat` script (see #105).

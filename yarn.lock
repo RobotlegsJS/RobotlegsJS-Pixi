@@ -96,10 +96,10 @@
   dependencies:
     commander "^2.15.1"
 
-"@robotlegsjs/core@^1.0.2":
-  version "1.0.2"
-  resolved "https://registry.npmjs.org/@robotlegsjs/core/-/core-1.0.2.tgz#084aa26bbea00b9659bc11dae3e1925f25210c9f"
-  integrity sha512-tMxAdsKM1hAPQztD/vy9QNG1NnBWKpG0+A6XBi7IigPmJmVoVxBw4xZvODWsDWoCLvhs/a9IOok2edUDxDiNrg==
+"@robotlegsjs/core@^1.0.3":
+  version "1.0.3"
+  resolved "https://registry.npmjs.org/@robotlegsjs/core/-/core-1.0.3.tgz#3ae018b4e8834552a076caf4f4eed7fe1433951a"
+  integrity sha512-fWQWvEqCx9SojQsIMbd1thvylhiUqyX11CBlnUJrpRxZEoLIWZ+F71E/7D662en79HGxtb8OAZZR7WXaiixljw==
   dependencies:
     inversify "^5.0.1"
     tslib "^1.10.0"
@@ -2829,9 +2829,9 @@ handle-thing@^2.0.0:
   integrity sha512-d4sze1JNC454Wdo2fkuyzCr6aHcbL6PGGuFAz0Li/NcOm1tCHGnWDRmJP85dh9IhQErTc2svWFEX5xHIOo//kQ==
 
 handlebars@^4.1.2:
-  version "4.4.3"
-  resolved "https://registry.npmjs.org/handlebars/-/handlebars-4.4.3.tgz#180bae52c1d0e9ec0c15d7e82a4362d662762f6e"
-  integrity sha512-B0W4A2U1ww3q7VVthTKfh+epHx+q4mCt6iK+zEAzbMBpWQAwxCeKxEGpj/1oQTpzPXDNSOG7hmG14TsISH50yw==
+  version "4.4.5"
+  resolved "https://registry.npmjs.org/handlebars/-/handlebars-4.4.5.tgz#1b1f94f9bfe7379adda86a8b73fb570265a0dddd"
+  integrity sha512-0Ce31oWVB7YidkaTq33ZxEbN+UDxMMgThvCe8ptgQViymL5DPis9uLdTA13MiRPhgvqyxIegugrP97iK3JeBHg==
   dependencies:
     neo-async "^2.6.0"
     optimist "^0.6.1"
