@@ -68,7 +68,7 @@
   },
   "devDependencies": {
     "@types/bluebird": "^3.5.28",
-    "@types/chai": "^4.2.3",
+    "@types/chai": "^4.2.4",
     "@types/mocha": "^5.2.7",
     "@types/pixi.js": "^4.8.9",
     "@types/sinon": "^7.5.0",
@@ -102,7 +102,7 @@
     "rimraf": "^3.0.0",
     "sinon": "^7.5.0",
     "sinon-chai": "^3.3.0",
-    "ts-loader": "^6.2.0",
+    "ts-loader": "^6.2.1",
     "ts-node": "^8.4.1",
     "tslint": "^5.20.0",
     "tslint-config-prettier": "^1.18.0",
@@ -110,7 +110,7 @@
     "uglifyjs-webpack-plugin": "^2.2.0",
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.9",
-    "webpack-dev-server": "^3.8.2",
+    "webpack-dev-server": "^3.9.0",
     "webpack-simple-progress-plugin": "^0.0.4"
   }
 }
