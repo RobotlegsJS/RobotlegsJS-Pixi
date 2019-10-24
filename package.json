@@ -97,7 +97,7 @@
     "pixi.js": "^4.8.8",
     "prettier": "^1.18.2",
     "publish-please": "^5.5.1",
-    "puppeteer": "^1.20.0",
+    "puppeteer": "^2.0.0",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.0",
     "sinon": "^7.5.0",
