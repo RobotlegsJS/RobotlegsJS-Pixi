@@ -45,9 +45,15 @@ Types of changes:
 - in case of vulnerabilities.
 -->
 
+## Robotlegs-Pixi 1.0.0
+
+### [v1.0.1](https://github.com/RobotlegsJS/RobotlegsJS-Pixi/releases/tag/1.0.1) - 2019-10-24
+
 #### Changed
 
 - Update `@robotlegsjs/core` to version `1.0.3` (see #117).
+
+- Update `pixi.js` to version `4.8.8`.
 
 - Remove `instanbul` dependency (see #116).
 
@@ -60,8 +66,6 @@ Types of changes:
 - Update `codebeat` Project UUID.
 
 - Update dev dependencies to latest version.
-
-## Robotlegs-Pixi 1.0.0
 
 ### [v1.0.0](https://github.com/RobotlegsJS/RobotlegsJS-Pixi/releases/tag/1.0.0) - 2018-11-25
 
