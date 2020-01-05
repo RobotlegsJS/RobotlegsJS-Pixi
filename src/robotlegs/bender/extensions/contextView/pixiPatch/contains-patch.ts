@@ -23,7 +23,7 @@ const ContainerMixin = {
      *
      * @see {@link https://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/flash/display/DisplayObjectContainer.html#contains()}
      */
-    contains(child: DisplayObject): boolean {
+    contains(this: Container, child: DisplayObject): boolean {
         let found: boolean = false;
         if (this === child || this.children.indexOf(child) >= 0) {
             found = true;
