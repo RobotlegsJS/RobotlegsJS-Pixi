@@ -49,10 +49,7 @@ export function applyPixiPatch(stage: PIXI.Container) {
     let removeChildren = PIXI.Container.prototype.removeChildren;
     let removeChildAt = PIXI.Container.prototype.removeChildAt;
 
-    PIXI.Container.prototype.addChild = function patchedAddChild<T extends PIXI.DisplayObject>(
-        child: T,
-        ...additionalChildren: PIXI.DisplayObject[]
-    ): T {
+    PIXI.Container.prototype.addChild = function patchedAddChild<T extends PIXI.DisplayObject[]>(/*...children: T*/): T[0] {
         for (let i = 0, len = arguments.length; i < len; i++) {
             const object = arguments[i];
             addChild.call(this, object);
@@ -61,7 +58,7 @@ export function applyPixiPatch(stage: PIXI.Container) {
                 emitAddedEvent(stage, object);
             }
         }
-        return child;
+        return arguments[0];
     };
 
     PIXI.Container.prototype.addChildAt = function patchedAddChildAt<T extends PIXI.DisplayObject>(child: T, index: number): T {
@@ -74,19 +71,17 @@ export function applyPixiPatch(stage: PIXI.Container) {
         return child;
     };
 
-    PIXI.Container.prototype.removeChild = function patchedRemoveChild<T extends PIXI.DisplayObject = PIXI.Container>(
-        child: PIXI.DisplayObject,
-        ...additionalChildren: PIXI.DisplayObject[]
-    ): T {
+    PIXI.Container.prototype.removeChild = function patchedRemoveChild<T extends PIXI.DisplayObject[]>(/*...children: T*/): T[0] {
         for (let i = 0, len = arguments.length; i < len; i++) {
-            if (isConnectedToStage(stage, arguments[i])) {
-                emitRemovedEvent(stage, arguments[i]);
+            const object = arguments[i];
+            if (isConnectedToStage(stage, object)) {
+                emitRemovedEvent(stage, object);
             }
 
-            removeChild.call(this, arguments[i]);
+            removeChild.call(this, object);
         }
 
-        return <T>child;
+        return arguments[0];
     };
 
     PIXI.Container.prototype.removeChildren = function patchedRemoveChildren<T extends PIXI.DisplayObject = PIXI.Container>(
