@@ -16,6 +16,8 @@ framework with [PixiJS](https://github.com/pixijs/pixi.js).
 Installation
 ---
 
++ Get `@robotlegsjs/pixi`
+
 You can get the latest release and the type definitions using [NPM](https://www.npmjs.com/):
 
 ```bash
@@ -31,9 +33,15 @@ yarn add @robotlegsjs/pixi
 From version `0.2.0` of this package, the [PixiJS](https://github.com/pixijs/pixi.js) dependencies were moved to **peerDependencies**,
 allowing the final user to choose the desired version of the `pixi.js` library on each project.
 
-The `@robotlegsjs/pixi` package is compatible with versions between the `>=4.2.1 <5` version range of `pixi.js` library.
+The `@robotlegsjs/pixi` package version `^2` is compatible with versions `^5` version range of `pixi.js` library.
 
-Since each version of `pixi.js` library defines which version of `eventemitter3` library is being used, remember to also install the proper version of `eventemitter3` in your project.
++ For pixi.js 4
+
+For pixi.js `>=4.2.1 <5`, please use `@robotlegsjs/pixi` versions `^1`.
+```bash
+yarn add @robotlegsjs/pixi@"^1.0.1"
+```
+Since each version of `pixi.js` 4 library defines which version of `eventemitter3` library is being used, remember to also install the proper version of `eventemitter3` in your project.
 
 As example, when you would like to use the version `4.2.1` of `pixi.js` library, you can run:
 
@@ -46,6 +54,8 @@ or
 ```bash
 yarn add pixi.js@4.2.1 eventemitter3@^2.0.0 reflect-metadata
 ```
+
++ Setup of your project
 
 Then follow the [installation instructions](https://github.com/RobotlegsJS/RobotlegsJS/blob/master/README.md#installation) of **RobotlegsJS** library to complete the setup of your project.
 
@@ -64,11 +74,9 @@ Usage
 ---
 
 ```typescript
-/// <reference path="node_modules/@robotlegsjs/pixi/definitions/pixi.d.ts" />
-
 import "reflect-metadata";
 
-import PIXI = require('pixi.js');
+import * as PIXI from 'pixi.js';
 
 import { Context, MVCSBundle } from "@robotlegsjs/core";
 import { ContextView, PixiBundle } from "@robotlegsjs/pixi";
@@ -80,12 +88,17 @@ export class Game {
 
     private canvas: HTMLCanvasElement;
     private stage: PIXI.Container;
-    private renderer: PIXI.CanvasRenderer | PIXI.WebGLRenderer;
+    private renderer: PIXI.Renderer;
     private context: Context;
 
     constructor () {
         this.canvas = <HTMLCanvasElement>(document.getElementById("canvas"));
-        this.renderer = PIXI.autoDetectRenderer(960, 400, { view: this.canvas, backgroundColor: 0xFFFFFF });
+        this.renderer = PIXI.autoDetectRenderer({
+            width: 960,
+            height: 400,
+            view: this.canvas,
+            backgroundColor: 0xffffff
+        });
         this.stage = new PIXI.Container();
 
         this.context = new Context();
