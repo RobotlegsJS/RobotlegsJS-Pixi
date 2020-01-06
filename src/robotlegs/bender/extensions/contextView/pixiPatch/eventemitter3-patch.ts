@@ -22,7 +22,7 @@ const EventDispatcherMixin = {
     },
 
     hasEventListener(this: EventEmitter, type: string | symbol, listener?: Function): boolean {
-        return this.listeners(type).length > 0;
+        return this.listenerCount(type) > 0;
     },
 
     removeEventListener(this: EventEmitter, type: string | symbol, listener?: Function, context?: any, once?: boolean): void {
