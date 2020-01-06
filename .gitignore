@@ -5,6 +5,8 @@ dist/lib
 dist-test
 lib
 lib-test
+/lib-example
+/dist
 node_modules
 *.as
 *.iml
