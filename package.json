@@ -69,7 +69,7 @@
   "devDependencies": {
     "@types/bluebird": "^3.5.28",
     "@types/chai": "^4.2.4",
-    "@types/mocha": "^5.2.7",
+    "@types/mocha": "^7.0.0",
     "@types/pixi.js": "^4.8.9",
     "@types/sinon": "^7.5.0",
     "@types/webpack-env": "^1.14.1",
