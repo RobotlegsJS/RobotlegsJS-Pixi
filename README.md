@@ -31,23 +31,25 @@ yarn add @robotlegsjs/pixi
 From version `0.2.0` of this package, the [PixiJS](https://github.com/pixijs/pixi.js) dependencies were moved to **peerDependencies**,
 allowing the final user to choose the desired version of the `pixi.js` library on each project.
 
-+ For `pixi.js` version 5
+### For `pixi.js` version 5
 
 The `@robotlegsjs/pixi` package version `^2.0.0` is compatible with versions `>=5.0.0 <6` version range of `pixi.js` library.
 
 Since version `5.0.0` of `pixi.js`, the `eventemitter3` library was removed and is not necessary anymore.
 
+You can setup your project for version 5 of `pixi.js` using:
+
 ```bash
-npm install @robotlegsjs/pixi pixi.js --save
+npm install @robotlegsjs/pixi@^2.0.0 pixi.js@^5.0.0 --save
 ```
 
 or
 
 ```bash
-yarn add @robotlegsjs/pixi pixi.js
+yarn add @robotlegsjs/pixi@^2.0.0 pixi.js@^5.0.0
 ```
 
-+ For `pixi.js` version 4
+### For `pixi.js` version 4
 
 For `pixi.js` `>=4.2.1 <5`, please use `@robotlegsjs/pixi` version `^1`.
 
