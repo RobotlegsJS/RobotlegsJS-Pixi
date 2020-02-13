@@ -51,6 +51,8 @@ Types of changes:
 
   - `eventemitter3` package is not necessary anymore, you should remove this dependency from your `package.json`.
 
+  - `@types/pixi.js` package is not necessary anymore, you should remove this dependency from your `package.json`.
+
   - For compatibility with version 4 of `pixi.js`, use `@robotlegsjs/pixi` version 1.
 
 ## Robotlegs-Pixi 1.0.0
