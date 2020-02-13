@@ -62,7 +62,7 @@
     "tslib": "^1.10.0"
   },
   "peerDependencies": {
-    "pixi.js": "^5.2.0",
+    "pixi.js": "^5.0.0",
     "reflect-metadata": "^0.1.13"
   },
   "devDependencies": {
@@ -91,7 +91,7 @@
     "karma-sourcemap-writer": "^0.1.2",
     "karma-webpack": "^4.0.2",
     "mocha": "^7.0.0",
-    "pixi.js": "^5.2.0",
+    "pixi.js": "^5.2.1",
     "prettier": "^1.18.2",
     "publish-please": "^5.5.1",
     "puppeteer": "^2.0.0",
