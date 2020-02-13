@@ -1,5 +1,4 @@
-RobotlegsJS PixiJS Extension
-===
+# RobotlegsJS PixiJS Extension
 
 [![GitHub license](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/RobotlegsJS/RobotlegsJS-Pixi/blob/master/LICENSE)
 [![Gitter chat](https://badges.gitter.im/RobotlegsJS/RobotlegsJS.svg)](https://gitter.im/RobotlegsJS/RobotlegsJS)
@@ -13,8 +12,7 @@ RobotlegsJS PixiJS Extension
 Integrate [RobotlegsJS](https://github.com/RobotlegsJS/RobotlegsJS)
 framework with [PixiJS](https://github.com/pixijs/pixi.js).
 
-Installation
----
+## Installation
 
 + Get `@robotlegsjs/pixi`
 
@@ -70,8 +68,7 @@ Then follow the [installation instructions](https://github.com/RobotlegsJS/Robot
 + [eventemitter3](https://github.com/primus/eventemitter3)
 + [reflect-metadata](https://github.com/rbuckton/reflect-metadata)
 
-Usage
----
+## Usage
 
 ```typescript
 import "reflect-metadata";
@@ -127,8 +124,7 @@ let game: Game = new Game();
 
 [See full example here](example/index.ts)
 
-Running the example
----
+## Running the example
 
 Run the following commands to run the example:
 
@@ -144,7 +140,6 @@ yarn install
 yarn start
 ```
 
-License
----
+## License
 
 [MIT](LICENSE)
