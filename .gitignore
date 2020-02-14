@@ -1,12 +1,12 @@
 .idea
 .nyc_output
 coverage
+dist
 dist/lib
 dist-test
 lib
+lib-example
 lib-test
-/lib-example
-/dist
 node_modules
 *.as
 *.iml
