@@ -1,5 +1,4 @@
-RobotlegsJS PixiJS Extension
-===
+# RobotlegsJS PixiJS Extension
 
 [![GitHub license](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/RobotlegsJS/RobotlegsJS-Pixi/blob/master/LICENSE)
 [![Gitter chat](https://badges.gitter.im/RobotlegsJS/RobotlegsJS.svg)](https://gitter.im/RobotlegsJS/RobotlegsJS)
@@ -13,8 +12,9 @@ RobotlegsJS PixiJS Extension
 Integrate [RobotlegsJS](https://github.com/RobotlegsJS/RobotlegsJS)
 framework with [PixiJS](https://github.com/pixijs/pixi.js).
 
-Installation
----
+## Installation
+
+### Get `@robotlegsjs/pixi`
 
 You can get the latest release and the type definitions using [NPM](https://www.npmjs.com/):
 
@@ -31,9 +31,39 @@ yarn add @robotlegsjs/pixi
 From version `0.2.0` of this package, the [PixiJS](https://github.com/pixijs/pixi.js) dependencies were moved to **peerDependencies**,
 allowing the final user to choose the desired version of the `pixi.js` library on each project.
 
-The `@robotlegsjs/pixi` package is compatible with versions between the `>=4.2.1 <5` version range of `pixi.js` library.
+#### For `pixi.js` version 5
 
-Since each version of `pixi.js` library defines which version of `eventemitter3` library is being used, remember to also install the proper version of `eventemitter3` in your project.
+The `@robotlegsjs/pixi` package version `^2.0.0` is compatible with versions `>=5.0.0 <6` version range of `pixi.js` library.
+
+Since version `5.0.0` of `pixi.js`, the `eventemitter3` library was removed and is not necessary anymore.
+
+You can setup your project for version 5 of `pixi.js` using:
+
+```bash
+npm install @robotlegsjs/pixi@^2.0.0 pixi.js@^5.0.0 --save
+```
+
+or
+
+```bash
+yarn add @robotlegsjs/pixi@^2.0.0 pixi.js@^5.0.0
+```
+
+#### For `pixi.js` version 4
+
+For `pixi.js` `>=4.2.1 <5`, please use `@robotlegsjs/pixi` version `^1`.
+
+```bash
+npm install @robotlegsjs/pixi@^1.0.1 --save
+```
+
+or
+
+```bash
+yarn add @robotlegsjs/pixi@^1.0.1
+```
+
+Since each version of `pixi.js` v4 library defines which version of `eventemitter3` library is being used, remember to also install the proper version of `eventemitter3` in your project.
 
 As example, when you would like to use the version `4.2.1` of `pixi.js` library, you can run:
 
@@ -46,6 +76,8 @@ or
 ```bash
 yarn add pixi.js@4.2.1 eventemitter3@^2.0.0 reflect-metadata
 ```
+
+### Setup of your project
 
 Then follow the [installation instructions](https://github.com/RobotlegsJS/RobotlegsJS/blob/master/README.md#installation) of **RobotlegsJS** library to complete the setup of your project.
 
@@ -60,15 +92,12 @@ Then follow the [installation instructions](https://github.com/RobotlegsJS/Robot
 + [eventemitter3](https://github.com/primus/eventemitter3)
 + [reflect-metadata](https://github.com/rbuckton/reflect-metadata)
 
-Usage
----
+## Usage
 
 ```typescript
-/// <reference path="node_modules/@robotlegsjs/pixi/definitions/pixi.d.ts" />
-
 import "reflect-metadata";
 
-import PIXI = require('pixi.js');
+import * as PIXI from 'pixi.js';
 
 import { Context, MVCSBundle } from "@robotlegsjs/core";
 import { ContextView, PixiBundle } from "@robotlegsjs/pixi";
@@ -80,12 +109,17 @@ export class Game {
 
     private canvas: HTMLCanvasElement;
     private stage: PIXI.Container;
-    private renderer: PIXI.CanvasRenderer | PIXI.WebGLRenderer;
+    private renderer: PIXI.Renderer;
     private context: Context;
 
     constructor () {
         this.canvas = <HTMLCanvasElement>(document.getElementById("canvas"));
-        this.renderer = PIXI.autoDetectRenderer(960, 400, { view: this.canvas, backgroundColor: 0xFFFFFF });
+        this.renderer = PIXI.autoDetectRenderer({
+            width: 960,
+            height: 400,
+            view: this.canvas,
+            backgroundColor: 0xffffff
+        });
         this.stage = new PIXI.Container();
 
         this.context = new Context();
@@ -114,8 +148,7 @@ let game: Game = new Game();
 
 [See full example here](example/index.ts)
 
-Running the example
----
+## Running the example
 
 Run the following commands to run the example:
 
@@ -131,7 +164,6 @@ yarn install
 yarn start
 ```
 
-License
----
+## License
 
 [MIT](LICENSE)

@@ -45,6 +45,16 @@ Types of changes:
 - in case of vulnerabilities.
 -->
 
+#### Breaking Change
+
+- Update `pixi.js` to version `^5.0.0` (see #122).
+
+  - `eventemitter3` package is not necessary anymore, you should remove this dependency from your `package.json`.
+
+  - `@types/pixi.js` package is not necessary anymore, you should remove this dependency from your `package.json`.
+
+  - For compatibility with version 4 of `pixi.js`, use `@robotlegsjs/pixi` version 1.
+
 ## Robotlegs-Pixi 1.0.0
 
 ### [v1.0.1](https://github.com/RobotlegsJS/RobotlegsJS-Pixi/releases/tag/1.0.1) - 2019-10-24

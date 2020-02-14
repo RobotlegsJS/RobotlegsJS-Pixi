@@ -16,12 +16,17 @@ import { RobotlegsView } from "./view/RobotlegsView";
 export class Game {
     private canvas: HTMLCanvasElement;
     private stage: PIXI.Container;
-    private renderer: PIXI.CanvasRenderer | PIXI.WebGLRenderer;
+    private renderer: PIXI.Renderer;
     private context: Context;
 
     constructor() {
         this.canvas = <HTMLCanvasElement>document.getElementById("canvas");
-        this.renderer = PIXI.autoDetectRenderer(960, 400, { view: this.canvas, backgroundColor: 0xffffff });
+        this.renderer = PIXI.autoDetectRenderer({
+            width: 960,
+            height: 400,
+            view: this.canvas,
+            backgroundColor: 0xffffff
+        });
         this.stage = new PIXI.Container();
 
         this.context = new Context();

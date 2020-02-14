@@ -20,7 +20,7 @@ export class RobotlegsView extends Container {
 
     private loadLogo(): void {
         // create a PIXI sprite from an image path
-        this.robotlegsLogo = Sprite.fromImage("images/robotlegs.png");
+        this.robotlegsLogo = Sprite.from("images/robotlegs.png");
 
         // add logo
         this.addChild(this.robotlegsLogo);

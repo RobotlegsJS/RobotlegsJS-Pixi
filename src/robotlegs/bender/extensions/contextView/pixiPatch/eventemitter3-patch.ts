@@ -12,20 +12,20 @@
  * - Implements event bubbling on `dispatchEvent` when `bubbles` is true.
  */
 
-import { DisplayObject } from "pixi.js";
-import { EventEmitter } from "eventemitter3";
+import { DisplayObject, utils } from "pixi.js";
+import EventEmitter = utils.EventEmitter;
 import { IEvent } from "@robotlegsjs/core";
 
 const EventDispatcherMixin = {
-    addEventListener(type: string | symbol, listener: Function, context?: any): void {
+    addEventListener(this: EventEmitter, type: string | symbol, listener: Function, context?: any): void {
         this.on(type, listener, context);
     },
 
-    hasEventListener(type: string | symbol, listener?: Function): boolean {
-        return this.listeners(type).length > 0;
+    hasEventListener(this: EventEmitter, type: string | symbol, listener?: Function): boolean {
+        return this.listenerCount(type) > 0;
     },
 
-    removeEventListener(type: string | symbol, listener?: Function, context?: any, once?: boolean): void {
+    removeEventListener(this: EventEmitter, type: string | symbol, listener?: Function, context?: any, once?: boolean): void {
         this.off(type, listener, context, once);
     },
 
@@ -33,14 +33,14 @@ const EventDispatcherMixin = {
         return this.hasEventListener(type);
     },
 
-    dispatchEvent(event: IEvent): void {
+    dispatchEvent(this: EventEmitter, event: IEvent): void {
         event.target = this;
 
         let currentTarget = this;
         do {
             event.currentTarget = currentTarget;
             event.currentTarget.emit(event.type, event);
-            currentTarget = currentTarget.parent;
+            currentTarget = (currentTarget as DisplayObject).parent;
         } while (currentTarget && event.bubbles);
     }
 };

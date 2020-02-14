@@ -32,9 +32,9 @@ h2 {
 h1::after {
     display: block;
     content: "";
-    background: url("../images/pixijs-v4-logo.png") no-repeat;
+    background: url("../images/pixijs-v5-logo.png") no-repeat;
     height: 33px;
-    width: 99px;
+    width: 110px;
     margin-top: -0.3em;
     float: right;
 }
