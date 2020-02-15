@@ -2,6 +2,7 @@ const webpack = require("webpack");
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const SimpleProgressPlugin = require("webpack-simple-progress-plugin");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 module.exports = options => {
   return {
@@ -23,6 +24,8 @@ module.exports = options => {
     },
 
     plugins: [
+      new CleanWebpackPlugin(),
+
       new HtmlWebpackPlugin({
         template: path.resolve("static/index.html"),
         inject: false
