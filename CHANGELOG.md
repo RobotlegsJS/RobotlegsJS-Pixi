@@ -55,6 +55,10 @@ Types of changes:
 
   - For compatibility with version 4 of `pixi.js`, use `@robotlegsjs/pixi` version 1.
 
+#### Added
+
+- Add **Tidelift** as funding option (see #126).
+
 #### Security
 
 - Migrate to [terser-webpack-plugin](https://github.com/webpack-contrib/terser-webpack-plugin) to solve security vulnerability (see #125).
