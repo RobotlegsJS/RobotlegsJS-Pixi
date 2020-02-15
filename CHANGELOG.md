@@ -55,6 +55,10 @@ Types of changes:
 
   - For compatibility with version 4 of `pixi.js`, use `@robotlegsjs/pixi` version 1.
 
+#### Security
+
+- Migrate to [terser-webpack-plugin](https://github.com/webpack-contrib/terser-webpack-plugin) to solve security vulnerability (see #123).
+
 ## Robotlegs-Pixi 1.0.0
 
 ### [v1.0.1](https://github.com/RobotlegsJS/RobotlegsJS-Pixi/releases/tag/1.0.1) - 2019-10-24
