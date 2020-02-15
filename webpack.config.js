@@ -1,6 +1,6 @@
 const webpack = require("webpack");
 const path = require("path");
-const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
+const TerserPlugin = require("terser-webpack-plugin");
 
 module.exports = env => {
   if (!env) env = { production: false, karma: false };
@@ -51,10 +51,10 @@ module.exports = env => {
           concatenateModules: true,
           minimize: true,
           minimizer: [
-            new UglifyJsPlugin({
+            new TerserPlugin({
               cache: true,
               parallel: 4,
-              uglifyOptions: {
+              terserOptions: {
                 output: {
                   comments: false
                 }
