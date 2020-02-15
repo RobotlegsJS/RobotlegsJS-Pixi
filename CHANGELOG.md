@@ -57,7 +57,7 @@ Types of changes:
 
 #### Security
 
-- Migrate to [terser-webpack-plugin](https://github.com/webpack-contrib/terser-webpack-plugin) to solve security vulnerability (see #123).
+- Migrate to [terser-webpack-plugin](https://github.com/webpack-contrib/terser-webpack-plugin) to solve security vulnerability (see #125).
 
 ## Robotlegs-Pixi 1.0.0
 
