@@ -2,6 +2,7 @@ const webpack = require("webpack");
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const SimpleProgressPlugin = require("webpack-simple-progress-plugin");
+const CopyPlugin = require("copy-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 module.exports = options => {
@@ -30,6 +31,8 @@ module.exports = options => {
         template: path.resolve("static/index.html"),
         inject: false
       }),
+
+      new CopyPlugin([{ from: "static", to: "." }]),
 
       new SimpleProgressPlugin()
     ],

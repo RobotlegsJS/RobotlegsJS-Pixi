@@ -4,6 +4,7 @@ coverage
 dist
 dist/lib
 dist-test
+gh-pages
 lib
 lib-example
 lib-test
