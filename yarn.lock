@@ -408,13 +408,13 @@
     eventemitter3 "^3.1.0"
     url "^0.11.0"
 
-"@robotlegsjs/core@^1.0.3":
-  version "1.0.3"
-  resolved "https://registry.npmjs.org/@robotlegsjs/core/-/core-1.0.3.tgz#3ae018b4e8834552a076caf4f4eed7fe1433951a"
-  integrity sha512-fWQWvEqCx9SojQsIMbd1thvylhiUqyX11CBlnUJrpRxZEoLIWZ+F71E/7D662en79HGxtb8OAZZR7WXaiixljw==
+"@robotlegsjs/core@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.npmjs.org/@robotlegsjs/core/-/core-2.0.0.tgz#6bbc0bd7c0f86d444de7efe58ac8d15d0ef8871b"
+  integrity sha512-yucJHS2aWoCQejV4SOKAfh61wVZXjjD2AX7fgIlYkRNErTHxtliISDla95AW5AhlpNuymTXA63afkbqqsysTyw==
   dependencies:
     inversify "^5.0.1"
-    tslib "^1.10.0"
+    tslib "^1.11.1"
 
 "@sinonjs/commons@^1", "@sinonjs/commons@^1.6.0", "@sinonjs/commons@^1.7.0":
   version "1.7.1"
