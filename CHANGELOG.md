@@ -55,6 +55,12 @@ Types of changes:
 
   - For compatibility with version 4 of `pixi.js`, use `@robotlegsjs/pixi` version 1.
 
+- Update [`@robotlegsjs/core`](https://github.com/RobotlegsJS/RobotlegsJS) to version `^2.0.0` (see #122 and #131).
+
+  - Migrate array notation from `Array<SomeType>` to `SomeType[]`.
+
+  - The rest of the `Public API` remains unchanged.
+
 #### Added
 
 - Add **Tidelift** as funding option (see #126).
