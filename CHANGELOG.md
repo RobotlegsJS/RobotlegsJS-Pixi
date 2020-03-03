@@ -45,6 +45,10 @@ Types of changes:
 - in case of vulnerabilities.
 -->
 
+## Robotlegs-Pixi 2.0.0
+
+### [v2.0.0](https://github.com/RobotlegsJS/RobotlegsJS-Pixi/releases/tag/2.0.0) - 2020-03-03
+
 #### Breaking Change
 
 - Update `pixi.js` to version `^5.0.0` (see #122).
