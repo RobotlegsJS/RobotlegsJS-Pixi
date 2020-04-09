@@ -85,7 +85,7 @@
     "html-webpack-plugin": "^3.2.0",
     "imports-loader": "^0.8.0",
     "istanbul-instrumenter-loader": "^3.0.1",
-    "karma": "^4.4.1",
+    "karma": "^5.0.0",
     "karma-chrome-launcher": "^3.1.0",
     "karma-coverage-istanbul-reporter": "^2.1.1",
     "karma-es6-shim": "^1.0.0",
