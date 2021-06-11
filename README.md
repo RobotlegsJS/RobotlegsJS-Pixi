@@ -1,12 +1,12 @@
+# Archived
+
+**This repository is archived**. Development migrated to https://github.com/RobotlegsJS/RobotlegsJS-Framework/blob/master/packages/pixi.
+
 # RobotlegsJS PixiJS Extension
 
 [![GitHub license](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/RobotlegsJS/RobotlegsJS-Pixi/blob/master/LICENSE)
 [![Gitter chat](https://badges.gitter.im/RobotlegsJS/RobotlegsJS.svg)](https://gitter.im/RobotlegsJS/RobotlegsJS)
-[![Build Status](https://travis-ci.com/RobotlegsJS/RobotlegsJS-Pixi.svg?branch=master)](https://travis-ci.com/RobotlegsJS/RobotlegsJS-Pixi)
-[![codebeat badge](https://codebeat.co/badges/f9e9f52e-ddef-4f51-82b7-9e6a695474ab)](https://codebeat.co/projects/github-com-robotlegsjs-robotlegsjs-pixi-master)
-[![Test Coverage](https://codeclimate.com/github/RobotlegsJS/RobotlegsJS-Pixi/badges/coverage.svg)](https://codeclimate.com/github/RobotlegsJS/RobotlegsJS-Pixi/coverage)
 [![npm version](https://badge.fury.io/js/%40robotlegsjs%2Fpixi.svg)](https://badge.fury.io/js/%40robotlegsjs%2Fpixi)
-[![Greenkeeper badge](https://badges.greenkeeper.io/RobotlegsJS/RobotlegsJS-Pixi.svg)](https://greenkeeper.io/)
 [![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
 
 Integrate [RobotlegsJS](https://github.com/RobotlegsJS/RobotlegsJS)
